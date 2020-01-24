@@ -17,7 +17,7 @@ const getProducts = (req, res) => {
                 });
             })
             .catch(err => {
-                console.log(ADD_PRODUCT_CONTROLLER, `Error adding product to database: ${JSON.stringify(err)}`);
+                console.log(GET_PRODUCT_CONTROLLER, `Error performing operation in database: ${JSON.stringify(err)}`);
                 res.status(500).send({
                     error: {
                         message: 'INTERNAL_SERVER_ERROR',
