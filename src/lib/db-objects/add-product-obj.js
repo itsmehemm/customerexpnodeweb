@@ -1,5 +1,8 @@
+const uniqid = require('uniqid');
+
 const addProductObj = (data) => {
     return ({
+        id: `${uniqid('p-').toUpperCase()}`,
         name: data.name,
         description: data.description,
         code: data.code || 'CODE_MISC',
