@@ -1,8 +1,8 @@
 module.exports = {
-    'COLLECTION': {
-        'PRODUCT': 'PRODUCT'
+    COLLECTION: {
+        PRODUCT: 'PRODUCT'
     },
-    'KEY': {
-        
+    KEY: {
+        PRODUCT_ID: 'id'
     }
 }
