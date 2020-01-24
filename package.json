@@ -1,0 +1,49 @@
+{
+  "name": "customerexpnodeweb",
+  "version": "1.0.0",
+  "description": "Buyer's home page for tinnat.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "start:server": "node tinnat.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tinnat-R/customerexpnodeweb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tinnat-R/customerexpnodeweb/issues"
+  },
+  "homepage": "https://github.com/Tinnat-R/customerexpnodeweb#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongodb": "^2.2.36",
+    "path": "^0.12.7",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "react-scripts": "^3.3.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
