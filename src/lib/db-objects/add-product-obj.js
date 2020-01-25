@@ -2,7 +2,7 @@ const uniqid = require('uniqid');
 
 const addProductObj = (data) => {
     return ({
-        id: `${uniqid('p-').toUpperCase()}`,
+        id: `${data.name.replace(new RegExp(' ', 'g'), '-')}-${uniqid().toUpperCase()}`,
         name: data.name,
         description: data.description,
         code: data.code || 'CODE_MISC',
