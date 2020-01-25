@@ -103,6 +103,7 @@
 .header-text-large {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5em;
+    font-weight: bold;
 }
 
 .header-text-medium {
@@ -118,6 +119,10 @@
     width: 40%;
     float: left;
     padding: 1em;
+}
+
+.p-item {
+    margin: 1em;
 }
 
 .p-infos {
@@ -141,4 +146,90 @@
     font-size: 1.2rem;
     border: 1px solid #B3B3B3;
     border-right: none;
+}
+
+.btn-grp-section {
+}
+
+.btn-group-single {
+    margin-right: 6px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-family: Arial, Helvetica, sans;
+    padding: 1em;
+    font-size: 1em;
+    min-width: 60px;
+    min-height: 50px;
+    background: #fff;
+    border-radius: 5px;
+    border: 2px solid #B3B3B3;
+    cursor: pointer;
+}
+
+.btn-group-single:hover {
+    color: #084cb1;
+    border: 2px solid #084cb1;
+}
+.btn-group-single-selected {
+    color: #084cb1;
+    border: 2px solid #084cb1;
+}
+
+amount-section {
+}
+
+.final-amount-text {
+    font-family: Arial, Helvetica, sans;
+    font-size: 2em;
+    color: rgb(5, 153, 54);
+    font-weight: bold;
+}
+
+.original-amount-text {
+    font-family: Arial, Helvetica, sans;
+    font-size: 1.5em;
+    color: rgb(0, 0, 0);
+    text-decoration: line-through;
+}
+
+.amount-offer-text {
+    font-family: Arial, Helvetica, sans;
+    font-size: 1.5em;
+    color: rgb(5, 153, 54);
+}
+
+.green-text {
+    color: rgb(5, 153, 54);
+}
+
+.red-text {
+    color: rgb(189, 6, 61);
+}
+
+.small-header-text {
+    font-family: Arial, Helvetica, sans;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.add-cart-btn {
+    padding:1em;
+    min-width: 100px;
+    background: rgb(235, 211, 1);
+    color: #000;
+    font-family: Arial, Helvetica, sans;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.add-cart-btn:hover {
+    background: rgb(209, 188, 2);
+
+}
+
+.material-icons {
+    vertical-align: middle !important;
 }
