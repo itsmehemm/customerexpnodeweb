@@ -2,10 +2,10 @@
     "production": {
         "api": {
             "v1_get_product_by_id": {
-                "uri": "http://tinnat.hemanthmurali.com/api/product/"
+                "uri": "http://tinnat.com/api/product/"
             },
             "v1_get_featured_products": {
-                "uri": "http://tinnat.hemanthmurali.com/api/products/featured?limit=6"
+                "uri": "http://tinnat.com/api/products/featured?limit=6"
             }
         }
     },
