@@ -6,7 +6,7 @@ const WelcomeWidget = () => {
             <div className="content">
                 <div className="header">
                     <span className="header-large">
-                        Welcome to Tinnat.com
+                        Welcome to <span className="highlight-text">T</span>he <span className="highlight-text">INN</span>ovative <span className="highlight-text">AT</span>tire
                 </span>
                 </div>
                 <div className="text-content">
