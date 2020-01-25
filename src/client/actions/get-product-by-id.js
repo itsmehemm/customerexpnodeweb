@@ -1,9 +1,13 @@
 import request from 'request';
+import config from '../configs/config.json';
+
+const environment = 'production';
+// const environment = 'development';
 
 const getProductById = (id) => {
     return new Promise((resolve, reject) => {
         request({
-            uri: `http://localhost.paypal.com:2002/api/product/${id}`,
+            uri: config[environment].api.v1_get_product_by_id.uri + id,
             method: 'GET',
             headers: {
                 'X-TINNAT-SECURITY-CONTEXT': JSON.stringify({ "userId": "admin", "key": "tinnat" })
