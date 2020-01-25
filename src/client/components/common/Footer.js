@@ -1,11 +1,10 @@
 import React from 'react';
+import '../../styles/footer.css';
 
 const Footer = (props) => {
     return (
         <div className="footer">
-            <div className="content">
-                &copy; 2020 Tinnat Inc. All rights reserved.
-            </div>
+            &copy; 2020 Tinnat Inc. All rights reserved.
         </div>
     )
 }
