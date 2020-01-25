@@ -17,12 +17,14 @@ app.use(cors());
 
 app.use(cookieParser());
 
+app.use('/static', express.static(path.resolve(__dirname, '../../', 'build/static')));
+
 const api = require('./api');
 
 const { apiAuthenticator } = require('../controllers');
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../..', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../../', 'build', 'index.html'));
 });
 
 app.use('/api', apiAuthenticator);
