@@ -18,7 +18,6 @@
   "bugs": {
     "url": "https://github.com/Tinnat-R/customerexpnodeweb/issues"
   },
-  "homepage": "https://github.com/Tinnat-R/customerexpnodeweb#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
