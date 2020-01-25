@@ -1,16 +1,14 @@
 import React from 'react';
-import Header from '../common/Header.js'
-import Footer from '../common/Footer.js'
+import HomeBanner from '../common/HomeBanner';
 import FeaturedProducts from '../home/FeaturedProducts';
-import HomeSlideShow from '../common/HomeSlideShow';
+import WelcomeWidget from '../common/WelcomeWidget'
 
 const Home = () => {
     return (
         <div>
-            <Header />
-            <HomeSlideShow />
+            <HomeBanner />
             <FeaturedProducts />
-            <Footer />
+            <WelcomeWidget />
         </div>
     )
 }
