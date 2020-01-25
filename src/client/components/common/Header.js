@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../../images/tinnat-logo.png';
+import '../../styles/header.css';
 
 export default class Header extends Component {
     constructor(props) {
@@ -8,8 +9,8 @@ export default class Header extends Component {
 
     render() {
         return (
-            <div className="content-wrapper">
-                <div className="content">
+            <div className="header-content-wrapper">
+                <div className="header-content">
                     <div onClick={() => window.location = '/'} className="logo">
                         <img src={logo} height="45px" width="80px" />
                     </div>
@@ -23,11 +24,14 @@ export default class Header extends Component {
                         <div onClick={() => window.location = '/products'} className="menu-item">
                             Products
                         </div>
-                        <div onClick={() => window.location = '/cart'} className="menu-item">
-                            Cart
+                        <div onClick={() => window.location = '/contact'} className="menu-item">
+                            Help
                         </div>
                         <div onClick={() => window.location = '/contact'} className="menu-item">
-                            Contact Us
+                            Contact
+                        </div>
+                        <div onClick={() => window.location = '/contact'} className="menu-item">
+                            <i className="material-icons">add_shopping_cart</i>&nbsp; (0)
                         </div>
                         <div className="clear"></div>
                     </div>
