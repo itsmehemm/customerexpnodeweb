@@ -20,7 +20,8 @@ const addProductObj = (data) => {
             amount: data.cost && data.cost.amount || 0,
             currency: data.cost && data.cost.currency || 'INR'
         },
-        picture_links: data.picture_links || []
+        picture_links: data.picture_links || [],
+        featured: data.featured || false
     });
 };
 
