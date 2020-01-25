@@ -25,6 +25,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "lodash": "^4.17.15",
     "mongodb": "^2.2.36",
     "path": "^0.12.7",
     "react": "^16.12.0",
