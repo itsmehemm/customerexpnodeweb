@@ -3,9 +3,9 @@ import banner from '../../images/banner.jpg';
 
 const HomeBanner = () => {
     return (
-        <div className="content-wrapper">
+        <div className="in-content-wrapper">
             <div className="content">
-                <img src={banner} />
+                <img width="100%" src={banner} />
             </div>
         </div>
     );
