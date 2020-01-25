@@ -1,0 +1,9 @@
+.footer {
+    font-family: 'Product Sans';
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-size: 1em;
+    padding: 1em;
+    width: 100%;
+    color: rgb(88, 88, 88);
+}
