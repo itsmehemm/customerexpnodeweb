@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.fa8b4bbb.chunk.css",
-    "main.js": "/static/js/main.7922f282.chunk.js",
-    "main.js.map": "/static/js/main.7922f282.chunk.js.map",
+    "main.css": "/static/css/main.96b67518.chunk.css",
+    "main.js": "/static/js/main.87de740e.chunk.js",
+    "main.js.map": "/static/js/main.87de740e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.b4fad7ba.js",
     "runtime-main.js.map": "/static/js/runtime-main.b4fad7ba.js.map",
-    "static/js/2.9326c15b.chunk.js": "/static/js/2.9326c15b.chunk.js",
-    "static/js/2.9326c15b.chunk.js.map": "/static/js/2.9326c15b.chunk.js.map",
+    "static/js/2.a66a8846.chunk.js": "/static/js/2.a66a8846.chunk.js",
+    "static/js/2.a66a8846.chunk.js.map": "/static/js/2.a66a8846.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.89523ab6c3faf7cbb28016308ec9f81d.js": "/precache-manifest.89523ab6c3faf7cbb28016308ec9f81d.js",
+    "precache-manifest.cb8f3fb7742fefb62454108cde340759.js": "/precache-manifest.cb8f3fb7742fefb62454108cde340759.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.fa8b4bbb.chunk.css.map": "/static/css/main.fa8b4bbb.chunk.css.map",
-    "static/js/2.9326c15b.chunk.js.LICENSE": "/static/js/2.9326c15b.chunk.js.LICENSE",
+    "static/css/main.96b67518.chunk.css.map": "/static/css/main.96b67518.chunk.css.map",
+    "static/js/2.a66a8846.chunk.js.LICENSE": "/static/js/2.a66a8846.chunk.js.LICENSE",
     "static/media/banner.jpg": "/static/media/banner.0a9a5ccd.jpg",
     "static/media/tinnat-logo.png": "/static/media/tinnat-logo.4d7196b3.png",
     "static/media/tshirt.jpg": "/static/media/tshirt.9e44ceb5.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.b4fad7ba.js",
-    "static/js/2.9326c15b.chunk.js",
-    "static/css/main.fa8b4bbb.chunk.css",
-    "static/js/main.7922f282.chunk.js"
+    "static/js/2.a66a8846.chunk.js",
+    "static/css/main.96b67518.chunk.css",
+    "static/js/main.87de740e.chunk.js"
   ]
 }
