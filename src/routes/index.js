@@ -23,12 +23,12 @@ const api = require('./api');
 
 const { apiAuthenticator } = require('../controllers');
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../', 'build', 'index.html'));
-});
-
 app.use('/api', apiAuthenticator);
 
 app.use('/api', api);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../../', 'build', 'index.html'));
+});
 
 module.exports = app;
