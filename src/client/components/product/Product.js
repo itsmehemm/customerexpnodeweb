@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import tshirt from '../../images/t-shirt.jpg';
+import tshirt from '../../images/tshirt.jpg';
 import getProductById from '../../actions/get-product-by-id';
 
 export default class Product extends Component {
