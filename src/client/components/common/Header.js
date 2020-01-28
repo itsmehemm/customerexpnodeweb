@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../../images/tinnat-logo.png';
+import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
 
 export default class Header extends Component {
