@@ -3,6 +3,8 @@ import tshirt from '../../images/tshirt.jpg';
 import getProductById from '../../actions/get-product-by-id';
 import SmallButtonGroup from '../common/elements/SmallButtonGroup';
 import Amount from '../common/elements/Amount';
+import ProductImages from '../product/ProductImages';
+import LargeBtn from '../common/elements/LargeBtn';
 
 export default class Product extends Component {
     constructor(props) {
@@ -23,36 +25,53 @@ export default class Product extends Component {
 
         if (productinfo)
             return (
-                <div className="in-content-wrapper">
+                <div className="incontent-wrapper">
                     <div className="content">
-                        <div className="p-images">
-                            <img src={productinfo && productinfo.picture_links && productinfo.picture_links[0] || tshirt} height="400px" width="400px" />
+                        {/* Product Images and Buttons */}
+                        <div className="content-6 rigid-content-6">
+                            <ProductImages images={productinfo.picture_links} />
+                            <LargeBtn
+                                name="ADD TO CART"
+                                color="#2874f0"
+                                icon="add_shopping_cart" />
+                            <LargeBtn
+                                name="BUY NOW"
+                                color="#fb641b"
+                                icon="trending_up" />
                         </div>
-                        <div className="p-infos">
-                            <div className="p-item">
-                                <span className="header-large">{productinfo.name}</span>
+
+                        {/* Product Information */}
+                        <div className="content-6 rigid-content-6">
+                            <div className="t-box">
+                                <div className="t-h2">{productinfo.name}</div>
+                                <div className="t-h4">{productinfo.description}</div>
                             </div>
-                            <div className="p-item">
-                                <span className="header-text-medium">{productinfo.description}</span>
-                            </div>
-                            <div className="p-item">
+                            <div className="t-box under-line">
                                 <Amount cost={productinfo.cost} discount={productinfo.discount} />
                             </div>
-                            <div className="p-item">
+                            <div className="t-box under-line">
+                                <div className="content-3">
+                                    <span className="t-h4">Size</span>
+                                </div>
                                 <SmallButtonGroup
                                     onSelect={() => { }}
                                     defaultButton={productinfo.default_size}
                                     buttons={productinfo.available_sizes}
                                 />
+                                <div className="clear" />
                             </div>
-                            <div className="p-item">
+                            <div className="t-box under-line">
+                                <div className="content-3">
+                                    <span className="t-h4">Color</span>
+                                </div>
                                 <SmallButtonGroup
                                     onSelect={() => { }}
                                     defaultButton={productinfo.default_color}
                                     buttons={productinfo.available_colors}
                                 />
+                                <div className="clear" />
                             </div>
-                            <div className="p-item">
+                            <div className="t-box under-line">
                                 {
                                     parseInt(productinfo.stock_quantity) > 0 ?
                                         <span className="small-header-text green-text">
@@ -65,14 +84,8 @@ export default class Product extends Component {
                                                     </span>
                                 }
                             </div>
-                            <div className="p-item">
-                                <button className="add-cart-btn">
-                                    <i className="material-icons">add_shopping_cart</i>
-                                    &ensp;ADD TO CART </button>
-                            </div>
-
                         </div>
-                        <div className="clear" />
+                        <div className="clear"></div>
                     </div>
                 </div>
             )
