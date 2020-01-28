@@ -17,13 +17,15 @@ const Amount = (props) => {
     return (
         <div className="amount-section">
             <span className="final-amount-text"> {cost.currency} {discountedAmount} </span>
+            &ensp;
             <span className="original-amount-text">{cost.currency} {amount}</span>
+            &ensp;
             <span className="amount-offer-text">
-                &nbsp;({
+                &nbsp;{
                     discount.type === 'INSTANT' ?
                         `${cost.currency} ${discountValue} off` :
                         `${discountValue}% off`
-                }) 
+                }
             </span>
         </div>
     )
