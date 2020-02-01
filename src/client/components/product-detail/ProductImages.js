@@ -4,7 +4,7 @@ import defaultImg from "../../images/default-product-image.png";
 import { Slide } from 'react-slideshow-image';
 
 const properties = {
-    duration: 5000,
+    duration: 2000,
     transitionDuration: 500,
     infinite: true,
     indicators: true,
