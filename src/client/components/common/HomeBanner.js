@@ -1,13 +1,16 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+
 import banner from '../../images/banner.jpg';
 
 const HomeBanner = () => {
     return (
-        <div className="in-content-wrapper">
-            <div className="content">
+        <Container maxWidth={"lg"}>
+            <Box m={4}>
                 <img width="100%" src={banner} />
-            </div>
-        </div>
+            </Box>
+        </Container>
     );
 }
 
