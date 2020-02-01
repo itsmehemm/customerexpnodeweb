@@ -11,7 +11,6 @@ const Home = () => {
             <Header />
             <HomeBanner />
             <FeaturedProducts />
-            <WelcomeWidget />
             <Footer />
         </div>
     )
