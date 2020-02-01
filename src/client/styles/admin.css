@@ -1,0 +1,12 @@
+
+
+.a-product-info-content {
+    margin: 5px;
+    border-radius: 5px;
+    padding: 1em;
+    border: 1px solid #c8c0c0;
+}
+
+.text-google-sans {
+    font-family: "Google Sans" !important;
+}
