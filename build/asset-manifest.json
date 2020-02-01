@@ -1,28 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.67e5cee3.chunk.css",
-    "main.js": "/static/js/main.92221a51.chunk.js",
-    "main.js.map": "/static/js/main.92221a51.chunk.js.map",
+    "main.css": "/static/css/main.c42a2e9f.chunk.css",
+    "main.js": "/static/js/main.5692d736.chunk.js",
+    "main.js.map": "/static/js/main.5692d736.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.b4fad7ba.js",
     "runtime-main.js.map": "/static/js/runtime-main.b4fad7ba.js.map",
-    "static/css/2.1a9f5c77.chunk.css": "/static/css/2.1a9f5c77.chunk.css",
-    "static/js/2.cc08da0c.chunk.js": "/static/js/2.cc08da0c.chunk.js",
-    "static/js/2.cc08da0c.chunk.js.map": "/static/js/2.cc08da0c.chunk.js.map",
+    "static/css/2.3e14f9b5.chunk.css": "/static/css/2.3e14f9b5.chunk.css",
+    "static/js/2.e0299d2b.chunk.js": "/static/js/2.e0299d2b.chunk.js",
+    "static/js/2.e0299d2b.chunk.js.map": "/static/js/2.e0299d2b.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1717b3846edd70dea9d177b4547a5a86.js": "/precache-manifest.1717b3846edd70dea9d177b4547a5a86.js",
+    "precache-manifest.3aaeac979f82626a3ded1c86a0a4451d.js": "/precache-manifest.3aaeac979f82626a3ded1c86a0a4451d.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.1a9f5c77.chunk.css.map": "/static/css/2.1a9f5c77.chunk.css.map",
-    "static/css/main.67e5cee3.chunk.css.map": "/static/css/main.67e5cee3.chunk.css.map",
-    "static/js/2.cc08da0c.chunk.js.LICENSE": "/static/js/2.cc08da0c.chunk.js.LICENSE",
+    "static/css/2.3e14f9b5.chunk.css.map": "/static/css/2.3e14f9b5.chunk.css.map",
+    "static/css/main.c42a2e9f.chunk.css.map": "/static/css/main.c42a2e9f.chunk.css.map",
+    "static/js/2.e0299d2b.chunk.js.LICENSE": "/static/js/2.e0299d2b.chunk.js.LICENSE",
     "static/media/banner.jpg": "/static/media/banner.0a9a5ccd.jpg",
-    "static/media/tinnat-logo-white.png": "/static/media/tinnat-logo-white.f00ef63f.png",
-    "static/media/tshirt.jpg": "/static/media/tshirt.9e44ceb5.jpg"
+    "static/media/tinnat-logo-white.png": "/static/media/tinnat-logo-white.f00ef63f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.b4fad7ba.js",
-    "static/css/2.1a9f5c77.chunk.css",
-    "static/js/2.cc08da0c.chunk.js",
-    "static/css/main.67e5cee3.chunk.css",
-    "static/js/main.92221a51.chunk.js"
+    "static/css/2.3e14f9b5.chunk.css",
+    "static/js/2.e0299d2b.chunk.js",
+    "static/css/main.c42a2e9f.chunk.css",
+    "static/js/main.5692d736.chunk.js"
   ]
 }
