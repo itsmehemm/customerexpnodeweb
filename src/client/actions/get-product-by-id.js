@@ -15,11 +15,7 @@ const getProductById = (id) => {
         }, (e, r, b) => {
             b = JSON.parse(b || '{}');
             console.log(JSON.stringify(b));
-            if (b && b.error) {
-                resolve(null);
-            } else {
-                resolve(b);
-            }
+            resolve(b);
         });
     });
 };
