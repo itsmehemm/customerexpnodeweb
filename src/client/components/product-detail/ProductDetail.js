@@ -25,11 +25,11 @@ export default class ProductDetail extends Component {
     render() {
         const { data } = this.props;
         return (
-            <Container maxWidth="md">
-                <Grid container spacing={4}>
+            <Container style={{ padding: '1em' }} maxWidth="md">
+                <Grid container>
                     {/* Product Images and Buttons */}
                     <Grid item xs={6}>
-                        <Box m={2}>
+                        <Box m={0}>
                             <ProductImages images={data.picture_links} />
                             <LargeBtn
                                 name="ADD TO CART"
@@ -42,7 +42,7 @@ export default class ProductDetail extends Component {
                         </Box>
                     </Grid>
                     {/* Product Information */}
-                    <Grid item xs={6}>
+                    <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
                         <Box m={2}>
                             <Typography text={data.name} size="h5" />
                         </Box>
