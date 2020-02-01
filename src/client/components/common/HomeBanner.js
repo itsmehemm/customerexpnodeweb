@@ -7,7 +7,7 @@ import banner from '../../images/banner.jpg';
 const HomeBanner = () => {
     return (
         <Container maxWidth={"lg"}>
-            <Box m={4}>
+            <Box m={1}>
                 <img width="100%" src={banner} />
             </Box>
         </Container>
