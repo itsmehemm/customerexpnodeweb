@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 export default class Header extends Component {
     constructor(props) {
@@ -9,35 +11,36 @@ export default class Header extends Component {
 
     render() {
         return (
-            <div className="header-content-wrapper">
-                <div className="header-content">
-                    <div onClick={() => window.location = '/'} className="logo">
-                        <img src={logo} height="45px" width="80px" />
-                    </div>
-                    <div className="menu">
-                        <div onClick={() => window.location = '/'} className="menu-item">
+            <Container className="header-content-wrapper" maxWidth={false}>
+                <Container maxWidth={"xl"}>
+                    <Grid className="menu" alignItems="center"
+                        justify="center"
+                        container
+                        spacing={1}>
+                        <Grid className="logo" onClick={() => window.location = '/'} item xs={1}>
+                            <img src={logo} height="45px" width="80px" />
+                        </Grid>
+                        <Grid className="menu-item" onClick={() => window.location = '/'} item xs={1}>
                             Home
-                        </div>
-                        <div onClick={() => window.location = '/about'} className="menu-item">
+                        </Grid>
+                        <Grid className="menu-item" onClick={() => window.location = '/about'} item xs={1}>
                             About
-                        </div>
-                        <div onClick={() => window.location = '/products'} className="menu-item">
+                        </Grid>
+                        <Grid className="menu-item" onClick={() => window.location = '/products'} item xs={1}>
                             Products
-                        </div>
-                        <div onClick={() => window.location = '/contact'} className="menu-item">
+                        </Grid>
+                        <Grid className="menu-item" onClick={() => window.location = '/help'} item xs={1}>
                             Help
-                        </div>
-                        <div onClick={() => window.location = '/contact'} className="menu-item">
+                        </Grid>
+                        <Grid className="menu-item" onClick={() => window.location = '/contact'} item xs={1}>
                             Contact
-                        </div>
-                        <div onClick={() => window.location = '/contact'} className="menu-item">
-                            <i className="material-icons">add_shopping_cart</i>&nbsp; (0)
-                        </div>
-                        <div className="clear"></div>
-                    </div>
-                    <div className="clear" />
-                </div>
-            </div>
+                        </Grid>
+                        <Grid className="menu-item" onClick={() => window.location = '/cart'} item xs={1}>
+                            <i className="material-icons">add_shopping_cart</i>&nbsp;(0)
+                        </Grid>
+                    </Grid>
+                </Container>
+            </Container>
         )
     }
 }
