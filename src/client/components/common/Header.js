@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from '../../images/tinnat-logo-white.png';
-import '../../styles/header.css';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+
+import logo from '../../images/tinnat-logo-white.png';
+import '../../styles/header.css';
 
 export default class Header extends Component {
     constructor(props) {
