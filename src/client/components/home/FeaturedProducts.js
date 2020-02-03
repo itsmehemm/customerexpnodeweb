@@ -5,7 +5,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '../common/elements/Typography';
 import Amount from '../common/elements/Amount';
 import getFeaturedProducts from '../../actions/get-featured-products';
-import { currencyCodeLabel } from '../../client-lib/mappers';
+
+import { addItemToCart } from '../../actions/cart/add-item-cart';
 
 export default class FeaturedProducts extends Component {
     constructor(props) {
@@ -18,9 +19,15 @@ export default class FeaturedProducts extends Component {
     componentDidMount() {
         getFeaturedProducts()
             .then(featured => this.setState({ featured: featured }));
+
     }
 
     render() {
+        addItemToCart({
+            id: 'HJEM',
+            color: 'R',
+            size: 'M'
+        });
         return (
             <Container maxWidth={"lg"}>
                 <Box m={1}>
