@@ -1,8 +1,8 @@
 import request from 'request';
 import config from '../configs/config.json';
 
-// const environment = 'production';
-const environment = 'development';
+const environment = 'production';
+// const environment = 'development';
 
 export const getProductById = (id) => {
     return new Promise((resolve, reject) => {
