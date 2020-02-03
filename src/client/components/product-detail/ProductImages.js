@@ -17,7 +17,7 @@ const properties = {
  * Given a list of product images, this component will display them as a slide show.1
  */
 const ProductImages = (props) => {
-    let { images = [] } = props;
+    let { images = [], style = {} } = props;
 
     if (images.length === 0)
         images.push(defaultImg);
@@ -27,7 +27,7 @@ const ProductImages = (props) => {
             <Slide {...properties}>
                 {
                     images.map((image, key) =>
-                        <div key={key} className="product-image">
+                        <div key={key} className="product-image" style={style}>
                             <img src={image} />
                         </div>
                     )}
