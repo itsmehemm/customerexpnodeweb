@@ -10,7 +10,9 @@ const _Typography = (props) => {
             <Typography className={type === "header" ? "text-google-sans" : ""}
                 variant={size}
                 align={align}
-                component="h2">
+                component="h2"
+                {...props}
+            >
                 {icon ? <Icon name="add" /> : ""} {text}
             </Typography>
         </Grid>
