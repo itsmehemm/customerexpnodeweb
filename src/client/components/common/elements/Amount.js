@@ -5,6 +5,7 @@ const Amount = (props) => {
 
     const { cost, discount } = props;
 
+    console.log(cost)
     let amount = parseInt(cost.amount);
     const discountValue = parseInt(discount.value);
     let discountedAmount = amount;
