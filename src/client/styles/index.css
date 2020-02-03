@@ -30,9 +30,7 @@ body {
     }
 }
 
-@media only screen and (min-width: 600px) {
-    
-}
+@media only screen and (min-width: 600px) {}
 
 .rigid-content-6 {
     min-width: 450px;
@@ -304,4 +302,9 @@ body {
 
 .margin-center {
     margin: auto;
+}
+
+.t-product-image img {
+    /* height: 200px; */
+    /* width: 100%; */
 }
