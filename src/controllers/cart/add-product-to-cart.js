@@ -19,19 +19,27 @@ const addProductToCart = (req, res) => {
     console.log(ADD_TO_CART_CONTROLLER, `item to be added in cart: ${JSON.stringify(item)}`);
 
     let cart = req.session.cart;
-    
+
     console.log(ADD_TO_CART_CONTROLLER, `Cart before adding product: ${JSON.stringify(cart)}`);
 
     let existingItem = false;
 
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id === item.id) {
-            console.log(ADD_TO_CART_CONTROLLER, `Item already present in cart. Increasing the item count`);
+            console.log(ADD_TO_CART_CONTROLLER, `Item already present in cart. Checking properties: ${JSON.stringify(cart[i])}`);
+            if (cart[i].color === item.color && cart[i].size === item.size) {
+                console.log(`Add similar properties. incrementing count.`);
+                cart[i].count += 1;
+            } else {
+                console.log(`New properties received. overwriting product in cart.`);
+                cart[i].color = item.color;
+                cart[i].size = item.size;
+            }
             existingItem = true;
-            cart[i].count += 1;
             break;
         }
     }
+
     if (!existingItem) {
         console.log(ADD_TO_CART_CONTROLLER, `Item not present in cart. Creating and inserting it`);
         cart.push(item);
