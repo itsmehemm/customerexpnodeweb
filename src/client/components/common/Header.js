@@ -5,9 +5,27 @@ import Grid from '@material-ui/core/Grid';
 import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
 
+import { getCart } from '../../actions/cart/get-cart';
+
 export default class Header extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            cart: []
+        }
+    }
+
+    componentDidMount() {
+        getCart()
+            .then(response => {
+                if (response && response.cart) {
+                    this.setState({ cart: response.cart });
+                } else {
+                    this.setState({ cart: [] });
+                }
+            })
+            .catch(error => this.setState({ cart: [] }))
     }
 
     render() {
@@ -37,7 +55,7 @@ export default class Header extends Component {
                             Contact
                         </Grid>
                         <Grid className="menu-item" onClick={() => window.location = '/cart'} item xs={1}>
-                            <i className="material-icons">add_shopping_cart</i>&nbsp;(0)
+                            <i className="material-icons">add_shopping_cart</i>&nbsp;({this.state.cart.length})
                         </Grid>
                     </Grid>
                 </Container>
