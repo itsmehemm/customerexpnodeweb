@@ -3,7 +3,7 @@ import { currencyCodeLabel } from '../../../client-lib/mappers';
 
 const Amount = (props) => {
 
-    const { cost, discount } = props;
+    const { cost, discount, style = {} } = props;
 
     console.log(cost)
     let amount = parseInt(cost.amount);
@@ -17,7 +17,7 @@ const Amount = (props) => {
     }
 
     return (
-        <div className="amount-section">
+        <div className="amount-section" style={style}>
             <span className="final-amount-text"> {currencyCodeLabel[cost.currency]}{discountedAmount} </span>
             &ensp;
             <span className="original-amount-text">{currencyCodeLabel[cost.currency]}{amount}</span>
