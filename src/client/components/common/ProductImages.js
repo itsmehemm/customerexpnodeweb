@@ -12,18 +12,18 @@ const properties = {
 }
 
 const ProductImages = (props) => {
-    let { images = [], style = {} } = props;
+    let { images = [], style = {}, default_properties = {}, onClick = onClick } = props;
 
     if (images.length === 0)
         images.push("https://i.ibb.co/xM1v6ts/Whats-App-Image-2020-01-25-at-20-30-54.jpg");
 
     return (
         <div style={style}>
-            <Slide {...properties}>
+            <Slide {...properties} {...default_properties}>
                 {
                     images.map((image, key) =>
                         <div key={key}>
-                            <img src={image} style={style} />
+                            <img onClick={props.onClick} src={image} style={style} />
                         </div>
                     )}
             </Slide>
