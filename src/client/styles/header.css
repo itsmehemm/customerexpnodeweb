@@ -17,14 +17,11 @@
 .menu-item {
     font-family: 'Product Sans';
     letter-spacing: 1px;
-    line-height: 2.5;
     text-align: center;
     font-size: 1em;
-    border-bottom: 2px solid transparent;
     color: #fff;
 }
 
 .menu-item:hover {
     cursor: pointer;
-    border-bottom: 2px solid #fff;
 }
