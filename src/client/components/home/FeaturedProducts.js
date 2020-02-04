@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '../common/elements/Typography';
 import Amount from '../common/elements/Amount';
 import getFeaturedProducts from '../../actions/get-featured-products';
-
+import ProductWidget from '../common/ProductWidget';
 import { addItemToCart } from '../../actions/cart/add-item-cart';
 
 export default class FeaturedProducts extends Component {
@@ -32,22 +32,14 @@ export default class FeaturedProducts extends Component {
             <Container maxWidth={"lg"}>
                 <Box m={1}>
                     <Box className="center" m={4}>
-                        <span className="header-large"> Featured Products </span>
+                        <Typography type="header" size="h4" text="Featured Products" />
                     </Box>
                     <Box className="center" m={4}>
                         <Grid container spacing={1}>
                             {
                                 this.state.featured.map((product, key) =>
-                                    <Grid item xs={4} key={key} onClick={() => window.open(`/product/${product.id}`)} >
-                                        <Box m={1} className="p-widget">
-                                            <img src={product.picture_links[0]} height="250px" width="250px" />
-                                            <Box m={1}>
-                                                <Typography text={product.name} size="subtitle1" />
-                                            </Box>
-                                            <Box m={1}>
-                                                <Amount cost={product.cost} discount={product.discount} />
-                                            </Box>
-                                        </Box>
+                                    <Grid item xs={4} key={key}>
+                                        <ProductWidget {...product} onClick={() => window.open(`/product/${product.id}`)} />
                                     </Grid>)
                             }
                             {
