@@ -1,7 +1,6 @@
 import config from '../../configs/config.json';
 
-const environment = 'production';
-// const environment = 'development';
+const environment = config.environment;
 
 export const addItemToCart = async (item) => {
     return new Promise((resolve, reject) => {
