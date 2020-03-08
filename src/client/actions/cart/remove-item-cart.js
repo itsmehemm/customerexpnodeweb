@@ -1,8 +1,7 @@
 import request from 'request';
 import config from '../../configs/config.json';
 
-const environment = 'production';
-// const environment = 'development';
+const environment = config.environment;
 
 const removeItemFromCart = async (id) => {
     return fetch(config[environment].api.v1_post_remove_item_cart.uri, {
