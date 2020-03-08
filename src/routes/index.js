@@ -26,7 +26,7 @@ app.use(session({
     name: config.session.name,
     secret: config.session.secret,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false
 }));
 
 app.use(validateUserSession);
