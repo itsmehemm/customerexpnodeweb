@@ -12,7 +12,7 @@ const properties = {
 }
 
 const ProductImages = (props) => {
-    let { images = [], style = {}, default_properties = {}, onClick = onClick } = props;
+    let { images = [], style = {}, default_properties = {}, onClick = () => {} } = props;
 
     if (images.length === 0)
         images.push(defaultImg);
