@@ -1,8 +1,7 @@
 import request from 'request';
 import config from '../../configs/config.json';
 
-const environment = 'production';
-// const environment = 'development';
+const environment = config.environment;
 
 export const getCart = async () => {
     return new Promise((resolve, reject) => {
@@ -10,7 +9,7 @@ export const getCart = async () => {
             uri: config[environment].api.v1_get_cart.uri,
             method: 'GET',
             headers: {
-                'X-TINNAT-SECURITY-CONTEXT': JSON.stringify({ "userId": "admin", "key": "tinnat" })
+                'X-TINNAT-SECURITY-CONTEXT': JSON.stringify({ "userId": "tinnat_guest", "key": "tinnat_guest_secret" })
             }
         }, (e, r, b) => {
             b = JSON.parse(b || '{}');
