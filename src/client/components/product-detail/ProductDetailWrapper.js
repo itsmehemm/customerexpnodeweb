@@ -4,8 +4,6 @@ import ProductDetailLoading from './ProductDetailLoading';
 import WebInternalServerError from '../common/WebInternalServerError';
 import Component404 from '../common/Component404';
 import ProductDetail from './ProductDetail';
-import Header from '../common/Header';
-import Footer from '../common/Footer';
 import getProductById from '../../actions/get-product-by-id';
 
 import {
@@ -64,9 +62,7 @@ export default class ProductDetailWrapper extends Component {
                 return <Component404 error={error} />
             case PAGE_LOADING_COMPLETED_SUCCESS:
                 return (<div>
-                    <Header />
                     <ProductDetail data={data} />
-                    <Footer />
                 </div>);
             default:
                 return <WebInternalServerError />;
