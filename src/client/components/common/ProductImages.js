@@ -15,7 +15,7 @@ const ProductImages = (props) => {
     let { images = [], style = {}, default_properties = {}, onClick = onClick } = props;
 
     if (images.length === 0)
-        images.push("https://i.ibb.co/xM1v6ts/Whats-App-Image-2020-01-25-at-20-30-54.jpg");
+        images.push(defaultImg);
 
     return (
         <div style={style}>
@@ -23,7 +23,7 @@ const ProductImages = (props) => {
                 {
                     images.map((image, key) =>
                         <div key={key}>
-                            <img onClick={props.onClick} src={image} style={style} />
+                            <img onClick={onClick} src={image} style={style} />
                         </div>
                     )}
             </Slide>
