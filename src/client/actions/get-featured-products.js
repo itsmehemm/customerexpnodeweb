@@ -1,8 +1,7 @@
 import request from 'request';
 import config from '../configs/config.json';
 
-const environment = 'production';
-// const environment = 'development';
+const environment = config.environment;
 
 const getFeaturedProducts = async () => {
     return new Promise((resolve, reject) => {
