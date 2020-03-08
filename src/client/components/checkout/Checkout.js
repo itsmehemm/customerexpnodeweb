@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import PriceWidget from './PriceWidget';
 import DeliveryInformation from './DeliveryInformation';
 import OrderDetails from './OrderDetails';
-import Header from '../common/Header';
+import Header from '../header/Header';
 import Footer from '../common/Footer';
 
 export default class Checkout extends Component {
