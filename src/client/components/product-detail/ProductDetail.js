@@ -12,7 +12,7 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import { productDetailsLabel } from '../../client-lib/mappers';
+import { productAdvancedDetailsMapper } from '../../lib/mappers';
 
 import { addItemToCart } from '../../actions/cart/add-item-cart';
 
@@ -70,11 +70,16 @@ export default class ProductDetail extends Component {
     }
 
     closeNotification() {
-        this.setState({ notification: { status: false, message: '' } });
+        this.setState({
+            notification: {
+                status: false,
+                message: ''
+            }
+        });
     }
 
     render() {
-        const { data } = this.props;
+        const { data = {} } = this.props;
         return (
             <Container style={{ padding: '1em' }} maxWidth="md">
                 <Snackbar
@@ -86,7 +91,6 @@ export default class ProductDetail extends Component {
                     message={this.state.notification.message}
                 />
                 <Grid container>
-                    {/* Product Images and Buttons */}
                     <Grid item xs={6}>
                         <Box m={0}>
                             <ProductImages images={data.picture_links} />
@@ -102,7 +106,6 @@ export default class ProductDetail extends Component {
                                 icon="trending_up" />
                         </Box>
                     </Grid>
-                    {/* Product Information */}
                     <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
                         <Box m={2}>
                             <Typography text={data.name} size="h5" />
@@ -114,7 +117,6 @@ export default class ProductDetail extends Component {
                             <Amount cost={data.cost} discount={data.discount} />
                         </Box>
                         <Box m={2}> <Divider /> </Box>
-
                         <Box m={2}>
                             <Typography text={"Size"} />
                         </Box>
@@ -128,7 +130,6 @@ export default class ProductDetail extends Component {
                             </Grid>
                         </Box>
                         <Box m={2}> <Divider /> </Box>
-
                         <Box m={2}>
                             <Typography text={"Color"} />
                         </Box>
@@ -142,45 +143,43 @@ export default class ProductDetail extends Component {
                             </Grid>
                         </Box>
                         <Box m={2}> <Divider /> </Box>
-
                         <Box m={2}>
-
                             {
-                                data.stock_quantity === 'UNLIMITED' || parseInt(data.stock_quantity) > 0 ?
-                                    <span className="small-header-text green-text">
-                                        <i className="material-icons">done</i>
-                                        &ensp; IN STOCK
-                                                </span> :
-                                    <span className="small-header-text red-text">
-                                        <i className="material-icons">cancel</i>
-                                        &ensp; OUT OF STOCK
-                                                </span>
+                                (data.stock_quantity === 'UNLIMITED' || parseInt(data.stock_quantity) > 0) &&
+                                <span className="small-header-text green-text">
+                                    <i className="material-icons">done</i> &ensp; IN STOCK
+                                </span>
+                                ||
+                                <span className="small-header-text red-text">
+                                    <i className="material-icons">cancel</i> &ensp; OUT OF STOCK
+                                </span>
                             }
                         </Box>
                         <Box m={2}> <Divider /> </Box>
                         {
-                            data.details ?
-                                <div>
-                                    <Box m={2}> <Typography text={"Product Details"} type="h4" /> </Box>
-                                    <Box m={2}>
-                                        {
-                                            Object.keys(data.details || {}).map((i, key) =>
-                                                <Grid container key={key} spacing={2}>
-                                                    <Grid item xs={6}>
-                                                        <Typography text={productDetailsLabel[i]} size="subtitle1" />
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography text={data["details"][i]} size="subtitle1" />
-                                                    </Grid>
+                            data.advanced_details &&
+                            <>
+                                <Box m={2}> <Typography text={"Product Details"} type="h4" /> </Box>
+                                <Box m={2}>
+                                    {
+                                        Object.keys(data.advanced_details || []).map((i, key) =>
+                                            data.advanced_details[i] && <Grid container key={key} spacing={2}>
+                                                <Grid item xs={6}>
+                                                    <Typography text={productAdvancedDetailsMapper[i]} size="subtitle1" />
                                                 </Grid>
-                                            )
-                                        }
-                                    </Box>
-                                    <Box m={2}> <Divider /> </Box>
-                                </div> : <div></div>}
+                                                <Grid item xs={6}>
+                                                    <Typography text={data.advanced_details[i]} size="subtitle1" />
+                                                </Grid>
+                                            </Grid>
+                                        )
+                                    }
+                                </Box>
+                                <Box m={2}> <Divider /> </Box>
+                            </>
+                        }
                     </Grid>
                 </Grid>
             </Container >
-        )
+        );
     }
 }
