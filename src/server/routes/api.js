@@ -10,7 +10,9 @@ const {
     addProductToCart,
     editProductInCart,
     removeProductFromCart,
-    getCart
+    getCart,
+    createInstantOrder,
+    getOrderById
 } = require('../controllers');
 
 const app = express();
@@ -36,5 +38,9 @@ app.post('/cart/edit', editProductInCart);
 app.post('/cart/remove', removeProductFromCart);
 
 app.get('/cart', getCart);
+
+app.post('/create/order', createInstantOrder);
+
+app.get('/order/:id', getOrderById);
 
 module.exports = app;
