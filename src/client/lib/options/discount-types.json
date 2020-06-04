@@ -1,0 +1,14 @@
+[
+    {
+        "label": "No Discount",
+        "value": "NO_DISCOUNT"
+    },
+    {
+        "label": "Instant Amount",
+        "value": "INSTANT_AMOUNT"
+    },
+    {
+        "label": "Instant Percentage",
+        "value": "INSTANT_PERCENTAGE"
+    }
+]
