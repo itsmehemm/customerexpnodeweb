@@ -2,15 +2,17 @@ import config from '../configs/config.json';
 
 const environment = config.environment;
 
-const addProduct = async (product) => {
-    console.log('[INFO]', 'action::addProduct');
+const updateProductById = async (product) => {
+    console.log('[INFO]', 'action::updateProduct');
     console.log('[INFO]', 'request', JSON.stringify(product, undefined, 4));
 
     var myHeaders = new Headers();
     myHeaders.append("X-TINNAT-SECURITY-CONTEXT", "{\"userId\": \"admin\", \"key\": \"tinnat\"}");
     myHeaders.append("Content-Type", "application/json");
 
-    return fetch(config[environment].api.v1_post_add_product.uri, {
+    let uri = config[environment].api.v1_post_update_product.uri;
+    uri = uri.replace("${productid", product.id);
+    return fetch(uri, {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(product),
@@ -21,5 +23,5 @@ const addProduct = async (product) => {
         .catch(error => error)
 };
 
-export default addProduct;
+export default updateProductById;
 

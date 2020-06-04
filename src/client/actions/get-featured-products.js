@@ -4,23 +4,19 @@ import config from '../configs/config.json';
 const environment = config.environment;
 
 const getFeaturedProducts = async () => {
-    return new Promise((resolve, reject) => {
-        request({
-            uri: config[environment].api.v1_get_featured_products.uri,
-            method: 'GET',
-            headers: {
-                'X-TINNAT-SECURITY-CONTEXT': JSON.stringify({ "userId": "admin", "key": "tinnat" })
-            }
-        }, (e, r, b) => {
-            b = JSON.parse(b || '{}');
-            console.log(JSON.stringify(b));
-            if (b && b.featured) {
-                resolve(b.featured);
-            } else {
-                resolve([]);
-            }
-        });
-    });
+    console.log('[INFO]', 'action::getFeaturedProducts');
+    
+    var myHeaders = new Headers();
+    myHeaders.append("X-TINNAT-SECURITY-CONTEXT", "{\"userId\": \"admin\", \"key\": \"tinnat\"}");
+
+    return fetch(config[environment].api.v1_get_featured_products.uri, {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    })
+        .then(response => response.json())
+        .then(response => (response && response.featured) || [])
+        .catch(error => error);
 };
 
 export default getFeaturedProducts;
