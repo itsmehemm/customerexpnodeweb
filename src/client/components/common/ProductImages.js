@@ -13,10 +13,8 @@ const properties = {
 
 const ProductImages = (props) => {
     let { images = [], style = {}, default_properties = {}, onClick = () => {} } = props;
-
     if (images.length === 0)
         images.push(defaultImg);
-
     return (
         <div style={style}>
             <Slide {...properties} {...default_properties}>

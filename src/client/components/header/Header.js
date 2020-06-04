@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-
 import Typography from '../common/elements/Typography';
-
 import { getCart } from '../../actions/cart/get-cart';
-
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING_ERROR
-} from '../../client-lib/constants';
-
+} from '../../lib/constants';
 import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
 
@@ -26,22 +22,32 @@ export default class Header extends Component {
     }
 
     componentDidMount() {
-        // To update the cart periodically every second.
         setInterval(() => {
             this.updateComponent();
-        }, 1000);
+        }, 2000);
     }
 
-    updateComponent() {
-        getCart()
-            .then(response => {
-                if (response && response.cart) {
-                    this.setState({ status: OPERATION_LOADING_COMPLETED, cart: response.cart });
-                } else {
-                    this.setState({ status: OPERATION_LOADING_ERROR, cart: [] });
-                }
-            })
-            .catch(error => this.setState({ status: OPERATION_LOADING_ERROR, cart: [] }))
+    async updateComponent() {
+        try {
+            const response = await getCart();
+            if (response && response.cart) {
+                this.setState({
+                    status: OPERATION_LOADING_COMPLETED,
+                    cart: response.cart
+                });
+            } else {
+                this.setState({
+                    status: OPERATION_LOADING_ERROR,
+                    cart: []
+                });
+            }
+        }
+        catch (error) {
+            this.setState({
+                status: OPERATION_LOADING_ERROR,
+                cart: []
+            });
+        }
     }
 
     render() {
@@ -72,7 +78,9 @@ export default class Header extends Component {
                         </Grid>
                         <Grid className="menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
                             <Typography icon="add_shopping_cart" text={
-                                `(${this.state.status === OPERATION_LOADING ? '...' : this.state.cart.length})`
+                                `(${this.state.status === OPERATION_LOADING ?
+                                    '...' : (this.state.status === OPERATION_LOADING_ERROR ?
+                                        '!' : this.state.cart.length)})`
                             } />
                         </Grid>
                     </Grid>
