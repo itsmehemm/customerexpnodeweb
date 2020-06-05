@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
 import Box from '@material-ui/core/Box';
 import Header from '../header/Header';
-import ComponentLoader from '../common/ComponentLoader';
+import ComponentLoader from '../common/loaders/ComponentLoader';
 import LargeBtn from '../common/elements/LargeBtn';
 import OrderSummary from './widgets/OrderSummary';
 import PersonalInformation from './widgets/PersonalInformation';
@@ -28,11 +29,15 @@ export default class InstantOrder extends Component {
         this.state = {
             status: OPERATION_LOADING,
             errors: new Set(),
-            notification: null,
+            notification: {
+                status: false,
+                message: null
+            },
             ...new InstantOrderModal().getDefaultData(),
         }
         this.update = this.update.bind(this);
-        this.updateOrder = this.updateOrder.bind(this);
+        this.patch = this.patch.bind(this);
+        this.closeNotification = this.closeNotification.bind(this);
     }
 
     async componentDidMount() {
@@ -74,16 +79,15 @@ export default class InstantOrder extends Component {
         });
     }
 
-    async updateOrder() {
+    async patch() {
         const { errors } = this.state;
-        console.log(errors.size);
         if (errors.size === 0) {
             const instantOrderModal = new InstantOrderModal();
             instantOrderModal.updatePatchDataFromState(this.state);
             try {
-                const response = await patchOrder(instantOrderModal.buildPatchRequest());
-                if (response && response.id) {
-                    window.location.href = response.payment_url;
+                const response = await patchOrder(instantOrderModal.buildPatchOrderRequest());
+                if (response && response.instant_payment_url) {
+                    window.location.href = response.instant_payment_url;
                 } else {
                     console.log('ERROR PATCHING ORDER');
                 }
@@ -92,8 +96,22 @@ export default class InstantOrder extends Component {
                 console.log('ERROR PATCHING ORDER');
             }
         } else {
-            console.log('ONE OR MORE REQUIRED INFORMATION IS MISSING');
+            await this.setState({
+                notification: {
+                    status: true,
+                    message: 'Fill all required information to continue'
+                }
+            });
         }
+    }
+
+    async closeNotification() {
+        await this.setState({
+            notification: {
+                status: false,
+                message: null
+            }
+        });
     }
 
     render() {
@@ -102,11 +120,20 @@ export default class InstantOrder extends Component {
             personal_information,
             purchase_item,
             billing_address,
-            shipping_address
+            shipping_address,
+            notification
         } = this.state;
         return (
             <>
                 <Header />
+                <Snackbar
+                    autoHideDuration={3000}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    key={`2`}
+                    open={notification.status}
+                    onClose={this.closeNotification}
+                    message={notification.message}
+                />
                 <Container style={{ padding: '1em' }} maxWidth="md">
                     <Grid container>
                         {status === OPERATION_LOADING && <ComponentLoader />}
@@ -117,22 +144,23 @@ export default class InstantOrder extends Component {
                                 <Grid item xs={6}>
                                     <Box m={2}>
                                         <LargeBtn
-                                            name="Proceed to payment"
+                                            name="REVIEW AND PLACE ORDER"
                                             icon="arrow_forward"
                                             color="rgb(23, 105, 236)"
-                                            onClick={this.updateOrder}></LargeBtn>
+                                            onClick={this.patch}
+                                        />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <OrderSummary
-                                        name={purchase_item.product_details.name}
-                                        description={purchase_item.product_details.description}
-                                        cost={purchase_item.product_details.cost}
-                                        discount={purchase_item.product_details.discount}
+                                        name={purchase_item.data.name}
+                                        description={purchase_item.data.description}
+                                        cost={purchase_item.data.cost}
+                                        discount={purchase_item.data.discount}
                                         size={purchase_item.size}
                                         color={purchase_item.color}
                                         quantity={purchase_item.quantity}
-                                        picture_links={purchase_item.product_details.picture_links}
+                                        picture_links={purchase_item.data.picture_links}
                                     />
                                     <PersonalInformation
                                         email={personal_information.email}
@@ -157,10 +185,10 @@ export default class InstantOrder extends Component {
                                 <Grid item xs={6}>
                                     <Box m={2}>
                                         <LargeBtn
-                                            name="Proceed to payment"
+                                            name="REVIEW AND PLACE ORDER"
                                             icon="arrow_forward"
                                             color="rgb(23, 105, 236)"
-                                            onClick={this.updateOrder}></LargeBtn>
+                                            onClick={this.patch} />
                                     </Box>
                                 </Grid>
                             </>
