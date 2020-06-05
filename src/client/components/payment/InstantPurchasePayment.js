@@ -84,17 +84,88 @@ export default class InstantPurchasePayment extends Component {
                         <>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <Box m={2}>
-                                        <Typography text="PLACE YOUR ORDER AND PAY" />
-                                    </Box>
+                                    <Grid container>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb-inactive"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text="Instant Purchase" />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    variant="button"
+                                                    gutterBottom
+                                                    icon="arrow_forward_ios"
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
+                                                    onClick={() => window.location.href = '/product/' + paymentPlan.tinnat.order_details.purchase_items[0].id}
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    variant="button"
+                                                    gutterBottom
+                                                    icon="arrow_forward_ios"
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text="REVIEW ORDER"
+                                                    onClick={() => window.location.href = '/instant-purchase/' + paymentPlan.tinnat.order_id}
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    icon="arrow_forward_ios"
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb-active"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text="PLACE YOUR ORDER AND PAY" />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
                                     <Box m={2}> <Divider /> </Box>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Grid container>
                                         <Grid item xs={8}>
-                                            <Box m={2}> <Typography text="Order Summary" /></Box>
+                                            <Box m={2}>
+                                                <Typography text="Order Summary" />
+                                                <Typography variant="caption" gutterBottom text="Here is what you're making a purchase." />
+                                            </Box>
                                             <OrderSummary
                                                 hide_label={true}
+                                                id={paymentPlan.tinnat.order_details.purchase_items[0].id}
                                                 name={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
                                                 description={paymentPlan.tinnat.order_details.purchase_items[0].data.description}
                                                 cost={paymentPlan.tinnat.order_details.cost}
@@ -106,13 +177,35 @@ export default class InstantPurchasePayment extends Component {
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
-                                            <Box m={2}> <Typography text="Ship to" /></Box>
+                                            <Grid container>
+                                                <Grid item xs={10}>
+                                                    <Box m={2}>
+                                                        <Typography variant="h6" text="Ship to" gutterBottom />
+                                                        <Typography
+                                                            text="Your order will be shipped to the following address."
+                                                            variant="caption"
+                                                        />
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item xs={2}>
+                                                    <Box m={2}>
+                                                        <Typography
+                                                            className="t-text-link"
+                                                            variant="button"
+                                                            text="EDIT"
+                                                            gutterBottom
+                                                            onClick={() => window.location.href = '/instant-purchase/' + paymentPlan.tinnat.order_id}
+                                                        />
+                                                    </Box>
+                                                </Grid>
+                                            </Grid>
                                             <ViewAddress
                                                 {...paymentPlan.tinnat.order_details.shipping_address}
+                                                forceShow={true}
                                             />
                                             <Box m={2}> <Divider /> </Box>
                                             <Box m={2}>
-                                                <Typography text="Place your order and pay"></Typography>
+                                                <Typography variant="h6" text="Place your order and pay" gutterBottom></Typography>
                                                 <Typography
                                                     text="You'll be securely redirected to PayPal to enter your password and complete your purchase."
                                                     variant="caption"
