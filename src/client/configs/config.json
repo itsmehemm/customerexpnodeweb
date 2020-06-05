@@ -1,5 +1,5 @@
 {
-    "environment": "development",
+    "environment": "production",
     "production": {
         "api": {
             "v1_get_product_by_id": {
