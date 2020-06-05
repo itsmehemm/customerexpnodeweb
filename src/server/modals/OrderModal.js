@@ -127,6 +127,7 @@ class OrderModal {
         this.billingAddress = data.billing_address;
         this.shippingAddress = data.shipping_address;
         this.data = data;
+        console.log('ORDER_MODAL', 'order details fetched from cache: ', JSON.stringify(data));
         return data;
     }
 
