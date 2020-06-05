@@ -4,4 +4,5 @@ export { default as updateProductById } from './update-product-by-id';
 export { default as getOrderDetails } from './get-order-details';
 export { default as patchOrder } from './patch-order';
 export { default as createInstantOrder } from './create-instant-order';
+export { default as getPaymentPlan } from './get-payment-plan';
 
