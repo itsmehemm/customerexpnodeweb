@@ -3,5 +3,33 @@
     "session": {
         "name": "hemms-tool-snippet",
         "secret": "hemm-is-a-batman"
+    },
+    "paypal": {
+        "development": {
+            "client_id": "Af7IUU7tag1dNnpB0X3BEVOL1r-Cw9phZgIpHbLrbNchW-mlPpyecUbuDCMdmBjmugCHuv2gs5V8gEhQ",
+            "secret": "ELsHkyHmtMQXjhhl_LYYzDdgObWpJq-3aQ-N9TfkT5BPLQXxs_qo7bJbPxqUjLPkiHY9RXLHj2qPS0nq",
+            "access_token": {
+                "url": "https://api.sandbox.paypal.com/v1/oauth2/token"
+            },
+            "client_token" : {
+                "url": "https://api.sandbox.paypal.com/v1/identity/generate-token"
+            },
+            "create_order": {
+                "url":"https://api.sandbox.paypal.com/v2/checkout/orders"
+            }
+        },
+        "production": {
+            "client_id": "",
+            "secret": "",
+            "access_token": {
+                "url": "https://api.paypal.com/v1/oauth2/token"
+            },
+            "client_token" : {
+                "url": "https://api.paypal.com/v1/identity/generate-token"
+            },
+            "create_order": {
+                "url":"https://api.paypal.com/v2/checkout/orders"
+            }
+        }
     }
 }
