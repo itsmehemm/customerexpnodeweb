@@ -13,7 +13,8 @@ const {
     getCart,
     createInstantOrder,
     getOrderById,
-    patchOrderById
+    patchOrderById,
+    getPaymentPlan
 } = require('../controllers');
 
 const app = express();
@@ -45,5 +46,7 @@ app.post('/create/order', createInstantOrder);
 app.get('/order/:id', getOrderById);
 
 app.patch('/order/:id', patchOrderById);
+
+app.get('/instant-purchase/:id/payment/plan', getPaymentPlan);
 
 module.exports = app;
