@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "react-scripts start eslint-disable-next-line",
     "build": "react-scripts build eslint-disable-next-line",
-    "start:server": "node tinnat.js"
+    "start:server:prod": "node tinnat.js --env=production",
+    "start:server:dev": "node tinnat.js --env=development"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
   "dependencies": {
     "@material-ui/core": "^4.9.0",
     "@material-ui/icons": "^4.5.1",
+    "async-request": "^1.2.0",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
@@ -32,8 +35,10 @@
     "memory-cache": "^0.2.0",
     "mongodb": "^2.2.36",
     "path": "^0.12.7",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.12.0",
+    "react-load-script": "0.0.6",
     "react-router-dom": "^5.1.2",
     "react-slideshow-image": "^1.3.3",
     "request": "^2.88.2",

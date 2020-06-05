@@ -7,7 +7,8 @@ import Products from './components/products';
 import Help from './components/common/Help';
 import ContactUs from './components/common/ContactUs';
 import Cart from './components/cart/Cart';
-import InstantOrder from './components/instant-order/InstantOrder';
+import InstantPurchase from './components/instant-purchase/InstantPurchase';
+import InstantPurchasePayment from './components/payment/InstantPurchasePayment';
 import Checkout from './components/checkout/Checkout';
 import ProductDetailWrapper from './components/product-detail/ProductDetailWrapper';
 import Internal from './components/internal';
@@ -23,11 +24,12 @@ export default class Tinnat extends Component {
                 <Route exact path="/products" component={Products} />
                 <Route exact path="/help" component={Help} />
                 <Route exact path="/contactus" component={ContactUs} />
-                <Route path="/product/:productid" component={ProductDetailWrapper} />
-                <Route path="/viewcart" component={Cart} />
-                <Route path="/checkout" component={Checkout} />
-                <Route path="/instant-purchase/:orderid" component={InstantOrder} />
-                <Route path="/internal" component={Internal} />
+                <Route exact path="/product/:productid" component={ProductDetailWrapper} />
+                <Route exact path="/viewcart" component={Cart} />
+                <Route exact path="/checkout" component={Checkout} />
+                <Route exact path="/instant-purchase/payment/:orderid" component={InstantPurchasePayment} />
+                <Route exact path="/instant-purchase/:orderid" component={InstantPurchase} />
+                <Route exact path="/internal" component={Internal} />
                 <Footer />
             </Router >
         );

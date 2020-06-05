@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../header/Header';
-import ComponentLoader from '../common/ComponentLoader';
-import WebInternalServerError from '../common/WebInternalServerError';
-import Component404 from '../common/Component404';
+import ComponentLoader from '../common/loaders/ComponentLoader';
+import WebInternalServerError from '../common/errors/WebInternalServerError';
+import Component404 from '../common/errors/Component404';
 import ProductDetail from './ProductDetail';
 import getProductById from '../../actions/get-product-by-id';
 import {
@@ -24,7 +24,6 @@ export default class ProductDetailWrapper extends Component {
     }
 
     async componentDidMount() {
-        this.setState({ status: OPERATION_LOADING });
         const productid = this.props.match.params.productid;
         try {
             const response = await getProductById(productid);
@@ -40,7 +39,11 @@ export default class ProductDetailWrapper extends Component {
                 });
             }
         } catch (error) {
-            this.setState({ status: PAGE_LOADING_FAILED });
+            this.setState({
+                status: PAGE_LOADING_FAILED,
+                data: null,
+                error: 'Unknown error'
+            });
         }
     }
 
@@ -50,10 +53,9 @@ export default class ProductDetailWrapper extends Component {
             <>
                 <Header />
                 {status === OPERATION_LOADING && <ComponentLoader />}
-                {status === PAGE_LOADING_FAILED && <WebInternalServerError />}
                 {status === OPERATION_LOADING_ERROR && <Component404 error={error} />}
                 {status === OPERATION_LOADING_COMPLETED && <ProductDetail data={data} />}
-                {status === OPERATION_LOADING && <ComponentLoader />}
+                {status === PAGE_LOADING_FAILED && <WebInternalServerError />}
             </>
         );
     }

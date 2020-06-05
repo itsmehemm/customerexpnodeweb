@@ -14,6 +14,7 @@ export default class OrderSummary extends Component {
 
     render() {
         const {
+            id,
             name,
             description,
             cost,
@@ -21,13 +22,20 @@ export default class OrderSummary extends Component {
             size,
             color,
             quantity,
-            picture_links } = this.props;
+            picture_links,
+            hide_label
+        } = this.props;
         return (
             <Box>
-                <Box m={2}>
-                    <Typography text="ORDER SUMMARY" size="h6" />
-                </Box>
-                <Box m={2}> <Divider /> </Box>
+                {
+                    !hide_label &&
+                    <>
+                        <Box m={2}>
+                            <Typography text="ORDER SUMMARY" size="h6" />
+                        </Box>
+                        <Box m={2}> <Divider /> </Box>
+                    </>
+                }
                 <Grid container>
                     <Grid item xs={6}>
                         <Box m={2}>
@@ -38,24 +46,30 @@ export default class OrderSummary extends Component {
                                     width: '340px',
                                     height: '340px',
                                     marginLeft: 'auto',
-                                    marginRight: 'auto'
-                                }} />
+                                    marginRight: 'auto', 
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => window.location.href = '/product/' + id}
+                            />
                         </Box>
                     </Grid>
                     <Grid item xs={6}>
-                        <Box m={2}>
-                            <Typography text={name} size="h5" />
-                        </Box>
-                        <Box m={2}>
+                        <Box m={1}>
+                            <Typography
+                                className="t-text-link"
+                                text={name}
+                                variant="h6"
+                                onClick={() => window.location.href = '/product/' + id}
+                            />
                             <Typography text={description} size="subtitle1" />
                         </Box>
-                        <Box m={2}>
+                        <Box m={1}>
                             <Amount cost={cost} discount={discount} />
                         </Box>
-                        <Box m={2}> <Divider /> </Box>
+                        <Box m={1}> <Divider /> </Box>
                         {
                             size &&
-                            <Box m={2}>
+                            <Box m={1}>
                                 <Grid container>
                                     <Grid item xs={3}>
                                         <Typography text="Size" size="subtitle1" />
@@ -68,7 +82,7 @@ export default class OrderSummary extends Component {
                         }
                         {
                             color &&
-                            <Box m={2}>
+                            <Box m={1}>
                                 <Grid container>
                                     <Grid item xs={3}>
                                         <Typography text="Color" size="subtitle1" />
@@ -81,7 +95,7 @@ export default class OrderSummary extends Component {
                         }
                         {
                             quantity &&
-                            <Box m={2}>
+                            <Box m={1}>
                                 <Grid container>
                                     <Grid item xs={3}>
                                         <Typography text="Quantity" size="subtitle1" />
@@ -94,6 +108,7 @@ export default class OrderSummary extends Component {
                         }
                     </Grid>
                 </Grid>
+                <Box m={2}> <Divider /> </Box>
             </Box>
         );
     }

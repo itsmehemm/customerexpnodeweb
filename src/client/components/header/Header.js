@@ -52,37 +52,42 @@ export default class Header extends Component {
 
     render() {
         return (
-            <Container className="header-wrapper" maxWidth={false}>
+            <Container
+                style={{
+                    backgroundImage: 'linear-gradient(100deg, rgb(51, 128, 253), rgb(23, 105, 236))'
+                }}
+                maxWidth={false}>
                 <Container maxWidth={"xl"}>
-                    <Grid className="menu"
+                    <Grid
+                        style={{ height: '4.5rem' }}
                         alignItems="center"
                         justify="center"
                         container>
-                        <Grid className="logo" onClick={() => window.location = '/'} item xs={1}>
-                            <img src={logo} height="45px" width="80px" />
+                        <Grid style={{ cursor: 'pointer' }} onClick={() => window.location = '/'} item xs={1}>
+                            <img src={logo} alt="Tinnat" height="45px" width="80px" />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/'} item xs={1}>
-                            <Typography text="Home" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/'} item xs={1}>
+                            <Typography text="home" variant="button" display="block" gutterTop />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/about'} item xs={1}>
-                            <Typography text="About" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/about'} item xs={1}>
+                            <Typography text="about" variant="button" display="block" gutterTop />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/products'} item xs={1}>
-                            <Typography text="Products" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/products'} item xs={1}>
+                            <Typography text="products" variant="button" display="block" gutterTop />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/help'} item xs={1}>
-                            <Typography text="Help" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/help'} item xs={1}>
+                            <Typography text="help" variant="button" display="block" gutterTop />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
-                            <Typography text="Contact" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
+                            <Typography text="contact" variant="button" display="block" gutterTop />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
+                        {/* <Grid className="t-menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
                             <Typography icon="add_shopping_cart" text={
                                 `(${this.state.status === OPERATION_LOADING ?
                                     '...' : (this.state.status === OPERATION_LOADING_ERROR ?
                                         '!' : this.state.cart.length)})`
                             } />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </Container>
             </Container>

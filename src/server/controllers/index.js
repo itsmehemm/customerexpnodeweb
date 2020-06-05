@@ -15,4 +15,5 @@ module.exports = {
     createInstantOrder: require('./create-instant-order'),
     getOrderById: require('./get-order-by-id'),
     patchOrderById: require('./patch-order-by-id'),
+    getPaymentPlan: require('./get-payment-plan')
 }

@@ -3,9 +3,10 @@ const mongoClient = require('../mongo/mongodb');
 const ViewProductModal = require('../modals/ViewProductModal');
 const { GET_FEATURED_PRODUCTS_CONTROLLER } = require('../lib/constants/logging-constants');
 const { COLLECTION, KEY } = require('../lib/constants/mongo-constants');
+const errorConstants = require('../lib/constants/error-constants');
 
 const getFeaturedProducts = (req, res) => {
-    console.log(GET_FEATURED_PRODUCTS_CONTROLLER, `Processing request to retrieve all featured products.`);
+    console.log(GET_FEATURED_PRODUCTS_CONTROLLER, `processing request to retrieve all featured products.`);
     return mongoClient.connection(db => {
         db
             .collection(COLLECTION.PRODUCT)
@@ -37,13 +38,10 @@ const getFeaturedProducts = (req, res) => {
                         featured: []
                     });
                 }
-            }).catch(err => {
-                console.log(GET_FEATURED_PRODUCTS_CONTROLLER, `There was an error performing the operation in the database. ${JSON.stringify(err)}`);
+            }).catch((error) => {
+                console.log(GET_FEATURED_PRODUCTS_CONTROLLER, `there was an error performing the operation in the database. ${JSON.stringify(error)}`);
                 return res.send({
-                    error: {
-                        message: 'INTERNAL_SERVER_ERROR',
-                        description: 'An internal server error occurred while trying to process your request. Please try again.'
-                    }
+                    error: errorConstants.DATABASE_ERROR
                 });
             });
     });

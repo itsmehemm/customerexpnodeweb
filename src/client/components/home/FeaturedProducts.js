@@ -3,8 +3,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '../common/elements/Typography';
-import getFeaturedProducts from '../../actions/get-featured-products';
 import ProductWidget from '../common/widgets/ProductWidget';
+import { getFeaturedProducts } from '../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
@@ -16,45 +16,67 @@ export default class FeaturedProducts extends Component {
         super(props);
         this.state = {
             status: OPERATION_LOADING,
-            featured: []
+            products: []
         }
     }
 
     async componentDidMount() {
         try {
-            const featured = await getFeaturedProducts();
-            this.setState({
-                featured: featured,
-                status: OPERATION_LOADING_COMPLETED
-            });
+            const products = await getFeaturedProducts();
+            if (Array.isArray(products)) {
+                await this.setState({
+                    products: products,
+                    status: OPERATION_LOADING_COMPLETED
+                });
+            } else {
+                await this.setState({
+                    products: [],
+                    status: OPERATION_LOADING_ERROR
+                });
+            }
         } catch (error) {
-            this.setState({
-                featured: [],
+            await this.setState({
+                products: [],
                 status: OPERATION_LOADING_ERROR
             });
         }
     }
 
     render() {
-        const { status, featured = [] } = this.state;
+        const { status, products } = this.state;
         return (
             <Container maxWidth={"lg"}>
-                <Box m={1}>
-                    <Box className="center" m={4}>
-                        <Typography size="h4" text="Featured Products" />
+                {
+                    (status === OPERATION_LOADING || status === OPERATION_LOADING_COMPLETED) &&
+                    <Box m={1}>
+                        <Box className="center" m={4}>
+                            <Typography size="h4" text="Featured Products" />
+                        </Box>
+                        <Box className="center" m={4}>
+                            <Grid container spacing={1}>
+                                {
+                                    status === OPERATION_LOADING &&
+                                    <div> Loading featured products... </div>
+                                }
+                                {
+                                    status === OPERATION_LOADING_COMPLETED &&
+                                    products.map((product, key) =>
+                                        <Grid item xs={4} key={key}>
+                                            <ProductWidget
+                                                {...product}
+                                                onClick={() => window.open(product.url)} />
+                                        </Grid>)
+                                }
+                                {
+                                    status === OPERATION_LOADING_COMPLETED &&
+                                    products.length === 0 &&
+                                    <div> There are no featured products </div>
+                                }
+                            </Grid>
+                        </Box>
                     </Box>
-                    <Box className="center" m={4}>
-                        <Grid container spacing={1}>
-                            {status === OPERATION_LOADING && <div> Loading featured products... </div>}
-                            {status === OPERATION_LOADING_COMPLETED && this.state.featured.map((product, key) =>
-                                <Grid item xs={4} key={key}>
-                                    <ProductWidget {...product} onClick={() => window.open(`/product/${product.id}`)} />
-                                </Grid>)}
-                            {status === OPERATION_LOADING_COMPLETED && this.state.featured.length === 0 && <div> There are no featured products </div>}
-                        </Grid>
-                    </Box>
-                </Box >
-            </Container >
+                }
+            </Container>
         );
     }
-}
+};

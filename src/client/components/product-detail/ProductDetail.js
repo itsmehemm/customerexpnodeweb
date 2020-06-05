@@ -4,19 +4,21 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import SmallButtonGroup from '../common/elements/SmallButtonGroup';
+import SmallImageButtonGroup from '../common/elements/SmallImageButtonGroup';
 import Amount from '../common/elements/Amount';
 import ProductImages from './ProductImages';
 import LargeBtn from '../common/elements/LargeBtn';
 import Typography from '../common/elements/Typography';
-import { productAdvancedDetailsMapper } from '../../lib/mappers';
 import InstantOrderModal from '../../modals/instant-order/InstantOrderModal';
-import {
-    addItemToCart
-} from '../../actions/cart/add-item-cart';
+import { productAdvancedDetailsMapper } from '../../lib/mappers';
 import {
     createInstantOrder
 } from '../../actions';
+import {
+    addItemToCart
+} from '../../actions/cart/add-item-cart';
 
 export default class ProductDetail extends Component {
 
@@ -29,11 +31,12 @@ export default class ProductDetail extends Component {
             quantity: 1,
             notification: {
                 status: false,
-                message: ''
+                message: null
             }
         };
         this.closeNotification = this.closeNotification.bind(this);
         this.update = this.update.bind(this);
+        this.instantPurchase = this.instantPurchase.bind(this);
     }
 
     async componentDidMount() {
@@ -77,13 +80,13 @@ export default class ProductDetail extends Component {
         instantOrderModal.updateCreateDataFromState(this.state);
         try {
             const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
-            if (response && response.id) {
-                window.location.href = response.order_link;
+            if (response && response.instant_purchase_url) {
+                window.location.href = response.instant_purchase_url;
             } else {
-                await this.notify('Error purchasing order. Please try again.');
+                await this.notify('There was an error while creating the order.');
             }
         } catch (error) {
-            await this.notify('Error purchasing order. Please try again.');
+            await this.notify('There was an error while creating the order.');
         }
     }
 
@@ -100,7 +103,7 @@ export default class ProductDetail extends Component {
         await this.setState({
             notification: {
                 status: false,
-                message: ''
+                message: null
             }
         });
     }
@@ -128,45 +131,68 @@ export default class ProductDetail extends Component {
                                 color="#2874f0"
                                 icon="add_shopping_cart" /> */}
                             <LargeBtn
-                                onClick={() => this.instantPurchase()}
+                                onClick={this.instantPurchase}
                                 name="BUY NOW"
                                 color="#fb641b"
                                 icon="trending_up" />
                         </Box>
                     </Grid>
                     <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
-                        <Box m={2}>
-                            <Typography text={data.name} size="h5" />
-                        </Box>
-                        <Box m={2}>
-                            <Typography text={data.description} size="subtitle1" />
-                        </Box>
+                        <Grid container>
+                            <Grid item xs={10}>
+                                <Box m={2}>
+                                    <Typography
+                                        text={data.name}
+                                        variant="h5" />
+                                    <Typography
+                                        text={data.description}
+                                        size="subtitle1" />
+
+                                </Box>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Box m={2}>
+                                    <CopyToClipboard
+                                        text={data.url}
+                                        onCopy={() => this.notify('Product link copied!')}>
+                                        <Typography className="t-text-link" text="Share" size="subtitle1" />
+                                    </CopyToClipboard>
+                                </Box>
+                            </Grid>
+                        </Grid>
                         <Box m={2}>
                             <Amount cost={data.cost} discount={data.discount} />
                         </Box>
                         <Box m={2}> <Divider /> </Box>
                         <Box m={2}>
-                            <Typography text={"Size"} />
+                            <Typography
+                                text={"Size"}
+                                variant="button"
+                            />
                         </Box>
                         <Box m={2}>
                             <Grid item xs={12}>
                                 <SmallButtonGroup
-                                    onSelect={(data) => this.update('size', data)}
                                     defaultButton={data.default_size}
                                     buttons={data.available_sizes}
+                                    onSelect={(data) => this.update('size', data)}
                                 />
                             </Grid>
                         </Box>
                         <Box m={2}> <Divider /> </Box>
                         <Box m={2}>
-                            <Typography text={"Color"} />
+                            <Typography
+                                text={"Color"}
+                                variant="button"
+                            />
                         </Box>
                         <Box m={2}>
                             <Grid item xs={12}>
-                                <SmallButtonGroup
-                                    onSelect={(data) => this.update('color', data)}
+                                <SmallImageButtonGroup
+                                    name="color"
                                     defaultButton={data.default_color}
                                     buttons={data.available_colors}
+                                    onSelect={(data) => this.update('color', data)}
                                 />
                             </Grid>
                         </Box>
@@ -174,13 +200,19 @@ export default class ProductDetail extends Component {
                         <Box m={2}>
                             {
                                 (data.stock_quantity === 'UNLIMITED' || parseInt(data.stock_quantity) > 0) &&
-                                <span className="small-header-text green-text">
-                                    <i className="material-icons">done</i> &ensp; IN STOCK
-                                </span>
+                                <Typography
+                                    text="IN STOCK"
+                                    icon="done"
+                                    variant="h6"
+                                    style={{ color: 'rgb(5, 153, 54)' }}
+                                />
                                 ||
-                                <span className="small-header-text red-text">
-                                    <i className="material-icons">cancel</i> &ensp; OUT OF STOCK
-                                </span>
+                                <Typography
+                                    text="OUT OF STOCK"
+                                    icon="cancel"
+                                    variant="h6"
+                                    style={{ color: 'rgb(189, 6, 61)' }}
+                                />
                             }
                         </Box>
                         <Box m={2}> <Divider /> </Box>
@@ -191,12 +223,17 @@ export default class ProductDetail extends Component {
                                 <Box m={2}>
                                     {
                                         Object.keys(data.advanced_details || []).map((i, key) =>
-                                            data.advanced_details[i] && <Grid container key={key} spacing={2}>
+                                            data.advanced_details[i] &&
+                                            <Grid container key={key} spacing={2}>
                                                 <Grid item xs={6}>
-                                                    <Typography text={productAdvancedDetailsMapper[i]} size="subtitle1" />
+                                                    <Typography
+                                                        text={productAdvancedDetailsMapper[i]}
+                                                        size="button" />
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <Typography text={data.advanced_details[i]} size="subtitle1" />
+                                                    <Typography
+                                                        text={data.advanced_details[i]}
+                                                        size="subtitle1" />
                                                 </Grid>
                                             </Grid>
                                         )

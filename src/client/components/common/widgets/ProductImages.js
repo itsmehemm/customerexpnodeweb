@@ -1,7 +1,7 @@
 
 import React from 'react';
-import defaultImg from "../../images/default-product-image.png";
 import { Slide } from 'react-slideshow-image';
+import defaultImg from '../../../images/default-product-image.png';
 
 const properties = {
     duration: 2000,

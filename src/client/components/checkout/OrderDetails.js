@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 import Add from '@material-ui/icons/Add';
-import ProductImages from '../common/ProductImages';
+import ProductImages from '../common/widgets/ProductImages';
 import Amount from '../common/elements/Amount';
 
 export default class OrderDetails extends Component {

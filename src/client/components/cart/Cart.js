@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider';
 
 import Typography from '../common/elements/Typography';
 import ProductImages from '../product-detail/ProductImages';
-import ComponentLoader from '../common/ComponentLoader';
+import ComponentLoader from '../common/loaders/ComponentLoader';
 import EmptyCart from './EmptyCart';
 import ErrorCart from './ErrorCart';
 
