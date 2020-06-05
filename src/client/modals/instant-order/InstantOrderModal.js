@@ -1,5 +1,5 @@
-
 export default class InstantOrderModal {
+
     constructor() {
         this.data = null;
     }
@@ -17,7 +17,7 @@ export default class InstantOrderModal {
             size: purchase_item && purchase_item.size,
             color: purchase_item && purchase_item.color,
             quantity: purchase_item && purchase_item.quantity,
-            product_details: purchase_item && purchase_item.product_details
+            data: purchase_item && purchase_item.data
         };
         data.purchase_items = [data.purchase_item];
         data.billing_address = {
@@ -39,14 +39,22 @@ export default class InstantOrderModal {
             state: d && d.shipping_address && d.shipping_address.state,
             landmark: d && d.shipping_address && d.shipping_address.landmark,
         };
-        this.data = data;
+        this.data = {
+            id: data.id,
+            personal_information: data.personal_information,
+            purchase_item: data.purchase_item,
+            purchase_items: data.purchase_items,
+            cost: data.cost,
+            billing_address: data.billing_address,
+            shipping_address: data.shipping_address,
+        };
     }
 
     getDefaultData() {
         return {
             id: null,
             purchase_item: null,
-            purchase_items: null,
+            purchase_items: [],
             cost: {
                 amount: null,
                 currency: null
@@ -74,7 +82,7 @@ export default class InstantOrderModal {
                 state: null,
                 landmark: null,
             }
-        }
+        };
     }
 
     updatePatchDataFromState(state) {
@@ -95,11 +103,12 @@ export default class InstantOrderModal {
             quantity: state && state.quantity
         }
         this.data = {
+            purchase_item: purchase_item,
             purchase_items: [purchase_item]
         };
     }
 
-    buildPatchRequest() {
+    buildPatchOrderRequest() {
         return {
             id: this.data && this.data.id,
             personal_information: this.data && this.data.personal_information,
