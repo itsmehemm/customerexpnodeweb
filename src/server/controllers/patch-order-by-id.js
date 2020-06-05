@@ -12,7 +12,7 @@ const patchOrderById = async (req, res) => {
         return res.send({
             status: 'COMPLETED',
             id: orderModal.getOrderId(),
-            payment_url: `/instant-purchase/${orderModal.getOrderId()}/payment`
+            payment_url: `/instant-purchase/payment/${orderModal.getOrderId()}`
         });
     } else {
         return res.status(400).send({
