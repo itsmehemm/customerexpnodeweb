@@ -23,7 +23,7 @@ app.use(cors());
 
 app.use(cookieParser());
 
-app.use('/static', express.static(path.resolve(__dirname, '../../', 'build/static')));
+app.use('/static', express.static(path.resolve(__dirname, '../../../', 'build/static')));
 
 app.use(session({
     name: config.session.name,
@@ -39,7 +39,7 @@ app.use('/api', apiAuthenticator);
 app.use('/api', api);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../../../', 'build', 'index.html'));
 });
 
 module.exports = app;
