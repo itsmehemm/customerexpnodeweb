@@ -1,25 +1,25 @@
 const { PATCH_ORDER_BY_ID_CONTROLLER } = require('../lib/constants/logging-constants');
 const OrderModal = require('../modals/OrderModal');
+const errorConstants = require('../lib/constants/error-constants');
+const apiMessages = require('../lib/constants/api-messages');
 
 const patchOrderById = async (req, res) => {
-    console.log(PATCH_ORDER_BY_ID_CONTROLLER, `Patch request received: ${req.body}.`);
-    console.log(PATCH_ORDER_BY_ID_CONTROLLER, `Processing request to patch order by id: ${req.params.id}.`);
-    console.log(PATCH_ORDER_BY_ID_CONTROLLER, `Patch request received: ${JSON.stringify(req.body)}.`);
+    console.log(PATCH_ORDER_BY_ID_CONTROLLER, `processing request to patch order by id: ${req.params.id}.`);
+    console.log(PATCH_ORDER_BY_ID_CONTROLLER, `patch request received: ${JSON.stringify(req.body)}.`);
     const orderModal = new OrderModal();
-    const orderDetails = await orderModal.getOrderDetails(req.params.id);
-    if (orderDetails && orderDetails.id) {
-        await orderModal.updateOrder(req.body);
-        return res.send({
-            status: 'COMPLETED',
+    const orderId = await orderModal.patch({
+        id: req.params.id,
+        ...req.body
+    });
+    if (orderId) {
+        return res.status(200).send({
+            ...apiMessages.ORDER_PATCHED,
             id: orderModal.getOrderId(),
-            payment_url: `/instant-purchase/payment/${orderModal.getOrderId()}`
+            instant_payment_url: `/instant-purchase/payment/${orderId}`
         });
     } else {
-        return res.status(400).send({
-            error: {
-                message: 'ORDER_NOT_FOUND',
-                description: 'There are no orders with the given id.'
-            }
+        return res.status(404).send({
+            error: errorConstants.ORDER_NOT_FOUND
         });
     }
 };

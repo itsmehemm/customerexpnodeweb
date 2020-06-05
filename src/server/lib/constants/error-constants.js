@@ -18,5 +18,17 @@ module.exports = {
     PRODUCT_NOT_FOUND: {
         message: 'PRODUCT_NOT_FOUND',
         description: 'The product doesn\'t exist.'
+    },
+    INVALID_OR_MORE_ITEMS_RECEIVED: {
+        message: 'INVALID_OR_MORE_ITEMS_RECEIVED',
+        description: 'Invalid or more items received. Please check the API specification and try again.'
+    },
+    ORDER_NOT_FOUND: {
+        message: 'ORDER_NOT_FOUND',
+        description: 'There are no orders with the given id.'
+    },
+    ERROR_CREATING_PAYMENT_PLAN: {
+        message: 'ERROR_CREATING_PAYMENT_PLAN',
+        description: 'There was an error creating payment plan for this order.'
     }
 };

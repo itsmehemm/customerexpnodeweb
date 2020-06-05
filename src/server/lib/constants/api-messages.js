@@ -13,5 +13,15 @@ module.exports = {
         status: 'COMPLETED',
         message: 'PRODUCT_REMOVED',
         description: 'The product has been removed from our system.'
-    }
+    },
+    ORDER_CREATED: {
+        status: 'COMPLETED',
+        message: 'ORDER_CREATED',
+        description: 'A new order has been created.'
+    },
+    ORDER_PATCHED: {
+        status: 'COMPLETED',
+        message: 'ORDER_PATCHED',
+        description: 'The order has been patched successfully.'
+    },
 }
