@@ -7,8 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import Header from '../header/Header';
 import ComponentLoader from '../common/loaders/ComponentLoader';
 import Typography from '../common/elements/Typography';
-import ViewAddress from '../instant-order/widgets/ViewAddress';
-import OrderSummary from '../instant-order/widgets/OrderSummary';
+import ViewAddress from '../instant-purchase/widgets/ViewAddress';
+import OrderSummary from '../instant-purchase/widgets/OrderSummary';
 import { renderSmartPaymentButtons } from './paypal-sdk';
 import { getPaymentPlan } from '../../actions';
 import {
@@ -17,7 +17,7 @@ import {
     OPERATION_LOADING_ERROR
 } from '../../lib/constants';
 
-export default class InstantOrderPayment extends Component {
+export default class InstantPurchasePayment extends Component {
 
     constructor(props) {
         super(props);
@@ -77,7 +77,7 @@ export default class InstantOrderPayment extends Component {
         return (
             <>
                 <Header />
-                <Container style={{ padding: '1em' }} maxWidth="md">
+                <Container style={{ padding: '1em' }} maxWidth="lg">
                     {status === OPERATION_LOADING && <ComponentLoader />}
                     {status === OPERATION_LOADING_ERROR && <div> ORDER NOT FOUND </div>}
                     {status === OPERATION_LOADING_COMPLETED &&
@@ -85,7 +85,7 @@ export default class InstantOrderPayment extends Component {
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Typography text="PLACE YOUR ORDER" />
+                                        <Typography text="PLACE YOUR ORDER AND PAY" />
                                     </Box>
                                     <Box m={2}> <Divider /> </Box>
                                 </Grid>
@@ -110,12 +110,12 @@ export default class InstantOrderPayment extends Component {
                                             <ViewAddress
                                                 {...paymentPlan.tinnat.order_details.shipping_address}
                                             />
+                                            <Box m={2}> <Divider /> </Box>
                                             <Box m={2}>
                                                 <Typography text="Place your order and pay"></Typography>
                                                 <Typography
-                                                    text="You'll be securely redirected to PayPal to enter your password and complete your purchase"
-                                                    component="span"
-                                                    size="small"
+                                                    text="You'll be securely redirected to PayPal to enter your password and complete your purchase."
+                                                    variant="caption"
                                                 />
                                             </Box>
                                             <Box m={2}>

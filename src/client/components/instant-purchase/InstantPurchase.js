@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
 import Box from '@material-ui/core/Box';
 import Header from '../header/Header';
 import ComponentLoader from '../common/loaders/ComponentLoader';
+import Typography from '../common/elements/Typography';
 import LargeBtn from '../common/elements/LargeBtn';
 import OrderSummary from './widgets/OrderSummary';
 import PersonalInformation from './widgets/PersonalInformation';
@@ -22,7 +24,7 @@ import {
     COMPONENT_MAPPER
 } from '../../lib/constants';
 
-export default class InstantOrder extends Component {
+export default class InstantPurchase extends Component {
 
     constructor(props) {
         super(props);
@@ -134,13 +136,36 @@ export default class InstantOrder extends Component {
                     onClose={this.closeNotification}
                     message={notification.message}
                 />
-                <Container style={{ padding: '1em' }} maxWidth="md">
+                <Container style={{ padding: '1em' }} maxWidth="lg">
                     <Grid container>
                         {status === OPERATION_LOADING && <ComponentLoader />}
                         {status === OPERATION_LOADING_ERROR && <div>Invalid order</div>}
                         {status === OPERATION_LOADING_COMPLETED &&
                             <>
-                                <Grid item xs={6} />
+                                <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
+                                    <Box m={2}>
+                                        <Typography text="REVIEW ORDER" size="h5" />
+                                    </Box>
+                                    <Box m={2}> <Divider /> </Box>
+                                    <PersonalInformation
+                                        email={personal_information.email}
+                                        phone_number={personal_information.phone_number}
+                                        update={this.update}
+                                    />
+                                    <Address
+                                        label="2.   BILLING ADDRESS"
+                                        {...billing_address}
+                                        update={((data) => this.update('billing_address', data))}
+                                    />
+                                    {
+                                        <Address
+                                            label="3.   SHIPPING ADDRESS"
+                                            {...shipping_address}
+                                            isShipping={true}
+                                            update={((data) => this.update('shipping_address', data))}
+                                        />
+                                    }
+                                </Grid>
                                 <Grid item xs={6}>
                                     <Box m={2}>
                                         <LargeBtn
@@ -150,8 +175,6 @@ export default class InstantOrder extends Component {
                                             onClick={this.patch}
                                         />
                                     </Box>
-                                </Grid>
-                                <Grid item xs={12}>
                                     <OrderSummary
                                         name={purchase_item.data.name}
                                         description={purchase_item.data.description}
@@ -162,26 +185,7 @@ export default class InstantOrder extends Component {
                                         quantity={purchase_item.quantity}
                                         picture_links={purchase_item.data.picture_links}
                                     />
-                                    <PersonalInformation
-                                        email={personal_information.email}
-                                        phone_number={personal_information.phone_number}
-                                        update={this.update}
-                                    />
-                                    <Address
-                                        label="BILLING ADDRESS"
-                                        {...billing_address}
-                                        update={((data) => this.update('billing_address', data))}
-                                    />
-                                    {
-                                        <Address
-                                            label="SHIPPING ADDRESS"
-                                            {...shipping_address}
-                                            isShipping={true}
-                                            update={((data) => this.update('shipping_address', data))}
-                                        />
-                                    }
                                 </Grid>
-                                <Grid item xs={6} />
                                 <Grid item xs={6}>
                                     <Box m={2}>
                                         <LargeBtn

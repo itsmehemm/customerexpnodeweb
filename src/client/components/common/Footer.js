@@ -10,7 +10,10 @@ const Footer = () => {
     return (
         <Container maxWidth="xl">
             <Box m={2}>
-                <Typography align="center" size="subtitle1" text="&copy; 2020 Tinnat Inc. All rights reserved." />
+                <Typography
+                    align="center"
+                    variant="body1"
+                    text="&copy; 2020 Tinnat Inc. All rights reserved." />
             </Box>
         </Container>
     );
