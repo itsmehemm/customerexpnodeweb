@@ -5,25 +5,26 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Header from '../header/Header';
-import ComponentLoader from '../common/ComponentLoader';
+import ComponentLoader from '../common/loaders/ComponentLoader';
 import Typography from '../common/elements/Typography';
 import ViewAddress from '../instant-order/widgets/ViewAddress';
 import OrderSummary from '../instant-order/widgets/OrderSummary';
+import { renderSmartPaymentButtons } from './paypal-sdk';
 import { getPaymentPlan } from '../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING_ERROR
 } from '../../lib/constants';
-import { renderSmartPaymentButtons } from './paypal-sdk';
 
 export default class InstantOrderPayment extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             paymentPlan: null,
-            scriptLoaded: false,
-            scriptError: false,
+            paypalSdkLoaded: false,
+            paypalSdkError: false,
             status: OPERATION_LOADING
         };
     }
@@ -38,49 +39,41 @@ export default class InstantOrderPayment extends Component {
                         status: OPERATION_LOADING_COMPLETED,
                         paymentPlan: response.payment_plan
                     });
-                    const script = document.createElement("script");
-                    script.type = "text/javascript";
-                    script.src = `${response.payment_plan.paypal.sdk.url}/sdk/js?components=buttons&client-id=${response.payment_plan.paypal.client_id}`;
-                    script['data-client-token'] = response.payment_plan.paypal.client_token;
-                    // document.body.appendChild(script);
                 } else {
                     this.setState({
                         status: OPERATION_LOADING_ERROR
                     });
                 }
             } catch (error) {
-                console.log('ERROR')
                 await this.setState({
                     status: OPERATION_LOADING_ERROR
                 });
             }
         } else {
-            console.log('ERROR')
             await this.setState({
                 status: OPERATION_LOADING_ERROR
             });
         }
     }
 
-    handleScriptCreate() {
-        this.setState({ scriptLoaded: false })
-        console.log('CREATED');
+    handlePaypalSdkInit() {
+        this.setState({ paypalSdkLoaded: false })
     }
 
-    handleScriptError() {
-        this.setState({ scriptError: true })
-        console.log('ERROR LOADING SDK');
+    handlePaypalSdkError() {
+        this.setState({ paypalSdkError: true })
     }
 
-    handleScriptLoad() {
-        this.setState({ scriptLoaded: true });
-        console.log('LOADED');
-        console.log(paypal);
+    handlePaypalSdkLoad() {
+        this.setState({ paypalSdkLoaded: true });
         renderSmartPaymentButtons(paypal, this.state.paymentPlan);
     }
 
     render() {
-        const { status, paymentPlan } = this.state;
+        const {
+            status,
+            paymentPlan
+        } = this.state;
         return (
             <>
                 <Header />
@@ -102,14 +95,14 @@ export default class InstantOrderPayment extends Component {
                                             <Box m={2}> <Typography text="Order Summary" /></Box>
                                             <OrderSummary
                                                 hide_label={true}
-                                                name={paymentPlan.tinnat.order_details.purchase_items[0].product_details.name}
-                                                description={paymentPlan.tinnat.order_details.purchase_items[0].product_details.description}
-                                                cost={paymentPlan.tinnat.order_details.purchase_items[0].product_details.cost}
-                                                discount={paymentPlan.tinnat.order_details.purchase_items[0].product_details.discount}
+                                                name={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
+                                                description={paymentPlan.tinnat.order_details.purchase_items[0].data.description}
+                                                cost={paymentPlan.tinnat.order_details.cost}
+                                                discount={paymentPlan.tinnat.order_details.purchase_items[0].data.discount}
                                                 size={paymentPlan.tinnat.order_details.purchase_items[0].size}
                                                 color={paymentPlan.tinnat.order_details.purchase_items[0].color}
                                                 quantity={paymentPlan.tinnat.order_details.purchase_items[0].quantity}
-                                                picture_links={paymentPlan.tinnat.order_details.purchase_items[0].product_details.picture_links}
+                                                picture_links={paymentPlan.tinnat.order_details.purchase_items[0].data.picture_links}
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
@@ -134,9 +127,9 @@ export default class InstantOrderPayment extends Component {
                             </Grid>
                             <Script
                                 url={`${paymentPlan.paypal.sdk.url}/sdk/js?components=buttons&client-id=${paymentPlan.paypal.client_id}&currency=INR`}
-                                onCreate={this.handleScriptCreate.bind(this)}
-                                onError={this.handleScriptError.bind(this)}
-                                onLoad={this.handleScriptLoad.bind(this)}
+                                onCreate={this.handlePaypalSdkInit.bind(this)}
+                                onError={this.handlePaypalSdkError.bind(this)}
+                                onLoad={this.handlePaypalSdkLoad.bind(this)}
                             />
                         </>
                     }
