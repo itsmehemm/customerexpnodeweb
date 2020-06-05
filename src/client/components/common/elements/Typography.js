@@ -4,17 +4,28 @@ import Grid from '@material-ui/core/Grid';
 import Icon from '../elements/Icon';
 
 const _Typography = (props) => {
-    const { width = 12, icon, text, style, align, type, size = "h6", component = "h2" } = props;
+    const {
+        width = 12,
+        icon,
+        icon_pos = "front",
+        text, style,
+        align,
+        type,
+        size = "h6",
+        component = "h2"
+    } = props;
     return (
         <Grid item xs={width}>
-            <Typography className={type === "header" ? "text-google-sans" : ""}
+            <Typography
                 style={style}
                 variant={size}
                 align={align}
                 component={component}
                 {...props}
             >
-                {icon ? <Icon name={icon} /> : ""} {text}
+                {icon_pos === 'front' && icon && <> <Icon name={icon} /> {text} </>}
+                {icon_pos === 'back' && icon && <> {text} <Icon name={icon} /> </>}
+                {!icon && text}
             </Typography>
         </Grid>
     );
