@@ -21,13 +21,19 @@ export default class OrderSummary extends Component {
             size,
             color,
             quantity,
-            picture_links } = this.props;
+            picture_links,
+            hide_label } = this.props;
         return (
             <Box>
-                <Box m={2}>
-                    <Typography text="ORDER SUMMARY" size="h6" />
-                </Box>
-                <Box m={2}> <Divider /> </Box>
+                {
+                    !hide_label &&
+                    <>
+                        <Box m={2}>
+                            <Typography text="ORDER SUMMARY" size="h6" />
+                        </Box>
+                        <Box m={2}> <Divider /> </Box>
+                    </>
+                }
                 <Grid container>
                     <Grid item xs={6}>
                         <Box m={2}>

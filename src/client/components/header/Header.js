@@ -76,13 +76,13 @@ export default class Header extends Component {
                         <Grid className="menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
                             <Typography text="Contact" />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
+                        {/* <Grid className="menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
                             <Typography icon="add_shopping_cart" text={
                                 `(${this.state.status === OPERATION_LOADING ?
                                     '...' : (this.state.status === OPERATION_LOADING_ERROR ?
                                         '!' : this.state.cart.length)})`
                             } />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </Container>
             </Container>
