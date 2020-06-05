@@ -1,4 +1,8 @@
 const uniqid = require('uniqid');
+const args = require('yargs').argv;
+const config = require('../lib/config.json');
+const { ENVIRONMENT_PRODUCTION } = require('../lib/constants')
+const environment = args.env || ENVIRONMENT_PRODUCTION;
 
 class AddProductModal {
     constructor(d) {
@@ -73,9 +77,17 @@ class AddProductModal {
         };
     }
 
+    getProductUrl(id) {
+        let url = config.tinnat[environment].url.v1_get_product_by_id;
+        url = url.replace('${productid}', id);
+        return url;
+    }
+
     setData(d) {
+        const id = `${(d && d.name || "").replace(new RegExp(' ', 'g'), '-')}-${uniqid().toUpperCase()}`;
         this.data = {
-            id: `${(d && d.name || "").replace(new RegExp(' ', 'g'), '-')}-${uniqid().toUpperCase()}`,
+            id: id,
+            url: this.getProductUrl(id),
             name: d && d.name,
             description: d && d.description,
             product_code: d && d.product_code,
@@ -84,15 +96,15 @@ class AddProductModal {
             default_color: d && d.default_color,
             available_sizes: this.getAvailableSizes(d && d.available_sizes),
             available_colors: this.getAvailableColors(d && d.available_colors),
-            discount: getDiscount(d),
+            discount: this.getDiscount(d),
             stock_quantity: d && d.stock_quantity,
-            cost: this.getCost(),
+            cost: this.getCost(d),
             picture_links: this.getPictureLinks(d && d.picture_links),
             featured: d && d.featured,
             thirty_day_exchange: d && d.thirty_day_exchange,
             fifteen_day_exchange: d && d.fifteen_day_exchange,
             payment_options: this.getPaymentOptions(d && d.payment_options),
-            advanced_details: this.getAdvancedDetails(d && d.advanced_details)
+            advanced_details: this.getAdvancedDetails(d)
         };
     }
 

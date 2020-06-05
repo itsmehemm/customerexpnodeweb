@@ -4,6 +4,24 @@
         "name": "hemms-tool-snippet",
         "secret": "hemm-is-a-batman"
     },
+    "tinnat": {
+        "development": {
+            "url": {
+                "v1_get_product_by_id": "http://localhost.paypal.com:2002/product/${productid}"
+            },
+            "api": {
+                "base_url": "http://localhost.paypal.com:2002/api"
+            }
+        },
+        "production": {
+            "url": {
+                "v1_get_product_by_id": "http://tinnat.com/product/${productid}"
+            },
+            "api": {
+                "base_url": "http://tinnat.com/api"
+            }
+        }
+    },
     "paypal": {
         "development": {
             "sdk": {
