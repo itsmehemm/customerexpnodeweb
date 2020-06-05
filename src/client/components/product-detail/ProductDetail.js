@@ -141,7 +141,13 @@ export default class ProductDetail extends Component {
                         <Grid container>
                             <Grid item xs={10}>
                                 <Box m={2}>
-                                    <Typography text={data.name} size="h5" />
+                                    <Typography
+                                        text={data.name}
+                                        variant="h5" />
+                                    <Typography
+                                        text={data.description}
+                                        size="subtitle1" />
+
                                 </Box>
                             </Grid>
                             <Grid item xs={2}>
@@ -149,20 +155,20 @@ export default class ProductDetail extends Component {
                                     <CopyToClipboard
                                         text={data.url}
                                         onCopy={() => this.notify('Product link copied!')}>
-                                        <Typography className="t-text-link" text="Share" size="subtitle1"/>
+                                        <Typography className="t-text-link" text="Share" size="subtitle1" />
                                     </CopyToClipboard>
                                 </Box>
                             </Grid>
                         </Grid>
                         <Box m={2}>
-                            <Typography text={data.description} size="subtitle1" />
-                        </Box>
-                        <Box m={2}>
                             <Amount cost={data.cost} discount={data.discount} />
                         </Box>
                         <Box m={2}> <Divider /> </Box>
                         <Box m={2}>
-                            <Typography text={"Size"} />
+                            <Typography
+                                text={"Size"}
+                                variant="button"
+                            />
                         </Box>
                         <Box m={2}>
                             <Grid item xs={12}>
@@ -175,7 +181,10 @@ export default class ProductDetail extends Component {
                         </Box>
                         <Box m={2}> <Divider /> </Box>
                         <Box m={2}>
-                            <Typography text={"Color"} />
+                            <Typography
+                                text={"Color"}
+                                variant="button"
+                            />
                         </Box>
                         <Box m={2}>
                             <Grid item xs={12}>
@@ -191,13 +200,19 @@ export default class ProductDetail extends Component {
                         <Box m={2}>
                             {
                                 (data.stock_quantity === 'UNLIMITED' || parseInt(data.stock_quantity) > 0) &&
-                                <span className="small-header-text green-text">
-                                    <i className="material-icons">done</i> &ensp; IN STOCK
-                                </span>
+                                <Typography
+                                    text="IN STOCK"
+                                    icon="done"
+                                    variant="h6"
+                                    style={{ color: 'rgb(5, 153, 54)' }}
+                                />
                                 ||
-                                <span className="small-header-text red-text">
-                                    <i className="material-icons">cancel</i> &ensp; OUT OF STOCK
-                                </span>
+                                <Typography
+                                    text="OUT OF STOCK"
+                                    icon="cancel"
+                                    variant="h6"
+                                    style={{ color: 'rgb(189, 6, 61)' }}
+                                />
                             }
                         </Box>
                         <Box m={2}> <Divider /> </Box>
@@ -211,10 +226,14 @@ export default class ProductDetail extends Component {
                                             data.advanced_details[i] &&
                                             <Grid container key={key} spacing={2}>
                                                 <Grid item xs={6}>
-                                                    <Typography text={productAdvancedDetailsMapper[i]} size="subtitle1" />
+                                                    <Typography
+                                                        text={productAdvancedDetailsMapper[i]}
+                                                        size="button" />
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <Typography text={data.advanced_details[i]} size="subtitle1" />
+                                                    <Typography
+                                                        text={data.advanced_details[i]}
+                                                        size="subtitle1" />
                                                 </Grid>
                                             </Grid>
                                         )
