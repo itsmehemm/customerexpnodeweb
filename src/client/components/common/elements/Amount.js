@@ -1,37 +1,38 @@
 import React from 'react';
-import { currencyCodeLabel } from '../../../client-lib/mappers';
+import { currencyCodeMapper } from '../../../lib/mappers';
+import {
+    INSTANT_PERCENTAGE,
+    NO_DISCOUNT,
+    INSTANT_AMOUNT
+} from '../../../lib/constants';
 
 const Amount = (props) => {
-
-    const { cost, discount, style = {} } = props;
-
-    console.log(cost)
+    const { cost = {}, discount = {}, style = {} } = props;
     let amount = parseInt(cost.amount);
     const discountValue = parseInt(discount.value);
-    let discountedAmount = amount;
-
-    if (discount.type === 'INSTANT') {
+    let discountedAmount;
+    if (discount.type === INSTANT_AMOUNT) {
         discountedAmount = amount - discountValue;
-    } if (discount.type === 'PERCENTAGE') {
+    }
+    if (discount.type === INSTANT_PERCENTAGE) {
         discountedAmount = amount - (amount * discountValue / 100);
     }
-
+    if (discount.type === NO_DISCOUNT) {
+        discountedAmount = amount;
+    }
     return (
         <div className="amount-section" style={style}>
-            <span className="final-amount-text"> {currencyCodeLabel[cost.currency]}{discountedAmount} </span>
-            &ensp;
-            <span className="original-amount-text">{currencyCodeLabel[cost.currency]}{amount}</span>
-            &ensp;
-            <span className="amount-offer-text">
-                &nbsp;{
-                    discount.type === 'INSTANT' ?
-                        `Flat ${currencyCodeLabel[cost.currency]}${discountValue} off` :
-                        `${discountValue}% off`
-                }
-            </span>
+            <span className="final-amount-text"> {currencyCodeMapper[cost.currency]}{discountedAmount} </span>
+            {discountedAmount !== amount && <span className="original-amount-text">{currencyCodeMapper[cost.currency]}{amount}</span>}
+            {
+                discountValue !== 0 &&
+                <span className="amount-offer-text">
+                    {discount.type === INSTANT_AMOUNT && ` Flat ${currencyCodeMapper[cost.currency]}${discountValue} off`}
+                    {discount.type === INSTANT_PERCENTAGE && ` ${discountValue}% off`}
+                </span>
+            }
         </div>
-    )
-
+    );
 };
 
 export default Amount;

@@ -1,71 +1,60 @@
 import React, { Component } from 'react';
-
-import ProductDetailLoading from './ProductDetailLoading';
+import Header from '../header/Header';
+import ComponentLoader from '../common/ComponentLoader';
 import WebInternalServerError from '../common/WebInternalServerError';
 import Component404 from '../common/Component404';
 import ProductDetail from './ProductDetail';
 import getProductById from '../../actions/get-product-by-id';
-
 import {
-    PAGE_LOADING,
-    PAGE_LOADING_COMPLETED_SUCCESS,
-    PAGE_LOADING_COMPLETED_FAILED,
+    OPERATION_LOADING,
+    OPERATION_LOADING_COMPLETED,
+    OPERATION_LOADING_ERROR,
     PAGE_LOADING_FAILED
-} from '../../client-lib/constants';
+} from '../../lib/constants';
 
 export default class ProductDetailWrapper extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            status: PAGE_LOADING,
+            status: OPERATION_LOADING,
             data: null,
             error: null
         }
     }
 
     async componentDidMount() {
-        this.setState({ status: PAGE_LOADING });
-
+        this.setState({ status: OPERATION_LOADING });
         const productid = this.props.match.params.productid;
-
-        const response = await getProductById(productid);
-
-        // Error fetching product details. Retry.
-        if (!response) {
+        try {
+            const response = await getProductById(productid);
+            if (response && response.error) {
+                this.setState({
+                    status: OPERATION_LOADING_ERROR,
+                    error: response.error
+                });
+            } else {
+                this.setState({
+                    status: OPERATION_LOADING_COMPLETED,
+                    data: response
+                });
+            }
+        } catch (error) {
             this.setState({ status: PAGE_LOADING_FAILED });
-        }
-        // No such product found. Throw 404.
-        if (response && response.error) {
-            this.setState({
-                status: PAGE_LOADING_COMPLETED_FAILED,
-                error: response.error
-            });
-        } else {
-            this.setState({
-                status: PAGE_LOADING_COMPLETED_SUCCESS,
-                data: response
-            });
         }
     }
 
     render() {
-
         const { status, data, error } = this.state;
-
-        switch (status) {
-            case PAGE_LOADING:
-                return <ProductDetailLoading />;
-            case PAGE_LOADING_FAILED:
-                return <WebInternalServerError />;
-            case PAGE_LOADING_COMPLETED_FAILED:
-                return <Component404 error={error} />
-            case PAGE_LOADING_COMPLETED_SUCCESS:
-                return (<div>
-                    <ProductDetail data={data} />
-                </div>);
-            default:
-                return <WebInternalServerError />;
-        };
+        return (
+            <>
+                <Header />
+                {status === OPERATION_LOADING && <ComponentLoader />}
+                {status === PAGE_LOADING_FAILED && <WebInternalServerError />}
+                {status === OPERATION_LOADING_ERROR && <Component404 error={error} />}
+                {status === OPERATION_LOADING_COMPLETED && <ProductDetail data={data} />}
+                {status === OPERATION_LOADING && <ComponentLoader />}
+            </>
+        );
     }
 }

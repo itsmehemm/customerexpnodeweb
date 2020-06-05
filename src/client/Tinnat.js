@@ -1,8 +1,5 @@
-
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-
-import Header from './components/header/Header';
 import Footer from './components/common/Footer';
 import Home from './components/home/Home';
 import About from './components/about/About';
@@ -10,17 +7,16 @@ import Products from './components/products';
 import Help from './components/common/Help';
 import ContactUs from './components/common/ContactUs';
 import Cart from './components/cart/Cart';
+import InstantOrder from './components/instant-order/InstantOrder';
 import Checkout from './components/checkout/Checkout';
 import ProductDetailWrapper from './components/product-detail/ProductDetailWrapper';
-
+import Internal from './components/internal';
 import './styles/index.css';
 
 export default class Tinnat extends Component {
-
     render() {
         return (
             <Router>
-                <Header />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/about" component={About} />
@@ -30,7 +26,8 @@ export default class Tinnat extends Component {
                 <Route path="/product/:productid" component={ProductDetailWrapper} />
                 <Route path="/viewcart" component={Cart} />
                 <Route path="/checkout" component={Checkout} />
-                {/* <Route path="/admin/product/add" component={ProductDetails} /> */}
+                <Route path="/instant-purchase/:orderid" component={InstantOrder} />
+                <Route path="/internal" component={Internal} />
                 <Footer />
             </Router >
         );

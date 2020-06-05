@@ -1,4 +1,5 @@
 {
+    "environment": "development",
     "production": {
         "api": {
             "v1_get_product_by_id": {
@@ -9,6 +10,18 @@
             },
             "v1_post_add_product": {
                 "uri": "http://tinnat.com/api/product/add"
+            },
+            "v1_post_update_product": {
+                "uri": "http://tinnat.com/api/product/${productid}/update"
+            },
+            "v1_get_order_details": {
+                "uri": "http://tinnat.com/api/order/${orderid}"
+            },
+            "v1_create_instant_order": {
+                "uri": "http://tinnat.com/api/create/order/"
+            },
+            "v1_patch_order_details": {
+                "uri": "http://tinnat.com/api/order/${orderid}"
             },
             "v1_post_add_item_cart": {
                 "uri": "http://tinnat.com/api/cart/add"
@@ -34,6 +47,18 @@
             },
             "v1_post_add_product": {
                 "uri": "http://localhost.paypal.com:2002/api/product/add"
+            },
+            "v1_post_update_product": {
+                "uri": "http://localhost.paypal.com:2002/api/product/${productid}/update"
+            },
+            "v1_get_order_details": {
+                "uri": "http://localhost.paypal.com:2002/api/order/${orderid}"
+            },
+            "v1_create_instant_order": {
+                "uri": "http://localhost.paypal.com:2002/api/create/order/"
+            },
+            "v1_patch_order_details": {
+                "uri": "http://localhost.paypal.com:2002/api/order/${orderid}"
             },
             "v1_post_add_item_cart": {
                 "uri": "http://localhost.paypal.com:2002/api/cart/add"

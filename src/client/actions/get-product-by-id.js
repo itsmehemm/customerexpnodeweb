@@ -1,22 +1,20 @@
-import request from 'request';
 import config from '../configs/config.json';
 
 const environment = config.environment;
 
 export const getProductById = (id) => {
-    return new Promise((resolve, reject) => {
-        request({
-            uri: config[environment].api.v1_get_product_by_id.uri + id,
-            method: 'GET',
-            headers: {
-                'X-TINNAT-SECURITY-CONTEXT': JSON.stringify({ "userId": "admin", "key": "tinnat" })
-            }
-        }, (e, r, b) => {
-            b = JSON.parse(b || '{}');
-            console.log(JSON.stringify(b));
-            resolve(b);
-        });
-    });
+    console.log('[INFO]', 'action::getProductById');
+    console.log('[INFO]', 'request', `product_id=${id}`);
+    var myHeaders = new Headers();
+    myHeaders.append("X-TINNAT-SECURITY-CONTEXT", "{\"userId\": \"admin\", \"key\": \"tinnat\"}");
+    return fetch(config[environment].api.v1_get_product_by_id.uri + id, {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    })
+        .then(response => response.json())
+        .then(response => response)
+        .catch(error => error);
 };
 
 export default getProductById;

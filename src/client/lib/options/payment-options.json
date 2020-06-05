@@ -1,0 +1,10 @@
+[
+    {
+        "label": "Cash on Delivery",
+        "value": "COD"
+    },
+    {
+        "label": "Credit and Debit Cards",
+        "value": "CREDIT_OR_DEBIT_CARDS"
+    }
+]

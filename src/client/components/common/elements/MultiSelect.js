@@ -19,7 +19,7 @@ const MenuProps = {
 };
 
 const MultiSelect = (props) => {
-    const { id, options = [], error = false, label, helperText = "", required = false, values = [], type = "text", width = 12, onChange } = props;
+    let { id, options = [], error = false, label, helperText = "", required = false, values = [], type = "text", width = 12, onChange } = props;
     return (
         <Grid item xs={width}>
             <InputLabel>{label}</InputLabel>
@@ -35,10 +35,10 @@ const MultiSelect = (props) => {
                 renderValue={selected => selected.join(', ')}
                 MenuProps={MenuProps}
             >
-                {options.map(name => (
-                    <MenuItem key={name} value={name}>
-                        <Checkbox checked={values.indexOf(name) > -1} />
-                        <ListItemText primary={name} />
+                {options.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                        <Checkbox checked={values.indexOf(option.value) > -1} />
+                        <ListItemText primary={option.label} />
                     </MenuItem>
                 ))}
             </Select>
