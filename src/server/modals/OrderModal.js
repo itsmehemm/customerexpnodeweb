@@ -131,6 +131,57 @@ class OrderModal {
         return data;
     }
 
+    buildPayPalRequest() {
+        const { personal_information, cost, purchase_items, billing_address, shipping_address } = this.data;
+        return {
+            intent: 'CAPTURE',
+            payer: {
+                name: {
+                    given_name: billing_address && billing_address.name,
+                    surname: billing_address && billing_address.name,
+                },
+                address: {
+                    address_line_1: billing_address && billing_address.address_line_1,
+                    address_line_2: billing_address && billing_address.address_line_2,
+                    admin_area_2: billing_address && billing_address.city,
+                    admin_area_1: billing_address && billing_address.state,
+                    postal_code: billing_address && billing_address.pincode,
+                    country_code: 'IN'
+                }
+            },
+            purchase_units: [{
+                reference_id: personal_information.email,
+                description: purchase_items[0].product_details.description,
+                custom_id: purchase_items[0].product_details.product_code,
+                soft_descriptor: 'TINNAT_INC',
+                amount: {
+                    currency_code: 'INR',
+                    value: cost.amount,
+                    breakdown: {
+                        item_total: {
+                            currency_code: 'INR',
+                            value: cost.amount,
+                        },
+                        tax_total: {
+                            currency_code: 'INR',
+                            value: '0.00'
+                        }
+                    }
+                },
+                shipping: {
+                    address: {
+                        address_line_1: shipping_address && shipping_address.address_line_1,
+                        address_line_2: shipping_address && shipping_address.address_line_2,
+                        admin_area_2: shipping_address && shipping_address.city,
+                        admin_area_1: shipping_address && shipping_address.state,
+                        postal_code: shipping_address && shipping_address.pincode,
+                        country_code: 'IN'
+                    }
+                }
+            }]
+        };
+    }
+
     getOrderId() { return this.data && this.data.id }
 };
 
