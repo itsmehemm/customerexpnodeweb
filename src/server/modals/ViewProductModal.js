@@ -29,10 +29,6 @@ class ViewProductModal {
         return;
     }
 
-    getProductUrl() {
-        
-    }
-
     setData(d) {
         if (!d) return;
         this.data = {

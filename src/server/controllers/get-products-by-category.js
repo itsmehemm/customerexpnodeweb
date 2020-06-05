@@ -2,6 +2,7 @@ const mongoClient = require('../mongo/mongodb');
 const ViewProductModal = require('../modals/ViewProductModal');
 const { GET_PRODUCTS_BY_CATEGORY_CONTROLLER } = require('../lib/constants/logging-constants');
 const { COLLECTION } = require('../lib/constants/mongo-constants');
+const errorConstants = require('../lib/constants/error-constants');
 
 const getProductsByCategory = (req, res) => {
     console.log(GET_PRODUCTS_BY_CATEGORY_CONTROLLER, `Processing request to get products by category: ${JSON.stringify(req.params.category_code)}.`)
@@ -28,10 +29,7 @@ const getProductsByCategory = (req, res) => {
             .catch(err => {
                 console.log(GET_PRODUCTS_BY_CATEGORY_CONTROLLER, `Error performing operation in database: ${JSON.stringify(err)}`);
                 res.status(500).send({
-                    error: {
-                        message: 'INTERNAL_SERVER_ERROR',
-                        description: 'An internal server error occurred while trying to process your request. Please try again.'
-                    }
+                    error: errorConstants.DATABASE_ERROR
                 });
             });
     });
