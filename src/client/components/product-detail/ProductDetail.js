@@ -1,76 +1,103 @@
 import React, { Component } from 'react';
-import SmallButtonGroup from '../common/elements/SmallButtonGroup';
-import Amount from '../common/elements/Amount';
-import ProductImages from './ProductImages';
-import LargeBtn from '../common/elements/LargeBtn';
-
-import Typography from '../common/elements/Typography';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
-
+import SmallButtonGroup from '../common/elements/SmallButtonGroup';
+import Amount from '../common/elements/Amount';
+import ProductImages from './ProductImages';
+import LargeBtn from '../common/elements/LargeBtn';
+import Typography from '../common/elements/Typography';
 import { productAdvancedDetailsMapper } from '../../lib/mappers';
-
-import { addItemToCart } from '../../actions/cart/add-item-cart';
+import InstantOrderModal from '../../modals/instant-order/InstantOrderModal';
+import {
+    addItemToCart
+} from '../../actions/cart/add-item-cart';
+import {
+    createInstantOrder
+} from '../../actions';
 
 export default class ProductDetail extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selected: {
-                color: null,
-                size: null
-            },
-
+            id: null,
+            color: null,
+            size: null,
+            quantity: 1,
             notification: {
                 status: false,
                 message: ''
             }
         };
-
         this.closeNotification = this.closeNotification.bind(this);
         this.update = this.update.bind(this);
     }
 
-    update(type, data) {
-        let selected = this.state.selected;
-        selected[type] = data;
-        this.setState({ selected: selected });
+    async componentDidMount() {
+        const { data } = this.props;
+        await this.setState({
+            id: data && data.id,
+            color: data && data.default_color,
+            size: data && data.default_size
+        });
     }
 
-    addToCart() {
-        const item = {
-            id: this.props.id,
-            color: this.state.selected.color || this.props.data.default_color,
-            size: this.state.selected.size || this.props.data.default_size
-        }
-        console.log(`ITEM TO BE ADDED: ${JSON.stringify(item)}`);
-        console.log(`${JSON.stringify(this.props)}`);
-        addItemToCart({
-            id: this.props.data.id,
-            color: this.state.selected.color || this.props.data.default_color,
-            size: this.state.selected.size || this.props.data.default_size
-        }).then(response => {
-            if (response && response.status === 'SUCCESS') {
-                this.setState({ notification: { status: true, message: response.description } });
+    async update(name, value) {
+        await this.setState({ [name]: value });
+    }
+
+    // addToCart() {
+    //     const item = {
+    //         id: this.props.id,
+    //         color: this.state.selected.color || this.props.data.default_color,
+    //         size: this.state.selected.size || this.props.data.default_size
+    //     }
+    //     console.log(`ITEM TO BE ADDED: ${JSON.stringify(item)}`);
+    //     console.log(`${JSON.stringify(this.props)}`);
+    //     addItemToCart({
+    //         id: this.props.data.id,
+    //         color: this.state.selected.color || this.props.data.default_color,
+    //         size: this.state.selected.size || this.props.data.default_size
+    //     }).then(response => {
+    //         if (response && response.status === 'SUCCESS') {
+    //             this.setState({ notification: { status: true, message: response.description } });
+    //         } else {
+    //             this.setState({ notification: { status: true, message: response.description } });
+    //         }
+    //     }).catch(error => {
+    //         this.setState({ notification: { status: true, message: 'Internal error' } });
+    //     })
+    // }
+
+    async instantPurchase() {
+        const instantOrderModal = new InstantOrderModal();
+        instantOrderModal.updateCreateDataFromState(this.state);
+        try {
+            const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
+            if (response && response.id) {
+                window.location.href = response.order_link;
             } else {
-                this.setState({ notification: { status: true, message: response.description } });
+                await this.notify('Error purchasing order. Please try again.');
             }
-        }).catch(error => {
-            this.setState({ notification: { status: true, message: 'Internal error' } });
-        })
+        } catch (error) {
+            await this.notify('Error purchasing order. Please try again.');
+        }
     }
 
-    buyNow() {
-
+    async notify(message) {
+        await this.setState({
+            notification: {
+                status: true,
+                message: message
+            }
+        });
     }
 
-    closeNotification() {
-        this.setState({
+    async closeNotification() {
+        await this.setState({
             notification: {
                 status: false,
                 message: ''
@@ -79,28 +106,29 @@ export default class ProductDetail extends Component {
     }
 
     render() {
-        const { data = {} } = this.props;
+        const { data } = this.props;
+        const { notification } = this.state;
         return (
             <Container style={{ padding: '1em' }} maxWidth="md">
                 <Snackbar
                     autoHideDuration={3000}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     key={`2`}
-                    open={this.state.notification.status}
+                    open={notification.status}
                     onClose={this.closeNotification}
-                    message={this.state.notification.message}
+                    message={notification.message}
                 />
                 <Grid container>
                     <Grid item xs={6}>
                         <Box m={0}>
                             <ProductImages images={data.picture_links} />
-                            <LargeBtn
+                            {/* <LargeBtn
                                 onClick={() => this.addToCart()}
                                 name="ADD TO CART"
                                 color="#2874f0"
-                                icon="add_shopping_cart" />
+                                icon="add_shopping_cart" /> */}
                             <LargeBtn
-                                onClick={() => this.buyNow()}
+                                onClick={() => this.instantPurchase()}
                                 name="BUY NOW"
                                 color="#fb641b"
                                 icon="trending_up" />

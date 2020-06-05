@@ -22,9 +22,9 @@ export default class Header extends Component {
     }
 
     componentDidMount() {
-        setInterval(() => {
-            this.updateComponent();
-        }, 2000);
+        // setInterval(() => {
+        //     this.updateComponent();
+        // }, 2000);
     }
 
     async updateComponent() {

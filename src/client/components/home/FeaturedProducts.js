@@ -36,6 +36,7 @@ export default class FeaturedProducts extends Component {
     }
 
     render() {
+        const { status, featured = [] } = this.state;
         return (
             <Container maxWidth={"lg"}>
                 <Box m={1}>
@@ -44,12 +45,12 @@ export default class FeaturedProducts extends Component {
                     </Box>
                     <Box className="center" m={4}>
                         <Grid container spacing={1}>
-                            {this.state.status === OPERATION_LOADING && <div> Loading featured products... </div>}
-                            {this.state.featured.map((product, key) =>
+                            {status === OPERATION_LOADING && <div> Loading featured products... </div>}
+                            {status === OPERATION_LOADING_COMPLETED && this.state.featured.map((product, key) =>
                                 <Grid item xs={4} key={key}>
                                     <ProductWidget {...product} onClick={() => window.open(`/product/${product.id}`)} />
                                 </Grid>)}
-                            {this.state.status === OPERATION_LOADING_COMPLETED && this.state.featured.length === 0 && <div> There are no featured products </div>}
+                            {status === OPERATION_LOADING_COMPLETED && this.state.featured.length === 0 && <div> There are no featured products </div>}
                         </Grid>
                     </Box>
                 </Box >

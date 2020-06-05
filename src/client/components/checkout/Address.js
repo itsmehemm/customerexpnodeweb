@@ -63,107 +63,105 @@ export default class Addresses extends Component {
         } = this.state;
 
         return (
-            <Box m={2}>
-                <Grid container>
-                    <Grid item xs={6}>
-                        <Box m={2}><TextField
-                            label="Name"
-                            value={name}
-                            error={name ? false : true}
-                            helperText={name ? "" : "Your name is required."}
-                            required={true}
-                            onChange={(data) => this.updateData('name', data)}
-                        />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <TextField
-                                label="Mobile number"
-                                type="number"
-                                value={mobile_number}
-                                error={mobile_number ? false : true}
-                                helperText={mobile_number ? "" : "Your mobile number is required."}
-                                required={true}
-                                onChange={(data) => this.updateData('mobile_number', data)}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <TextField
-                                label="Address Line 1"
-                                value={address_line_1}
-                                error={address_line_1 ? false : true}
-                                helperText={address_line_1 ? "" : "Your address is required."}
-                                required={true}
-                                onChange={(data) => this.updateData('address_line_1', data)}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <TextField
-                                label="Address Line 2"
-                                value={address_line_2}
-                                onChange={(data) => this.updateData('address_line_2', data)}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <TextField
-                                label="City"
-                                value={city}
-                                error={city ? false : true}
-                                helperText={city ? "" : "Your city is required."}
-                                required={true}
-                                onChange={(data) => this.updateData('city', data)}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <TextField
-                                label="Pincode"
-                                type="number"
-                                value={pincode}
-                                error={pincode ? false : true}
-                                helperText={pincode ? "" : "Your pincode is required."}
-                                required={true}
-                                onChange={(data) => this.updateData('pincode', data)}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <TextField
-                                label="State"
-                                value={state}
-                                error={state ? false : true}
-                                helperText={state ? "" : "Your state is required."}
-                                required={true}
-                                onChange={(data) => this.updateData('state', data)}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <TextField
-                                label="Landmark (optional)"
-                                value={landmark}
-                                onChange={(data) => this.updateData('landmark', data)}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Box m={2}>
-                            <Typography text={validation_error} size="subtitle1" style={{ color: '#f44336' }} />
-                            <LargeBtn onClick={this.validateAndUpdate} icon="check" name="CONFIRM ADDRESS" color="#fb641b" />
-                        </Box>
-                    </Grid>
+            <Grid container>
+                <Grid item xs={6}>
+                    <Box m={2}><TextField
+                        label="Name"
+                        value={name}
+                        error={name ? false : true}
+                        helperText={name ? "" : "Your name is required."}
+                        required={true}
+                        onChange={(data) => this.updateData('name', data)}
+                    />
+                    </Box>
                 </Grid>
-            </Box>
+                <Grid item xs={6}>
+                    <Box m={2}>
+                        <TextField
+                            label="Mobile number"
+                            type="number"
+                            value={mobile_number}
+                            error={mobile_number ? false : true}
+                            helperText={mobile_number ? "" : "Your mobile number is required."}
+                            required={true}
+                            onChange={(data) => this.updateData('mobile_number', data)}
+                        />
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Box m={2}>
+                        <TextField
+                            label="Address Line 1"
+                            value={address_line_1}
+                            error={address_line_1 ? false : true}
+                            helperText={address_line_1 ? "" : "Your address is required."}
+                            required={true}
+                            onChange={(data) => this.updateData('address_line_1', data)}
+                        />
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Box m={2}>
+                        <TextField
+                            label="Address Line 2"
+                            value={address_line_2}
+                            onChange={(data) => this.updateData('address_line_2', data)}
+                        />
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Box m={2}>
+                        <TextField
+                            label="City"
+                            value={city}
+                            error={city ? false : true}
+                            helperText={city ? "" : "Your city is required."}
+                            required={true}
+                            onChange={(data) => this.updateData('city', data)}
+                        />
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Box m={2}>
+                        <TextField
+                            label="Pincode"
+                            type="number"
+                            value={pincode}
+                            error={pincode ? false : true}
+                            helperText={pincode ? "" : "Your pincode is required."}
+                            required={true}
+                            onChange={(data) => this.updateData('pincode', data)}
+                        />
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Box m={2}>
+                        <TextField
+                            label="State"
+                            value={state}
+                            error={state ? false : true}
+                            helperText={state ? "" : "Your state is required."}
+                            required={true}
+                            onChange={(data) => this.updateData('state', data)}
+                        />
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Box m={2}>
+                        <TextField
+                            label="Landmark (optional)"
+                            value={landmark}
+                            onChange={(data) => this.updateData('landmark', data)}
+                        />
+                    </Box>
+                </Grid>
+                <Grid item xs={12}>
+                    <Box m={2}>
+                        <Typography text={validation_error} size="subtitle1" style={{ color: '#f44336' }} />
+                        <LargeBtn onClick={this.validateAndUpdate} icon="check" name="CONFIRM ADDRESS" color="#fb641b" />
+                    </Box>
+                </Grid>
+            </Grid>
         );
     }
 }
