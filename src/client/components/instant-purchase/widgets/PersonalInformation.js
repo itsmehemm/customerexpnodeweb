@@ -57,7 +57,8 @@ export default class PersonalInformation extends Component {
         return (
             <Box>
                 <Box m={2}>
-                    <Typography text="1.   PERSONAL INFORMATION" size="h6" />
+                    <Typography text="1. Personal Information" variant="h6" gutterBottom/>
+                    <Typography text="We need your email and phone number to keep you updated." variant="caption" gutterBottom/>
                 </Box>
                 <Grid container>
                     <Grid item xs={6}>

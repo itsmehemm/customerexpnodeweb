@@ -142,24 +142,94 @@ export default class InstantPurchase extends Component {
                         {status === OPERATION_LOADING_ERROR && <div>Invalid order</div>}
                         {status === OPERATION_LOADING_COMPLETED &&
                             <>
-                                <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
-                                    <Box m={2}>
-                                        <Typography text="REVIEW ORDER" size="h5" />
-                                    </Box>
+                                <Grid item xs={12}>
+                                    <Grid container>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb-inactive"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text="Instant Purchase" />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    variant="button"
+                                                    gutterBottom
+                                                    icon="arrow_forward_ios"
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text={purchase_item.data.name}
+                                                    onClick={() => window.location.href = '/product/' + purchase_item.id}
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    variant="button"
+                                                    gutterBottom
+                                                    icon="arrow_forward_ios"
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb-active"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text="REVIEW ORDER"
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    icon="arrow_forward_ios"
+                                                />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item>
+                                            <Box m={1}>
+                                                <Typography
+                                                    className="t-breadcrumb-inactive"
+                                                    variant="button"
+                                                    gutterBottom
+                                                    text="PLACE YOUR ORDER AND PAY" />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12}>
                                     <Box m={2}> <Divider /> </Box>
+                                </Grid>
+                                <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
                                     <PersonalInformation
                                         email={personal_information.email}
                                         phone_number={personal_information.phone_number}
                                         update={this.update}
                                     />
                                     <Address
-                                        label="2.   BILLING ADDRESS"
+                                        label="2. Billing Address"
                                         {...billing_address}
                                         update={((data) => this.update('billing_address', data))}
                                     />
                                     {
                                         <Address
-                                            label="3.   SHIPPING ADDRESS"
+                                            label="3. Shipping Address"
                                             {...shipping_address}
                                             isShipping={true}
                                             update={((data) => this.update('shipping_address', data))}
@@ -167,15 +237,19 @@ export default class InstantPurchase extends Component {
                                     }
                                 </Grid>
                                 <Grid item xs={6}>
+                                    <LargeBtn
+                                        name="PLACE YOUR ORDER AND PAY"
+                                        icon="arrow_forward"
+                                        color="rgb(23, 105, 236)"
+                                        onClick={this.patch}
+                                    />
                                     <Box m={2}>
-                                        <LargeBtn
-                                            name="REVIEW AND PLACE ORDER"
-                                            icon="arrow_forward"
-                                            color="rgb(23, 105, 236)"
-                                            onClick={this.patch}
-                                        />
+                                        <Typography text="Order Summary" />
+                                        <Typography variant="caption" gutterBottom text="Here is what you're making a purchase." />
                                     </Box>
                                     <OrderSummary
+                                        hide_label={true}
+                                        id={purchase_item.id}
                                         name={purchase_item.data.name}
                                         description={purchase_item.data.description}
                                         cost={purchase_item.data.cost}
@@ -189,7 +263,7 @@ export default class InstantPurchase extends Component {
                                 <Grid item xs={6}>
                                     <Box m={2}>
                                         <LargeBtn
-                                            name="REVIEW AND PLACE ORDER"
+                                            name="PLACE YOUR ORDER AND PAY"
                                             icon="arrow_forward"
                                             color="rgb(23, 105, 236)"
                                             onClick={this.patch} />

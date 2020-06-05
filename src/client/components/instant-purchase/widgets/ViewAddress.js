@@ -1,9 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
-import TextField from '../../common/elements/TextField';
-import LargeBtn from '../../common/elements/LargeBtn';
 import Typography from '../../common/elements/Typography';
 
 const ViewAddress = (props) => {
@@ -16,22 +13,23 @@ const ViewAddress = (props) => {
         pincode,
         landmark,
         shipping_same_as_billing,
+        forceShow
     } = props;
     return (
-        <Grid container>
+        <Grid container style={{ backgroundColor: 'rgb(244, 244, 244)' }}>
             <Grid item xs={12}>
                 {
-                    !shipping_same_as_billing &&
+                    (!shipping_same_as_billing || forceShow) &&
                     <>
-                        <Box m={3}>
-                            <Typography size="h6" text={name} />
+                        <Box m={2}>
+                            <Typography variant="h6" text={name} />
                         </Box>
                         <Box m={2}>
-                            <Box m={1}><Typography component="p" size="normal" text={address_line_1} /></Box>
-                            {address_line_2 && <Box m={1}><Typography component="p" size="normal" text={address_line_2} /></Box>}
-                            <Box m={1}><Typography component="p" size="normal" text={city + " " + pincode} /></Box>
-                            <Box m={1}><Typography component="p" size="normal" text={landmark} /></Box>
-                            <Box m={1}><Typography component="p" size="normal" text={state} /></Box>
+                            <Box m={0}><Typography variant="subtitle1" text={address_line_1} /></Box>
+                            {address_line_2 && <Box m={0}><Typography variant="subtitle1" text={address_line_2} /></Box>}
+                            <Box m={0}><Typography variant="subtitle1" text={city + " " + pincode} /></Box>
+                            <Box m={0}><Typography variant="subtitle1" text={landmark} /></Box>
+                            <Box m={0}><Typography variant="subtitle1" text={state} /></Box>
                         </Box>
                     </>
                 }
