@@ -53,7 +53,7 @@ class OrderModal {
             email: (personal_information && personal_information.email) || (this.personal_information && this.personal_information.email),
             phone_number: (personal_information && personal_information.phone_number) || (this.personal_information && this.personal_information.phone_number)
         };
-        this.billingAddress = {
+        this.billing_address = {
             name: (billing_address && billing_address.name) || (this.billing_address && this.billing_address.name),
             address_line_1: (billing_address && billing_address.address_line_1) || (this.billing_address && this.billing_address.address_line_1),
             address_line_2: (billing_address && billing_address.address_line_2) || (this.billing_address && this.billing_address.address_line_2),
