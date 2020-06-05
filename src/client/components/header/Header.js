@@ -62,19 +62,19 @@ export default class Header extends Component {
                             <img src={logo} height="45px" width="80px" />
                         </Grid>
                         <Grid className="menu-item" onClick={() => window.location = '/'} item xs={1}>
-                            <Typography text="Home" />
+                            <Typography text="HOME" />
                         </Grid>
                         <Grid className="menu-item" onClick={() => window.location = '/about'} item xs={1}>
-                            <Typography text="About" />
+                            <Typography text="ABOUT" />
                         </Grid>
                         <Grid className="menu-item" onClick={() => window.location = '/products'} item xs={1}>
-                            <Typography text="Products" />
+                            <Typography text="PRODUCTS" />
                         </Grid>
                         <Grid className="menu-item" onClick={() => window.location = '/help'} item xs={1}>
-                            <Typography text="Help" />
+                            <Typography text="HELP" />
                         </Grid>
                         <Grid className="menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
-                            <Typography text="Contact" />
+                            <Typography text="CONTACT" />
                         </Grid>
                         {/* <Grid className="menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
                             <Typography icon="add_shopping_cart" text={
