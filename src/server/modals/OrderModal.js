@@ -182,7 +182,15 @@ class OrderModal {
         if (!d || !Array.isArray(d)) return null;
         let amount = 0;
         d.forEach(item => {
-            amount += parseInt(item.data.cost.amount);
+            let discountType = item.data.discount.type;
+            let discountValue = item.data.discount.value;
+            if (discountType === 'INSTANT_AMOUNT') {
+                amount = amount + (parseInt(item.data.cost.amount) - parseInt(discountValue));
+            } else if (discountType === 'INSTANT_PERCENTAGE') {
+                amount = amount + (parseInt(item.data.cost.amount) - (parseInt(item.data.cost.amount) * parseInt(discountValue) / 100));
+            } else {
+                amount += parseInt(item.data.cost.amount);
+            }
         });
         return {
             amount: amount,
@@ -243,8 +251,8 @@ class OrderModal {
             },
             purchase_units: [{
                 reference_id: this.id,
-                description: purchase_items[0].product_details.description,
-                custom_id: purchase_items[0].product_details.product_code,
+                description: purchase_items[0].data.description,
+                custom_id: purchase_items[0].data.product_code,
                 soft_descriptor: 'TINNAT_INC',
                 amount: {
                     currency_code: 'INR',
