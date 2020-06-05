@@ -14,4 +14,5 @@ module.exports = {
     validateUserSession: require('./validate-user-session'),
     createInstantOrder: require('./create-instant-order'),
     getOrderById: require('./get-order-by-id'),
+    patchOrderById: require('./patch-order-by-id'),
 }

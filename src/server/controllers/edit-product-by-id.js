@@ -1,7 +1,6 @@
 const mongoClient = require('../mongo/mongodb');
 const { EDIT_PRODUCT_BY_ID_CONTROLLER } = require('../lib/constants/logging-constants');
 const { COLLECTION, KEY } = require('../lib/constants/mongo-constants');
-const editProductInfoObj = require('../lib/db-objects/edit-product-obj');
 const EditProductModal = require('../modals/EditProductModal');
 
 const editProductById = async (req, res) => {
