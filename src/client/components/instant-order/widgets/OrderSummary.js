@@ -22,7 +22,8 @@ export default class OrderSummary extends Component {
             color,
             quantity,
             picture_links,
-            hide_label } = this.props;
+            hide_label
+        } = this.props;
         return (
             <Box>
                 {
