@@ -1,5 +1,5 @@
 const { CREATE_INSTANT_ORDER_CONTROLLER } = require('../lib/constants/logging-constants');
-const instantPurchaseModal = require('../modals/InstantPurchaseModal');
+const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
 const errorConstants = require('../lib/constants/error-constants');
 const apiMessages = require('../lib/constants/api-messages');
 
