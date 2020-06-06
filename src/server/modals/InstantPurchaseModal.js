@@ -3,8 +3,9 @@ const cache = require('../cache');
 const mongoClient = require('../mongo/mongodb');
 const { COLLECTION, KEY } = require('../lib/constants/mongo-constants');
 const { ORDER_LIFE_TIME } = require('../lib/constants');
+const { getProductUrl } = require('../lib/utils');
 
-class OrderModal {
+class InstantPurchaseModal {
     constructor() {
         this.id = null;
         this.personal_information = null;
@@ -157,6 +158,7 @@ class OrderModal {
             if (product) {
                 purchase_items.push({
                     id: product.id,
+                    url: getProductUrl(product.id),
                     size: item.size,
                     color: item.color,
                     quantity: item.quantity,
@@ -287,4 +289,4 @@ class OrderModal {
     getOrder() { return this.data }
 };
 
-module.exports = OrderModal;
+module.exports = InstantPurchaseModal;

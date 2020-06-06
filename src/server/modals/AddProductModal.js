@@ -1,8 +1,5 @@
 const uniqid = require('uniqid');
-const args = require('yargs').argv;
-const config = require('../lib/config.json');
-const { ENVIRONMENT_PRODUCTION } = require('../lib/constants')
-const environment = args.env || ENVIRONMENT_PRODUCTION;
+const { getProductUrl } = require('../lib/utils');
 
 class AddProductModal {
     constructor(d) {
@@ -77,17 +74,11 @@ class AddProductModal {
         };
     }
 
-    getProductUrl(id) {
-        let url = config.tinnat[environment].url.v1_get_product_by_id;
-        url = url.replace('${productid}', id);
-        return url;
-    }
-
     setData(d) {
         const id = `${(d && d.name || "").replace(new RegExp(' ', 'g'), '-')}-${uniqid().toUpperCase()}`;
         this.data = {
             id: id,
-            url: this.getProductUrl(id),
+            url: getProductUrl(id),
             name: d && d.name,
             description: d && d.description,
             product_code: d && d.product_code,
