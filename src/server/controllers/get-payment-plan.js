@@ -66,6 +66,7 @@ const getPaymentPlan = async (req, res) => {
         });
     }
     paymentPlanModel.setRazorPayOrderId(razorpayOrder.id);
+    paymentPlanModel.setRazorPayOrderDetails(razorpayOrder);
 
     const {
         api_key,

@@ -45,6 +45,16 @@ class PaymentPlanModel {
         this.razorpay.api_key = k;
     }
 
+    setRazorPayOrderDetails(o) {
+        this.razorpay = this.razorpay || {};
+        this.razorpay.order_details = {
+            amount: o.amount,
+            currency: o.currency,
+            receipt: o.receipt,
+            notes: o.notes
+        };
+    }
+
     getData() {
         return {
             tinnat: this.tinnat,
