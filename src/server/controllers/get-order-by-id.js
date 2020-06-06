@@ -1,5 +1,5 @@
 const { GET_ORDER_BY_ID_CONTROLLER } = require('../lib/constants/logging-constants');
-const instantPurchaseModal = require('../modals/InstantPurchaseModal');
+const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
 const errorConstants = require('../lib/constants/error-constants');
 
 const getOrderById = async (req, res) => {
