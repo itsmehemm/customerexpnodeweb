@@ -374,3 +374,20 @@ body {
     color: rgb(40, 116, 240);
     cursor: pointer;
 }
+
+.paynow-btn {
+    font-family: Roboto, sans-serif;
+    width: 100%;
+    cursor: pointer;
+    padding: 1em;
+    font-size: 1.3em;
+    background: #fb641b;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+    border: none;
+    margin: 5px;
+    color: #fff;
+}
+
+.paynow-btn:hover {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
