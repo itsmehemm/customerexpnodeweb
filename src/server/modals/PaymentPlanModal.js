@@ -35,10 +35,21 @@ class PaymentPlanModel {
         this.tinnat.order_details = d;
     }
 
+    setRazorPayOrderId(id) {
+        this.razorpay = this.razorpay || {};
+        this.razorpay.order_id = id;
+    }
+
+    setRazorPayApiKey(k) {
+        this.razorpay = this.razorpay || {};
+        this.razorpay.api_key = k;
+    }
+
     getData() {
         return {
+            tinnat: this.tinnat,
             paypal: this.paypal,
-            tinnat: this.tinnat
+            razorpay: this.razorpay
         };
     }
 };

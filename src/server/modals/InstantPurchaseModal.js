@@ -233,6 +233,20 @@ class InstantPurchaseModal {
         };
     }
 
+    buildRazorPayRequest() {
+        const { cost, purchase_items } = this.data;
+        return {
+            amount: cost.amount * 100,
+            currency: "INR",
+            receipt: uniqid('R2020').toUpperCase(),
+            payment_capture: 1,
+            notes: {
+                notes_key_1: purchase_items[0].data.name,
+                notes_key_2: purchase_items[0].data.id
+            }
+        };
+    }
+
     buildPayPalRequest() {
         const { personal_information, cost, purchase_items, billing_address, shipping_address } = this.data;
         return {
