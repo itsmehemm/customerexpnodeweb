@@ -23,7 +23,8 @@ export default class OrderSummary extends Component {
             color,
             quantity,
             picture_links,
-            hide_label
+            hide_label,
+            hide_image
         } = this.props;
         return (
             <Box>
@@ -37,24 +38,27 @@ export default class OrderSummary extends Component {
                     </>
                 }
                 <Grid container>
+                    {
+                        !hide_image &&
+                        <Grid item xs={6}>
+                            <Box m={2}>
+                                <ProductImages
+                                    images={picture_links}
+                                    default_properties={{ indicators: false }}
+                                    style={{
+                                        width: '340px',
+                                        height: '340px',
+                                        marginLeft: 'auto',
+                                        marginRight: 'auto',
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => window.location.href = '/product/' + id}
+                                />
+                            </Box>
+                        </Grid>
+                    }
                     <Grid item xs={6}>
                         <Box m={2}>
-                            <ProductImages
-                                images={picture_links}
-                                default_properties={{ indicators: false }}
-                                style={{
-                                    width: '340px',
-                                    height: '340px',
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto', 
-                                    cursor: 'pointer'
-                                }}
-                                onClick={() => window.location.href = '/product/' + id}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Box m={1}>
                             <Typography
                                 className="t-text-link"
                                 text={name}
@@ -63,13 +67,13 @@ export default class OrderSummary extends Component {
                             />
                             <Typography text={description} size="subtitle1" />
                         </Box>
-                        <Box m={1}>
+                        <Box m={2}>
                             <Amount cost={cost} discount={discount} />
                         </Box>
-                        <Box m={1}> <Divider /> </Box>
+                        <Box m={2}> <Divider /> </Box>
                         {
                             size &&
-                            <Box m={1}>
+                            <Box m={2}>
                                 <Grid container>
                                     <Grid item xs={3}>
                                         <Typography text="Size" size="subtitle1" />
@@ -82,7 +86,7 @@ export default class OrderSummary extends Component {
                         }
                         {
                             color &&
-                            <Box m={1}>
+                            <Box m={2}>
                                 <Grid container>
                                     <Grid item xs={3}>
                                         <Typography text="Color" size="subtitle1" />
@@ -95,7 +99,7 @@ export default class OrderSummary extends Component {
                         }
                         {
                             quantity &&
-                            <Box m={1}>
+                            <Box m={2}>
                                 <Grid container>
                                     <Grid item xs={3}>
                                         <Typography text="Quantity" size="subtitle1" />

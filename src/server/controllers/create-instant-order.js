@@ -1,5 +1,5 @@
 const { CREATE_INSTANT_ORDER_CONTROLLER } = require('../lib/constants/logging-constants');
-const OrderModal = require('../modals/OrderModal');
+const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
 const errorConstants = require('../lib/constants/error-constants');
 const apiMessages = require('../lib/constants/api-messages');
 
@@ -15,8 +15,8 @@ const createInstantOrder = async (req, res) => {
                 error: errorConstants.INVALID_DATA
             });
         }
-        const orderModal = new OrderModal();
-        const orderId = await orderModal.create(req.body);
+        const instantPurchaseModal = new InstantPurchaseModal();
+        const orderId = await instantPurchaseModal.create(req.body);
         if (!orderId) {
             return res.status(404).send({
                 error: errorConstants.PRODUCT_NOT_FOUND

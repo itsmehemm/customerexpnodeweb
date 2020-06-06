@@ -1,15 +1,15 @@
 const { GET_ORDER_BY_ID_CONTROLLER } = require('../lib/constants/logging-constants');
-const OrderModal = require('../modals/OrderModal');
+const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
 const errorConstants = require('../lib/constants/error-constants');
 
 const getOrderById = async (req, res) => {
     console.log(GET_ORDER_BY_ID_CONTROLLER, `processing request to get order by id: ${req.params.id}.`);
-    const orderModal = new OrderModal();
-    orderModal.get(req.params.id);
-    if (orderModal.getOrderId()) {
+    const instantPurchaseModal = new InstantPurchaseModal();
+    instantPurchaseModal.get(req.params.id);
+    if (instantPurchaseModal.getOrderId()) {
         return res.send({
-            id: orderModal.getOrderId(),
-            ...orderModal.getOrder()
+            id: instantPurchaseModal.getOrderId(),
+            ...instantPurchaseModal.getOrder()
         });
     } else {
         return res.status(404).send({
