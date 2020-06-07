@@ -38,20 +38,65 @@ class EditProductModal {
             description: d.description,
             product_code: d.product_code,
             category_code: d.category_code,
+            sub_category_code: d && d.sub_category_code,
             default_size: d.default_size,
             default_color: d.default_color,
-            available_sizes: d.available_sizes,
-            available_colors: d.available_colors,
-            discount: d.discount,
-            stock_quantity: d.stock_quantity,
-            cost: d.cost,
-            picture_links: d.picture_links,
+            themes: d.themes,
             featured: d.featured,
             thirty_day_exchange: d.thirty_day_exchange,
             fifteen_day_exchange: d.fifteen_day_exchange,
             payment_options: d.payment_options,
             advanced_details: d.advanced_details
         }
+    }
+
+    getPictureLinks(d) {
+        let picture_links = [];
+        if (Array.isArray(d) && d.length > 0) {
+            picture_links = d;
+        }
+        return picture_links;
+    }
+
+    getDiscount(d) {
+        return {
+            type: d && d.discount && d.discount.type,
+            value: d && d.discount && d.discount.value
+        };
+    }
+
+    getAmount(d) {
+        return {
+            maximum_retail_price: d && d.maximum_retail_price,
+            discount: this.getDiscount(d),
+            subtotal: d && d.subtotal,
+            correction: d && d.correction,
+            currency: d && d.currency
+        };
+    }
+
+    getTheme(d) {
+        return {
+            size: d && d.size,
+            color: d && d.color,
+            picture_links: this.getPictureLinks(d && d.picture_links),
+            amount: this.getAmount(d && d.amount),
+            stock_quantity: d && d.stock_quantity
+        };
+    }
+
+    getThemes(d) {
+        if (!d || !d.themes || !Array.isArray(d.themes)) return null;
+        let themes = [];
+        d.themes.forEach(theme => {
+            themes.push(this.getTheme(theme));
+        });
+        return themes;
+    }
+
+    updateThemes(o, d) {
+        if (!d.themes) return o.themes;
+        return this.getThemes(d);
     }
 
     updateData(d) {
@@ -63,20 +108,10 @@ class EditProductModal {
             description: d.description || o.description,
             product_code: d.product_code || o.product_code,
             category_code: d.category_code || o.category_code,
+            sub_category_code: d.sub_category_code || o.sub_category_code,
             default_size: d.default_size || o.default_size,
             default_color: d.default_color || o.default_color,
-            available_sizes: d.available_sizes || o.available_sizes,
-            available_colors: d.available_colors || o.available_colors,
-            discount: {
-                type: (d.discount && d.discount.type) || (o.discount && o.discount.type),
-                value: (d.discount && d.discount.value) || (o.discount && o.discount.value)
-            },
-            stock_quantity: d.stock_quantity || o.stock_quantity,
-            cost: {
-                amount: (d.cost && d.cost.amount) || (o.cost && o.cost.amount),
-                currency: (d.cost && d.cost.currency) || (o.cost && o.cost.currency)
-            },
-            picture_links: d.picture_links || o.picture_links,
+            themes: this.updateThemes(o, d),
             featured: d.featured || o.featured,
             thirty_day_exchange: d.thirty_day_exchange || o.thirty_day_exchange,
             fifteen_day_exchange: d.fifteen_day_exchange || o.fifteen_day_exchange,
@@ -103,10 +138,7 @@ class EditProductModal {
             !this.data.name ||
             !this.data.product_code ||
             !this.data.category_code ||
-            !this.data.default_color ||
-            !this.data.default_size ||
-            !this.data.cost.amount ||
-            !this.data.cost.currency) {
+            !this.data.sub_category_code) {
             return false;
         }
         return true;

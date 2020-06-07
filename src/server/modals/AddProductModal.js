@@ -9,47 +9,6 @@ class AddProductModal {
         }
     }
 
-    getAvailableSizes(d) {
-        let available_sizes = [];
-        if (Array.isArray(d) && d.length > 0) {
-            available_sizes = d;
-        }
-        return available_sizes;
-    }
-
-    getPictureLinks(d) {
-        let picture_links = [];
-        if (Array.isArray(d) && d.length > 0) {
-            picture_links = d;
-        }
-        return picture_links;
-    }
-
-    getAvailableColors(d) {
-        let available_colors = [];
-        if (Array.isArray(d) && d.length > 0) {
-            d.forEach(c => available_colors.push({
-                color: c.color,
-                picture_links: this.getPictureLinks(c.picture_links)
-            }));
-        }
-        return available_colors;
-    }
-
-    getDiscount(d) {
-        return {
-            type: d && d.discount && d.discount.type,
-            value: d && d.discount && d.discount.value
-        };
-    }
-
-    getCost(d) {
-        return {
-            amount: d && d.cost && d.cost.amount,
-            currency: d && d.cost && d.cost.currency
-        };
-    }
-
     getPaymentOptions(d) {
         let payment_options = [];
         if (Array.isArray(d) && d.length > 0) {
@@ -74,6 +33,50 @@ class AddProductModal {
         };
     }
 
+    getPictureLinks(d) {
+        let picture_links = [];
+        if (Array.isArray(d) && d.length > 0) {
+            picture_links = d;
+        }
+        return picture_links;
+    }
+
+    getDiscount(d) {
+        return {
+            type: d && d.discount && d.discount.type,
+            value: d && d.discount && d.discount.value
+        };
+    }
+
+    getAmount(d) {
+        return {
+            maximum_retail_price: d && d.maximum_retail_price,
+            discount: this.getDiscount(d),
+            subtotal: d && d.subtotal,
+            correction: d && d.correction,
+            currency: d && d.currency
+        };
+    }
+
+    getTheme(d) {
+        return {
+            size: d && d.size,
+            color: d && d.color,
+            picture_links: this.getPictureLinks(d && d.picture_links),
+            amount: this.getAmount(d && d.amount),
+            stock_quantity: d && d.stock_quantity
+        };
+    }
+
+    getThemes(d) {
+        if (!d || !d.themes || !Array.isArray(d.themes)) return null;
+        let themes = [];
+        d.themes.forEach(theme => {
+            themes.push(this.getTheme(theme));
+        });
+        return themes;
+    }
+
     setData(d) {
         const id = `${(d && d.name || "").replace(new RegExp(' ', 'g'), '-')}-${uniqid().toUpperCase()}`;
         this.data = {
@@ -83,14 +86,10 @@ class AddProductModal {
             description: d && d.description,
             product_code: d && d.product_code,
             category_code: d && d.category_code,
+            sub_category_code: d && d.sub_category_code,
             default_size: d && d.default_size,
             default_color: d && d.default_color,
-            available_sizes: this.getAvailableSizes(d && d.available_sizes),
-            available_colors: this.getAvailableColors(d && d.available_colors),
-            discount: this.getDiscount(d),
-            stock_quantity: d && d.stock_quantity,
-            cost: this.getCost(d),
-            picture_links: this.getPictureLinks(d && d.picture_links),
+            themes: this.getThemes(d),
             featured: d && d.featured,
             thirty_day_exchange: d && d.thirty_day_exchange,
             fifteen_day_exchange: d && d.fifteen_day_exchange,
@@ -104,10 +103,7 @@ class AddProductModal {
             !this.data.name ||
             !this.data.product_code ||
             !this.data.category_code ||
-            !this.data.default_color ||
-            !this.data.default_size ||
-            !this.data.cost.amount ||
-            !this.data.cost.currency) {
+            !this.data.sub_category_code) {
             return false;
         }
         return true;
