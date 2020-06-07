@@ -121,6 +121,7 @@ export default class InstantPurchase extends Component {
             status,
             personal_information,
             purchase_item,
+            cost,
             billing_address,
             shipping_address,
             notification
@@ -208,7 +209,7 @@ export default class InstantPurchase extends Component {
                                                     className="t-breadcrumb-inactive"
                                                     variant="button"
                                                     gutterBottom
-                                                    text="PLACE YOUR ORDER AND PAY" />
+                                                    text="PROCEED TO PAY YOUR ORDER" />
                                             </Box>
                                         </Grid>
                                     </Grid>
@@ -238,7 +239,7 @@ export default class InstantPurchase extends Component {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <LargeBtn
-                                        name="PLACE YOUR ORDER AND PAY"
+                                        name="PROCEED TO PAY YOUR ORDER"
                                         icon="arrow_forward"
                                         color="rgb(23, 105, 236)"
                                         onClick={this.patch}
@@ -252,6 +253,7 @@ export default class InstantPurchase extends Component {
                                         id={purchase_item.id}
                                         name={purchase_item.data.name}
                                         description={purchase_item.data.description}
+                                        payment={cost}
                                         cost={purchase_item.data.cost}
                                         discount={purchase_item.data.discount}
                                         size={purchase_item.size}
@@ -259,11 +261,17 @@ export default class InstantPurchase extends Component {
                                         quantity={purchase_item.quantity}
                                         picture_links={purchase_item.data.picture_links}
                                     />
+                                    <LargeBtn
+                                        name="PROCEED TO PAY YOUR ORDER"
+                                        icon="arrow_forward"
+                                        color="rgb(23, 105, 236)"
+                                        onClick={this.patch}
+                                    />
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Box m={2}>
                                         <LargeBtn
-                                            name="PLACE YOUR ORDER AND PAY"
+                                            name="PROCEED TO PAY YOUR ORDER"
                                             icon="arrow_forward"
                                             color="rgb(23, 105, 236)"
                                             onClick={this.patch} />
