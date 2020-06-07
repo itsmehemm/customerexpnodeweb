@@ -29,7 +29,7 @@ export default class Tinnat extends Component {
                 <Route exact path="/checkout" component={Checkout} />
                 <Route exact path="/instant-purchase/payment/:orderid" component={InstantPurchasePayment} />
                 <Route exact path="/instant-purchase/:orderid" component={InstantPurchase} />
-                <Route exact path="/internal" component={Internal} />
+                <Route path="/internal" component={Internal} />
                 <Footer />
             </Router >
         );
