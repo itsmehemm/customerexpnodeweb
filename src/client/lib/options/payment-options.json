@@ -4,6 +4,10 @@
         "value": "COD"
     },
     {
+        "label": "PayPal",
+        "value": "PAYPAL"
+    },
+    {
         "label": "Credit and Debit Cards",
         "value": "CREDIT_OR_DEBIT_CARDS"
     }
