@@ -34,7 +34,6 @@ export default class BasicDetails extends Component {
         await this.setState({
             ...basicDetailsModal.getData()
         });
-        console.log(basicDetailsModal.getData(), undefined, 2)
         await this.validate();
         await this.props.update('basic_details', this.state);
     }
