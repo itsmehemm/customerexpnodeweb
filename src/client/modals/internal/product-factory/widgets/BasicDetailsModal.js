@@ -1,5 +1,7 @@
-
-import { DEFAULT_CATEGORY_CODE } from '../../../../lib/constants';
+import {
+    DEFAULT_CATEGORY_CODE,
+    DEFAULT_SUB_CATEGORY_CODE
+} from '../../../../lib/constants';
 
 export default class BasicDetailsModal {
 
@@ -15,7 +17,7 @@ export default class BasicDetailsModal {
             description: '',
             product_code: '',
             category_code: DEFAULT_CATEGORY_CODE,
-            sub_category_code: '',
+            sub_category_code: DEFAULT_SUB_CATEGORY_CODE,
             default_size: '',
             default_color: ''
         }
