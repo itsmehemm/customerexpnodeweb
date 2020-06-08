@@ -10,7 +10,6 @@ const _Typography = (props) => {
         icon_pos = "front",
         text, style,
         align,
-        type,
         size = "h6",
         component = "h2"
     } = props;
