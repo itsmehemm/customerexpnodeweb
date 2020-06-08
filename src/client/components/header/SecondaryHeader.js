@@ -28,16 +28,16 @@ export default class SecondaryHeader extends Component {
                             <img src={logo} height="45px" width="80px" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/products'} item xs={1}>
-                            <Typography variant="button" display="block" gutterTop text="Products" />
+                            <Typography variant="button" display="block" guttertop="true" text="Products" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/product/add'} item xs={2}>
-                            <Typography variant="button" display="block" gutterTop text="Add Product" />
+                            <Typography variant="button" display="block" guttertop="true" text="Add Product" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/help'} item xs={1}>
-                            <Typography variant="button" display="block" gutterTop text="Help" />
+                            <Typography variant="button" display="block" guttertop="true" text="Help" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
-                            <Typography variant="button" display="block" gutterTop text="Contact" />
+                            <Typography variant="button" display="block" guttertop="true" text="Contact" />
                         </Grid>
                     </Grid>
                 </Container>
