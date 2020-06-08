@@ -15,7 +15,6 @@ const Amount = (props) => {
             {
                 parseInt(discount.value) > 0 &&
                 <span className="amount-offer-text">
-                    {discount.type === INSTANT_PERCENTAGE && ` ${discountValue}% off`}
                     {discount.type === INSTANT_AMOUNT && ` Flat ${currencyCodeMapper[currency]}${discount.value} off`}
                     {discount.type === INSTANT_PERCENTAGE && ` ${discount.value}% off`}
                 </span>
