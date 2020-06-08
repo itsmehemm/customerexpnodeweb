@@ -10,6 +10,9 @@ import {
     COMPONENT_STATUS_INVALID
 } from '../../../../lib/constants';
 import CategoryCodes from '../../../../lib/options/category-codes.json';
+import SubCategoryCodes from '../../../../lib/options/sub-category-codes.json';
+import availableColors from '../../../../lib/options/colors.json';
+import availableSizes from '../../../../lib/options/sizes.json';
 
 export default class BasicDetails extends Component {
 
@@ -119,6 +122,27 @@ export default class BasicDetails extends Component {
                         value={this.state.category_code}
                         onChange={data => this.onChange("category_code", data)}
                         options={CategoryCodes}
+                    />
+                    <Select
+                        width={3}
+                        label="Sub Category Code"
+                        value={this.state.sub_category_code}
+                        onChange={data => this.onChange("sub_category_code", data)}
+                        options={SubCategoryCodes}
+                    />
+                    <Select
+                        width={3}
+                        label="Default Size"
+                        value={this.state.default_size}
+                        onChange={data => this.onChange("default_size", data)}
+                        options={availableSizes}
+                    />
+                    <Select
+                        width={3}
+                        label="Default Color"
+                        value={this.state.default_color}
+                        onChange={data => this.onChange("default_color", data)}
+                        options={availableColors}
                     />
                 </Grid>
             </Box>
