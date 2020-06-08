@@ -7,18 +7,16 @@ import ProductImages from './ProductImages';
 
 const ProductWidget = (props) => {
     const {
-        cost,
-        discount,
         name,
         description,
         onClick,
-        picture_links = []
+        themes
     } = props;
     return (
         <Card onClick={onClick} style={{ cursor: 'pointer' }} variant="outlined">
             <Box m={2}>
                 <ProductImages
-                    images={picture_links}
+                    images={themes[0].picture_links}
                     default_properties={{ indicators: false }}
                     style={{
                         width: '300px',
@@ -38,8 +36,8 @@ const ProductWidget = (props) => {
                 <Box m={0}>
                     <Amount
                         style={{ textAlign: 'center' }}
-                        cost={cost}
-                        discount={discount} />
+                        amount={themes[0].amount}
+                    />
                 </Box>
             </Box>
         </Card>
