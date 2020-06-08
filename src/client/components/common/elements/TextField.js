@@ -3,10 +3,22 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 const _TextField = (props) => {
-    const { id, label, helperText = "", error = false, required = false, value = '', type = "text", width = 12, onChange } = props;
+    const {
+        id,
+        label,
+        helperText = "",
+        error = false,
+        disabled = false,
+        required = false,
+        value = '',
+        type = "text",
+        width = 12,
+        onChange
+    } = props;
     return (
         <Grid item xs={width}>
             <TextField
+                disabled={disabled}
                 error={error}
                 required={required}
                 value={value}
