@@ -88,7 +88,7 @@ class EditProductModal {
     }
 
     getThemes(d) {
-        if (!d || !d.themes || !Array.isArray(d.themes)) return null;
+        if (!d || !d.themes || !Array.isArray(d.themes)) return [];
         let themes = [];
         d.themes.forEach(theme => {
             themes.push(this.getTheme(theme));
