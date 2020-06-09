@@ -320,6 +320,29 @@ class InstantPurchaseModal {
         console.log('ORDER_MODAL', 'order detail patched with payment details:', cache.get(this.id));
     }
 
+    validate() {
+        if (!this.personal_information ||
+            !this.personal_information.email ||
+            !this.personal_information.phone_number) {
+            return false;
+        }
+        if (!this.billing_address || !this.billing_address.name) {
+            return false;
+        }
+        if (!this.shipping_address ||
+            !this.shipping_address.name ||
+            !this.shipping_address.address_line_1 ||
+            !this.shipping_address.city ||
+            !this.shipping_address.state ||
+            !this.shipping_address.pincode) {
+            return false;
+        }
+        if (!this.amount) {
+            return false;
+        }
+        return true;
+    }
+
     getOrderId() { return this.id }
 
     getOrder() { return this.data }

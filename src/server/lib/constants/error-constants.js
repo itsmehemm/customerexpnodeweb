@@ -38,5 +38,17 @@ module.exports = {
     PAYMENT_ALREADY_COMPLETED: {
         message: 'PAYMENT_ALREADY_COMPLETED',
         description: 'Payment is already received for this order.'
+    },
+    ORDER_ALREADY_PURCHASED: {
+        message: 'ORDER_ALREADY_PURCHASED',
+        description: 'This already has been placed already.'
+    },
+    CANNOT_PATCH_COMPLETED_ORDER: {
+        message: 'CANNOT_PATCH_COMPLETED_ORDER',
+        description: 'Cannot patch order that has been completed already.'
+    },
+    INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN: {
+        message: 'INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN',
+        description: 'One or more required details are missing in the order.'
     }
 };

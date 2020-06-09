@@ -20,6 +20,19 @@ const getPaymentPlan = async (req, res) => {
         });
     }
 
+    if (instantPurchaseModal.getOrder().payment_information &&
+        instantPurchaseModal.getOrder().payment_information.status === 'COMPLETED') {
+        return res.status(400).send({
+            error: errorConstants.ORDER_ALREADY_PURCHASED
+        });
+    }
+
+    if (!instantPurchaseModal.validate()) {
+        return res.status(400).send({
+            error: errorConstants.INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN
+        });
+    }
+
     const paymentPlanModel = new PaymentPlanModel();
     paymentPlanModel.setOrderId(req.params.id);
     paymentPlanModel.setOrderDetails(instantPurchaseModal.getOrder());
