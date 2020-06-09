@@ -42,6 +42,7 @@ class ViewProductModal {
             default_size: d.default_size,
             default_color: d.default_color,
             themes: d.themes,
+            default_theme_id: d.default_theme_id,
             featured: d.featured,
             thirty_day_exchange: d.thirty_day_exchange,
             fifteen_day_exchange: d.fifteen_day_exchange,

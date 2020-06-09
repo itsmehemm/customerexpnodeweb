@@ -70,7 +70,7 @@ class AddProductModal {
     }
 
     getThemes(d) {
-        if (!d || !d.themes || !Array.isArray(d.themes)) return null;
+        if (!d || !d.themes || !Array.isArray(d.themes)) return [];
         let themes = [];
         d.themes.forEach(theme => {
             themes.push(this.getTheme(theme));
@@ -78,9 +78,19 @@ class AddProductModal {
         return themes;
     }
 
+    getDefaultTheme(themes, default_size, default_color) {
+        if (themes.length === 0) return null;
+        let defaultTheme = {};
+        themes.forEach(theme => {
+            if (theme.color === default_color && theme.size === default_size)
+                defaultTheme = theme;
+        });
+        return defaultTheme.id || null;
+    }
+
     setData(d) {
         const id = `${(d && d.name || "").replace(new RegExp(' ', 'g'), '-')}-${uniqid().toUpperCase()}`;
-        this.data = {
+        let data = {
             id: id,
             url: getProductUrl(id),
             name: d && d.name,
@@ -97,6 +107,8 @@ class AddProductModal {
             payment_options: this.getPaymentOptions(d && d.payment_options),
             advanced_details: this.getAdvancedDetails(d)
         };
+        data.default_theme_id = this.getDefaultTheme(data.themes, data.default_size, data.default_color)
+        this.data = data;
     }
 
     validate() {

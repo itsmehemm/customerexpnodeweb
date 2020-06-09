@@ -96,6 +96,16 @@ class EditProductModal {
         return themes;
     }
 
+    getDefaultTheme(themes, default_size, default_color) {
+        if (themes.length === 0) return null;
+        let defaultTheme = {};
+        themes.forEach(theme => {
+            if (theme.color === default_color && theme.size === default_size)
+                defaultTheme = theme;
+        });
+        return defaultTheme.id || null;
+    }
+
     updateThemes(o, d) {
         if (!d.themes) return o.themes;
         return this.getThemes(d);
@@ -132,6 +142,7 @@ class EditProductModal {
                 brand_fit: (d.advanced_details && d.advanced_details.brand_fit) || (o.advanced_details && o.advanced_details.brand_fit),
             }
         };
+        data.default_theme_id = this.getDefaultTheme(data.themes, data.default_size, data.default_color);
         this.data = data;
     }
 
