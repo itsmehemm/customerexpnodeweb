@@ -1,3 +1,4 @@
+const uniqid = require('uniqid');
 const mongoClient = require('../mongo/mongodb');
 const { COLLECTION, KEY } = require('../lib/constants/mongo-constants');
 
@@ -77,6 +78,7 @@ class EditProductModal {
 
     getTheme(d) {
         return {
+            id: uniqid('T-').toUpperCase(),
             size: d && d.size,
             color: d && d.color,
             picture_links: this.getPictureLinks(d && d.picture_links),
