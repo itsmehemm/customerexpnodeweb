@@ -2,6 +2,7 @@ class PaymentPlanModel {
     constructor() {
         this.paypal = null;
         this.tinnat = null;
+        this.razorpay = null;
     }
 
     setClientToken(t) {
