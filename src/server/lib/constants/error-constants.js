@@ -30,5 +30,13 @@ module.exports = {
     ERROR_CREATING_PAYMENT_PLAN: {
         message: 'ERROR_CREATING_PAYMENT_PLAN',
         description: 'There was an error creating payment plan for this order.'
+    },
+    RAZORPAY_PAYMENT_FAILED: {
+        message: 'RAZORPAY_PAYMENT_FAILED',
+        description: 'Payment failed. Please try again or use another mode of payment.'
+    },
+    PAYMENT_ALREADY_COMPLETED: {
+        message: 'PAYMENT_ALREADY_COMPLETED',
+        description: 'Payment is already received for this order.'
     }
 };

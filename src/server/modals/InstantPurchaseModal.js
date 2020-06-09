@@ -13,6 +13,7 @@ class InstantPurchaseModal {
         this.amount = null;
         this.billing_address = null;
         this.shipping_address = null;
+        this.payment_information = null;
         this.data = null;
     }
 
@@ -31,7 +32,8 @@ class InstantPurchaseModal {
             purchase_items: this.purchase_items,
             amount: this.amount,
             billing_address: this.billing_address,
-            shipping_address: this.shipping_address
+            shipping_address: this.shipping_address,
+            payment_information: this.payment_information
         };
         await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
         console.log('ORDER_MODAL', 'order detail persisted:', cache.get(this.id));
@@ -92,7 +94,8 @@ class InstantPurchaseModal {
             ...this.data,
             personal_information: this.personal_information,
             billing_address: this.billing_address,
-            shipping_address: this.shipping_address
+            shipping_address: this.shipping_address,
+            payment_information: this.payment_information
         };
         await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
         console.log('ORDER_MODAL', 'order detail patched:', cache.get(this.id));
@@ -110,6 +113,7 @@ class InstantPurchaseModal {
         this.amount = data.amount;
         this.billing_address = data.billing_address;
         this.shipping_address = data.shipping_address;
+        this.payment_information = data.payment_information;
         console.log('ORDER_MODAL', 'order details fetched from cache: ', JSON.stringify(this.data));
         return this.data;
     }
@@ -296,6 +300,24 @@ class InstantPurchaseModal {
                 }
             }]
         };
+    }
+
+    async updatePaymentDetails(payment) {
+        if (payment) {
+            this.payment_information = {
+                status: payment.status,
+                transaction_id: payment.transaction_id,
+                processor: payment.processor,
+                processor_order_id: payment.processor_order_id,
+                others: payment.others
+            };
+            this.data = {
+                ...this.data,
+                payment_information: this.payment_information
+            };
+        }
+        await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
+        console.log('ORDER_MODAL', 'order detail patched with payment details:', cache.get(this.id));
     }
 
     getOrderId() { return this.id }

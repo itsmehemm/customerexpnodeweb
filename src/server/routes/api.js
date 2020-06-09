@@ -14,7 +14,8 @@ const {
     createInstantOrder,
     getOrderById,
     patchOrderById,
-    getPaymentPlan
+    getPaymentPlan,
+    razorpayPaymentComplete
 } = require('../controllers');
 
 const app = express();
@@ -48,5 +49,7 @@ app.get('/order/:id', getOrderById);
 app.patch('/order/:id', patchOrderById);
 
 app.get('/instant-purchase/:id/payment/plan', getPaymentPlan);
+
+app.post('/instant-purchase/:id/payment/razorpay', razorpayPaymentComplete);
 
 module.exports = app;
