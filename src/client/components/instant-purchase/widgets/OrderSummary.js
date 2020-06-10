@@ -18,15 +18,13 @@ export default class OrderSummary extends Component {
             id,
             name,
             description,
-            cost,
+            amount,
             payment,
             discount,
             size,
             color,
             quantity,
             picture_links,
-            hide_label,
-            hide_image
         } = this.props;
         return (
             <Grid container>
@@ -90,7 +88,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="MRP (Inc. of all taxes)" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${cost.currency} ${cost.amount}`} variant="body2" />
+                                <Typography align="right" text={`${amount.currency} ${amount.maximum_retail_price}`} variant="body2" />
                             </Grid>
                         </Grid>
                         <Grid container>
@@ -106,7 +104,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="Sub total" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${cost.currency} ${cost.amount}`} variant="body2" />
+                                <Typography align="right" text={`${amount.currency} ${amount.subtotal}`} variant="body2" />
                             </Grid>
                         </Grid>
                         <Grid container>
@@ -114,7 +112,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="Shipping charges" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${cost.currency} 0`} variant="body2" />
+                                <Typography align="right" text={`${amount.currency} 0`} variant="body2" />
                             </Grid>
                         </Grid>
                     </Box>
@@ -125,7 +123,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="Final Amount" variant="h6" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${cost.currency} ${cost.amount}`} variant="h6" />
+                                <Typography align="right" text={`${payment.currency} ${payment.subtotal}`} variant="h6" />
                             </Grid>
                         </Grid>
                     </Box>
