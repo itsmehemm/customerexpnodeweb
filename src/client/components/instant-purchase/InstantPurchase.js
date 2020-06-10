@@ -121,7 +121,7 @@ export default class InstantPurchase extends Component {
             status,
             personal_information,
             purchase_item,
-            cost,
+            amount,
             billing_address,
             shipping_address,
             notification
@@ -253,13 +253,13 @@ export default class InstantPurchase extends Component {
                                         id={purchase_item.id}
                                         name={purchase_item.data.name}
                                         description={purchase_item.data.description}
-                                        payment={cost}
-                                        cost={purchase_item.data.cost}
-                                        discount={purchase_item.data.discount}
+                                        payment={amount}
+                                        amount={purchase_item.amount}
+                                        discount={purchase_item.amount.discount}
                                         size={purchase_item.size}
                                         color={purchase_item.color}
                                         quantity={purchase_item.quantity}
-                                        picture_links={purchase_item.data.picture_links}
+                                        picture_links={purchase_item.picture_links}
                                     />
                                     <LargeBtn
                                         name="PROCEED TO PAY YOUR ORDER"
