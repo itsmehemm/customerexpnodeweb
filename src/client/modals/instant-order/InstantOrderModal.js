@@ -11,15 +11,9 @@ export default class InstantOrderModal {
             email: d && d.personal_information && d.personal_information.email,
             phone_number: d && d.personal_information && d.personal_information.phone_number
         };
-        let purchase_item = d && d.purchase_items && d.purchase_items[0];
-        data.purchase_item = {
-            id: purchase_item && purchase_item.id,
-            size: purchase_item && purchase_item.size,
-            color: purchase_item && purchase_item.color,
-            quantity: purchase_item && purchase_item.quantity,
-            data: purchase_item && purchase_item.data
-        };
-        data.purchase_items = [data.purchase_item];
+        data.purchase_items = d && d.purchase_items;
+        data.purchase_item = d && d.purchase_items && d.purchase_items[0];
+        data.amount = d && d.amount;
         data.billing_address = {
             name: d && d.billing_address && d.billing_address.name,
             address_line_1: d && d.billing_address && d.billing_address.address_line_1,
@@ -39,14 +33,16 @@ export default class InstantOrderModal {
             state: d && d.shipping_address && d.shipping_address.state,
             landmark: d && d.shipping_address && d.shipping_address.landmark,
         };
+        data.payment_information = d && d.payment_information;
         this.data = {
             id: data.id,
             personal_information: data.personal_information,
             purchase_item: data.purchase_item,
             purchase_items: data.purchase_items,
-            cost: data.cost,
+            amount: data.amount,
             billing_address: data.billing_address,
             shipping_address: data.shipping_address,
+            payment_information: data.payment_information
         };
     }
 
@@ -55,8 +51,8 @@ export default class InstantOrderModal {
             id: null,
             purchase_item: null,
             purchase_items: [],
-            cost: {
-                amount: null,
+            amount: {
+                subtotal: null,
                 currency: null
             },
             personal_information: {
@@ -81,7 +77,8 @@ export default class InstantOrderModal {
                 pincode: null,
                 state: null,
                 landmark: null,
-            }
+            },
+            payment_information: null
         };
     }
 
@@ -98,9 +95,8 @@ export default class InstantOrderModal {
     updateCreateDataFromState(state) {
         let purchase_item = {
             id: state && state.id,
-            color: state && state.color,
-            size: state && state.size,
-            quantity: state && state.quantity
+            theme_id: state && state.selection && state.selection.themeId,
+            quantity: state && state.selection && state.selection.quantity
         }
         this.data = {
             purchase_item: purchase_item,
