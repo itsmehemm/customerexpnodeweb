@@ -7,6 +7,7 @@ import {
 
 const Amount = (props) => {
     const { amount, style } = props;
+    if (!amount) return <div />
     const { maximum_retail_price, discount, subtotal, correction, currency } = amount;
     return (
         <div className="amount-section" style={style}>
