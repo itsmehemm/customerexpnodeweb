@@ -266,16 +266,16 @@ export default class InstantPurchasePayment extends Component {
                                                         <Typography variant='caption' gutterBottom text={`Here is what you're making a purchase.`} />
                                                     </Box>
                                                     <OrderSummary
-                                                        hide_label={true}
                                                         id={paymentPlan.tinnat.order_details.purchase_items[0].id}
                                                         name={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
                                                         description={paymentPlan.tinnat.order_details.purchase_items[0].data.description}
-                                                        cost={paymentPlan.tinnat.order_details.cost}
-                                                        discount={paymentPlan.tinnat.order_details.purchase_items[0].data.discount}
+                                                        payment={paymentPlan.tinnat.order_details.amount}
+                                                        amount={paymentPlan.tinnat.order_details.purchase_items[0].amount}
+                                                        discount={paymentPlan.tinnat.order_details.purchase_items[0].amount.discount}
                                                         size={paymentPlan.tinnat.order_details.purchase_items[0].size}
                                                         color={paymentPlan.tinnat.order_details.purchase_items[0].color}
                                                         quantity={paymentPlan.tinnat.order_details.purchase_items[0].quantity}
-                                                        picture_links={paymentPlan.tinnat.order_details.purchase_items[0].data.picture_links}
+                                                        picture_links={paymentPlan.tinnat.order_details.purchase_items[0].picture_links}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>
