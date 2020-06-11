@@ -24,4 +24,9 @@ module.exports = {
         message: 'ORDER_PATCHED',
         description: 'The order has been patched successfully.'
     },
+    PAYMENT_COMPLETED: {
+        status: 'COMPLETED',
+        message: 'PAYMENT_COMPLETED',
+        description: 'Your order has been received. Payment was successfully completed.'
+    }
 }

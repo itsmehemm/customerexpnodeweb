@@ -7,39 +7,43 @@ import ProductImages from './ProductImages';
 
 const ProductWidget = (props) => {
     const {
-        cost,
-        discount,
         name,
         description,
         onClick,
-        picture_links = []
+        themes
     } = props;
     return (
-        <Card onClick={onClick} style={{ cursor: 'pointer' }} variant="outlined">
-            <Box m={2}>
+        <Card variant="outlined">
+            <Box m={1}>
                 <ProductImages
-                    images={picture_links}
-                    default_properties={{ indicators: false }}
+                    images={themes[0].picture_links}
                     style={{
                         width: '300px',
                         height: '300px',
                         marginLeft: 'auto',
-                        marginRight: 'auto'
+                        marginRight: 'auto',
+                        cursor: 'pointer'
                     }}
+                    onClick={onClick}
                 />
             </Box>
             <Box>
                 <Box m={0}>
-                    <Typography style={{ textAlign: 'center' }} text={name} />
+                    <Typography
+                        className="t-text-link"
+                        align='center'
+                        text={name}
+                        onClick={onClick}
+                    />
                 </Box>
                 <Box m={0}>
-                    <Typography style={{ textAlign: 'center' }} size="subtitle2" text={description} />
+                    <Typography 
+                    align='center' 
+                    size="subtitle1" 
+                    text={description} />
                 </Box>
                 <Box m={0}>
-                    <Amount
-                        style={{ textAlign: 'center' }}
-                        cost={cost}
-                        discount={discount} />
+                    <Amount amount={themes[0].amount} />
                 </Box>
             </Box>
         </Card>

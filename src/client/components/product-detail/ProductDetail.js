@@ -12,6 +12,7 @@ import ProductImages from './ProductImages';
 import LargeBtn from '../common/elements/LargeBtn';
 import Typography from '../common/elements/Typography';
 import InstantOrderModal from '../../modals/instant-order/InstantOrderModal';
+import ProductDetailModal from '../../modals/product-detail/ProductDetailModal';
 import { productAdvancedDetailsMapper } from '../../lib/mappers';
 import {
     createInstantOrder
@@ -24,16 +25,7 @@ export default class ProductDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            id: null,
-            color: null,
-            size: null,
-            quantity: 1,
-            notification: {
-                status: false,
-                message: null
-            }
-        };
+        this.state = new ProductDetailModal().getDefaultData();
         this.closeNotification = this.closeNotification.bind(this);
         this.update = this.update.bind(this);
         this.instantPurchase = this.instantPurchase.bind(this);
@@ -41,15 +33,38 @@ export default class ProductDetail extends Component {
 
     async componentDidMount() {
         const { data } = this.props;
+        const productDetailModal = new ProductDetailModal(data);
         await this.setState({
-            id: data && data.id,
-            color: data && data.default_color,
-            size: data && data.default_size
+            ...productDetailModal.getData(),
         });
     }
 
     async update(name, value) {
-        await this.setState({ [name]: value });
+        let { selection, availableColors, amount, stockQuantity, pictureLinks } = this.state;
+        if (name === 'size') {
+            availableColors = new ProductDetailModal().getAvailableColors(this.props.data.themes, value);
+            selection.color = null;
+            selection.themeId = new ProductDetailModal().getThemeId(this.props.data.themes, value, selection.color);
+            amount = new ProductDetailModal().getAmount(this.props.data.themes, value, selection.color);
+            stockQuantity = new ProductDetailModal().getStockQuantity(this.props.data.themes, value, selection.color);
+            pictureLinks = new ProductDetailModal().getPictureLinks(this.props.data.themes, value, selection.color);
+        }
+        if (name === 'color') {
+            amount = new ProductDetailModal().getAmount(this.props.data.themes, selection.size, value);
+            selection.themeId = new ProductDetailModal().getThemeId(this.props.data.themes, selection.size, value);
+            stockQuantity = new ProductDetailModal().getStockQuantity(this.props.data.themes, selection.size, value);
+            pictureLinks = new ProductDetailModal().getPictureLinks(this.props.data.themes, selection.size, value);
+        }
+        await this.setState({
+            availableColors: availableColors,
+            amount: amount,
+            stockQuantity: stockQuantity,
+            pictureLinks: pictureLinks,
+            selection: {
+                ...selection,
+                [name]: value
+            }
+        });
     }
 
     // addToCart() {
@@ -76,17 +91,22 @@ export default class ProductDetail extends Component {
     // }
 
     async instantPurchase() {
-        const instantOrderModal = new InstantOrderModal();
-        instantOrderModal.updateCreateDataFromState(this.state);
-        try {
-            const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
-            if (response && response.instant_purchase_url) {
-                window.location.href = response.instant_purchase_url;
-            } else {
+        const { selection } = this.state;
+        if (selection.color && selection.size) {
+            const instantOrderModal = new InstantOrderModal();
+            instantOrderModal.updateCreateDataFromState(this.state);
+            try {
+                const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
+                if (response && response.instant_purchase_url) {
+                    window.location.href = response.instant_purchase_url;
+                } else {
+                    await this.notify('There was an error while creating the order.');
+                }
+            } catch (error) {
                 await this.notify('There was an error while creating the order.');
             }
-        } catch (error) {
-            await this.notify('There was an error while creating the order.');
+        } else {
+            await this.notify('Select a size and color of your choice.');
         }
     }
 
@@ -110,7 +130,16 @@ export default class ProductDetail extends Component {
 
     render() {
         const { data } = this.props;
-        const { notification } = this.state;
+        const {
+            availableSizes,
+            availableColors,
+            amount,
+            stockQuantity,
+            pictureLinks,
+            notification,
+            selection
+        } = this.state;
+        console.log(stockQuantity)
         return (
             <Container style={{ padding: '1em' }} maxWidth="md">
                 <Snackbar
@@ -124,7 +153,7 @@ export default class ProductDetail extends Component {
                 <Grid container>
                     <Grid item xs={6}>
                         <Box m={0}>
-                            <ProductImages images={data.picture_links} />
+                            <ProductImages images={pictureLinks} />
                             {/* <LargeBtn
                                 onClick={() => this.addToCart()}
                                 name="ADD TO CART"
@@ -160,25 +189,34 @@ export default class ProductDetail extends Component {
                                 </Box>
                             </Grid>
                         </Grid>
-                        <Box m={2}>
-                            <Amount cost={data.cost} discount={data.discount} />
-                        </Box>
-                        <Box m={2}> <Divider /> </Box>
+                        {
+                            amount &&
+                            <>
+                                <Box m={2}>
+                                    <Amount amount={amount} />
+                                </Box>
+                                <Box m={2}> <Divider /> </Box>
+                            </>
+                        }
                         <Box m={2}>
                             <Typography
                                 text={"Size"}
                                 variant="button"
                             />
                         </Box>
-                        <Box m={2}>
-                            <Grid item xs={12}>
-                                <SmallButtonGroup
-                                    defaultButton={data.default_size}
-                                    buttons={data.available_sizes}
-                                    onSelect={(data) => this.update('size', data)}
-                                />
-                            </Grid>
-                        </Box>
+                        {
+                            availableSizes &&
+                            availableSizes.length > 0 &&
+                            <Box m={2}>
+                                <Grid item xs={12}>
+                                    <SmallButtonGroup
+                                        defaultButton={data.default_size}
+                                        buttons={availableSizes}
+                                        onSelect={(data) => this.update('size', data)}
+                                    />
+                                </Grid>
+                            </Box>
+                        }
                         <Box m={2}> <Divider /> </Box>
                         <Box m={2}>
                             <Typography
@@ -186,36 +224,46 @@ export default class ProductDetail extends Component {
                                 variant="button"
                             />
                         </Box>
-                        <Box m={2}>
-                            <Grid item xs={12}>
-                                <SmallImageButtonGroup
-                                    name="color"
-                                    defaultButton={data.default_color}
-                                    buttons={data.available_colors}
-                                    onSelect={(data) => this.update('color', data)}
-                                />
-                            </Grid>
-                        </Box>
+                        {
+                            availableColors &&
+                            availableColors.length > 0 &&
+                            <Box m={2}>
+                                <Grid item xs={12}>
+                                    <SmallImageButtonGroup
+                                        name="color"
+                                        size={selection.size}
+                                        buttons={availableColors}
+                                        onSelect={(data) => this.update('color', data)}
+                                    />
+                                    {!selection.color && <Typography text="select a color of your choice" variant="caption" style={{ color: 'rgb(189, 6, 61)' }} />}
+                                </Grid>
+                            </Box>
+                        }
                         <Box m={2}> <Divider /> </Box>
-                        <Box m={2}>
-                            {
-                                (data.stock_quantity === 'UNLIMITED' || parseInt(data.stock_quantity) > 0) &&
-                                <Typography
-                                    text="IN STOCK"
-                                    icon="done"
-                                    variant="h6"
-                                    style={{ color: 'rgb(5, 153, 54)' }}
-                                />
-                                ||
-                                <Typography
-                                    text="OUT OF STOCK"
-                                    icon="cancel"
-                                    variant="h6"
-                                    style={{ color: 'rgb(189, 6, 61)' }}
-                                />
-                            }
-                        </Box>
-                        <Box m={2}> <Divider /> </Box>
+                        {
+                            stockQuantity !== null && stockQuantity !== undefined &&
+                            <>
+                                <Box m={2}>
+                                    {
+                                        (stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) &&
+                                        <Typography
+                                            text="IN STOCK"
+                                            icon="done"
+                                            variant="h6"
+                                            style={{ color: 'rgb(5, 153, 54)' }}
+                                        />
+                                        ||
+                                        <Typography
+                                            text="OUT OF STOCK"
+                                            icon="cancel"
+                                            variant="h6"
+                                            style={{ color: 'rgb(189, 6, 61)' }}
+                                        />
+                                    }
+                                </Box>
+                                <Box m={2}> <Divider /> </Box>
+                            </>
+                        }
                         {
                             data.advanced_details &&
                             <>

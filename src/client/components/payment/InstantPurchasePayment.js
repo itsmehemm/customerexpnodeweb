@@ -6,7 +6,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Header from '../header/Header';
@@ -87,29 +86,28 @@ export default class InstantPurchasePayment extends Component {
 
     handleRazorpaySdkLoad() {
         this.setState({ razorpaySdkLoaded: true });
+        const { paymentPlan } = this.state;
+        const { razorpay, tinnat } = paymentPlan;
         const options = {
-            'key': 'rzp_test_IhEymNzpAxVoFV',
-            'amount': '45000',
-            'currency': 'INR',
-            'name': 'Tinnat Inc',
-            'description': 'Test Transaction',
-            'image': 'http://localhost:3000/tinnat-logo.png',
-            'order_id': 'order_EzGOyi4KRR3F9q',
-            'handler': function (response) {
+            key: razorpay.api_key,
+            amount: razorpay.order_details.amount,
+            currency: razorpay.order_details.currency,
+            name: 'Tinnat Inc.',
+            description: tinnat.order_id,
+            image: 'http://localhost:3000/tinnat-logo.png',
+            order_id: razorpay.order_id,
+            handler: (response) => {
                 alert(response.razorpay_payment_id);
                 alert(response.razorpay_order_id);
                 alert(response.razorpay_signature)
             },
-            'prefill': {
-                'name': 'Hemanth Murali',
-                'email': 'hemm@paypal.com',
-                'contact': '9999999999'
+            prefill: {
+                name: tinnat.order_details.billing_address.name,
+                email: tinnat.order_details.personal_information.email,
+                contact: tinnat.order_details.personal_information.phone_number,
             },
-            'notes': {
-                'address': 'Razorpay Corporate Office'
-            },
-            'theme': {
-                'color': 'rgb(40, 116, 240)'
+            theme: {
+                color: 'rgb(40, 116, 240)'
             }
         };
         var razorPay = new Razorpay(options);
@@ -268,16 +266,16 @@ export default class InstantPurchasePayment extends Component {
                                                         <Typography variant='caption' gutterBottom text={`Here is what you're making a purchase.`} />
                                                     </Box>
                                                     <OrderSummary
-                                                        hide_label={true}
                                                         id={paymentPlan.tinnat.order_details.purchase_items[0].id}
                                                         name={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
                                                         description={paymentPlan.tinnat.order_details.purchase_items[0].data.description}
-                                                        cost={paymentPlan.tinnat.order_details.cost}
-                                                        discount={paymentPlan.tinnat.order_details.purchase_items[0].data.discount}
+                                                        payment={paymentPlan.tinnat.order_details.amount}
+                                                        amount={paymentPlan.tinnat.order_details.purchase_items[0].amount}
+                                                        discount={paymentPlan.tinnat.order_details.purchase_items[0].amount.discount}
                                                         size={paymentPlan.tinnat.order_details.purchase_items[0].size}
                                                         color={paymentPlan.tinnat.order_details.purchase_items[0].color}
                                                         quantity={paymentPlan.tinnat.order_details.purchase_items[0].quantity}
-                                                        picture_links={paymentPlan.tinnat.order_details.purchase_items[0].data.picture_links}
+                                                        picture_links={paymentPlan.tinnat.order_details.purchase_items[0].picture_links}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>

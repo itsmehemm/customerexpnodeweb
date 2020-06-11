@@ -2,6 +2,7 @@ class PaymentPlanModel {
     constructor() {
         this.paypal = null;
         this.tinnat = null;
+        this.razorpay = null;
     }
 
     setClientToken(t) {
@@ -35,10 +36,31 @@ class PaymentPlanModel {
         this.tinnat.order_details = d;
     }
 
+    setRazorPayOrderId(id) {
+        this.razorpay = this.razorpay || {};
+        this.razorpay.order_id = id;
+    }
+
+    setRazorPayApiKey(k) {
+        this.razorpay = this.razorpay || {};
+        this.razorpay.api_key = k;
+    }
+
+    setRazorPayOrderDetails(o) {
+        this.razorpay = this.razorpay || {};
+        this.razorpay.order_details = {
+            amount: o.amount,
+            currency: o.currency,
+            receipt: o.receipt,
+            notes: o.notes
+        };
+    }
+
     getData() {
         return {
+            tinnat: this.tinnat,
             paypal: this.paypal,
-            tinnat: this.tinnat
+            razorpay: this.razorpay
         };
     }
 };

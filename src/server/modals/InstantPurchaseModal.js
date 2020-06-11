@@ -10,9 +10,10 @@ class InstantPurchaseModal {
         this.id = null;
         this.personal_information = null;
         this.purchase_items = [];
-        this.cost = null;
+        this.amount = null;
         this.billing_address = null;
         this.shipping_address = null;
+        this.payment_information = null;
         this.data = null;
     }
 
@@ -23,15 +24,16 @@ class InstantPurchaseModal {
         if (this.purchase_items.length == 0) {
             return null;
         }
-        this.cost = this.getCost(this.purchase_items);
+        this.amount = this.getAmount(this.purchase_items);
         this.billing_address = this.getBillingAddress(d);
         this.shipping_address = this.getShippingAddress(d);
         this.data = {
             personal_information: this.personal_information,
             purchase_items: this.purchase_items,
-            cost: this.cost,
+            amount: this.amount,
             billing_address: this.billing_address,
-            shipping_address: this.shipping_address
+            shipping_address: this.shipping_address,
+            payment_information: this.payment_information
         };
         await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
         console.log('ORDER_MODAL', 'order detail persisted:', cache.get(this.id));
@@ -46,7 +48,7 @@ class InstantPurchaseModal {
         this.data = data;
         this.personal_information = data.personal_information;
         this.purchase_items = data.purchase_items;
-        this.cost = data.cost;
+        this.amount = data.amount;
         this.billing_address = data.billing_address;
         this.shipping_address = data.shipping_address;
         const { personal_information, billing_address, shipping_address } = d;
@@ -92,7 +94,8 @@ class InstantPurchaseModal {
             ...this.data,
             personal_information: this.personal_information,
             billing_address: this.billing_address,
-            shipping_address: this.shipping_address
+            shipping_address: this.shipping_address,
+            payment_information: this.payment_information
         };
         await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
         console.log('ORDER_MODAL', 'order detail patched:', cache.get(this.id));
@@ -107,9 +110,10 @@ class InstantPurchaseModal {
         this.data = data;
         this.personal_information = data.personal_information;
         this.purchase_items = data.purchase_items;
-        this.cost = data.cost;
+        this.amount = data.amount;
         this.billing_address = data.billing_address;
         this.shipping_address = data.shipping_address;
+        this.payment_information = data.payment_information;
         console.log('ORDER_MODAL', 'order details fetched from cache: ', JSON.stringify(this.data));
         return this.data;
     }
@@ -156,20 +160,28 @@ class InstantPurchaseModal {
                 });
             });
             if (product) {
+                const { themes } = product;
+                let theme = null;
+                themes.forEach(t => {
+                    if (t.id === item.theme_id) {
+                        theme = t;
+                    }
+                });
                 purchase_items.push({
                     id: product.id,
                     url: getProductUrl(product.id),
-                    size: item.size,
-                    color: item.color,
+                    theme_id: theme.id,
+                    size: theme.size,
+                    color: theme.color,
                     quantity: item.quantity,
+                    picture_links: theme.picture_links,
+                    amount: theme.amount,
+                    stock_quantity: theme.stock_quantity,
                     data: {
                         name: product.name,
-                        description: product.description,
                         product_code: product.product_code,
+                        description: product.description,
                         category_code: product.category_code,
-                        picture_links: this.getPictureLinks(product.available_colors, 'color', item.color),
-                        cost: product.cost,
-                        discount: product.discount,
                         thirty_day_exchange: product.thirty_day_exchange,
                         fifteen_day_exchange: product.fifteen_day_exchange,
                         payment_options: product.payment_options
@@ -180,22 +192,14 @@ class InstantPurchaseModal {
         return purchase_items;
     }
 
-    getCost(d) {
+    getAmount(d) {
         if (!d || !Array.isArray(d)) return null;
-        let amount = 0;
+        let subtotal = 0;
         d.forEach(item => {
-            let discountType = item.data.discount.type;
-            let discountValue = item.data.discount.value;
-            if (discountType === 'INSTANT_AMOUNT') {
-                amount = amount + (parseInt(item.data.cost.amount) - parseInt(discountValue));
-            } else if (discountType === 'INSTANT_PERCENTAGE') {
-                amount = amount + (parseInt(item.data.cost.amount) - (parseInt(item.data.cost.amount) * parseInt(discountValue) / 100));
-            } else {
-                amount += parseInt(item.data.cost.amount);
-            }
+            subtotal += parseInt(item.amount.subtotal);
         });
         return {
-            amount: amount,
+            subtotal: subtotal,
             currency: 'INR'
         };
     }
@@ -233,8 +237,22 @@ class InstantPurchaseModal {
         };
     }
 
+    buildRazorPayRequest() {
+        const { amount, purchase_items } = this.data;
+        return {
+            amount: amount.subtotal * 100,
+            currency: "INR",
+            receipt: uniqid('R2020').toUpperCase(),
+            payment_capture: 1,
+            notes: {
+                notes_key_1: purchase_items[0].data.name,
+                notes_key_2: purchase_items[0].id
+            }
+        };
+    }
+
     buildPayPalRequest() {
-        const { personal_information, cost, purchase_items, billing_address, shipping_address } = this.data;
+        const { personal_information, amount, purchase_items, billing_address, shipping_address } = this.data;
         return {
             intent: 'CAPTURE',
             payer: {
@@ -258,11 +276,11 @@ class InstantPurchaseModal {
                 soft_descriptor: 'TINNAT_INC',
                 amount: {
                     currency_code: 'INR',
-                    value: cost.amount,
+                    value: amount.subtotal,
                     breakdown: {
                         item_total: {
                             currency_code: 'INR',
-                            value: cost.amount,
+                            value: amount.subtotal,
                         },
                         tax_total: {
                             currency_code: 'INR',
@@ -282,6 +300,47 @@ class InstantPurchaseModal {
                 }
             }]
         };
+    }
+
+    async updatePaymentDetails(payment) {
+        if (payment) {
+            this.payment_information = {
+                status: payment.status,
+                transaction_id: payment.transaction_id,
+                processor: payment.processor,
+                processor_order_id: payment.processor_order_id,
+                others: payment.others
+            };
+            this.data = {
+                ...this.data,
+                payment_information: this.payment_information
+            };
+        }
+        await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
+        console.log('ORDER_MODAL', 'order detail patched with payment details:', cache.get(this.id));
+    }
+
+    validate() {
+        if (!this.personal_information ||
+            !this.personal_information.email ||
+            !this.personal_information.phone_number) {
+            return false;
+        }
+        if (!this.billing_address || !this.billing_address.name) {
+            return false;
+        }
+        if (!this.shipping_address ||
+            !this.shipping_address.name ||
+            !this.shipping_address.address_line_1 ||
+            !this.shipping_address.city ||
+            !this.shipping_address.state ||
+            !this.shipping_address.pincode) {
+            return false;
+        }
+        if (!this.amount) {
+            return false;
+        }
+        return true;
     }
 
     getOrderId() { return this.id }

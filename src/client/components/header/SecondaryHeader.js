@@ -13,26 +13,31 @@ export default class SecondaryHeader extends Component {
 
     render() {
         return (
-            <Container className="header-wrapper" maxWidth={false}>
+            <Container
+                style={{
+                    backgroundImage: 'linear-gradient(100deg, rgb(51, 128, 253), rgb(23, 105, 236))'
+                }}
+                maxWidth={false}>
                 <Container maxWidth={"xl"}>
-                    <Grid className="menu"
+                    <Grid
+                        style={{ height: '4.5rem' }}
                         alignItems="center"
                         justify="center"
                         container>
                         <Grid className="logo" onClick={() => window.location = '/'} item xs={1}>
                             <img src={logo} height="45px" width="80px" />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/internal/warehouse/products'} item xs={1}>
-                            <Typography component="span" text="Products" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/products'} item xs={1}>
+                            <Typography variant="button" display="block" guttertop="true" text="Products" />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/internal/warehouse/product/add'} item xs={2}>
-                            <Typography component="span" text="Add Product" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/product/add'} item xs={2}>
+                            <Typography variant="button" display="block" guttertop="true" text="Add Product" />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/help'} item xs={1}>
-                            <Typography component="span" text="Help" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/help'} item xs={1}>
+                            <Typography variant="button" display="block" guttertop="true" text="Help" />
                         </Grid>
-                        <Grid className="menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
-                            <Typography component="span" text="Contact" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
+                            <Typography variant="button" display="block" guttertop="true" text="Contact" />
                         </Grid>
                     </Grid>
                 </Container>

@@ -1,0 +1,18 @@
+.final-amount-text {
+    font-family: 'Roboto';
+    font-size: 2em;
+    color: #000;
+}
+
+.original-amount-text {
+    font-family: 'Product Sans';
+    font-size: 1em;
+    color: rgb(73, 73, 73);
+    text-decoration: line-through;
+}
+
+.amount-offer-text {
+    font-family: 'Product Sans';
+    font-size: 1.2em;
+    color: rgb(5, 153, 54);
+}

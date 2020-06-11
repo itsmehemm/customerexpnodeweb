@@ -61,5 +61,15 @@
                 "url": "https://api.sandbox.paypal.com/v2/checkout/orders"
             }
         }
+    },
+    "razorpay": {
+        "development":  {
+            "api_key": "rzp_test_IhEymNzpAxVoFV",
+            "api_secret": "95u2pAEl6ccJUCZ8WEFn4hux",
+            "basic_auth_token": "cnpwX3Rlc3RfSWhFeW1OenBBeFZvRlY6OTV1MnBBRWw2Y2NKVUNaOFdFRm40aHV4",
+            "create_order": {
+                "url": "https://api.razorpay.com/v1/orders"
+            }
+        }
     }
 }

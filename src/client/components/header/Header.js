@@ -67,19 +67,19 @@ export default class Header extends Component {
                             <img src={logo} alt="Tinnat" height="45px" width="80px" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/'} item xs={1}>
-                            <Typography text="home" variant="button" display="block" gutterTop />
+                            <Typography text="home" variant="button" display="block" guttertop={"true"} />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/about'} item xs={1}>
-                            <Typography text="about" variant="button" display="block" gutterTop />
+                            <Typography text="about" variant="button" display="block" guttertop={"true"} />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/products'} item xs={1}>
-                            <Typography text="products" variant="button" display="block" gutterTop />
+                            <Typography text="products" variant="button" display="block" guttertop={"true"} />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/help'} item xs={1}>
-                            <Typography text="help" variant="button" display="block" gutterTop />
+                            <Typography text="help" variant="button" display="block" guttertop={"true"} />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
-                            <Typography text="contact" variant="button" display="block" gutterTop />
+                            <Typography text="contact" variant="button" display="block" guttertop={"true"} />
                         </Grid>
                         {/* <Grid className="t-menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
                             <Typography icon="add_shopping_cart" text={
