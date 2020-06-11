@@ -25,7 +25,6 @@ import {
 } from '../../lib/constants';
 
 export default class InstantPurchase extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -217,7 +216,7 @@ export default class InstantPurchase extends Component {
                                 <Grid item xs={12}>
                                     <Box m={2}> <Divider /> </Box>
                                 </Grid>
-                                <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
+                                <Grid item xs={6}>
                                     <PersonalInformation
                                         email={personal_information.email}
                                         phone_number={personal_information.phone_number}
@@ -245,8 +244,8 @@ export default class InstantPurchase extends Component {
                                         onClick={this.patch}
                                     />
                                     <Box m={2}>
-                                        <Typography text="Order Summary" />
-                                        <Typography variant="caption" gutterBottom text="Here is what you're making a purchase." />
+                                        <Typography text="Review Order" />
+                                        <Typography variant="caption" gutterBottom text="Here is what you're about to purchase." />
                                     </Box>
                                     <OrderSummary
                                         hide_label={true}
@@ -260,12 +259,6 @@ export default class InstantPurchase extends Component {
                                         color={purchase_item.color}
                                         quantity={purchase_item.quantity}
                                         picture_links={purchase_item.picture_links}
-                                    />
-                                    <LargeBtn
-                                        name="PROCEED TO PAY YOUR ORDER"
-                                        icon="arrow_forward"
-                                        color="rgb(23, 105, 236)"
-                                        onClick={this.patch}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
