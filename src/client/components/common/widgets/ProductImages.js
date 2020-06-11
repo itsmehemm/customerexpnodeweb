@@ -1,32 +1,57 @@
-
-import React from 'react';
+import React, { Component } from 'react';
 import { Slide } from 'react-slideshow-image';
-import defaultImg from '../../../images/default-product-image.png';
+import imageloader from '../../../images/default-product-image.png';
 
-const properties = {
-    duration: 2000,
-    transitionDuration: 500,
-    infinite: true,
-    indicators: true,
-    arrows: true,
-}
+export default class ProductImages extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            images: (this.props.images || []).map(image => imageloader) || [imageloader]
+        };
+    }
 
-const ProductImages = (props) => {
-    let { images = [], style = {}, default_properties = {}, onClick = () => {} } = props;
-    if (images.length === 0)
-        images.push(defaultImg);
-    return (
-        <div style={style}>
-            <Slide {...properties} {...default_properties}>
-                {
-                    images.map((image, key) =>
-                        <div key={key}>
-                            <img onClick={onClick} src={image} style={style} />
-                        </div>
-                    )}
-            </Slide>
-        </div>
-    );
+    componentWillMount() {
+        this.state.images.forEach((image, index) => {
+            const src = this.props.images[index];
+            let actualImage = new Image();
+            actualImage.onload = () => {
+                let { images } = this.state;
+                images[index] = src;
+                this.setState({
+                    images
+                });
+            }
+            actualImage.src = src;
+        });
+    }
+
+    render() {
+        const {
+            style,
+            onClick
+        } = this.props;
+        const {
+            images
+        } = this.state;
+        return (
+            <div>
+                <Slide
+                    duration="2000"
+                    transitionDuration="500"
+                    infinite={true}
+                    indicators={false}
+                    arrows={true}>
+                    {
+                        images.map((image, key) =>
+                            <img
+                                key={key}
+                                src={image}
+                                style={style}
+                                onClick={onClick}
+                            />)
+                    }
+                </Slide>
+            </div>
+        );
+    }
 };
-
-export default ProductImages;
