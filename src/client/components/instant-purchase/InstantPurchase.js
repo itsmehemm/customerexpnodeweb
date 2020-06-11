@@ -248,7 +248,6 @@ export default class InstantPurchase extends Component {
                                         <Typography variant="caption" gutterBottom text="Here is what you're about to purchase." />
                                     </Box>
                                     <OrderSummary
-                                        hide_label={true}
                                         id={purchase_item.id}
                                         name={purchase_item.data.name}
                                         description={purchase_item.data.description}
