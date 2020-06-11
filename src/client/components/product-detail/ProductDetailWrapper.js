@@ -20,7 +20,7 @@ export default class ProductDetailWrapper extends Component {
             status: OPERATION_LOADING,
             data: null,
             error: null
-        }
+        };
     }
 
     async componentDidMount() {
