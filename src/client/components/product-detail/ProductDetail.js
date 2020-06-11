@@ -8,18 +8,15 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import SmallButtonGroup from '../common/elements/SmallButtonGroup';
 import SmallImageButtonGroup from '../common/elements/SmallImageButtonGroup';
 import Amount from '../common/elements/Amount';
-import ProductImages from './ProductImages';
 import LargeBtn from '../common/elements/LargeBtn';
 import Typography from '../common/elements/Typography';
+import ProductImages from './ProductImages';
 import InstantOrderModal from '../../modals/instant-order/InstantOrderModal';
 import ProductDetailModal from '../../modals/product-detail/ProductDetailModal';
 import { productAdvancedDetailsMapper } from '../../lib/mappers';
 import {
     createInstantOrder
 } from '../../actions';
-import {
-    addItemToCart
-} from '../../actions/cart/add-item-cart';
 
 export default class ProductDetail extends Component {
 
@@ -129,7 +126,9 @@ export default class ProductDetail extends Component {
     }
 
     render() {
-        const { data } = this.props;
+        const {
+            data
+        } = this.props;
         const {
             availableSizes,
             availableColors,
@@ -139,7 +138,6 @@ export default class ProductDetail extends Component {
             notification,
             selection
         } = this.state;
-        console.log(stockQuantity)
         return (
             <Container style={{ padding: '1em' }} maxWidth="md">
                 <Snackbar
@@ -152,21 +150,23 @@ export default class ProductDetail extends Component {
                 />
                 <Grid container>
                     <Grid item xs={6}>
-                        <Box m={0}>
-                            <ProductImages images={pictureLinks} />
-                            {/* <LargeBtn
-                                onClick={() => this.addToCart()}
-                                name="ADD TO CART"
-                                color="#2874f0"
-                                icon="add_shopping_cart" /> */}
+                        <Box m={2}>
+                            <ProductImages
+                                images={pictureLinks}
+                                style={{
+                                    height: "500px",
+                                    width: "100%"
+                                }}
+                            />
                             <LargeBtn
                                 onClick={this.instantPurchase}
                                 name="BUY NOW"
                                 color="#fb641b"
-                                icon="trending_up" />
+                                icon="trending_up"
+                            />
                         </Box>
                     </Grid>
-                    <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
+                    <Grid item xs={6}>
                         <Grid container>
                             <Grid item xs={10}>
                                 <Box m={2}>
@@ -176,7 +176,6 @@ export default class ProductDetail extends Component {
                                     <Typography
                                         text={data.description}
                                         size="subtitle1" />
-
                                 </Box>
                             </Grid>
                             <Grid item xs={2}>
@@ -184,7 +183,10 @@ export default class ProductDetail extends Component {
                                     <CopyToClipboard
                                         text={data.url}
                                         onCopy={() => this.notify('Product link copied!')}>
-                                        <Typography className="t-text-link" text="Share" size="subtitle1" />
+                                        <Typography
+                                            className="t-text-link"
+                                            text="Share"
+                                            size="subtitle1" />
                                     </CopyToClipboard>
                                 </Box>
                             </Grid>
@@ -235,7 +237,14 @@ export default class ProductDetail extends Component {
                                         buttons={availableColors}
                                         onSelect={(data) => this.update('color', data)}
                                     />
-                                    {!selection.color && <Typography text="select a color of your choice" variant="caption" style={{ color: 'rgb(189, 6, 61)' }} />}
+                                    {
+                                        !selection.color &&
+                                        <Typography
+                                            text="select a color of your choice"
+                                            variant="caption"
+                                            style={{ color: 'rgb(189, 6, 61)' }}
+                                        />
+                                    }
                                 </Grid>
                             </Box>
                         }
@@ -267,7 +276,7 @@ export default class ProductDetail extends Component {
                         {
                             data.advanced_details &&
                             <>
-                                <Box m={2}> <Typography text={"Product Details"} type="h4" /> </Box>
+                                <Box m={2}> <Typography text={"Product Details"} /> </Box>
                                 <Box m={2}>
                                     {
                                         Object.keys(data.advanced_details || []).map((i, key) =>

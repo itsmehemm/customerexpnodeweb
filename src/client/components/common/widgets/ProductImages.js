@@ -36,15 +36,14 @@ export default class ProductImages extends Component {
         return (
             <div>
                 <Slide
-                    duration="2000"
-                    transitionDuration="500"
+                    duration={2000}
+                    transitionDuration={500}
                     infinite={true}
                     indicators={false}
                     arrows={true}>
                     {
                         images.map((image, key) =>
                             <img
-                                key={key}
                                 src={image}
                                 style={style}
                                 onClick={onClick}

@@ -3,19 +3,6 @@ import React from "react";
 import defaultImg from "../../images/default-product-image.png";
 import { Slide } from 'react-slideshow-image';
 
-const properties = {
-    duration: 2000,
-    transitionDuration: 500,
-    infinite: true,
-    indicators: true,
-    arrows: true,
-    onChange: (oldIndex, newIndex) => {
-    }
-}
-
-/**
- * Given a list of product images, this component will display them as a slide show.1
- */
 const ProductImages = (props) => {
     let { images = [], style = {} } = props;
 
@@ -24,13 +11,17 @@ const ProductImages = (props) => {
 
     return (
         <div>
-            <Slide {...properties}>
+            <Slide
+                duration={2000}
+                transitionDuration={500}
+                infinite={true}
+                indicators={true}
+                arrows={true}
+            >
                 {
                     images.map((image, key) =>
-                        <div key={key} className="product-image" style={style}>
-                            <img src={image} />
-                        </div>
-                    )}
+                        <img key={key} src={image} style={style} />)
+                }
             </Slide>
         </div>
     );
