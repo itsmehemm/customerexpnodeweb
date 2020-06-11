@@ -105,7 +105,14 @@ export default class Addresses extends Component {
                         </Grid>
                         <Grid item xs={2}>
                             <Box m={2} onClick={() => this.setState({ viewer: false })}>
-                                <Typography text="Edit" size="h6" className="t-text-link" style={{ cursor: 'pointer', color: 'rgb(251, 100, 27)' }} />
+                                <Typography
+                                    text="Edit"
+                                    variant="h6"
+                                    className="t-text-link"
+                                    style={{
+                                        cursor: 'pointer',
+                                        color: 'rgb(251, 100, 27)'
+                                    }} />
                             </Box>
                         </Grid>
                     </>
@@ -131,7 +138,9 @@ export default class Addresses extends Component {
                         </Box>
                     </Grid>
                 }
-                {viewer && <ViewAddress {...this.state} />}
+
+                {viewer && <Grid item xs={12}><Box m={2}><ViewAddress {...this.state} /></Box></Grid>}
+
                 {
                     ((isShipping && !shipping_same_as_billing) || (!isShipping)) && !viewer &&
                     <>
