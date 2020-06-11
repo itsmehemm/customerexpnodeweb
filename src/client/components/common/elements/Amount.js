@@ -6,6 +6,7 @@ import {
     INSTANT_PERCENTAGE,
     INSTANT_AMOUNT
 } from '../../../lib/constants';
+import '../../../styles/amount.css';
 
 const Amount = (props) => {
     const {
