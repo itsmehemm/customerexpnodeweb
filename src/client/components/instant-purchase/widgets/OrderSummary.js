@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Typography from '../../common/elements/Typography';
-import Amount from '../../common/elements/Amount';
-import ProductImages from '../../product-detail/ProductImages';
 
 export default class OrderSummary extends Component {
 
@@ -28,16 +25,16 @@ export default class OrderSummary extends Component {
         } = this.props;
         return (
             <Grid container>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <Box m={2}>
                         <img
-                            height="100px"
-                            width="100px"
+                            height="120px"
+                            width="120px"
                             src={picture_links[0]}
                         />
                     </Box>
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item xs={9}>
                     <Box m={2}>
                         <Typography
                             className="t-text-link"
@@ -46,6 +43,11 @@ export default class OrderSummary extends Component {
                             onClick={() => window.location.href = '/product/' + id}
                         />
                         <Typography text={description} variant="body2" />
+                    </Box>
+                    <Box m={2}>
+                        <Divider />
+                    </Box>
+                    <Box m={2}>
                         <Grid container>
                             <Grid item xs={2}>
                                 <Typography text="Size" variant="body2" />
@@ -70,6 +72,11 @@ export default class OrderSummary extends Component {
                                 <Typography text={quantity} variant="body2" />
                             </Grid>
                         </Grid>
+                    </Box>
+                    <Box m={2}>
+                        <Divider />
+                    </Box>
+                    <Box m={2}>
                         <Typography
                             icon="local_shipping"
                             text={"Confirmed delivery in 4 - 7 days"}
@@ -79,7 +86,7 @@ export default class OrderSummary extends Component {
                     </Box>
                 </Grid>
                 <Grid item xs={12}>
-                    <Box m={2}> <Divider /> </Box>
+                    <Box m={0}> <Divider /> </Box>
                 </Grid>
                 <Grid item xs={12}>
                     <Box m={2}>
@@ -96,7 +103,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="Discount" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`-${discount.value}`} variant="body2" />
+                                <Typography align="right" text={`${discount.type === 'INSTANT_AMOUNT' ? amount.currency : ''}${discount.value}${discount.type === 'INSTANT_AMOUNT' ? '' : '%'}`} variant="body2" />
                             </Grid>
                         </Grid>
                         <Grid container>
@@ -120,13 +127,14 @@ export default class OrderSummary extends Component {
                     <Box m={2}>
                         <Grid container>
                             <Grid item xs={3}>
-                                <Typography text="Final Amount" variant="h6" />
+                                <Typography text="Total" variant="h6" />
                             </Grid>
                             <Grid item xs={2}>
                                 <Typography align="right" text={`${payment.currency} ${payment.subtotal}`} variant="h6" />
                             </Grid>
                         </Grid>
                     </Box>
+                    <Box m={2}> <Divider /> </Box>
                 </Grid>
             </Grid>
         );
