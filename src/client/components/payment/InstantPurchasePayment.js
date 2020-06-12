@@ -14,7 +14,10 @@ import Typography from '../common/elements/Typography';
 import ViewAddress from '../instant-purchase/widgets/ViewAddress';
 import OrderSummary from '../instant-purchase/widgets/OrderSummary';
 import { renderSmartPaymentButtons } from './paypal-sdk';
-import { getPaymentPlan } from '../../actions';
+import {
+    getPaymentPlan,
+    razorpayPayment
+} from '../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
@@ -32,6 +35,7 @@ export default class InstantPurchasePayment extends Component {
             razorpaySdkLoaded: false,
             razorpaySdkError: false,
             paymentChoice: 'razorpay',
+            notification: null,
             status: OPERATION_LOADING
         };
     }
@@ -96,10 +100,28 @@ export default class InstantPurchasePayment extends Component {
             description: tinnat.order_id,
             image: 'http://localhost:3000/tinnat-logo.png',
             order_id: razorpay.order_id,
-            handler: (response) => {
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature)
+            handler: async (response) => {
+                if (response) {
+                    await this.setState({
+                        status: OPERATION_LOADING
+                    });
+                    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
+                    const paymentResponse = await razorpayPayment({
+                        id: tinnat.order_id,
+                        payment_id: razorpay_payment_id,
+                        order_id: razorpay_order_id,
+                        signature: razorpay_signature,
+                    });
+                    await this.setState({ notification: null });
+                    if (paymentResponse && paymentResponse.message === 'PAYMENT_COMPLETED') {
+                        window.location.href = '/instant-purchase/complete/' + tinnat.order_id;
+                    }
+                } else {
+                    this.setState({
+                        status: OPERATION_LOADING_COMPLETED,
+                        notification: 'Sorry, the payment for the order failed. Please try again. If amount is deducted, we will refund you in 2-3 working days.'
+                    });
+                }
             },
             prefill: {
                 name: tinnat.order_details.billing_address.name,
@@ -114,13 +136,14 @@ export default class InstantPurchasePayment extends Component {
         document.getElementById('rzp-button1').onclick = function (e) {
             razorPay.open();
             e.preventDefault();
-        }
+        };
     }
 
     render() {
         const {
             status,
-            paymentPlan
+            paymentPlan,
+            notification
         } = this.state;
         return (
             <>
@@ -204,9 +227,19 @@ export default class InstantPurchasePayment extends Component {
                                     </Grid>
                                     <Box m={2}> <Divider /> </Box>
                                 </Grid>
+                                {
+                                    notification &&
+                                    <Grid item xs={12}>
+                                        <Box m={2}>
+                                            <Alert severity="success">
+                                                {notification}
+                                            </Alert>
+                                        </Box>
+                                    </Grid>
+                                }
                                 <Grid item xs={12}>
                                     <Grid container>
-                                        <Grid item xs={5}>
+                                        <Grid item xs={6}>
                                             <Grid container>
                                                 <Grid item xs={10}>
                                                     <Box m={2}>
@@ -229,12 +262,13 @@ export default class InstantPurchasePayment extends Component {
                                                     </Box>
                                                 </Grid>
                                             </Grid>
-                                            <ViewAddress
-                                                {...paymentPlan.tinnat.order_details.shipping_address}
-                                                forceShow={true}
-                                            />
-                                            <Box m={2}> <Divider /> </Box>
-
+                                            <Box m={2}>
+                                                <ViewAddress
+                                                    {...paymentPlan.tinnat.order_details.shipping_address}
+                                                    forceShow={true}
+                                                />
+                                            </Box>
+                                            <Box m={2}><Divider /></Box>
                                             <Grid container>
                                                 <Grid item xs={10}>
                                                     <Box m={2}>
@@ -253,16 +287,18 @@ export default class InstantPurchasePayment extends Component {
                                                     </Box>
                                                 </Grid>
                                             </Grid>
-                                            <ViewAddress
-                                                {...paymentPlan.tinnat.order_details.billing_address}
-                                                forceShow={true}
-                                            />
+                                            <Box m={2}>
+                                                <ViewAddress
+                                                    {...paymentPlan.tinnat.order_details.billing_address}
+                                                    forceShow={true}
+                                                />
+                                            </Box>
                                         </Grid>
-                                        <Grid item xs={7}>
+                                        <Grid item xs={6}>
                                             <Grid container>
                                                 <Grid item xs={12}>
                                                     <Box m={2}>
-                                                        <Typography text='Order Summary' />
+                                                        <Typography text='Confirm your order' />
                                                         <Typography variant='caption' gutterBottom text={`Here is what you're making a purchase.`} />
                                                     </Box>
                                                     <OrderSummary
