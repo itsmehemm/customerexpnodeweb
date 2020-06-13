@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import validUrl from 'valid-url';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -155,9 +156,11 @@ export default class Theme extends Component {
 
     async addPictureLink(link) {
         const { picture_links } = this.state;
-        picture_links.push(link);
-        await this.setState({ picture_links: picture_links });
-        await this.validate();
+        if (validUrl.isUri(link)) {
+            picture_links.push(link);
+            await this.setState({ picture_links: picture_links });
+            await this.validate();
+        }
     }
 
     async removePictureLink(id) {
@@ -227,15 +230,6 @@ export default class Theme extends Component {
                     <TextField
                         width={4}
                         type="text"
-                        label="Stock quantity"
-                        value={stock_quantity}
-                        error={helperTexts.stock_quantity ? true : false}
-                        helperText={helperTexts.stock_quantity}
-                        onChange={data => this.onChange("stock_quantity", data)}
-                    />
-                    <TextField
-                        width={2}
-                        type="text"
                         label="MRP"
                         value={maximum_retail_price}
                         error={helperTexts.maximum_retail_price ? true : false}
@@ -243,14 +237,14 @@ export default class Theme extends Component {
                         onChange={data => this.onAmountChange("maximum_retail_price", data)}
                     />
                     <Select
-                        width={2}
+                        width={4}
                         label="Discount Type"
                         value={discount.type}
                         onChange={data => this.onDiscountChange("type", data)}
                         options={discountTypes}
                     />
                     <TextField
-                        width={2}
+                        width={4}
                         type="number"
                         label="Discount value"
                         value={discount.value}
@@ -259,26 +253,36 @@ export default class Theme extends Component {
                         onChange={data => this.onDiscountChange("value", data)}
                     />
                     <TextField
-                        width={2}
+                        width={4}
                         type="text"
                         label="Amount Correction"
                         value={correction}
                         onChange={data => this.onCorrectionChange(data)}
                     />
                     <Select
-                        width={2}
+                        width={6}
                         label="Currency"
                         value={currency}
                         onChange={data => this.onAmountChange("currency", data)}
                         options={currencyCodes}
                     />
                     <TextField
+                        label="Final Amount"
                         disabled={true}
-                        width={2}
+                        width={6}
                         type="text"
                         value={subtotal}
                     />
-                    <Grid item xs={9}>
+                    <TextField
+                        width={12}
+                        type="text"
+                        label="Stock quantity"
+                        value={stock_quantity}
+                        error={helperTexts.stock_quantity ? true : false}
+                        helperText={helperTexts.stock_quantity}
+                        onChange={data => this.onChange("stock_quantity", data)}
+                    />
+                    <Grid item xs={11}>
                         <TextField
                             width={12}
                             type="text"
@@ -289,14 +293,15 @@ export default class Theme extends Component {
                             onChange={data => this.onChange("link", data)}
                         />
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={1}>
                         <Button
-                            fullWidth
+                            align="left"
+                            style={{ height: '57px' }}
                             size="large"
                             variant="outlined"
                             color="primary"
                             onClick={() => this.addPictureLink(this.state.link)}
-                            startIcon={<Icon>done</Icon>}> Add Picture </Button>
+                            startIcon={<Icon>done</Icon>}></Button>
                     </Grid>
                     {
                         picture_links.map((link, key) =>
@@ -322,6 +327,7 @@ export default class Theme extends Component {
                     <Grid item xs={6}>
                         <Button
                             fullWidth
+                            style={{ height: '57px' }}
                             size="large"
                             variant="outlined"
                             color="primary"
@@ -333,12 +339,13 @@ export default class Theme extends Component {
                     <Grid item xs={6}>
                         <Button
                             fullWidth
+                            style={{ height: '57px' }}
                             size="large"
                             variant="outlined"
                             color="secondary"
                             onClick={() => this.removeTheme()}
                             startIcon={<Icon>cancel</Icon>}>
-                            Delete
+                            Remove
                         </Button>
                     </Grid>
                 </Grid>

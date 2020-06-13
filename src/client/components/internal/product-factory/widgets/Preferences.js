@@ -62,64 +62,76 @@ export default class Preferences extends Component {
     render() {
         const {
             featured,
+            active,
             thirty_day_exchange,
             fifteen_day_exchange,
             payment_options,
-            helperTexts,
-            message
+            helperTexts
         } = this.state;
         return (
-            <Box m={2}>
-                <Grid container spacing={3}>
-                    <Typography variant="h6" text="4. Preferences" />
-                    <Grid item xs={3}>
-                        <MultiSelect
-                            label="Accepted Payment options"
-                            values={payment_options}
-                            onChange={data => this.onChange("payment_options", data)}
-                            error={helperTexts.payment_options ? true : false}
-                            helperText={helperTexts.payment_options}
-                            options={paymentOptions}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    color="primary"
-                                    checked={featured}
-                                    onChange={(event) => this.onChange('featured', event.target.checked)}
-                                />
-                            }
-                            label="Mark this product as featured"
-                        />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    color="primary"
-                                    checked={fifteen_day_exchange}
-                                    onChange={(event) => this.onChange('fifteen_day_exchange', event.target.checked)}
-                                />
-                            }
-                            label="15 days exchange"
-                        />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    color="primary"
-                                    checked={thirty_day_exchange}
-                                    onChange={(event) => this.onChange('thirty_day_exchange', event.target.checked)}
-                                />
-                            }
-                            label="30 days exchange"
-                        />
-                    </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <Typography variant="button" text="Preferences" />
                 </Grid>
-            </Box >
+                <Grid item xs={6}>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                color="primary"
+                                checked={featured}
+                                onChange={(event) => this.onChange('featured', event.target.checked)}
+                            />
+                        }
+                        label="Mark this product as featured"
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                color="primary"
+                                checked={active}
+                                onChange={(event) => this.onChange('active', event.target.checked)}
+                            />
+                        }
+                        label="Enable this product for sale"
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                color="primary"
+                                checked={fifteen_day_exchange}
+                                onChange={(event) => this.onChange('fifteen_day_exchange', event.target.checked)}
+                            />
+                        }
+                        label="15 days exchange"
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                color="primary"
+                                checked={thirty_day_exchange}
+                                onChange={(event) => this.onChange('thirty_day_exchange', event.target.checked)}
+                            />
+                        }
+                        label="30 days exchange"
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <MultiSelect
+                        label="Accepted Payment options"
+                        values={payment_options}
+                        onChange={data => this.onChange("payment_options", data)}
+                        error={helperTexts.payment_options ? true : false}
+                        helperText={helperTexts.payment_options}
+                        options={paymentOptions}
+                    />
+                </Grid>
+            </Grid>
         );
     }
 }

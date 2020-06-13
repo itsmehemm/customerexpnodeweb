@@ -34,77 +34,75 @@ export default class AdvancedDetails extends Component {
 
     render() {
         return (
-            <Box m={2}>
-                <Grid container spacing={3}>
-                    <Typography variant="h6" text="3. Advanced Details" />
-                    <TextField
-                        width={2}
-                        label="Type"
-                        value={this.state.type}
-                        onChange={data => this.onChange('type', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Sleeve"
-                        value={this.state.sleeve}
-                        onChange={data => this.onChange('sleeve', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Fit"
-                        value={this.state.fit}
-                        onChange={data => this.onChange('fit', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Fabric"
-                        value={this.state.fabric}
-                        onChange={data => this.onChange('fabric', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Pack Size"
-                        value={this.state.pack_size}
-                        onChange={data => this.onChange('pack_size', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Neck Type"
-                        value={this.state.neck_type}
-                        onChange={data => this.onChange('neck_type', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Ideal Gender"
-                        value={this.state.ideal_gender}
-                        onChange={data => this.onChange('ideal_gender', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Occasion"
-                        value={this.state.occasion}
-                        onChange={data => this.onChange('occasion', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Brand Color"
-                        value={this.state.brand_color}
-                        onChange={data => this.onChange('brand_color', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Fabric Care"
-                        value={this.state.fabric_care}
-                        onChange={data => this.onChange('fabric_care', data)}
-                    />
-                    <TextField
-                        width={2}
-                        label="Brand Fit"
-                        value={this.state.brand_fit}
-                        onChange={data => this.onChange('brand_fit', data)}
-                    />
-                </Grid>
-            </Box>
+            <Grid container spacing={3}>
+                <Typography variant="button" text="Advanced Details" />
+                <TextField
+                    width={3}
+                    label="Type"
+                    value={this.state.type}
+                    onChange={data => this.onChange('type', data)}
+                />
+                <TextField
+                    width={3}
+                    label="Sleeve"
+                    value={this.state.sleeve}
+                    onChange={data => this.onChange('sleeve', data)}
+                />
+                <TextField
+                    width={3}
+                    label="Fit"
+                    value={this.state.fit}
+                    onChange={data => this.onChange('fit', data)}
+                />
+                <TextField
+                    width={3}
+                    label="Fabric"
+                    value={this.state.fabric}
+                    onChange={data => this.onChange('fabric', data)}
+                />
+                <TextField
+                    width={3}
+                    label="Pack Size"
+                    value={this.state.pack_size}
+                    onChange={data => this.onChange('pack_size', data)}
+                />
+                <TextField
+                    width={3}
+                    label="Neck Type"
+                    value={this.state.neck_type}
+                    onChange={data => this.onChange('neck_type', data)}
+                />
+                <TextField
+                    width={3}
+                    label="Ideal Gender"
+                    value={this.state.ideal_gender}
+                    onChange={data => this.onChange('ideal_gender', data)}
+                />
+                <TextField
+                    width={3}
+                    label="Occasion"
+                    value={this.state.occasion}
+                    onChange={data => this.onChange('occasion', data)}
+                />
+                <TextField
+                    width={4}
+                    label="Brand Color"
+                    value={this.state.brand_color}
+                    onChange={data => this.onChange('brand_color', data)}
+                />
+                <TextField
+                    width={4}
+                    label="Fabric Care"
+                    value={this.state.fabric_care}
+                    onChange={data => this.onChange('fabric_care', data)}
+                />
+                <TextField
+                    width={4}
+                    label="Brand Fit"
+                    value={this.state.brand_fit}
+                    onChange={data => this.onChange('brand_fit', data)}
+                />
+            </Grid>
         );
     }
 };

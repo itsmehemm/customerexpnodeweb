@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -99,60 +100,106 @@ export default class ProductFactory extends Component {
     render() {
         const { notification } = this.state;
         return (
-            <>
-                <Container>
-                    <Snackbar
-                        autoHideDuration={5000}
-                        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                        open={notification ? true : false}
-                        message={notification}
-                        onClose={() => this.setState({ notification: null })}
-                        key={"topcenter"}
-                    />
-                    <Box m={2}>
-                        <Typography
-                            variant="h5"
-                            text={`${this.state.id ? 'Edit product' : 'Add product'}`}
-                            icon={`${this.state.id ? 'edit' : 'add'}`}
+            <Box m={2}>
+                <Container maxWidth={"md"}>
+                    <Card variant="outlined">
+                        <Snackbar
+                            autoHideDuration={5000}
+                            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                            open={notification ? true : false}
+                            message={notification}
+                            onClose={() => this.setState({ notification: null })}
+                            key={"topcenter"}
                         />
-                    </Box>
-                    <BasicDetails data={this.props.product} update={this.update} />
-                    <Box m={2}><Divider /></Box>
-                    <Themes data={this.props.product} update={this.update} />
-                    <Box m={2}><Divider /></Box>
-                    <AdvancedDetails data={this.props.product} update={this.update} />
-                    <Box m={2}><Divider /></Box>
-                    <Preferences data={this.props.product} update={this.update} />
-                    <div className="t-container">
-                        <Grid container spacing={3}>
-                            <Grid item xs={4}></Grid>
-                            <Grid item xs={2}>
-                                <Button
-                                    fullWidth
-                                    size="large"
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => this.state.id ? this.updateProduct() : this.addProduct()}
-                                    startIcon={<Icon>{this.state.id ? 'edit' : 'done'}</Icon>}>
-                                    {this.state.id ? 'Edit' : 'Add'}
-                                </Button>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Box m={2}>
+                                    {
+                                        !this.state.id &&
+                                        <Typography
+                                            variant="button"
+                                            text='Add a new product to sale'
+                                            icon='add'
+                                        />
+                                    }
+                                    {
+                                        this.state.id &&
+                                        <Typography
+                                            variant="h6"
+                                            text={`${this.state.id ? 'Edit product' : 'Add product'}`}
+                                            icon={`${this.state.id ? 'edit' : 'add'}`}
+                                        />
+                                    }
+
+                                </Box>
                             </Grid>
-                            <Grid item xs={2}>
-                                <Button
-                                    fullWidth
-                                    size="large"
-                                    variant="outlined"
-                                    color="secondary"
-                                    onClick={() => window.location.reload()}
-                                    startIcon={<Icon>refresh</Icon>}>
-                                    Reset
-                        </Button>
+                            <Grid item xs={12}>
+                                <Divider />
                             </Grid>
-                            <Grid item xs={4}></Grid>
+                            <Grid item xs={12}>
+                                <Box m={2}>
+                                    <BasicDetails data={this.props.product} update={this.update} />
+                                </Box>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Divider />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Box m={2}>
+                                    <Themes data={this.props.product} update={this.update} />
+                                </Box>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Divider />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Box m={2}>
+                                    <AdvancedDetails data={this.props.product} update={this.update} />
+                                </Box>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Divider />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Box m={2}>
+                                    <Preferences data={this.props.product} update={this.update} />
+                                </Box>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Divider />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box m={4}>
+                                    <Button
+                                        fullWidth
+                                        style={{ height: '57px' }}
+                                        size="large"
+                                        variant="outlined"
+                                        color="primary"
+                                        onClick={() => this.state.id ? this.updateProduct() : this.addProduct()}
+                                        startIcon={<Icon>{this.state.id ? 'edit' : 'done'}</Icon>}>
+                                        {this.state.id ? 'Edit' : 'Add'}
+                                    </Button>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box m={4}>
+                                    <Button
+                                        fullWidth
+                                        style={{ height: '57px' }}
+                                        size="large"
+                                        variant="outlined"
+                                        color="secondary"
+                                        onClick={() => window.location.reload()}
+                                        startIcon={<Icon>refresh</Icon>}>
+                                        Reset
+                                    </Button>
+                                </Box>
+                            </Grid>
                         </Grid>
-                    </div>
+                    </Card>
                 </Container>
-            </>
+            </Box >
         );
     }
 }
