@@ -101,6 +101,8 @@ export default class InstantPurchaseConfirmation extends Component {
                                             <Divider />
                                             <Box m={2}>
                                                 <Typography text="Items will be delivered to:" variant="subtitle2" />
+                                            </Box>
+                                            <Box m={2}>
                                                 <ViewAddress
                                                     {...billing_address}
                                                     forceShow={true}
