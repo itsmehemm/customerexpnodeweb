@@ -125,9 +125,9 @@ export default class ProductFactory extends Component {
                                     {
                                         this.state.id &&
                                         <Typography
-                                            variant="h6"
-                                            text={`${this.state.id ? 'Edit product' : 'Add product'}`}
-                                            icon={`${this.state.id ? 'edit' : 'add'}`}
+                                            variant="button"
+                                            text='Edit product'
+                                            icon='edit'
                                         />
                                     }
 
@@ -177,7 +177,7 @@ export default class ProductFactory extends Component {
                                         variant="outlined"
                                         color="primary"
                                         onClick={() => this.state.id ? this.updateProduct() : this.addProduct()}
-                                        startIcon={<Icon>{this.state.id ? 'edit' : 'done'}</Icon>}>
+                                        startIcon={<Icon>done</Icon>}>
                                         {this.state.id ? 'Edit' : 'Add'}
                                     </Button>
                                 </Box>

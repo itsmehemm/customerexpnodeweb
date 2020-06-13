@@ -308,7 +308,7 @@ export default class Theme extends Component {
                             <Grid key={key} item xs={12}>
                                 <Grid container>
                                     <Grid item xs={9}>
-                                        <Typography variant="subtitle1" text={link} />
+                                        <Typography className="t-text-link" variant="subtitle1" text={link} />
                                     </Grid>
                                     <Grid item xs={3}>
                                         <Typography
@@ -316,7 +316,6 @@ export default class Theme extends Component {
                                             className="t-text-link"
                                             icon="close"
                                             variant="subtitle1"
-                                            text="Remove"
                                             onClick={() => this.removePictureLink(key)}
                                         />
                                     </Grid>
