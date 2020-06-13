@@ -3,13 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Typography from '../../common/elements/Typography';
+import { currencyCodeMapper } from '../../../lib/mappers';
 
 export default class OrderSummary extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {
             id,
@@ -25,28 +21,36 @@ export default class OrderSummary extends Component {
         } = this.props;
         return (
             <Grid container>
-                <Grid item xs={3}>
+                <Grid item xs={12}>
+                    <Divider />
+                </Grid>
+                <Grid item>
                     <Box m={2}>
                         <img
-                            height="120px"
+                            height="125px"
                             width="120px"
                             src={picture_links[0]}
                         />
                     </Box>
                 </Grid>
+                <Divider orientation="vertical" flexItem />
                 <Grid item xs={9}>
-                    <Box m={2}>
-                        <Typography
-                            className="t-text-link"
-                            text={name}
-                            variant="subtitle2"
-                            onClick={() => window.location.href = '/product/' + id}
-                        />
-                        <Typography text={description} variant="body2" />
-                    </Box>
-                    <Box m={2}>
-                        <Divider />
-                    </Box>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Box m={2}>
+                                <Typography
+                                    className="t-text-link"
+                                    text={name}
+                                    variant="subtitle2"
+                                    onClick={() => window.location.href = '/product/' + id}
+                                />
+                                <Typography text={description} variant="body2" />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Divider />
+                        </Grid>
+                    </Grid>
                     <Box m={2}>
                         <Grid container>
                             <Grid item xs={2}>
@@ -73,9 +77,7 @@ export default class OrderSummary extends Component {
                             </Grid>
                         </Grid>
                     </Box>
-                    <Box m={2}>
-                        <Divider />
-                    </Box>
+                    <Divider />
                     <Box m={2}>
                         <Typography
                             icon="local_shipping"
@@ -95,7 +97,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="MRP (Inc. of all taxes)" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${amount.currency} ${amount.maximum_retail_price}`} variant="body2" />
+                                <Typography align="right" text={`${currencyCodeMapper[amount.currency]} ${amount.maximum_retail_price}`} variant="body2" />
                             </Grid>
                         </Grid>
                         <Grid container>
@@ -103,7 +105,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="Discount" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${discount.type === 'INSTANT_AMOUNT' ? amount.currency : ''}${discount.value}${discount.type === 'INSTANT_AMOUNT' ? '' : '%'}`} variant="body2" />
+                                <Typography align="right" text={`${discount.type === 'INSTANT_AMOUNT' ? currencyCodeMapper[amount.currency] : ''}${discount.value}${discount.type === 'INSTANT_AMOUNT' ? '' : '%'}`} variant="body2" />
                             </Grid>
                         </Grid>
                         <Grid container>
@@ -111,7 +113,7 @@ export default class OrderSummary extends Component {
                                 <Typography text="Sub total" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${amount.currency} ${amount.subtotal}`} variant="body2" />
+                                <Typography align="right" text={`${currencyCodeMapper[amount.currency]} ${amount.subtotal}`} variant="body2" />
                             </Grid>
                         </Grid>
                         <Grid container>
@@ -119,22 +121,22 @@ export default class OrderSummary extends Component {
                                 <Typography text="Shipping charges" variant="body2" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${amount.currency} 0`} variant="body2" />
+                                <Typography align="right" text={`${currencyCodeMapper[amount.currency]} 0`} variant="body2" />
                             </Grid>
                         </Grid>
                     </Box>
-                    <Box m={2}> <Divider /> </Box>
+                    <Divider />
                     <Box m={2}>
                         <Grid container>
                             <Grid item xs={3}>
                                 <Typography text="Total" variant="h6" />
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right" text={`${payment.currency} ${payment.subtotal}`} variant="h6" />
+                                <Typography align="right" text={`${currencyCodeMapper[payment.currency]} ${payment.subtotal}`} variant="h6" />
                             </Grid>
                         </Grid>
                     </Box>
-                    <Box m={2}> <Divider /> </Box>
+                    <Divider />
                 </Grid>
             </Grid>
         );

@@ -263,16 +263,13 @@ body {
     cursor: pointer;
     padding: 1em;
     font-size: 1.3em;
-    background: #fb641b;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
-    border: none;
     margin: 5px;
+    background: rgb(247, 36, 52);
+    border: 3px solid rgb(247, 36, 52);
     color: #fff;
 }
 
-.t-large-btn:hover {
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-}
+.t-large-btn:hover {}
 
 .t-box {
     margin: 5px;
@@ -364,7 +361,7 @@ body {
 }
 
 .t-breadcrumb-active {
-    color: #fb641b;
+    color: rgb(247, 36, 52);
 }
 
 .t-breadcrumb:hover {
