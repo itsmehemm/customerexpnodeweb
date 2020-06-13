@@ -6,6 +6,7 @@ module.exports = {
     getProductById: require('./get-product-by-id'),
     getFeaturedProducts: require('./get-featured-products'),
     getProducts: require('./get-products'),
+    getFilteredProducts: require('./get-filtered-products'),
     getProductsByCategory: require('./get-products-by-category'),
     addProductToCart: require('./cart/add-product-to-cart'),
     removeProductFromCart: require('./cart/remove-product-from-cart'),
