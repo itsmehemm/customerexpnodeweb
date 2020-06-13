@@ -43,7 +43,7 @@ const ProductThemeWidget = (props) => {
                         size="subtitle1"
                         text={description} />
                 </Box>
-                <Box m={0}>
+                <Box m={0} align="center">
                     <Amount amount={amount} />
                 </Box>
             </Box>
