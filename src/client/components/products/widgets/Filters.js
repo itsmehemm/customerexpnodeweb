@@ -109,7 +109,7 @@ export default class Filters extends Component {
                                     align="right"
                                     text="CLEAR ALL"
                                     variant="subtitle2"
-                                    className="t-text-link"
+                                    className="t-text-link-2"
                                     onClick={this.clearAll}
                                 />
                             </Box>
@@ -127,7 +127,7 @@ export default class Filters extends Component {
                             <FormControlLabel
                                 control={
                                     <Checkbox
-                                        color="primary"
+                                        style={{ color: 'rgb(247, 36, 52)' }}
                                         checked={subCategories['ALL'] === true}
                                         onChange={(e) => this.selectAllSubCategories(e.target.checked)}
                                         name="ALL"
@@ -142,7 +142,7 @@ export default class Filters extends Component {
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                color="primary"
+                                                style={{ color: 'rgb(247, 36, 52)' }}
                                                 disabled={subCategories['ALL'] === true}
                                                 checked={subCategories[categoryCode.name] === true}
                                                 onChange={(e) => this.onSubCategoryChange(categoryCode.name, e.target.checked)}
@@ -164,6 +164,7 @@ export default class Filters extends Component {
                         <Grid item xs={12} style={{ marginTop: '3em' }}>
                             <Box m={2}>
                                 <Slider
+                                    style={{ color: 'rgb(247, 36, 52)' }}
                                     value={priceRange}
                                     onChange={this.onPriceChange}
                                     valueLabelDisplay="auto"
@@ -197,7 +198,7 @@ export default class Filters extends Component {
                             <FormControlLabel
                                 control={
                                     <Checkbox
-                                        color="primary"
+                                        style={{ color: 'rgb(247, 36, 52)' }}
                                         checked={sizes['ALL'] === true}
                                         onChange={(e) => this.selectAllSizes(e.target.checked)}
                                         name="ALL"
@@ -212,7 +213,7 @@ export default class Filters extends Component {
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                color="primary"
+                                                style={{ color: 'rgb(247, 36, 52)' }}
                                                 disabled={sizes['ALL'] === true}
                                                 checked={sizes[s.name] === true}
                                                 onChange={(e) => this.onSizeChange(s.name, e.target.checked)}

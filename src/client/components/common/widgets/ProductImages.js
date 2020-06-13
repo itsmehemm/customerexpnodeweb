@@ -28,7 +28,8 @@ export default class ProductImages extends Component {
     render() {
         const {
             style,
-            onClick
+            onClick,
+            properties
         } = this.props;
         const {
             images
@@ -40,7 +41,9 @@ export default class ProductImages extends Component {
                     transitionDuration={500}
                     infinite={true}
                     indicators={false}
-                    arrows={true}>
+                    arrows={true}
+                    {...properties}
+                >
                     {
                         images.map((image, key) =>
                             <img

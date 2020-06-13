@@ -25,13 +25,18 @@ const ProductThemeWidget = (props) => {
                         marginRight: 'auto',
                         cursor: 'pointer'
                     }}
+                    properties={{
+                        infinite: false,
+                        arrows: false
+                    }}
                     onClick={onClick}
                 />
             </Box>
             <Box>
                 <Box m={0}>
                     <Typography
-                        className="t-text-link"
+                        className="t-text-link-3"
+                        variant="button"
                         align='center'
                         text={name}
                         onClick={onClick}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
@@ -148,160 +149,176 @@ export default class ProductDetail extends Component {
                     onClose={this.closeNotification}
                     message={notification.message}
                 />
-                <Grid container>
-                    <Grid item xs={6}>
-                        <Box m={2}>
-                            <ProductImages
-                                images={pictureLinks}
-                                style={{
-                                    height: "500px",
-                                    width: "100%"
-                                }}
-                            />
-                            <LargeBtn
-                                onClick={this.instantPurchase}
-                                name="BUY NOW"
-                                color="#fb641b"
-                                icon="trending_up"
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Grid container>
-                            <Grid item xs={10}>
-                                <Box m={2}>
-                                    <Typography
-                                        text={data.name}
-                                        variant="h5" />
-                                    <Typography
-                                        text={data.description}
-                                        size="subtitle1" />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={2}>
-                                <Box m={2}>
-                                    <CopyToClipboard
-                                        text={data.url}
-                                        onCopy={() => this.notify('Product link copied!')}>
-                                        <Typography
-                                            className="t-text-link"
-                                            text="Share"
-                                            size="subtitle1" />
-                                    </CopyToClipboard>
-                                </Box>
-                            </Grid>
+                <Card variant="outlined">
+                    <Grid container>
+                        <Grid item xs={6}>
+                            <Box m={2}>
+                                <ProductImages
+                                    images={pictureLinks}
+                                    style={{
+                                        height: "500px",
+                                        width: "100%"
+                                    }}
+                                />
+                                <LargeBtn
+                                    onClick={this.instantPurchase}
+                                    name="BUY NOW"
+                                    color="rgb(247, 36, 52)"
+                                    icon="trending_up"
+                                />
+                            </Box>
                         </Grid>
-                        {
-                            amount &&
-                            <>
-                                <Box m={2}>
-                                    <Amount amount={amount} />
-                                </Box>
-                                <Box m={2}> <Divider /> </Box>
-                            </>
-                        }
-                        <Box m={2}>
-                            <Typography
-                                text={"Size"}
-                                variant="button"
-                            />
-                        </Box>
-                        {
-                            availableSizes &&
-                            availableSizes.length > 0 &&
-                            <Box m={2}>
-                                <Grid item xs={12}>
-                                    <SmallButtonGroup
-                                        defaultButton={data.default_size}
-                                        buttons={availableSizes}
-                                        onSelect={(data) => this.update('size', data)}
-                                    />
+                        <Grid item>
+                            <Divider orientation="vertical" />
+                        </Grid>
+                        <Grid item>
+                            <Grid container>
+                                <Grid item xs={9}>
+                                    <Box m={2}>
+                                        <Typography
+                                            text={data.name}
+                                            variant="h5" />
+                                        <Typography
+                                            text={data.description}
+                                            size="body2" />
+                                    </Box>
                                 </Grid>
-                            </Box>
-                        }
-                        <Box m={2}> <Divider /> </Box>
-                        <Box m={2}>
-                            <Typography
-                                text={"Color"}
-                                variant="button"
-                            />
-                        </Box>
-                        {
-                            availableColors &&
-                            availableColors.length > 0 &&
-                            <Box m={2}>
-                                <Grid item xs={12}>
-                                    <SmallImageButtonGroup
-                                        name="color"
-                                        size={selection.size}
-                                        buttons={availableColors}
-                                        onSelect={(data) => this.update('color', data)}
-                                    />
-                                    {
-                                        !selection.color &&
-                                        <Typography
-                                            text="select a color of your choice"
-                                            variant="caption"
-                                            style={{ color: 'rgb(189, 6, 61)' }}
-                                        />
-                                    }
+                                <Grid item xs={3}>
+                                    <Box m={2}>
+                                        <CopyToClipboard
+                                            text={data.url}
+                                            onCopy={() => this.notify('Product link copied!')}>
+                                            <Typography
+                                                icon="share"
+                                                className="t-text-link-2"
+                                                text="Share"
+                                                variant="button" />
+                                        </CopyToClipboard>
+                                    </Box>
                                 </Grid>
+                                <Grid item xs={12}>
+                                    <Divider />
+                                </Grid>
+                            </Grid>
+                            <Grid container>
+                                {
+                                    amount &&
+                                    <>
+                                        <Grid item xs={12}>
+                                            <Box m={2}>
+                                                <Amount amount={amount} />
+                                            </Box>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Divider />
+                                        </Grid>
+                                    </>
+                                }
+                            </Grid>
+                            <Box m={2}>
+                                <Typography
+                                    text={"Size"}
+                                    variant="button"
+                                />
                             </Box>
-                        }
-                        <Box m={2}> <Divider /> </Box>
-                        {
-                            stockQuantity !== null && stockQuantity !== undefined &&
-                            <>
+                            {
+                                availableSizes &&
+                                availableSizes.length > 0 &&
                                 <Box m={2}>
-                                    {
-                                        (stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) &&
-                                        <Typography
-                                            text="IN STOCK"
-                                            icon="done"
-                                            variant="h6"
-                                            style={{ color: 'rgb(5, 153, 54)' }}
+                                    <Grid item xs={12}>
+                                        <SmallButtonGroup
+                                            defaultButton={data.default_size}
+                                            buttons={availableSizes}
+                                            onSelect={(data) => this.update('size', data)}
                                         />
-                                        ||
-                                        <Typography
-                                            text="OUT OF STOCK"
-                                            icon="cancel"
-                                            variant="h6"
-                                            style={{ color: 'rgb(189, 6, 61)' }}
-                                        />
-                                    }
+                                    </Grid>
                                 </Box>
-                                <Box m={2}> <Divider /> </Box>
-                            </>
-                        }
-                        {
-                            data.advanced_details &&
-                            <>
-                                <Box m={2}> <Typography text={"Product Details"} /> </Box>
-                                <Box m={2}>
-                                    {
-                                        Object.keys(data.advanced_details || []).map((i, key) =>
-                                            data.advanced_details[i] &&
-                                            <Grid container key={key} spacing={2}>
-                                                <Grid item xs={6}>
-                                                    <Typography
-                                                        text={productAdvancedDetailsMapper[i]}
-                                                        size="button" />
+                            }
+                            <Divider />
+                            <Box m={2}>
+                                <Typography
+                                    text={"Color"}
+                                    variant="button"
+                                />
+                            </Box>
+                            {
+                                availableColors &&
+                                availableColors.length > 0 &&
+                                <>
+                                    <Box m={2}>
+                                        <Grid item xs={12}>
+                                            <SmallImageButtonGroup
+                                                name="color"
+                                                size={selection.size}
+                                                buttons={availableColors}
+                                                onSelect={(data) => this.update('color', data)}
+                                            />
+                                            {
+                                                !selection.color &&
+                                                <Typography
+                                                    text="select a color of your choice"
+                                                    variant="caption"
+                                                    style={{ color: 'rgb(189, 6, 61)' }}
+                                                />
+                                            }
+                                        </Grid>
+                                    </Box>
+                                    <Divider />
+                                </>
+                            }
+                            {
+                                stockQuantity !== null && stockQuantity !== undefined &&
+                                <>
+                                    <Box m={2}>
+                                        {
+                                            (stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) &&
+                                            <Typography
+                                                text="IN STOCK"
+                                                icon="done"
+                                                variant="button"
+                                                style={{ color: 'rgb(5, 153, 54)' }}
+                                            />
+                                            ||
+                                            <Typography
+                                                text="OUT OF STOCK"
+                                                icon="cancel"
+                                                variant="button"
+                                                style={{ color: 'rgb(189, 6, 61)' }}
+                                            />
+                                        }
+                                    </Box>
+                                    <Divider />
+                                </>
+                            }
+                            {
+                                data.advanced_details &&
+                                <>
+                                    <Box m={2}> <Typography variant="button" text={"Product Details"} /> </Box>
+                                    <Box m={2}>
+                                        {
+                                            Object.keys(data.advanced_details || []).map((i, key) =>
+                                                data.advanced_details[i] &&
+                                                <Grid container key={key} spacing={2}>
+                                                    <Grid item xs={6}>
+                                                        <Typography
+                                                            text={productAdvancedDetailsMapper[i]}
+                                                            size="overline" />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <Typography
+                                                            text={data.advanced_details[i]}
+                                                            size="subtitle2" />
+                                                    </Grid>
                                                 </Grid>
-                                                <Grid item xs={6}>
-                                                    <Typography
-                                                        text={data.advanced_details[i]}
-                                                        size="subtitle1" />
-                                                </Grid>
-                                            </Grid>
-                                        )
-                                    }
-                                </Box>
-                                <Box m={2}> <Divider /> </Box>
-                            </>
-                        }
+                                            )
+                                        }
+                                    </Box>
+                                </>
+                            }
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Container >
+                </Card>
+            </Container>
         );
     }
 }
