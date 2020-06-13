@@ -1,9 +1,16 @@
 [
     {
+        "name": "DOCTOR_DESIGN",
         "label": "Doctor's Design",
         "value": "DOCTOR_DESIGN"
     },
     {
+        "name": "DOCTORS_T_SHIRT",
+        "label": "Doctor's Design",
+        "value": "DOCTORS_T_SHIRT"
+    },
+    {
+        "name": "OTHERS",
         "label": "Others",
         "value": "OTHERS"
     }
