@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Script from 'react-load-script'
 import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -25,7 +26,6 @@ import {
 } from '../../lib/constants';
 
 export default class InstantPurchasePayment extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -149,83 +149,87 @@ export default class InstantPurchasePayment extends Component {
             <>
                 <Header />
                 <Container style={{ padding: '1em' }} maxWidth='lg'>
-                    {status === OPERATION_LOADING && <ComponentLoader />}
-                    {status === OPERATION_LOADING_ERROR && <div> ORDER NOT FOUND </div>}
-                    {status === OPERATION_LOADING_COMPLETED &&
-                        <>
+                    <Card variant="outlined">
+                        {status === OPERATION_LOADING && <ComponentLoader />}
+                        {status === OPERATION_LOADING_ERROR && <div> ORDER NOT FOUND </div>}
+                        {status === OPERATION_LOADING_COMPLETED &&
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <Grid container>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb-inactive'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text='Instant Purchase' />
-                                            </Box>
+                                    <Box m={2}>
+                                        <Grid container>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb-inactive'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text='Instant Purchase' />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        variant='button'
+                                                        gutterBottom
+                                                        icon='arrow_forward_ios'
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
+                                                        onClick={() => window.location.href = '/product/' + paymentPlan.tinnat.order_details.purchase_items[0].id}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        variant='button'
+                                                        gutterBottom
+                                                        icon='arrow_forward_ios'
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text='REVIEW ORDER'
+                                                        onClick={() => window.location.href = '/instant-purchase/' + paymentPlan.tinnat.order_id}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        icon='arrow_forward_ios'
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb-active'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text='PLACE YOUR ORDER AND PAY' />
+                                                </Box>
+                                            </Grid>
                                         </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    variant='button'
-                                                    gutterBottom
-                                                    icon='arrow_forward_ios'
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
-                                                    onClick={() => window.location.href = '/product/' + paymentPlan.tinnat.order_details.purchase_items[0].id}
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    variant='button'
-                                                    gutterBottom
-                                                    icon='arrow_forward_ios'
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text='REVIEW ORDER'
-                                                    onClick={() => window.location.href = '/instant-purchase/' + paymentPlan.tinnat.order_id}
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    icon='arrow_forward_ios'
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb-active'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text='PLACE YOUR ORDER AND PAY' />
-                                            </Box>
-                                        </Grid>
-                                    </Grid>
-                                    <Box m={2}> <Divider /> </Box>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Divider />
                                 </Grid>
                                 {
                                     notification &&
@@ -239,7 +243,7 @@ export default class InstantPurchasePayment extends Component {
                                 }
                                 <Grid item xs={12}>
                                     <Grid container>
-                                        <Grid item xs={6}>
+                                        <Grid item>
                                             <Grid container>
                                                 <Grid item xs={10}>
                                                     <Box m={2}>
@@ -253,7 +257,7 @@ export default class InstantPurchasePayment extends Component {
                                                 <Grid item xs={2}>
                                                     <Box m={2}>
                                                         <Typography
-                                                            className='t-text-link'
+                                                            className='t-text-link-2'
                                                             variant='button'
                                                             text='EDIT'
                                                             gutterBottom
@@ -268,7 +272,7 @@ export default class InstantPurchasePayment extends Component {
                                                     forceShow={true}
                                                 />
                                             </Box>
-                                            <Box m={2}><Divider /></Box>
+                                            <Divider />
                                             <Grid container>
                                                 <Grid item xs={10}>
                                                     <Box m={2}>
@@ -278,7 +282,7 @@ export default class InstantPurchasePayment extends Component {
                                                 <Grid item xs={2}>
                                                     <Box m={2}>
                                                         <Typography
-                                                            className='t-text-link'
+                                                            className='t-text-link-2'
                                                             variant='button'
                                                             text='EDIT'
                                                             gutterBottom
@@ -294,8 +298,9 @@ export default class InstantPurchasePayment extends Component {
                                                 />
                                             </Box>
                                         </Grid>
-                                        <Grid item xs={6}>
-                                            <Grid container>
+                                        <Divider orientation="vertical" flexItem />
+                                        <Grid item xs={8} >
+                                            <Grid container alignItems="right">
                                                 <Grid item xs={12}>
                                                     <Box m={2}>
                                                         <Typography text='Confirm your order' />
@@ -333,7 +338,7 @@ export default class InstantPurchasePayment extends Component {
                                                                             text='Pay securely by Credit or Debit card or Internet Banking through Razorpay.'
                                                                             variant='caption'
                                                                         />
-                                                                        <button className='paynow-btn' id='rzp-button1'>Pay Now</button>
+                                                                        <button className='paynow-btn' id='rzp-button1'>PAY NOW</button>
                                                                         <Script
                                                                             url='https://checkout.razorpay.com/v1/checkout.js'
                                                                             onCreate={this.handleRazorpaySdkInit.bind(this)}
@@ -368,8 +373,8 @@ export default class InstantPurchasePayment extends Component {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </>
-                    }
+                        }
+                    </Card>
                 </Container>
             </>
         );
