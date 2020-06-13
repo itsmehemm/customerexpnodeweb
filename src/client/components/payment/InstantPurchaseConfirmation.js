@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Alert from '@material-ui/lab/Alert';
@@ -56,28 +57,28 @@ export default class InstantPurchaseConfirmation extends Component {
         return (
             <>
                 <Header />
-                <Container>
+                <Container style={{ padding: '1em' }} maxWidth="lg">
                     {
                         status === OPERATION_LOADING_COMPLETED &&
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <Box m={2}>
-                                    <Alert severity="success">
-                                        Thank you, {billing_address && billing_address.name} <br></br>
-                                    Your order (Order ID: {id}) has been placed successfully.
-                                </Alert>
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Grid container>
-                                    <Grid item xs={7}>
-                                        <Box m={2}>
-                                            <Typography text={`Order Summary`} />
-                                        </Box>
-                                        <Box m={2}>
-                                            <Divider />
-                                        </Box>
-                                        <Box m={2}>
+                        <Card variant="outlined">
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Box m={2}>
+                                        <Alert severity="success">
+                                            Thank you, {billing_address && billing_address.name} <br></br>
+                                            Your order (Order ID: {id}) has been placed successfully.
+                                        </Alert>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Divider />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Grid container>
+                                        <Grid item>
+                                            <Box m={2}>
+                                                <Typography text={`Order Summary`} />
+                                            </Box>
                                             <OrderSummary
                                                 id={id}
                                                 name={purchase_items[0].data.name}
@@ -90,33 +91,30 @@ export default class InstantPurchaseConfirmation extends Component {
                                                 quantity={purchase_items[0].quantity}
                                                 picture_links={purchase_items[0].picture_links}
                                             />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <Box m={2}>
-                                            <Typography text={`Your Order ID: ${id}`} />
-                                            <Typography text="Placed on Tue, 9 Jan, 2020" variant="caption" />
-                                        </Box>
-                                        <Box m={2}>
+                                        </Grid>
+                                        <Divider orientation="vertical" flexItem />
+                                        <Grid item xs={5}>
+                                            <Box m={2}>
+                                                <Typography text={`Your Order ID: ${id}`} />
+                                                <Typography text="Placed on Tue, 9 Jan, 2020" variant="caption" />
+                                            </Box>
                                             <Divider />
-                                        </Box>
-                                        <Box m={2}>
-                                            <Typography text="Items will be delivered to:" variant="subtitle2" />
-                                            <ViewAddress
-                                                {...billing_address}
-                                                forceShow={true}
-                                            />
-                                        </Box>
-                                        <Box m={2}>
+                                            <Box m={2}>
+                                                <Typography text="Items will be delivered to:" variant="subtitle2" />
+                                                <ViewAddress
+                                                    {...billing_address}
+                                                    forceShow={true}
+                                                />
+                                            </Box>
                                             <Divider />
-                                        </Box>
-                                        <Box m={2}>
-                                            <Typography text={`Check your email at ${personal_information && personal_information.email} for further information.`} variant="subtitle2" />
-                                        </Box>
+                                            <Box m={2}>
+                                                <Typography text={`Check your email at ${personal_information && personal_information.email} for further information.`} variant="subtitle2" />
+                                            </Box>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Card>
                     }
                     {status === OPERATION_LOADING && <ComponentLoader />}
                 </Container>
