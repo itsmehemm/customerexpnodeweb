@@ -54,7 +54,7 @@ export default class Header extends Component {
         return (
             <Container
                 style={{
-                    backgroundImage: 'linear-gradient(100deg, rgb(51, 128, 253), rgb(23, 105, 236))'
+                    backgroundImage: 'linear-gradient(100deg, rgb(247, 36, 52), rgb(247, 36, 52))'
                 }}
                 maxWidth={false}>
                 <Container maxWidth={"xl"}>

@@ -240,7 +240,7 @@ export default class InstantPurchase extends Component {
                                     <LargeBtn
                                         name="PROCEED TO PAY YOUR ORDER"
                                         icon="arrow_forward"
-                                        color="rgb(23, 105, 236)"
+                                        color="rgb(247, 36, 52)"
                                         onClick={this.patch}
                                     />
                                     <Box m={2}>
@@ -265,7 +265,7 @@ export default class InstantPurchase extends Component {
                                         <LargeBtn
                                             name="PROCEED TO PAY YOUR ORDER"
                                             icon="arrow_forward"
-                                            color="rgb(23, 105, 236)"
+                                            color="rgb(247, 36, 52)"
                                             onClick={this.patch} />
                                     </Box>
                                 </Grid>

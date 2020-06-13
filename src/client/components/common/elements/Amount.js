@@ -20,7 +20,7 @@ const Amount = (props) => {
         currency
     } = amount;
     return (
-        <div>
+        <div style={{ textAlign: 'center' }}>
             <span className="final-amount-text"> {currencyCodeMapper[currency]}{subtotal} </span>
             {subtotal !== maximum_retail_price && <span className="original-amount-text">{currencyCodeMapper[currency]}{maximum_retail_price}</span>}
             {

@@ -129,7 +129,7 @@ export default class InstantPurchasePayment extends Component {
                 contact: tinnat.order_details.personal_information.phone_number,
             },
             theme: {
-                color: 'rgb(40, 116, 240)'
+                color: 'rgb(247, 36, 52)'
             }
         };
         var razorPay = new Razorpay(options);

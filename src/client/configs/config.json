@@ -8,6 +8,9 @@
             "v1_get_featured_products": {
                 "uri": "http://tinnat.com/api/products/featured?limit=6"
             },
+            "v1_post_filtered_products": {
+                "uri": "http://tinnat.com/api/products/filters"
+            },
             "v1_post_add_product": {
                 "uri": "http://tinnat.com/api/product/add"
             },
@@ -50,6 +53,9 @@
             },
             "v1_get_featured_products": {
                 "uri": "http://localhost.paypal.com:2002/api/products/featured?limit=6"
+            },
+            "v1_post_filtered_products": {
+                "uri": "http://localhost.paypal.com:2002/api/products/filter"
             },
             "v1_post_add_product": {
                 "uri": "http://localhost.paypal.com:2002/api/product/add"
