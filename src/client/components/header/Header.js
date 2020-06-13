@@ -64,7 +64,7 @@ export default class Header extends Component {
                         justify="center"
                         container>
                         <Grid style={{ cursor: 'pointer' }} onClick={() => window.location = '/'} item xs={1}>
-                            <img src={logo} alt="Tinnat" height="45px" width="80px" />
+                            <img src={logo} alt="Tinnat" height="80px" width="120px" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/'} item xs={1}>
                             <Typography text="home" variant="button" display="block" guttertop={"true"} />

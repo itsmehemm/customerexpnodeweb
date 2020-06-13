@@ -25,7 +25,7 @@ export default class SecondaryHeader extends Component {
                         justify="center"
                         container>
                         <Grid className="logo" onClick={() => window.location = '/'} item xs={1}>
-                            <img src={logo} height="45px" width="80px" />
+                            <img src={logo} height="80px" width="120px" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/products'} item xs={1}>
                             <Typography variant="button" display="block" guttertop="true" text="Products" />
