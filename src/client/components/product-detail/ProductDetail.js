@@ -140,7 +140,7 @@ export default class ProductDetail extends Component {
             selection
         } = this.state;
         return (
-            <Container style={{ padding: '1em' }} maxWidth="md">
+            <Container style={{ padding: '1em' }} maxWidth="lg">
                 <Snackbar
                     autoHideDuration={3000}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -151,7 +151,7 @@ export default class ProductDetail extends Component {
                 />
                 <Card variant="outlined">
                     <Grid container>
-                        <Grid item xs={6}>
+                        <Grid item xs={5}>
                             <Box m={2}>
                                 <ProductImages
                                     images={pictureLinks}
@@ -168,10 +168,8 @@ export default class ProductDetail extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item>
-                            <Divider orientation="vertical" />
-                        </Grid>
-                        <Grid item>
+                        <Divider orientation="vertical" flexItem />
+                        <Grid item xs={6}>
                             <Grid container>
                                 <Grid item xs={9}>
                                     <Box m={2}>
