@@ -47,6 +47,7 @@ export default class ProductImages extends Component {
                     {
                         images.map((image, key) =>
                             <img
+                                key={key}
                                 src={image}
                                 style={style}
                                 onClick={onClick}
