@@ -4,6 +4,7 @@ import ComponentLoader from '../common/loaders/ComponentLoader';
 import WebInternalServerError from '../common/errors/WebInternalServerError';
 import Component404 from '../common/errors/Component404';
 import ProductDetail from './ProductDetail';
+import RecentProducts from '../recent-products/RecentProducts';
 import getProductById from '../../actions/get-product-by-id';
 import {
     OPERATION_LOADING,
@@ -54,7 +55,11 @@ export default class ProductDetailWrapper extends Component {
                 <Header />
                 {status === OPERATION_LOADING && <ComponentLoader />}
                 {status === OPERATION_LOADING_ERROR && <Component404 error={error} />}
-                {status === OPERATION_LOADING_COMPLETED && <ProductDetail data={data} />}
+                {status === OPERATION_LOADING_COMPLETED &&
+                    <>
+                        <ProductDetail data={data} />
+                        <RecentProducts />
+                    </>}
                 {status === PAGE_LOADING_FAILED && <WebInternalServerError />}
             </>
         );
