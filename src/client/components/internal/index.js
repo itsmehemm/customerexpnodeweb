@@ -14,7 +14,6 @@ export default class Internal extends Component {
                 <Route exact path="/internal/warehouse/product/add" component={ProductFactoryWrapper} />
                 <Route exact path="/internal/warehouse/product/edit/:productid" component={ProductFactoryWrapper} />
                 <Route exact path="/internal/warehouse/product/view/:productid/" component={ProductDetailWrapper} />
-                <Footer />
             </Router >
         );
     }
