@@ -17,6 +17,10 @@ const ProductWidget = (props) => {
             <Box m={1}>
                 <ProductImages
                     images={themes[0].picture_links}
+                    properties={{
+                        arrows: false,
+                        infinite: false
+                    }}
                     style={{
                         width: '300px',
                         height: '300px',
@@ -37,10 +41,10 @@ const ProductWidget = (props) => {
                     />
                 </Box>
                 <Box m={0}>
-                    <Typography 
-                    align='center' 
-                    size="subtitle1" 
-                    text={description} />
+                    <Typography
+                        align='center'
+                        size="subtitle1"
+                        text={description} />
                 </Box>
                 <Box m={0}>
                     <Amount amount={themes[0].amount} />

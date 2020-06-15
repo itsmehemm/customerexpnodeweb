@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './components/home/Home';
+import Footer from './components/common/Footer';
 import About from './components/about/About';
 import Products from './components/products/Products';
 import Help from './components/common/Help';
@@ -31,6 +32,7 @@ export default class Tinnat extends Component {
                 <Route exact path="/instant-purchase/complete/:orderid" component={InstantPurchaseConfirmation} />
                 <Route exact path="/instant-purchase/:orderid" component={InstantPurchase} />
                 <Route path="/internal" component={Internal} />
+                <Footer />
             </Router >
         );
     }
