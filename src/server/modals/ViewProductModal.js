@@ -44,6 +44,7 @@ class ViewProductModal {
             themes: d.themes,
             default_theme_id: d.default_theme_id,
             featured: d.featured,
+            active: d.active,
             thirty_day_exchange: d.thirty_day_exchange,
             fifteen_day_exchange: d.fifteen_day_exchange,
             payment_options: d.payment_options,

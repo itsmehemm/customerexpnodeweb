@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
 import Box from '@material-ui/core/Box';
@@ -25,7 +26,6 @@ import {
 } from '../../lib/constants';
 
 export default class InstantPurchase extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -138,148 +138,146 @@ export default class InstantPurchase extends Component {
                     message={notification.message}
                 />
                 <Container style={{ padding: '1em' }} maxWidth="lg">
-                    <Grid container>
-                        {status === OPERATION_LOADING && <ComponentLoader />}
-                        {status === OPERATION_LOADING_ERROR && <div>Invalid order</div>}
-                        {status === OPERATION_LOADING_COMPLETED &&
-                            <>
-                                <Grid item xs={12}>
-                                    <Grid container>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className="t-breadcrumb-inactive"
-                                                    variant="button"
-                                                    gutterBottom
-                                                    text="Instant Purchase" />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    variant="button"
-                                                    gutterBottom
-                                                    icon="arrow_forward_ios"
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className="t-breadcrumb"
-                                                    variant="button"
-                                                    gutterBottom
-                                                    text={purchase_item.data.name}
-                                                    onClick={() => window.location.href = '/product/' + purchase_item.id}
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    variant="button"
-                                                    gutterBottom
-                                                    icon="arrow_forward_ios"
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className="t-breadcrumb-active"
-                                                    variant="button"
-                                                    gutterBottom
-                                                    text="REVIEW ORDER"
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className="t-breadcrumb"
-                                                    variant="button"
-                                                    gutterBottom
-                                                    icon="arrow_forward_ios"
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className="t-breadcrumb-inactive"
-                                                    variant="button"
-                                                    gutterBottom
-                                                    text="PROCEED TO PAY YOUR ORDER" />
-                                            </Box>
-                                        </Grid>
+                    <Card variant="outlined">
+                        <Grid container>
+                            {status === OPERATION_LOADING && <ComponentLoader />}
+                            {status === OPERATION_LOADING_ERROR && <div>Invalid order</div>}
+                            {status === OPERATION_LOADING_COMPLETED &&
+                                <>
+                                    <Grid item xs={12}>
+                                        <Box m={2}>
+                                            <Grid container>
+                                                <Grid item>
+                                                    <Box m={1}>
+                                                        <Typography
+                                                            className="t-breadcrumb-inactive"
+                                                            variant="button"
+                                                            gutterBottom
+                                                            text="Instant Purchase" />
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Box m={1}>
+                                                        <Typography
+                                                            variant="button"
+                                                            gutterBottom
+                                                            icon="arrow_forward_ios"
+                                                        />
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Box m={1}>
+                                                        <Typography
+                                                            className="t-breadcrumb"
+                                                            variant="button"
+                                                            gutterBottom
+                                                            text={purchase_item.data.name}
+                                                            onClick={() => window.location.href = '/product/' + purchase_item.id}
+                                                        />
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Box m={1}>
+                                                        <Typography
+                                                            variant="button"
+                                                            gutterBottom
+                                                            icon="arrow_forward_ios"
+                                                        />
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Box m={1}>
+                                                        <Typography
+                                                            className="t-breadcrumb-active"
+                                                            variant="button"
+                                                            gutterBottom
+                                                            text="REVIEW ORDER"
+                                                        />
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Box m={1}>
+                                                        <Typography
+                                                            variant="button"
+                                                            gutterBottom
+                                                            icon="arrow_forward_ios"
+                                                        />
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Box m={1}>
+                                                        <Typography
+                                                            className="t-breadcrumb-inactive"
+                                                            variant="button"
+                                                            gutterBottom
+                                                            text="PROCEED TO PAY YOUR ORDER" />
+                                                    </Box>
+                                                </Grid>
+                                            </Grid>
+                                        </Box>
                                     </Grid>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Box m={2}> <Divider /> </Box>
-                                </Grid>
-                                <Grid style={{ height: "700px", overflow: 'auto' }} item xs={6}>
-                                    <PersonalInformation
-                                        email={personal_information.email}
-                                        phone_number={personal_information.phone_number}
-                                        update={this.update}
-                                    />
-                                    <Address
-                                        label="2. Billing Address"
-                                        {...billing_address}
-                                        update={((data) => this.update('billing_address', data))}
-                                    />
-                                    {
+                                    <Grid item xs={12}>
+                                        <Divider />
+                                    </Grid>
+                                    <Grid item xs={5}>
+                                        <PersonalInformation
+                                            email={personal_information.email}
+                                            phone_number={personal_information.phone_number}
+                                            update={this.update}
+                                        />
+                                        <Divider />
+                                        <Address
+                                            label="2. Billing Address"
+                                            {...billing_address}
+                                            update={((data) => this.update('billing_address', data))}
+                                        />
+                                        <Divider />
                                         <Address
                                             label="3. Shipping Address"
                                             {...shipping_address}
                                             isShipping={true}
                                             update={((data) => this.update('shipping_address', data))}
                                         />
-                                    }
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <LargeBtn
-                                        name="PROCEED TO PAY YOUR ORDER"
-                                        icon="arrow_forward"
-                                        color="rgb(23, 105, 236)"
-                                        onClick={this.patch}
-                                    />
-                                    <Box m={2}>
-                                        <Typography text="Order Summary" />
-                                        <Typography variant="caption" gutterBottom text="Here is what you're making a purchase." />
-                                    </Box>
-                                    <OrderSummary
-                                        hide_label={true}
-                                        id={purchase_item.id}
-                                        name={purchase_item.data.name}
-                                        description={purchase_item.data.description}
-                                        payment={amount}
-                                        amount={purchase_item.amount}
-                                        discount={purchase_item.amount.discount}
-                                        size={purchase_item.size}
-                                        color={purchase_item.color}
-                                        quantity={purchase_item.quantity}
-                                        picture_links={purchase_item.picture_links}
-                                    />
-                                    <LargeBtn
-                                        name="PROCEED TO PAY YOUR ORDER"
-                                        icon="arrow_forward"
-                                        color="rgb(23, 105, 236)"
-                                        onClick={this.patch}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Box m={2}>
-                                        <LargeBtn
-                                            name="PROCEED TO PAY YOUR ORDER"
-                                            icon="arrow_forward"
-                                            color="rgb(23, 105, 236)"
-                                            onClick={this.patch} />
-                                    </Box>
-                                </Grid>
-                            </>
-                        }
-                    </Grid>
+                                        <Box m={2}>
+                                            <LargeBtn
+                                                name="PROCEED TO PAY YOUR ORDER"
+                                                icon="arrow_forward"
+                                                color="rgb(247, 36, 52)"
+                                                onClick={this.patch} />
+                                        </Box>
+                                    </Grid>
+                                    <Grid item>
+                                        <Divider orientation="vertical" />
+                                    </Grid>
+                                    <Grid item>
+                                        <Box m={2}>
+                                            <LargeBtn
+                                                name="PROCEED TO PAY YOUR ORDER"
+                                                icon="arrow_forward"
+                                                onClick={this.patch}
+                                            />
+                                        </Box>
+                                        <Box m={2}>
+                                            <Typography text="Review Order" />
+                                            <Typography variant="caption" gutterBottom text="Here is what you're about to purchase." />
+                                        </Box>
+                                        <OrderSummary
+                                            id={purchase_item.id}
+                                            name={purchase_item.data.name}
+                                            description={purchase_item.data.description}
+                                            payment={amount}
+                                            amount={purchase_item.amount}
+                                            discount={purchase_item.amount.discount}
+                                            size={purchase_item.size}
+                                            color={purchase_item.color}
+                                            quantity={purchase_item.quantity}
+                                            picture_links={purchase_item.picture_links}
+                                        />
+                                    </Grid>
+                                </>
+                            }
+                        </Grid>
+                    </Card>
                 </Container>
             </>
         );

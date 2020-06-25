@@ -44,6 +44,7 @@ class EditProductModal {
             default_color: d.default_color,
             themes: d.themes,
             featured: d.featured,
+            active: d && d.active,
             thirty_day_exchange: d.thirty_day_exchange,
             fifteen_day_exchange: d.fifteen_day_exchange,
             payment_options: d.payment_options,
@@ -83,7 +84,8 @@ class EditProductModal {
             color: d && d.color,
             picture_links: this.getPictureLinks(d && d.picture_links),
             amount: this.getAmount(d && d.amount),
-            stock_quantity: d && d.stock_quantity
+            stock_quantity: d && d.stock_quantity,
+            active: d && d.active,
         };
     }
 
@@ -124,7 +126,8 @@ class EditProductModal {
             default_size: d.default_size || o.default_size,
             default_color: d.default_color || o.default_color,
             themes: this.updateThemes(o, d),
-            featured: d.featured || o.featured,
+            featured: (d.featured !== undefined || d.featured !== null) ? d.featured : o.featured,
+            active: (d.active !== undefined || d.active !== null) ? d.active : o.active,
             thirty_day_exchange: d.thirty_day_exchange || o.thirty_day_exchange,
             fifteen_day_exchange: d.fifteen_day_exchange || o.fifteen_day_exchange,
             payment_options: d.payment_options || o.payment_options,

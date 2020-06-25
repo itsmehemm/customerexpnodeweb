@@ -17,10 +17,11 @@ const Amount = (props) => {
         maximum_retail_price,
         discount,
         subtotal,
-        currency
+        currency,
+        style
     } = amount;
     return (
-        <div>
+        <>
             <span className="final-amount-text"> {currencyCodeMapper[currency]}{subtotal} </span>
             {subtotal !== maximum_retail_price && <span className="original-amount-text">{currencyCodeMapper[currency]}{maximum_retail_price}</span>}
             {
@@ -30,7 +31,7 @@ const Amount = (props) => {
                     {discount.type === INSTANT_PERCENTAGE && ` ${discount.value}% off`}
                 </span>
             }
-        </div>
+        </>
     );
 };
 

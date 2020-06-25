@@ -1,22 +1,27 @@
 [
     {
         "label": "S",
-        "value": "S"
+        "value": "S",
+        "name": "S"
     },
     {
         "label": "M",
-        "value": "M"
+        "value": "M",
+        "name": "M"
     },
     {
         "label": "L",
-        "value": "L"
+        "value": "L",
+        "name": "L"
     },
     {
         "label": "XL",
-        "value": "XL"
+        "value": "XL",
+        "name": "XL"
     },
     {
         "label": "XXL",
-        "value": "XXL"
+        "value": "XXL",
+        "name": "XXL"
     }
 ]

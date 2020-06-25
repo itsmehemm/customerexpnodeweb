@@ -89,63 +89,61 @@ export default class BasicDetails extends Component {
     render() {
         const { helperTexts } = this.state;
         return (
-            <Box m={2}>
-                <Grid container spacing={3}>
-                    <Typography variant="h6" text="1. Basic Details" />
-                    <TextField
-                        required={true}
-                        width={3}
-                        label="Product Name"
-                        value={this.state.name}
-                        error={helperTexts.name.type === 'ERROR'}
-                        helperText={helperTexts.name.text}
-                        onChange={data => this.onChange('name', data)}
-                    />
-                    <TextField
-                        width={3}
-                        label="Product Description"
-                        value={this.state.description}
-                        onChange={data => this.onChange('description', data)}
-                    />
-                    <TextField
-                        required={true}
-                        width={3}
-                        label="Product Code"
-                        value={this.state.product_code}
-                        error={helperTexts.product_code.type === 'ERROR'}
-                        helperText={helperTexts.product_code.text}
-                        onChange={data => this.onChange('product_code', data)}
-                    />
-                    <Select
-                        width={3}
-                        label="Category Code"
-                        value={this.state.category_code}
-                        onChange={data => this.onChange("category_code", data)}
-                        options={CategoryCodes}
-                    />
-                    <Select
-                        width={3}
-                        label="Sub Category Code"
-                        value={this.state.sub_category_code}
-                        onChange={data => this.onChange("sub_category_code", data)}
-                        options={SubCategoryCodes}
-                    />
-                    <Select
-                        width={3}
-                        label="Default Size"
-                        value={this.state.default_size}
-                        onChange={data => this.onChange("default_size", data)}
-                        options={availableSizes}
-                    />
-                    <Select
-                        width={3}
-                        label="Default Color"
-                        value={this.state.default_color}
-                        onChange={data => this.onChange("default_color", data)}
-                        options={availableColors}
-                    />
-                </Grid>
-            </Box>
+            <Grid container spacing={3}>
+                <Typography variant="button" text="Basic Details" />
+                <TextField
+                    required={true}
+                    width={6}
+                    label="Product Name"
+                    value={this.state.name}
+                    error={helperTexts.name.type === 'ERROR'}
+                    helperText={helperTexts.name.text}
+                    onChange={data => this.onChange('name', data)}
+                />
+                <TextField
+                    width={6}
+                    label="Product Description"
+                    value={this.state.description}
+                    onChange={data => this.onChange('description', data)}
+                />
+                <TextField
+                    required={true}
+                    width={4}
+                    label="Product Code"
+                    value={this.state.product_code}
+                    error={helperTexts.product_code.type === 'ERROR'}
+                    helperText={helperTexts.product_code.text}
+                    onChange={data => this.onChange('product_code', data)}
+                />
+                <Select
+                    width={4}
+                    label="Category Code"
+                    value={this.state.category_code}
+                    onChange={data => this.onChange("category_code", data)}
+                    options={CategoryCodes}
+                />
+                <Select
+                    width={4}
+                    label="Sub Category Code"
+                    value={this.state.sub_category_code}
+                    onChange={data => this.onChange("sub_category_code", data)}
+                    options={SubCategoryCodes}
+                />
+                <Select
+                    width={6}
+                    label="Default Size"
+                    value={this.state.default_size}
+                    onChange={data => this.onChange("default_size", data)}
+                    options={availableSizes}
+                />
+                <Select
+                    width={6}
+                    label="Default Color"
+                    value={this.state.default_color}
+                    onChange={data => this.onChange("default_color", data)}
+                    options={availableColors}
+                />
+            </Grid>
         );
     }
 };

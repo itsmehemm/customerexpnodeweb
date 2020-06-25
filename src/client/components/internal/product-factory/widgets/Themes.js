@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import uniqid from 'uniqid';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
@@ -90,35 +89,31 @@ export default class Themes extends Component {
         return (
             themes && <Grid container>
                 <Grid item xs={12}>
-                    <Box m={2}>
-                        <Typography text="2. Themes" variant="h6" />
-                        <Typography text={`${valid} theme(s) added`} variant="subtitle1" />
-                    </Box>
+                    <Typography text="Themes" variant="button" />
+                    <Typography text={`${valid} theme(s) added`} variant="caption" />
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid container>
-                        {
-                            themes.map((theme, key) =>
-                                <Grid key={key} item xs={12}>
-                                    <Box m={2}>
-                                        <Theme
-                                            data={theme}
-                                            update={(data) => this.update(key, data)}
-                                            remove={() => this.remove(key)}
-                                        />
-                                    </Box>
-                                    <Box m={2}>
-                                        <Divider />
-                                    </Box>
+                    {
+                        themes.map((theme, key) =>
+                            <Grid key={key} container>
+                                <Grid item xs={12}>
+                                    <Theme
+                                        data={theme}
+                                        update={(data) => this.update(key, data)}
+                                        remove={() => this.remove(key)}
+                                    />
                                 </Grid>
-                            )
-                        }
-                    </Grid>
+                                <Grid item xs={12}>
+                                    <Divider light />
+                                </Grid>
+                            </Grid>
+                        )
+                    }
                 </Grid>
                 <Grid item xs={12}>
-                    <Box m={2}>
+                    <Box m={4}>
                         <Typography
-                            align="right"
+                            align="center"
                             variant="subtitle1"
                             className="t-text-link"
                             text="Add another theme"
@@ -127,7 +122,7 @@ export default class Themes extends Component {
                         />
                     </Box>
                 </Grid>
-            </Grid> || <div></div>
+            </Grid> || <></>
         );
     }
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Script from 'react-load-script'
 import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -14,7 +15,10 @@ import Typography from '../common/elements/Typography';
 import ViewAddress from '../instant-purchase/widgets/ViewAddress';
 import OrderSummary from '../instant-purchase/widgets/OrderSummary';
 import { renderSmartPaymentButtons } from './paypal-sdk';
-import { getPaymentPlan } from '../../actions';
+import {
+    getPaymentPlan,
+    razorpayPayment
+} from '../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
@@ -22,7 +26,6 @@ import {
 } from '../../lib/constants';
 
 export default class InstantPurchasePayment extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -32,6 +35,7 @@ export default class InstantPurchasePayment extends Component {
             razorpaySdkLoaded: false,
             razorpaySdkError: false,
             paymentChoice: 'razorpay',
+            notification: null,
             status: OPERATION_LOADING
         };
     }
@@ -96,10 +100,28 @@ export default class InstantPurchasePayment extends Component {
             description: tinnat.order_id,
             image: 'http://localhost:3000/tinnat-logo.png',
             order_id: razorpay.order_id,
-            handler: (response) => {
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature)
+            handler: async (response) => {
+                if (response) {
+                    await this.setState({
+                        status: OPERATION_LOADING
+                    });
+                    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
+                    const paymentResponse = await razorpayPayment({
+                        id: tinnat.order_id,
+                        payment_id: razorpay_payment_id,
+                        order_id: razorpay_order_id,
+                        signature: razorpay_signature,
+                    });
+                    await this.setState({ notification: null });
+                    if (paymentResponse && paymentResponse.message === 'PAYMENT_COMPLETED') {
+                        window.location.href = '/instant-purchase/complete/' + tinnat.order_id;
+                    }
+                } else {
+                    this.setState({
+                        status: OPERATION_LOADING_COMPLETED,
+                        notification: 'Sorry, the payment for the order failed. Please try again. If amount is deducted, we will refund you in 2-3 working days.'
+                    });
+                }
             },
             prefill: {
                 name: tinnat.order_details.billing_address.name,
@@ -107,106 +129,121 @@ export default class InstantPurchasePayment extends Component {
                 contact: tinnat.order_details.personal_information.phone_number,
             },
             theme: {
-                color: 'rgb(40, 116, 240)'
+                color: 'rgb(247, 36, 52)'
             }
         };
         var razorPay = new Razorpay(options);
         document.getElementById('rzp-button1').onclick = function (e) {
             razorPay.open();
             e.preventDefault();
-        }
+        };
     }
 
     render() {
         const {
             status,
-            paymentPlan
+            paymentPlan,
+            notification
         } = this.state;
         return (
             <>
                 <Header />
                 <Container style={{ padding: '1em' }} maxWidth='lg'>
-                    {status === OPERATION_LOADING && <ComponentLoader />}
-                    {status === OPERATION_LOADING_ERROR && <div> ORDER NOT FOUND </div>}
-                    {status === OPERATION_LOADING_COMPLETED &&
-                        <>
+                    <Card variant="outlined">
+                        {status === OPERATION_LOADING && <ComponentLoader />}
+                        {status === OPERATION_LOADING_ERROR && <div> ORDER NOT FOUND </div>}
+                        {status === OPERATION_LOADING_COMPLETED &&
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <Grid container>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb-inactive'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text='Instant Purchase' />
-                                            </Box>
+                                    <Box m={2}>
+                                        <Grid container>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb-inactive'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text='Instant Purchase' />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        variant='button'
+                                                        gutterBottom
+                                                        icon='arrow_forward_ios'
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
+                                                        onClick={() => window.location.href = '/product/' + paymentPlan.tinnat.order_details.purchase_items[0].id}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        variant='button'
+                                                        gutterBottom
+                                                        icon='arrow_forward_ios'
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text='REVIEW ORDER'
+                                                        onClick={() => window.location.href = '/instant-purchase/' + paymentPlan.tinnat.order_id}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        icon='arrow_forward_ios'
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                            <Grid item>
+                                                <Box m={1}>
+                                                    <Typography
+                                                        className='t-breadcrumb-active'
+                                                        variant='button'
+                                                        gutterBottom
+                                                        text='PLACE YOUR ORDER AND PAY' />
+                                                </Box>
+                                            </Grid>
                                         </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    variant='button'
-                                                    gutterBottom
-                                                    icon='arrow_forward_ios'
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text={paymentPlan.tinnat.order_details.purchase_items[0].data.name}
-                                                    onClick={() => window.location.href = '/product/' + paymentPlan.tinnat.order_details.purchase_items[0].id}
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    variant='button'
-                                                    gutterBottom
-                                                    icon='arrow_forward_ios'
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text='REVIEW ORDER'
-                                                    onClick={() => window.location.href = '/instant-purchase/' + paymentPlan.tinnat.order_id}
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    icon='arrow_forward_ios'
-                                                />
-                                            </Box>
-                                        </Grid>
-                                        <Grid item>
-                                            <Box m={1}>
-                                                <Typography
-                                                    className='t-breadcrumb-active'
-                                                    variant='button'
-                                                    gutterBottom
-                                                    text='PLACE YOUR ORDER AND PAY' />
-                                            </Box>
-                                        </Grid>
-                                    </Grid>
-                                    <Box m={2}> <Divider /> </Box>
+                                    </Box>
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <Divider />
+                                </Grid>
+                                {
+                                    notification &&
+                                    <Grid item xs={12}>
+                                        <Box m={2}>
+                                            <Alert severity="success">
+                                                {notification}
+                                            </Alert>
+                                        </Box>
+                                    </Grid>
+                                }
+                                <Grid item xs={12}>
                                     <Grid container>
-                                        <Grid item xs={5}>
+                                        <Grid item>
                                             <Grid container>
                                                 <Grid item xs={10}>
                                                     <Box m={2}>
@@ -220,7 +257,7 @@ export default class InstantPurchasePayment extends Component {
                                                 <Grid item xs={2}>
                                                     <Box m={2}>
                                                         <Typography
-                                                            className='t-text-link'
+                                                            className='t-text-link-2'
                                                             variant='button'
                                                             text='EDIT'
                                                             gutterBottom
@@ -229,12 +266,13 @@ export default class InstantPurchasePayment extends Component {
                                                     </Box>
                                                 </Grid>
                                             </Grid>
-                                            <ViewAddress
-                                                {...paymentPlan.tinnat.order_details.shipping_address}
-                                                forceShow={true}
-                                            />
-                                            <Box m={2}> <Divider /> </Box>
-
+                                            <Box m={2}>
+                                                <ViewAddress
+                                                    {...paymentPlan.tinnat.order_details.shipping_address}
+                                                    forceShow={true}
+                                                />
+                                            </Box>
+                                            <Divider />
                                             <Grid container>
                                                 <Grid item xs={10}>
                                                     <Box m={2}>
@@ -244,7 +282,7 @@ export default class InstantPurchasePayment extends Component {
                                                 <Grid item xs={2}>
                                                     <Box m={2}>
                                                         <Typography
-                                                            className='t-text-link'
+                                                            className='t-text-link-2'
                                                             variant='button'
                                                             text='EDIT'
                                                             gutterBottom
@@ -253,16 +291,19 @@ export default class InstantPurchasePayment extends Component {
                                                     </Box>
                                                 </Grid>
                                             </Grid>
-                                            <ViewAddress
-                                                {...paymentPlan.tinnat.order_details.billing_address}
-                                                forceShow={true}
-                                            />
+                                            <Box m={2}>
+                                                <ViewAddress
+                                                    {...paymentPlan.tinnat.order_details.billing_address}
+                                                    forceShow={true}
+                                                />
+                                            </Box>
                                         </Grid>
-                                        <Grid item xs={7}>
-                                            <Grid container>
+                                        <Divider orientation="vertical" flexItem />
+                                        <Grid item xs={8} >
+                                            <Grid container alignItems="right">
                                                 <Grid item xs={12}>
                                                     <Box m={2}>
-                                                        <Typography text='Order Summary' />
+                                                        <Typography text='Confirm your order' />
                                                         <Typography variant='caption' gutterBottom text={`Here is what you're making a purchase.`} />
                                                     </Box>
                                                     <OrderSummary
@@ -297,7 +338,7 @@ export default class InstantPurchasePayment extends Component {
                                                                             text='Pay securely by Credit or Debit card or Internet Banking through Razorpay.'
                                                                             variant='caption'
                                                                         />
-                                                                        <button className='paynow-btn' id='rzp-button1'>Pay Now</button>
+                                                                        <button className='paynow-btn' id='rzp-button1'>PAY NOW</button>
                                                                         <Script
                                                                             url='https://checkout.razorpay.com/v1/checkout.js'
                                                                             onCreate={this.handleRazorpaySdkInit.bind(this)}
@@ -332,8 +373,8 @@ export default class InstantPurchasePayment extends Component {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </>
-                    }
+                        }
+                    </Card>
                 </Container>
             </>
         );

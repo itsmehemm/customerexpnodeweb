@@ -7,6 +7,7 @@ const {
     getFeaturedProducts,
     getProductsByCategory,
     getProducts,
+    getFilteredProducts,
     addProductToCart,
     editProductInCart,
     removeProductFromCart,
@@ -23,6 +24,8 @@ const app = express();
 app.get('/products', getProducts);
 
 app.get('/products/featured', getFeaturedProducts);
+
+app.post('/products/filter', getFilteredProducts);
 
 app.get('/products/category/:category_code', getProductsByCategory);
 

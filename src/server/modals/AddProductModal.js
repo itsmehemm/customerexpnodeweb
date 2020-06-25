@@ -65,7 +65,8 @@ class AddProductModal {
             color: d && d.color,
             picture_links: this.getPictureLinks(d && d.picture_links),
             amount: this.getAmount(d && d.amount),
-            stock_quantity: d && d.stock_quantity
+            stock_quantity: d && d.stock_quantity,
+            active: d && d.active,
         };
     }
 
@@ -102,6 +103,7 @@ class AddProductModal {
             default_color: d && d.default_color,
             themes: this.getThemes(d),
             featured: d && d.featured,
+            active: d && d.active,
             thirty_day_exchange: d && d.thirty_day_exchange,
             fifteen_day_exchange: d && d.fifteen_day_exchange,
             payment_options: this.getPaymentOptions(d && d.payment_options),

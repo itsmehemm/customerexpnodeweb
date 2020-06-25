@@ -13,7 +13,7 @@ import {
     OPERATION_LOADING_ERROR
 } from '../../lib/constants';
 
-export default class FeaturedProducts extends Component {
+export default class TrendingProducts extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ export default class FeaturedProducts extends Component {
                         <Grid container>
                             <Grid item xs={12}>
                                 <Box m={2}>
-                                    <Typography variant="h6" text="Featured Products" />
+                                    <Typography variant="h6" text="Trending Products" />
                                 </Box>
                             </Grid>
                             <Grid item xs={12}>
@@ -64,7 +64,7 @@ export default class FeaturedProducts extends Component {
                                     <Grid container align="center" spacing={2}>
                                         {
                                             status === OPERATION_LOADING &&
-                                            <div> Loading featured products... </div>
+                                            <div> Loading trending products... </div>
                                         }
                                         {
                                             status === OPERATION_LOADING_COMPLETED &&
@@ -78,7 +78,7 @@ export default class FeaturedProducts extends Component {
                                         {
                                             status === OPERATION_LOADING_COMPLETED &&
                                             products.length === 0 &&
-                                            <div> There are no featured products </div>
+                                            <div> There are no trending products </div>
                                         }
                                     </Grid>
                                 </Box>

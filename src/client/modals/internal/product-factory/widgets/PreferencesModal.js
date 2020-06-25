@@ -9,9 +9,10 @@ export default class PreferencesModal {
     getDefaultData = () => {
         return {
             featured: false,
+            active: true,
             thirty_day_exchange: false,
             fifteen_day_exchange: false,
-            payment_options: [],
+            payment_options: ['CREDIT_OR_DEBIT_CARDS'],
         };
     }
 
@@ -19,6 +20,7 @@ export default class PreferencesModal {
         let data = this.getDefaultData();
         if (this.rawdata) {
             data.featured = this.rawdata.featured;
+            data.active = this.rawdata.active;
             data.thirty_day_exchange = this.rawdata.thirty_day_exchange;
             data.fifteen_day_exchange = this.rawdata.fifteen_day_exchange;
             data.payment_options = this.rawdata.payment_options;
@@ -29,6 +31,7 @@ export default class PreferencesModal {
     updateData(d) {
         let data = {};
         data.featured = d.featured;
+        data.active = d.active;
         data.thirty_day_exchange = d.thirty_day_exchange;
         data.fifteen_day_exchange = d.fifteen_day_exchange;
         data.payment_options = d.payment_options;
@@ -38,6 +41,7 @@ export default class PreferencesModal {
     updateDataFromState(state) {
         let data = {};
         data.featured = state.featured;
+        data.active = state.active;
         data.thirty_day_exchange = state.thirty_day_exchange;
         data.fifteen_day_exchange = state.fifteen_day_exchange;
         data.payment_options = state.payment_options;

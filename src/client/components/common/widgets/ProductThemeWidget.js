@@ -5,28 +5,29 @@ import Amount from '../elements/Amount';
 import Typography from '../elements/Typography';
 import ProductImages from './ProductImages';
 
-const ProductWidget = (props) => {
+const ProductThemeWidget = (props) => {
     const {
         name,
         description,
         onClick,
-        themes
+        amount,
+        picture_links
     } = props;
     return (
         <Card variant="outlined">
             <Box m={1}>
                 <ProductImages
-                    images={themes[0].picture_links}
-                    properties={{
-                        arrows: false,
-                        infinite: false
-                    }}
+                    images={picture_links}
                     style={{
-                        width: '300px',
-                        height: '300px',
+                        width: '100%',
+                        height: '100%',
                         marginLeft: 'auto',
                         marginRight: 'auto',
                         cursor: 'pointer'
+                    }}
+                    properties={{
+                        infinite: false,
+                        arrows: false
                     }}
                     onClick={onClick}
                 />
@@ -34,7 +35,8 @@ const ProductWidget = (props) => {
             <Box>
                 <Box m={0}>
                     <Typography
-                        className="t-text-link"
+                        className="t-text-link-3"
+                        variant="button"
                         align='center'
                         text={name}
                         onClick={onClick}
@@ -46,12 +48,12 @@ const ProductWidget = (props) => {
                         size="subtitle1"
                         text={description} />
                 </Box>
-                <Box m={0}>
-                    <Amount amount={themes[0].amount} />
+                <Box m={0} align="center">
+                    <Amount amount={amount} />
                 </Box>
             </Box>
         </Card>
     );
 };
 
-export default ProductWidget;
+export default ProductThemeWidget;

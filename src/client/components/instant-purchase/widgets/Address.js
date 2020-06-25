@@ -2,9 +2,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
 import TextField from '../../common/elements/TextField';
-import LargeBtn from '../../common/elements/LargeBtn';
 import Typography from '../../common/elements/Typography';
 import AddressModal from '../../../modals/instant-order/widgets/AddressModal';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -105,7 +103,11 @@ export default class Addresses extends Component {
                         </Grid>
                         <Grid item xs={2}>
                             <Box m={2} onClick={() => this.setState({ viewer: false })}>
-                                <Typography text="Edit" size="h6" className="t-text-link" style={{ cursor: 'pointer', color: 'rgb(251, 100, 27)' }} />
+                                <Typography
+                                    text="Edit"
+                                    variant="button"
+                                    className="t-text-link-2"
+                                />
                             </Box>
                         </Grid>
                     </>
@@ -131,7 +133,9 @@ export default class Addresses extends Component {
                         </Box>
                     </Grid>
                 }
-                {viewer && <ViewAddress {...this.state} />}
+
+                {viewer && <Grid item xs={12}><Box m={2}><ViewAddress {...this.state} /></Box></Grid>}
+
                 {
                     ((isShipping && !shipping_same_as_billing) || (!isShipping)) && !viewer &&
                     <>
@@ -216,10 +220,12 @@ export default class Addresses extends Component {
                         </Grid>
                         <Grid item xs={12}>
                             <Box m={2}>
-                                <LargeBtn
-                                    name="CONFIRM ADDRESS"
+                                <Typography
+                                    align="center"
+                                    variant="body1"
+                                    className="t-text-link"
                                     icon="check"
-                                    color="#fb641b"
+                                    text="Confirm Address"
                                     onClick={this.confirm}
                                 />
                             </Box>
