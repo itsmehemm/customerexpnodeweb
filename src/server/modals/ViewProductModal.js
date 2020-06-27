@@ -1,13 +1,47 @@
 const mongoClient = require('../mongo/mongodb');
 const { COLLECTION, KEY } = require('../lib/constants/mongo-constants');
+const {
+    constructProductLink,
+    getDefaultThemeObj,
+    getFormattedProductInfo
+} = require('../lib/utils');
 
 class ViewProductModal {
     constructor() {
         this.data = null;
     }
 
-    async getProduct(id) {
-        if (!id) return;
+    buildWithProduct(product) {
+        if (product) {
+            let data = {};
+            data.id = product.id;
+            data.name = product.name;
+            data.description = product.description;
+            data.product_code = product.product_code;
+            data.category_code = product.category_code;
+            data.sub_category_code = product.sub_category_code;
+            data.default_theme = getDefaultThemeObj(product);
+            data.themes = product.themes;
+            data.advanced_details = product.advanced_details;
+            data.featured = product.featured;
+            data.active = product.active;
+            data.fifteen_day_exchange = product.fifteen_day_exchange;
+            data.thirty_day_exchange = product.thirty_day_exchange;
+            data.payment_options = product.payment_options;
+            data.url = constructProductLink(product.id);
+            data.formatted = getFormattedProductInfo(product);
+            this.setData(data);
+        } else {
+            console.log('[ERROR]', 'ViewProductModal::buildWithProduct', `product not found`);
+            this.setData(null);
+        }
+    }
+
+    async build(id) {
+        if (!id) {
+            console.log('[ERROR]', 'ViewProductModal::build', `no id received`);
+            return;
+        };
         const product = await new Promise((resolve) => {
             mongoClient.connection(db => {
                 db.
@@ -25,32 +59,16 @@ class ViewProductModal {
                     .catch(() => resolve(null))
             })
         });
-        this.setData(product);
+        if (product) {
+            this.buildWithProduct(product);
+        } else {
+            console.log('[ERROR]', 'ViewProductModal::build', `product not found with id=${id}`);
+            this.setData(null);
+        }
         return;
     }
 
-    setData(d) {
-        if (!d) return;
-        this.data = {
-            id: d.id,
-            url: d.url,
-            name: d.name,
-            description: d.description,
-            product_code: d.product_code,
-            category_code: d.category_code,
-            sub_category_code: d.sub_category_code,
-            default_size: d.default_size,
-            default_color: d.default_color,
-            themes: d.themes,
-            default_theme_id: d.default_theme_id,
-            featured: d.featured,
-            active: d.active,
-            thirty_day_exchange: d.thirty_day_exchange,
-            fifteen_day_exchange: d.fifteen_day_exchange,
-            payment_options: d.payment_options,
-            advanced_details: d.advanced_details
-        }
-    }
+    setData(d) { this.data = d }
 
     getData() { return this.data }
 };

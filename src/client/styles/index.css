@@ -269,7 +269,9 @@ body {
     color: #fff;
 }
 
-.t-large-btn:hover {}
+.t-large-btn-disabled {
+    cursor: not-allowed;
+}
 
 .t-box {
     margin: 5px;
@@ -383,4 +385,18 @@ body {
 
 .paynow-btn:hover {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.t-color-pallette {
+    height: 20px;
+    width: 20px;
+    border-radius: 100px;
+}
+
+.t-extend-hr {
+    width: 110% !important;
+}
+
+.t-extend-hr-2 {
+    width: 119% !important;
 }

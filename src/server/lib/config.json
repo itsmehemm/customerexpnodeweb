@@ -7,10 +7,18 @@
     "tinnat": {
         "development": {
             "url": {
-                "v1_get_product_by_id": "http://localhost.paypal.com:2002/product/${productid}"
+                "v1_get_product_by_id": "http://localhost:2002/product/${productid}"
             },
             "api": {
-                "base_url": "http://localhost.paypal.com:2002/api"
+                "base_url": "http://localhost:2002/api"
+            }
+        },
+        "hemm": {
+            "url": {
+                "v1_get_product_by_id": "http://192.168.0.8:2002/product/${productid}"
+            },
+            "api": {
+                "base_url": "http://192.168.0.8:2002/api"
             }
         },
         "production": {

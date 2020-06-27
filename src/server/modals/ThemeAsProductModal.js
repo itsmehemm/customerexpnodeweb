@@ -1,3 +1,5 @@
+const { constructProductLink } = require('../lib/utils');
+
 class ThemeAsProductModal {
     constructor(product) {
         this.product = product;
@@ -19,7 +21,6 @@ class ThemeAsProductModal {
         themes.forEach(theme => {
             let data = {};
             data.id = this.product.id;
-            data.url = this.product.url;
             data.name = this.product.name;
             data.description = this.product.description;
             data.product_code = this.product.product_code;
@@ -32,12 +33,13 @@ class ThemeAsProductModal {
             data.picture_links = theme.picture_links;
             data.amount = theme.amount;
             data.stock_quantity = theme.stock_quantity;
+            data.advanced_details = this.product.advanced_details;
             data.featured = this.product.featured;
             data.active = this.product.active && theme.active;
-            data.thirty_day_exchange = this.product.thirty_day_exchange;
             data.fifteen_day_exchange = this.product.fifteen_day_exchange;
+            data.thirty_day_exchange = this.product.thirty_day_exchange;
             data.payment_options = this.product.payment_options;
-            data.advanced_details = this.product.advanced_details;
+            data.url = constructProductLink(this.product.id);
             themeproducts.push(data);
         });
 

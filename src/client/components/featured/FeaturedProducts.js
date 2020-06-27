@@ -5,19 +5,17 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-import ProductWidget from '../common/widgets/ProductWidget';
-import ComponentLoader from '../common/loaders/ComponentLoader';
 import Typography from '../common/elements/Typography';
-import {
-    getRecentlyViewedProducts,
-    getProductById
-} from '../../actions';
+import ComponentLoader from '../common/loaders/ComponentLoader';
+import ProductWidget from '../common/widgets/ProductWidget';
+import { getFeaturedProducts } from '../../actions';
 import {
     OPERATION_LOADING,
-    OPERATION_LOADING_COMPLETED
+    OPERATION_LOADING_COMPLETED,
+    OPERATION_LOADING_ERROR
 } from '../../lib/constants';
 
-export default class RecentProducts extends Component {
+export default class FeaturedProducts extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,34 +25,44 @@ export default class RecentProducts extends Component {
     }
 
     async componentDidMount() {
-        const recentProducts = getRecentlyViewedProducts();
-        const productids = Object.keys(recentProducts);
-        const products = [];
-        for (let i = 0; i < productids.length; i++) {
-            const product = await getProductById(productids[i]);
-            products.push(product);
+        try {
+            const products = await getFeaturedProducts();
+            if (Array.isArray(products)) {
+                await this.setState({
+                    products: products,
+                    status: OPERATION_LOADING_COMPLETED
+                });
+            } else {
+                await this.setState({
+                    products: [],
+                    status: OPERATION_LOADING_ERROR
+                });
+            }
+        } catch (error) {
+            await this.setState({
+                products: [],
+                status: OPERATION_LOADING_ERROR
+            });
         }
-        await this.setState({ products, status: OPERATION_LOADING_COMPLETED });
     }
 
     render() {
-        const {
-            status,
-            products
-        } = this.state;
-        console.log(status)
-        console.log(products)
+        const { status, products } = this.state;
         return (
-            <Container maxWidth="xl">
-                {status === OPERATION_LOADING && <ComponentLoader />}
-                {status === OPERATION_LOADING_COMPLETED &&
-                    products.length > 0 &&
+            <Container maxWidth={"xl"}>
+                {
+                    status === OPERATION_LOADING &&
+                    <ComponentLoader />
+                }
+                {
+                    status === OPERATION_LOADING_COMPLETED &&
+                    Array.isArray(products) && products.length > 0 &&
                     <Box m={2}>
                         <Card variant="outlined">
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Typography variant="h6" text="Recently Viewed" />
+                                        <Typography variant="h6" text="Featured Products" />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -84,4 +92,4 @@ export default class RecentProducts extends Component {
             </Container>
         );
     }
-}
+};
