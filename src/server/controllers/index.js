@@ -1,5 +1,6 @@
 module.exports = {
     apiAuthenticator: require('./api-authenticator'),
+    createSessionWithFacebook: require('./create-session-with-facebook'),
     addProduct: require('./add-product'),
     editProductById: require('./edit-product-by-id'),
     removeProductById: require('./remove-product-id'),
