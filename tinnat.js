@@ -7,8 +7,8 @@ const HTTPS_PORT = process.env.HTTPS_PORT || 2003;
 app.listen(PORT, () => { console.log(`TINNAT WEBAPP & API RUNNING ON PORT ${PORT}`) });
 
 https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert')
+    key: fs.readFileSync('tinnat.key'),
+    cert: fs.readFileSync('tinnat.cert'),
 }, app)
     .listen(HTTPS_PORT, function () {
         console.log(`TINNAT HTTPS WEBAPP & API RUNNING ON PORT ${HTTPS_PORT}`)
