@@ -32,7 +32,7 @@ export default class ProductDetailModal {
     getAvailableSizes(themes) {
         let availableSizes = new Set();
         themes.forEach(theme => availableSizes.add(theme.size));
-        return [...availableSizes];
+        return Array.from(availableSizes);
     }
 
     getAvailableColors(themes, size) {
@@ -49,7 +49,7 @@ export default class ProductDetailModal {
     }
 
     getStockQuantity(themes, size, color) {
-        let stockQuantity;
+        let stockQuantity = null;
         themes.forEach(theme => {
             if (theme.size === size && theme.color === color) {
                 stockQuantity = theme.stock_quantity;
@@ -95,19 +95,19 @@ export default class ProductDetailModal {
         });
         return themeId;
     }
-    
+
     update(data) {
-        const { themes } = data;
+        const { default_theme, themes, formatted } = data;
         this.data = {
             id: data.id,
-            availableSizes: this.getAvailableSizes(themes),
-            availableColors: this.getAvailableColors(themes, data.default_size),
-            amount: this.getAmount(themes, data.default_size, data.default_color),
+            availableSizes: formatted.available_sizes,
+            availableColors: this.getAvailableColors(themes, default_theme.size),
+            amount: default_theme.amount,
             stockQuantity: null,
-            pictureLinks: this.getPictureLinks(themes, data.default_size, data.default_color),
+            pictureLinks: this.getPictureLinks(themes, default_theme.size),
             selection: {
-                themeId: this.getThemeId(themes, data.default_size, data.default_color),
-                size: data.default_size,
+                themeId: data.default_theme.id,
+                size: default_theme.size,
                 color: null,
                 quantity: 1
             },
