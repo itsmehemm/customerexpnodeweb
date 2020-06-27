@@ -6,10 +6,10 @@
   "scripts": {
     "create:cert": "openssl req -nodes -new -x509 -keyout tinnat.key -out tinnat.cert",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "react-scripts start eslint-disable-next-line",
+    "start": "HTTPS=true react-scripts start eslint-disable-next-line",
     "build": "react-scripts build eslint-disable-next-line",
-    "start:server:prod": "node tinnat.js --env=production",
-    "start:server:dev": "node tinnat.js --env=development"
+    "start:server:prod": "HTTPS=true node tinnat.js --env=production",
+    "start:server:dev": "HTTPS=true node tinnat.js --env=development"
   },
   "repository": {
     "type": "git",
