@@ -1,2 +1,2 @@
 # customerexpnodeweb
-Buyer's home page for tinnat.com
+Buyer's experience for tinnat.com
