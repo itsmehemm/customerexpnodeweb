@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '../common/elements/Typography';
+import LoginDialog from '../login/LoginDialog';
 import { getCart } from '../../actions/cart/get-cart';
 import {
     OPERATION_LOADING,
@@ -12,13 +13,45 @@ import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
 
 export default class Header extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             status: OPERATION_LOADING,
+            login: false,
             cart: []
         }
+        this.fbAtttributes = {
+            "data-size": "medium",
+            "data-button-type": "continue_with",
+            "data-layout": "rounded",
+            "data-auto-logout-link": "true",
+            "data-use-continue-as": "true",
+            "data-width": "",
+            "data-scope": "public_profile,email",
+            "data-onlogin": "checkLoginStatus()"
+        }
+    }
+
+    onLogin = () => {
+        console.log('here')
+        FB.getLoginStatus(function (response) {
+            if (response && response.status === 'connected' && response.authResponse) {
+                fetch(`/auth/facebook?access_token=${response.authResponse.accessToken}`).then((response) => {
+                    window.location.reload();
+                });
+            } else {
+                FB.login((response) => {
+                    if (response && response.status === 'connected' && response.authResponse) {
+                        console.log('logged into fb')
+                        fetch(`/auth/facebook?access_token=${response.authResponse.accessToken}`).then((response) => {
+                            window.location.reload();
+                        });
+                    }
+                }, {
+                    scope: 'public_profile,email'
+                });
+            }
+        });
     }
 
     componentDidMount() {
@@ -80,6 +113,15 @@ export default class Header extends Component {
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
                             <Typography text="contact" variant="button" display="block" guttertop={"true"} />
+                        </Grid>
+                        {/* <Grid className="t-menu-item" onClick={() => this.setState({ login: true })} item xs={1}>
+                            <Typography className="t-text-link-3" text="Login" variant="button" display="block" guttertop={"true"} />
+                        </Grid> */}
+                        <Grid className="t-menu-item" onClick={() => this.setState({ login: true })} item xs={1}>
+                            <div
+                                className="fb-login-button"
+                                {...this.fbAtttributes}
+                            />
                         </Grid>
                         {/* <Grid className="t-menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
                             <Typography icon="add_shopping_cart" text={
