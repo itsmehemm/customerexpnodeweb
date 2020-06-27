@@ -18,7 +18,7 @@ const getProductsByCategory = (req, res) => {
                 if (Array.isArray(result) && result.length > 0) {
                     result.forEach(product => {
                         const viewProductModal = new ViewProductModal();
-                        viewProductModal.setData(product);
+                        viewProductModal.buildWithProduct(product);
                         products.push(viewProductModal.getData());
                     });
                 }
