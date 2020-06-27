@@ -22,7 +22,7 @@ export default class OrderSummary extends Component {
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <Divider />
+                    <Divider className="t-extend-hr" />
                 </Grid>
                 <Grid item>
                     <Box m={2}>
@@ -48,7 +48,7 @@ export default class OrderSummary extends Component {
                             </Box>
                         </Grid>
                         <Grid item xs={12}>
-                            <Divider />
+                            <Divider className="t-extend-hr-2" />
                         </Grid>
                     </Grid>
                     <Box m={2}>
@@ -77,7 +77,7 @@ export default class OrderSummary extends Component {
                             </Grid>
                         </Grid>
                     </Box>
-                    <Divider />
+                    <Divider className="t-extend-hr-2" />
                     <Box m={2}>
                         <Typography
                             icon="local_shipping"
@@ -88,7 +88,7 @@ export default class OrderSummary extends Component {
                     </Box>
                 </Grid>
                 <Grid item xs={12}>
-                    <Box m={0}> <Divider /> </Box>
+                    <Box m={0}> <Divider className="t-extend-hr" /> </Box>
                 </Grid>
                 <Grid item xs={12}>
                     <Box m={2}>
@@ -125,7 +125,7 @@ export default class OrderSummary extends Component {
                             </Grid>
                         </Grid>
                     </Box>
-                    <Divider />
+                    <Divider className="t-extend-hr" />
                     <Box m={2}>
                         <Grid container>
                             <Grid item xs={3}>
@@ -136,7 +136,7 @@ export default class OrderSummary extends Component {
                             </Grid>
                         </Grid>
                     </Box>
-                    <Divider />
+                    <Divider className="t-extend-hr" />
                 </Grid>
             </Grid>
         );

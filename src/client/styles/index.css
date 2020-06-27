@@ -392,3 +392,11 @@ body {
     width: 20px;
     border-radius: 100px;
 }
+
+.t-extend-hr {
+    width: 110% !important;
+}
+
+.t-extend-hr-2 {
+    width: 119% !important;
+}

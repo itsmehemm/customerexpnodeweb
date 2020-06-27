@@ -75,24 +75,6 @@ export default class InstantPurchaseConfirmation extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Grid container>
-                                        <Grid item>
-                                            <Box m={2}>
-                                                <Typography text={`Order Summary`} />
-                                            </Box>
-                                            <OrderSummary
-                                                id={id}
-                                                name={purchase_items[0].data.name}
-                                                description={purchase_items[0].data.description}
-                                                amount={purchase_items[0].amount}
-                                                payment={amount}
-                                                discount={purchase_items[0].amount.discount}
-                                                size={purchase_items[0].size}
-                                                color={purchase_items[0].color}
-                                                quantity={purchase_items[0].quantity}
-                                                picture_links={purchase_items[0].picture_links}
-                                            />
-                                        </Grid>
-                                        <Divider orientation="vertical" flexItem />
                                         <Grid item xs={5}>
                                             <Box m={2}>
                                                 <Typography text={`Your Order ID: ${id}`} />
@@ -112,6 +94,24 @@ export default class InstantPurchaseConfirmation extends Component {
                                             <Box m={2}>
                                                 <Typography text={`Check your email at ${personal_information && personal_information.email} for further information.`} variant="subtitle2" />
                                             </Box>
+                                        </Grid>
+                                        <Divider orientation="vertical" flexItem />
+                                        <Grid item>
+                                            <Box m={2}>
+                                                <Typography text={`Order Summary`} />
+                                            </Box>
+                                            <OrderSummary
+                                                id={id}
+                                                name={purchase_items[0].data.name}
+                                                description={purchase_items[0].data.description}
+                                                amount={purchase_items[0].amount}
+                                                payment={amount}
+                                                discount={purchase_items[0].amount.discount}
+                                                size={purchase_items[0].size}
+                                                color={purchase_items[0].color}
+                                                quantity={purchase_items[0].quantity}
+                                                picture_links={purchase_items[0].picture_links}
+                                            />
                                         </Grid>
                                     </Grid>
                                 </Grid>

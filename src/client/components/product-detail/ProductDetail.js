@@ -200,7 +200,7 @@ export default class ProductDetail extends Component {
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Divider />
+                                    <Divider className="t-extend-hr-2" />
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -213,7 +213,7 @@ export default class ProductDetail extends Component {
                                             </Box>
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <Divider />
+                                            <Divider className="t-extend-hr-2" />
                                         </Grid>
                                     </>
                                 }
@@ -237,7 +237,7 @@ export default class ProductDetail extends Component {
                                     </Grid>
                                 </Box>
                             }
-                            <Divider />
+                            <Divider className="t-extend-hr-2" />
                             <Box m={2}>
                                 <Typography
                                     text={"Color"}
@@ -266,7 +266,7 @@ export default class ProductDetail extends Component {
                                             }
                                         </Grid>
                                     </Box>
-                                    <Divider />
+                                    <Divider className="t-extend-hr-2" />
                                 </>
                             }
                             {
@@ -290,7 +290,7 @@ export default class ProductDetail extends Component {
                                             />
                                         }
                                     </Box>
-                                    <Divider />
+                                    <Divider className="t-extend-hr-2" />
                                 </>
                             }
                             {
