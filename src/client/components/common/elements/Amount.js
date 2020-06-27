@@ -18,7 +18,6 @@ const Amount = (props) => {
         discount,
         subtotal,
         currency,
-        style
     } = amount;
     return (
         <>
