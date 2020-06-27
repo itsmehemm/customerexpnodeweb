@@ -32,6 +32,7 @@
     "express-session": "^1.17.0",
     "fs": "0.0.1-security",
     "googleapis": "^52.1.0",
+    "https": "^1.0.0",
     "lodash": "^4.17.15",
     "memcached": "^2.2.2",
     "memjs": "^1.2.2",
