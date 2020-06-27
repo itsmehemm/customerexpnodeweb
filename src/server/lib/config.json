@@ -1,29 +1,25 @@
 {
     "appId": "TINNAT_CUSTOMER_EXPERIENCE",
     "session": {
-        "name": "hemms-tool-snippet",
-        "secret": "hemm-is-a-batman"
+        "name": "tinnat-web",
+        "secret": "tinnat-web"
     },
     "tinnat": {
         "development": {
             "url": {
-                "v1_get_product_by_id": "http://localhost:2002/product/${productid}"
+                "v1_get_product_by_id": "https://localhost:2003/product/${productid}",
+                "login_success": "https://localhost:2003/",
+                "login_failure": "https://localhost:2003/error"
             },
             "api": {
-                "base_url": "http://localhost:2002/api"
-            }
-        },
-        "hemm": {
-            "url": {
-                "v1_get_product_by_id": "http://192.168.0.8:2002/product/${productid}"
-            },
-            "api": {
-                "base_url": "http://192.168.0.8:2002/api"
+                "base_url": "https://localhost:2003/api"
             }
         },
         "production": {
             "url": {
-                "v1_get_product_by_id": "http://tinnat.com/product/${productid}"
+                "v1_get_product_by_id": "http://tinnat.com/product/${productid}",
+                "login_success": "http://tinnat.com/",
+                "login_failure": "http://tinnat.com/error"
             },
             "api": {
                 "base_url": "http://tinnat.com/api"
