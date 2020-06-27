@@ -269,7 +269,9 @@ body {
     color: #fff;
 }
 
-.t-large-btn:hover {}
+.t-large-btn-disabled {
+    cursor: not-allowed;
+}
 
 .t-box {
     margin: 5px;
