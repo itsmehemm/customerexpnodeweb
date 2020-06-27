@@ -89,19 +89,23 @@ export default class ProductDetail extends Component {
     // }
 
     async instantPurchase() {
-        const { selection } = this.state;
+        const { selection, stockQuantity } = this.state;
         if (selection.color && selection.size) {
-            const instantOrderModal = new InstantOrderModal();
-            instantOrderModal.updateCreateDataFromState(this.state);
-            try {
-                const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
-                if (response && response.instant_purchase_url) {
-                    window.location.href = response.instant_purchase_url;
-                } else {
+            if (stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) {
+                const instantOrderModal = new InstantOrderModal();
+                instantOrderModal.updateCreateDataFromState(this.state);
+                try {
+                    const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
+                    if (response && response.instant_purchase_url) {
+                        window.location.href = response.instant_purchase_url;
+                    } else {
+                        await this.notify('There was an error while creating the order.');
+                    }
+                } catch (error) {
                     await this.notify('There was an error while creating the order.');
                 }
-            } catch (error) {
-                await this.notify('There was an error while creating the order.');
+            } else {
+                await this.notify('This product is out of stock.');
             }
         } else {
             await this.notify('Select a size and color of your choice.');
@@ -161,6 +165,7 @@ export default class ProductDetail extends Component {
                                     }}
                                 />
                                 <LargeBtn
+                                    disabled={!(stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0)}
                                     onClick={this.instantPurchase}
                                     name="BUY NOW"
                                     color="rgb(247, 36, 52)"
@@ -225,7 +230,7 @@ export default class ProductDetail extends Component {
                                 <Box m={2}>
                                     <Grid item xs={12}>
                                         <SmallButtonGroup
-                                            defaultButton={data.default_size}
+                                            defaultButton={data.default_theme.size}
                                             buttons={availableSizes}
                                             onSelect={(data) => this.update('size', data)}
                                         />
