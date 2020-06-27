@@ -72,10 +72,10 @@ export default class Products extends Component {
                 <Header />
                 <Container maxWidth="xl">
                     <Grid container>
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <Box m={2}><Filters onUpdate={this.updateFilters} /></Box>
                         </Grid>
-                        <Grid item xs={10}>
+                        <Grid item xs={9}>
                             <Box m={2}><ProductsViewer products={products} status={status} /></Box>
                         </Grid>
                     </Grid>

@@ -47,7 +47,7 @@ export default class ProductsViewer extends Component {
                                 <Grid container spacing={2}>
                                     {
                                         products.map(product =>
-                                            <Grid item xs={3}>
+                                            <Grid item xs={4}>
                                                 <ProductThemeWidget
                                                     {...product}
                                                     onClick={() => window.open(product.url)}
