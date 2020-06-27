@@ -29,7 +29,7 @@ const getUserInfo = async (userAccessToken) => {
         console.log('[ERROR]', 'oauth::facebook::getUserInfo', `error fetching user info: ${JSON.stringify(response.error)}`);
         return null;
     }
-    console.log('[INFO]', 'oauth::facebook::getUserInfo', `user info fetched from fb me: ${JSON.stringify(response && response.data)}`);
+    console.log('[INFO]', 'oauth::facebook::getUserInfo', `user info fetched from fb me: ${JSON.stringify(response)}`);
     return response;
 };
 
