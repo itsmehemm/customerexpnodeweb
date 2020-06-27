@@ -8,6 +8,7 @@ const api = require('./api');
 const config = require('../lib/config.json');
 const {
     validateUserSession,
+    createSessionWithFacebook,
     apiAuthenticator
 } = require('../controllers');
 
@@ -26,11 +27,16 @@ app.use(cookieParser());
 app.use('/static', express.static(path.resolve(__dirname, '../../../', 'build/static')));
 
 app.use(session({
+    cookie: {
+        maxAge: 1200000
+    },
     name: config.session.name,
     secret: config.session.secret,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false
 }));
+
+app.get('/auth/facebook', createSessionWithFacebook);
 
 app.use(validateUserSession);
 
