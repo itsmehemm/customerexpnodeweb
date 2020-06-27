@@ -89,7 +89,7 @@ const ProductWidget = (props) => {
                         </Grid>
                         <Grid item xs={9}>
                             <Grid container spacing={3}>
-                                {formatted.available_colors.map(color => <ColorPallette color={color} />)}
+                                {formatted.available_colors.map((color, key) => <ColorPallette key={key} color={color} />)}
                             </Grid>
                         </Grid>
                     </Grid>
