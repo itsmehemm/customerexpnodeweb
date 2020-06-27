@@ -41,6 +41,8 @@
                 console.log('FB_LOGIN_DETAILS', JSON.stringify(response));
                 if (response && response.status === 'connected' && response.authResponse) {
                     fetch(`/auth/facebook?access_token=${response.authResponse.accessToken}`);
+                } else {
+                    fetch('/logout');
                 }
             });
         }
