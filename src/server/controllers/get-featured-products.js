@@ -27,7 +27,7 @@ const getFeaturedProducts = (req, res) => {
                     let response = [];
                     featured.forEach(product => {
                         const viewProductModal = new ViewProductModal();
-                        viewProductModal.setData(product);
+                        viewProductModal.buildWithProduct(product);
                         response.push(viewProductModal.getData());
                     });
                     return res.status(200).send({
