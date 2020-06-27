@@ -8,6 +8,7 @@ const api = require('./api');
 const config = require('../lib/config.json');
 const {
     validateUserSession,
+    logoutSession,
     createSessionWithFacebook,
     apiAuthenticator
 } = require('../controllers');
@@ -37,6 +38,8 @@ app.use(session({
 }));
 
 app.get('/auth/facebook', createSessionWithFacebook);
+
+app.get('/logout', logoutSession);
 
 app.use(validateUserSession);
 

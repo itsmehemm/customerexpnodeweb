@@ -9,6 +9,7 @@
             "url": {
                 "v1_get_product_by_id": "https://localhost:2003/product/${productid}",
                 "login_success": "https://localhost:2003/",
+                "logout_success": "https://localhost:2003/",
                 "login_failure": "https://localhost:2003/error"
             },
             "api": {
@@ -19,6 +20,7 @@
             "url": {
                 "v1_get_product_by_id": "http://tinnat.com/product/${productid}",
                 "login_success": "http://tinnat.com/",
+                "logout_success": "http://tinnat.com",
                 "login_failure": "http://tinnat.com/error"
             },
             "api": {
