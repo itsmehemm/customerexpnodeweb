@@ -32,28 +32,6 @@ export default class Header extends Component {
         }
     }
 
-    onLogin = () => {
-        console.log('here')
-        FB.getLoginStatus(function (response) {
-            if (response && response.status === 'connected' && response.authResponse) {
-                fetch(`/auth/facebook?access_token=${response.authResponse.accessToken}`).then((response) => {
-                    window.location.reload();
-                });
-            } else {
-                FB.login((response) => {
-                    if (response && response.status === 'connected' && response.authResponse) {
-                        console.log('logged into fb')
-                        fetch(`/auth/facebook?access_token=${response.authResponse.accessToken}`).then((response) => {
-                            window.location.reload();
-                        });
-                    }
-                }, {
-                    scope: 'public_profile,email'
-                });
-            }
-        });
-    }
-
     componentDidMount() {
         // setInterval(() => {
         //     this.updateComponent();
