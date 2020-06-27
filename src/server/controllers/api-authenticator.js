@@ -1,10 +1,21 @@
-const { API_AUTHENTICATOR } = require('../lib/constants/logging-constants');
-const { TINNAT_WEB_GUEST, TINNAT_WEB_GUEST_KEY, ADMIN_USER, ADMIN_USER_KEY } = require('../lib/constants');
+const facebookOAuth = require('../oauth/facebook.js');
+const {
+    API_AUTHENTICATOR
+} = require('../lib/constants/logging-constants');
+const {
+    TINNAT_WEB_GUEST,
+    TINNAT_WEB_GUEST_KEY,
+    TINNAT_WEB,
+    TINNAT_FACEBOOK_OAUTH,
+    ADMIN_USER,
+    ADMIN_USER_KEY,
+    X_TINNAT_SECURITY_CONTEXT
+} = require('../lib/constants');
 
-const apiAuthenticator = (req, res, next) => {
+const apiAuthenticator = async (req, res, next) => {
     console.log(API_AUTHENTICATOR, `Authenticating API request: ${req.method}: ${req.url}`);
-    const securityContext = JSON.parse(req.headers && req.headers['x-tinnat-security-context'] || '{}');
-    console.log(API_AUTHENTICATOR, `Request received from user: ${securityContext.userId}`);
+    const securityContext = JSON.parse(req.headers && req.headers[X_TINNAT_SECURITY_CONTEXT] || '{}');
+    console.log(API_AUTHENTICATOR, `security context received: ${JSON.stringify(securityContext)}`);
     if (securityContext.userId === ADMIN_USER && securityContext.key === ADMIN_USER_KEY) {
         console.log(API_AUTHENTICATOR, `GET and POST Authorized user: ${securityContext.userId}`);
         return next();
@@ -13,7 +24,17 @@ const apiAuthenticator = (req, res, next) => {
         console.log(API_AUTHENTICATOR, `GET Authorized user: ${securityContext.userId}`);
         return next();
     }
-    console.log(API_AUTHENTICATOR, `User not authorized: ${securityContext.userId}`);
+    if (securityContext.client_id === TINNAT_WEB) {
+        if (securityContext.login_provider === TINNAT_FACEBOOK_OAUTH) {
+            const userAccessToken = securityContext.facebook && securityContext.facebook.access_token;
+            const user = await facebookOAuth.authenticate(userAccessToken);
+            if (user) {
+                req.user = user;
+                return next();
+            }
+        }
+    }
+    console.log(API_AUTHENTICATOR, `User not authorized: ${JSON.stringify(securityContext)}`);
     return res.status(401).send({
         error: {
             message: 'UNAUTHORIZED REQUEST',
