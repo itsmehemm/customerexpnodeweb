@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -28,12 +29,9 @@ export default class RecentProducts extends Component {
     async componentDidMount() {
         const recentProducts = getRecentlyViewedProducts();
         const productids = Object.keys(recentProducts);
-        console.log('recentProducts ', JSON.stringify(recentProducts));
-        console.log('product ids: ', JSON.stringify(productids));
         const products = [];
         for (let i = 0; i < productids.length; i++) {
             const product = await getProductById(productids[i]);
-            console.log('product ', JSON.stringify(product));
             products.push(product);
         }
         await this.setState({ products, status: OPERATION_LOADING_COMPLETED });
@@ -70,7 +68,10 @@ export default class RecentProducts extends Component {
                                                     <Grid item xs={3} key={key}>
                                                         <ProductWidget
                                                             {...product}
-                                                            onClick={() => window.open(product.url)} />
+                                                            picture_links={_.get(product, 'default_theme.picture_links', [])}
+                                                            amount={_.get(product, 'default_theme.amount')}
+                                                            onClick={() => window.open(product.url)}
+                                                        />
                                                     </Grid>)
                                             }
                                         </Grid>
