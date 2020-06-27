@@ -1,5 +1,5 @@
 {
-    "environment": "hemm",
+    "environment": "development:secure",
     "production": {
         "api": {
             "v1_get_product_by_id": {
