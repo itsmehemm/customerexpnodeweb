@@ -1,5 +1,5 @@
 {
-    "environment": "development:secure",
+    "environment": "development",
     "production": {
         "api": {
             "v1_get_product_by_id": {
@@ -47,52 +47,6 @@
         }
     },
     "development": {
-        "api": {
-            "v1_get_product_by_id": {
-                "uri": "http://localhost:2002/api/product/"
-            },
-            "v1_get_featured_products": {
-                "uri": "http://localhost:2002/api/products/featured?limit=6"
-            },
-            "v1_post_filtered_products": {
-                "uri": "http://localhost:2002/api/products/filter"
-            },
-            "v1_post_add_product": {
-                "uri": "http://localhost:2002/api/product/add"
-            },
-            "v1_post_update_product": {
-                "uri": "http://localhost:2002/api/product/${productid}/update"
-            },
-            "v1_get_order_details": {
-                "uri": "http://localhost:2002/api/order/${orderid}"
-            },
-            "v1_create_instant_order": {
-                "uri": "http://localhost:2002/api/create/order/"
-            },
-            "v1_patch_order_details": {
-                "uri": "http://localhost:2002/api/order/${orderid}"
-            },
-            "v1_get_payment_plan": {
-                "uri": "http://localhost:2002/api/instant-purchase/${orderid}/payment/plan"
-            },
-            "v1_post_razorpay_payment": {
-                "uri": "http://localhost:2002/api/instant-purchase/${orderid}/payment/razorpay"
-            },
-            "v1_post_add_item_cart": {
-                "uri": "http://localhost:2002/api/cart/add"
-            },
-            "v1_post_remove_item_cart": {
-                "uri": "http://localhost:2002/api/cart/remove"
-            },
-            "v1_post_edit_item_cart": {
-                "uri": "http://localhost:2002/api/cart/edit"
-            },
-            "v1_get_cart": {
-                "uri": "http://localhost:2002/api/cart"
-            }
-        }
-    },
-    "development:secure": {
         "api": {
             "v1_get_product_by_id": {
                 "uri": "https://localhost:2003/api/product/"
