@@ -6,7 +6,7 @@ const app = require('./src/server/routes');
 const PORT = process.env.PORT || 2002;
 const HTTPS_PORT = process.env.HTTPS_PORT || 2003;
 
-app.listen(PORT, () => { console.log(`TINNAT WEBAPP & API RUNNING ON PORT ${PORT}`) });
+// app.listen(PORT, () => { console.log(`TINNAT WEBAPP & API RUNNING ON PORT ${PORT}`) });
 
 https.createServer({
     key: fs.readFileSync('tinnat.key'),
