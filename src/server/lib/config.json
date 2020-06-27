@@ -71,12 +71,23 @@
         }
     },
     "razorpay": {
-        "development":  {
+        "development": {
             "api_key": "rzp_test_IhEymNzpAxVoFV",
             "api_secret": "95u2pAEl6ccJUCZ8WEFn4hux",
             "basic_auth_token": "cnpwX3Rlc3RfSWhFeW1OenBBeFZvRlY6OTV1MnBBRWw2Y2NKVUNaOFdFRm40aHV4",
             "create_order": {
                 "url": "https://api.razorpay.com/v1/orders"
+            }
+        }
+    },
+    "facebook": {
+        "app_id": "1133774466999266",
+        "oauth": {
+            "me": {
+                "url": "https://graph.facebook.com/v7.0/me"
+            },
+            "debug_token": {
+                "url": "https://graph.facebook.com/debug_token"
             }
         }
     }
