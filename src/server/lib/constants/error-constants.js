@@ -21,42 +21,42 @@ module.exports = {
     },
     INVALID_OR_MORE_ITEMS_RECEIVED: {
         message: 'INVALID_OR_MORE_ITEMS_RECEIVED',
-        description: 'Invalid or more items received. Please check the API specification and try again.'
+        description: 'Invalid or more items received. Please check the API specification and try again'
     },
     ORDER_NOT_FOUND: {
         message: 'ORDER_NOT_FOUND',
-        description: 'There are no orders with the given id.'
+        description: 'There are no orders with the given id'
     },
     ERROR_CREATING_PAYMENT_PLAN: {
         message: 'ERROR_CREATING_PAYMENT_PLAN',
-        description: 'There was an error creating payment plan for this order.'
+        description: 'There was an error creating payment plan for this order'
     },
     RAZORPAY_PAYMENT_FAILED: {
         message: 'RAZORPAY_PAYMENT_FAILED',
-        description: 'Payment failed. Please try again or use another mode of payment.'
+        description: 'Payment failed. Please try again or use another mode of payment'
     },
     PAYMENT_ALREADY_COMPLETED: {
         message: 'PAYMENT_ALREADY_COMPLETED',
-        description: 'Payment is already received for this order.'
+        description: 'Payment is already received for this order'
     },
     ORDER_ALREADY_PURCHASED: {
         message: 'ORDER_ALREADY_PURCHASED',
-        description: 'This already has been placed already.'
+        description: 'This already has been placed already'
     },
     CANNOT_PATCH_COMPLETED_ORDER: {
         message: 'CANNOT_PATCH_COMPLETED_ORDER',
-        description: 'Cannot patch order that has been completed already.'
+        description: 'Cannot patch order that has been completed already'
     },
     INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN: {
         message: 'INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN',
-        description: 'One or more required details are missing in the order.'
+        description: 'One or more required details are missing in the order'
     },
     INVALID_PINCODE: {
         message: 'INVALID_PINCODE',
-        description: 'Invalid delivery pincode. Please try again.'
+        description: 'Invalid delivery pincode. Please try again'
     },
     NOT_DELIVERABLE: {
         message: 'NOT_DELIVERABLE',
-        description: 'Sorry, we don\'t deliver product to this pincode at this time.'
+        description: 'Sorry, we don\'t deliver product to this pincode at this time'
     }
 };

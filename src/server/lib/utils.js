@@ -44,9 +44,27 @@ const getFormattedProductInfo = (product) => {
     }
 };
 
+const constructDeliveryObj = (delivery) => {
+    if (delivery && delivery.pincode) {
+        return {
+            status: delivery.status,
+            address: {
+                place: delivery.place,
+                region: delivery.region,
+                district: delivery.district,
+                state: delivery.state,
+                pincode: delivery.pincode
+            },
+            delivery_time: delivery.deliveryTime
+        };
+    }
+    return null;
+}
+
 module.exports = {
     getProductUrl: getProductUrl,
     constructProductLink: constructProductLink,
     getDefaultThemeObj: getDefaultThemeObj,
-    getFormattedProductInfo: getFormattedProductInfo
+    getFormattedProductInfo: getFormattedProductInfo,
+    constructDeliveryObj: constructDeliveryObj
 };
