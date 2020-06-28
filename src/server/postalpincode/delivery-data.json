@@ -1,0 +1,10 @@
+{
+    "chennai region": {
+        "status": true,
+        "delivery_time": 345600
+    },
+    "madambakkam": {
+        "status": true,
+        "delivery_time": 445600
+    }
+}
