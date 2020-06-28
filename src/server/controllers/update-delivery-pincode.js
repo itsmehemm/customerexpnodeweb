@@ -15,7 +15,6 @@ const updateDeliveryPincode = async (req, res, next) => {
         const delivery = await postalpincodeApi.getDeliveryStatus(address);
         req.session = req.session || {};
         req.session.delivery = {
-            pincode: req.body.pincode,
             state: address.getState(),
             district: address.getDistrict(),
             region: address.getRegion(),
