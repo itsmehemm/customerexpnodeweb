@@ -19,5 +19,6 @@ module.exports = {
     getOrderById: require('./get-order-by-id'),
     patchOrderById: require('./patch-order-by-id'),
     getPaymentPlan: require('./get-payment-plan'),
-    razorpayPaymentComplete: require('./razorpay-payment-complete')
+    razorpayPaymentComplete: require('./razorpay-payment-complete'),
+    updateDeliveryPincode: require('./update-delivery-pincode.js')
 }

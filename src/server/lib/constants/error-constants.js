@@ -50,5 +50,13 @@ module.exports = {
     INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN: {
         message: 'INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN',
         description: 'One or more required details are missing in the order.'
+    },
+    INVALID_PINCODE: {
+        message: 'INVALID_PINCODE',
+        description: 'Invalid delivery pincode. Please try again.'
+    },
+    NOT_DELIVERABLE: {
+        message: 'NOT_DELIVERABLE',
+        description: 'Sorry, we don\'t deliver product to this pincode at this time.'
     }
 };

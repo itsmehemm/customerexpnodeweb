@@ -40,6 +40,7 @@
     "memory-cache": "^0.2.0",
     "mongodb": "^2.2.36",
     "path": "^0.12.7",
+    "pug": "^3.0.0",
     "razorpay": "^2.0.6",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",

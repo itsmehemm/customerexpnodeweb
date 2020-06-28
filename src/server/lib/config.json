@@ -88,5 +88,10 @@
                 "url": "https://graph.facebook.com/debug_token"
             }
         }
+    },
+    "postalpincode": {
+        "api":{
+            "url": "https://api.postalpincode.in/pincode"
+        }
     }
 }

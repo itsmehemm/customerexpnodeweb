@@ -30,8 +30,13 @@ module.exports = {
         description: 'Your order has been received. Payment was successfully completed.'
     },
     PAYMENT_FAILED: {
-        status: 'PAYMENT_FAILED',
+        status: 'COMPLETED',
         message: 'PAYMENT_FAILED',
         description: 'There was an error processing your payment.'
+    },
+    PINCODE_UPDATED: {
+        status: 'COMPLETED',
+        message: 'PINCODE_UPDATED',
+        description: 'The pincode was successfully updated.'
     }
 }
