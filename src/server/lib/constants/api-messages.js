@@ -28,5 +28,10 @@ module.exports = {
         status: 'COMPLETED',
         message: 'PAYMENT_COMPLETED',
         description: 'Your order has been received. Payment was successfully completed.'
+    },
+    PAYMENT_FAILED: {
+        status: 'PAYMENT_FAILED',
+        message: 'PAYMENT_FAILED',
+        description: 'There was an error processing your payment.'
     }
 }
