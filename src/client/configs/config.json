@@ -43,6 +43,9 @@
             },
             "v1_get_cart": {
                 "uri": "http://tinnat.com/api/cart"
+            },
+            "v1_post_update_pincode": {
+                "uri": "http://tinnat.com/api/delivery/update/pincode"
             }
         }
     },
@@ -89,6 +92,9 @@
             },
             "v1_get_cart": {
                 "uri": "https://localhost:2003/api/cart"
+            },
+            "v1_post_update_pincode": {
+                "uri": "https://localhost:2003/api/delivery/update/pincode"
             }
         }
     }

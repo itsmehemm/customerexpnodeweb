@@ -6,5 +6,8 @@
     "madambakkam": {
         "status": true,
         "delivery_time": 445600
+    },
+    "washermanpet": {
+        "status": false
     }
 }

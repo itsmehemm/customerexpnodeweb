@@ -10,4 +10,5 @@ export { default as patchOrder } from './patch-order';
 export { default as createInstantOrder } from './create-instant-order';
 export { default as getPaymentPlan } from './get-payment-plan';
 export { default as razorpayPayment } from './razorpay-payment';
+export { default as updateDeliveryPincode } from './update-delivery-pincode';
 

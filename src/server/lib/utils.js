@@ -44,6 +44,15 @@ const getFormattedProductInfo = (product) => {
     }
 };
 
+const constructDeliveryString = (time) => {
+    if (time) {
+        time = parseInt(time);
+        time = Math.ceil(time / (3600 * 24));
+        return `Confirmed delivery in ${time} days`
+    }
+    return null;
+}
+
 const constructDeliveryObj = (delivery) => {
     if (delivery && delivery.pincode) {
         return {
@@ -55,7 +64,10 @@ const constructDeliveryObj = (delivery) => {
                 state: delivery.state,
                 pincode: delivery.pincode
             },
-            delivery_time: delivery.deliveryTime
+            delivery_time: delivery.deliveryTime,
+            formatted: {
+                delivery_string: constructDeliveryString(delivery.deliveryTime)
+            }
         };
     }
     return null;

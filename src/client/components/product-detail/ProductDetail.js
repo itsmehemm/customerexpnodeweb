@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import TextField from '../common/elements/TextField';
 import SmallButtonGroup from '../common/elements/SmallButtonGroup';
 import SmallImageButtonGroup from '../common/elements/SmallImageButtonGroup';
 import Amount from '../common/elements/Amount';
@@ -16,7 +17,8 @@ import InstantOrderModal from '../../modals/instant-order/InstantOrderModal';
 import ProductDetailModal from '../../modals/product-detail/ProductDetailModal';
 import { productAdvancedDetailsMapper } from '../../lib/mappers';
 import {
-    createInstantOrder
+    createInstantOrder,
+    updateDeliveryPincode
 } from '../../actions';
 
 export default class ProductDetail extends Component {
@@ -130,6 +132,18 @@ export default class ProductDetail extends Component {
         });
     }
 
+    async updatePincode() {
+        const { pincode } = this.state;
+        const response = await updateDeliveryPincode(pincode);
+        if (response && response.status === "COMPLETED") {
+            this.setState({ delivery: response.delivery, delivery_error: null });
+        } else if (response && response.error) {
+            this.setState({ delivery: null, delivery_error: response.error.description })
+        } else {
+            this.setState({ delivery: null, delivery_error: null })
+        }
+    }
+
     render() {
         const {
             data
@@ -141,7 +155,10 @@ export default class ProductDetail extends Component {
             stockQuantity,
             pictureLinks,
             notification,
-            selection
+            selection,
+            pincode,
+            delivery,
+            delivery_error
         } = this.state;
         return (
             <Container style={{ padding: '1em' }} maxWidth="lg">
@@ -293,6 +310,59 @@ export default class ProductDetail extends Component {
                                     <Divider className="t-extend-hr-2" />
                                 </>
                             }
+                            {
+                                <>
+                                    <Box m={2}> <Typography variant="button" text={"Delivery"} /> </Box>
+                                    <Box m={2}>
+                                        <Grid container>
+                                            <Grid item xs={6}>
+                                                <TextField
+                                                    required
+                                                    type="number"
+                                                    label="Pincode"
+                                                    variant="filled"
+                                                    value={pincode}
+                                                    onChange={(pincode) => this.setState({ pincode: pincode })}
+                                                    onKeyPress={(e) => {
+                                                        if (e.key === 'Enter') {
+                                                            this.updatePincode();
+                                                        }
+                                                    }}
+                                                />
+                                                {
+                                                    delivery_error &&
+                                                    <Typography text={delivery_error} variant="caption" style={{ color: "rgb(247, 36, 52)" }} />
+                                                }
+                                                <Typography text="Type your pincode and press enter" variant="caption" />
+                                            </Grid>
+                                        </Grid>
+                                    </Box>
+                                    {
+                                        delivery && delivery.status === "DELIVERABLE" &&
+                                        <Box m={2}>
+                                            <Typography
+                                                icon="local_shipping"
+                                                text={delivery.formatted.delivery_string}
+                                                variant="body2"
+                                                style={{ color: "rgb(5, 153, 54)" }}
+                                            />
+                                        </Box>
+                                    }
+                                    {
+                                        delivery && delivery.status === "NOT_DELIVERABLE" &&
+                                        <Box m={2}>
+                                            <Typography
+                                                icon="local_shipping"
+                                                text="Sorry, this item is not deliverable to the address."
+                                                variant="body2"
+                                                style={{ color: "rgb(247, 36, 52)" }}
+                                            />
+                                        </Box>
+                                    }
+                                    <Divider className="t-extend-hr-2" />
+                                </>
+                            }
+
                             {
                                 data.advanced_details &&
                                 <>

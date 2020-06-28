@@ -13,11 +13,14 @@ const _TextField = (props) => {
         value = '',
         type = "text",
         width = 12,
+        variant = "outlined",
+        style = {},
         onChange
     } = props;
     return (
         <Grid item xs={width}>
             <TextField
+                {...props}
                 disabled={disabled}
                 error={error}
                 required={required}
@@ -28,7 +31,8 @@ const _TextField = (props) => {
                 type={type}
                 helperText={helperText}
                 onChange={event => onChange(event.target.value)}
-                variant="outlined"
+                variant={variant}
+                style={style}
             />
         </Grid>
     );

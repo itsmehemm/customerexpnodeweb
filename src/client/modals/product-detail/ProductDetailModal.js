@@ -25,7 +25,8 @@ export default class ProductDetailModal {
             notification: {
                 status: false,
                 message: null
-            }
+            },
+            pincode: ''
         };
     }
 
@@ -114,7 +115,9 @@ export default class ProductDetailModal {
             notification: {
                 status: false,
                 message: null
-            }
+            },
+            delivery: data.delivery,
+            pincode: data.delivery && data.delivery.address && data.delivery.address.pincode
         };
     }
 
