@@ -143,8 +143,8 @@ class InstantPurchaseModal {
         return this.id;
     }
 
-    get(id) {
-        console.log(INSTANT_PURCHASE_MODAL, 'retrive order details from cache for id: ', id);
+    load(id) {
+        console.log(INSTANT_PURCHASE_MODAL, 'load order details from cache for id: ', id);
         const data = JSON.parse(cache.get(id));
         if (!data) return null;
         this.id = id;
@@ -157,8 +157,7 @@ class InstantPurchaseModal {
         this.shipping_address = data.shipping_address;
         this.payment_information = data.payment_information;
         this.time_stamp = data.time_stamp;
-        console.log(INSTANT_PURCHASE_MODAL, 'order details fetched from cache: ', JSON.stringify(this.data));
-        return this.data;
+        console.log(INSTANT_PURCHASE_MODAL, 'order details loaded from cache: ', JSON.stringify(this.data));
     }
 
     _getPersonalInformation(d) {

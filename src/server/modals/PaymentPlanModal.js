@@ -20,6 +20,10 @@ class PaymentPlanModel {
         this.paypal.order_id = id;
     }
 
+    getPayPalOrderId() {
+        return this.paypal && this.paypal.order_id;
+    }
+
     setSdkUrl(url) {
         this.paypal = this.paypal || {};
         this.paypal.sdk = this.paypal.sdk || {};
@@ -39,6 +43,10 @@ class PaymentPlanModel {
     setRazorPayOrderId(id) {
         this.razorpay = this.razorpay || {};
         this.razorpay.order_id = id;
+    }
+
+    getRazorPayOrderId() { 
+        return this.razorpay && this.razorpay.order_id;
     }
 
     setRazorPayApiKey(k) {

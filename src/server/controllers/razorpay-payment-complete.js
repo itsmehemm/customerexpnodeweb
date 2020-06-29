@@ -2,7 +2,12 @@ const Razorpay = require('razorpay');
 const args = require('yargs').argv;
 const mailservices = require('tinnat-mailservices')
 const { RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION } = require('../lib/constants/logging-constants');
-const { ENVIRONMENT_PRODUCTION } = require('../lib/constants')
+const {
+    ENVIRONMENT_PRODUCTION,
+    COMPLETED,
+    RAZORPAY,
+    MAILSERVICE
+} = require('../lib/constants')
 const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
 const errorConstants = require('../lib/constants/error-constants');
 const apiMessages = require('../lib/constants/api-messages');
@@ -13,13 +18,14 @@ const razorpayPaymentComplete = async (req, res) => {
     console.log(RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION, `processing request to complete payment for order id: ${req.params.id}.`);
     console.log(RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION, `razorpay payment complete received: ${JSON.stringify(req.body)}.`);
     const instantPurchaseModal = new InstantPurchaseModal();
-    const orderDetails = instantPurchaseModal.get(req.params.id);
-    if (!orderDetails) {
+    instantPurchaseModal.load(req.params.id);
+    if (!instantPurchaseModal.getOrderId()) {
         return res.status(404).send({
             error: errorConstants.ORDER_NOT_FOUND
         });
     }
-    if (orderDetails.payment_information && orderDetails.payment_information.status === 'COMPLETED') {
+    if (instantPurchaseModal.getPaymentInformation() &&
+        instantPurchaseModal.getPaymentInformation().status === COMPLETED) {
         return res.status(400).send({
             error: errorConstants.PAYMENT_ALREADY_COMPLETED
         });
@@ -41,17 +47,17 @@ const razorpayPaymentComplete = async (req, res) => {
             console.log(RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION, `payment information fetched from razorpay: ${JSON.stringify(response)}`);
             if (response && response.id && response.order_id) {
                 await instantPurchaseModal.updatePaymentDetails({
-                    status: "COMPLETED",
+                    status: COMPLETED,
                     transaction_id: payment_id,
-                    processor: 'RAZORPAY',
+                    processor: RAZORPAY,
                     processor_order_id: order_id,
                     others: {
                         signature: signature
                     }
                 });
-                const service = await mailservices.build('noreply');
+                const service = await mailservices.build(MAILSERVICE.NOREPLY);
                 const order = instantPurchaseModal.getOrder();
-                const to = order && order.personal_information && order.personal_information.email;
+                const to = instantPurchaseModal.getPersonalInformation() && instantPurchaseModal.getPersonalInformation().email;
                 if (to) {
                     service.send(to, 'Payment received', JSON.stringify(order));
                 }
