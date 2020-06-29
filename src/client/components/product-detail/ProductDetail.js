@@ -91,9 +91,9 @@ export default class ProductDetail extends Component {
     // }
 
     async instantPurchase() {
-        const { selection, stockQuantity } = this.state;
+        const { selection, stockQuantity, delivery } = this.state;
         if (selection.color && selection.size) {
-            if (stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) {
+            if ((stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) && delivery && delivery.status === 'DELIVERABLE') {
                 const instantOrderModal = new InstantOrderModal();
                 instantOrderModal.updateCreateDataFromState(this.state);
                 try {
@@ -107,7 +107,7 @@ export default class ProductDetail extends Component {
                     await this.notify('There was an error while creating the order.');
                 }
             } else {
-                await this.notify('This product is out of stock.');
+                await this.notify('This product is out of stock or not deliverable');
             }
         } else {
             await this.notify('Select a size and color of your choice.');
@@ -182,7 +182,12 @@ export default class ProductDetail extends Component {
                                     }}
                                 />
                                 <LargeBtn
-                                    disabled={!(stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0)}
+                                    disabled={
+                                        !((stockQuantity === 'UNLIMITED' ||
+                                            parseInt(stockQuantity) > 0) &&
+                                            delivery &&
+                                            delivery.status === "DELIVERABLE")
+                                    }
                                     onClick={this.instantPurchase}
                                     name="BUY NOW"
                                     color="rgb(247, 36, 52)"
