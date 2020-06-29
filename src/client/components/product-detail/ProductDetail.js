@@ -22,7 +22,6 @@ import {
 } from '../../actions';
 
 export default class ProductDetail extends Component {
-
     constructor(props) {
         super(props);
         this.state = new ProductDetailModal().getDefaultData();
@@ -98,8 +97,9 @@ export default class ProductDetail extends Component {
                 instantOrderModal.updateCreateDataFromState(this.state);
                 try {
                     const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
-                    if (response && response.instant_purchase_url) {
-                        window.location.href = response.instant_purchase_url;
+                    if (response && response.status === 'COMPLETED') {
+                        const next = response.links.filter(link => link.name === 'INSTANT_PURCHASE')
+                        window.location.href = next[0].href;
                     } else {
                         await this.notify('There was an error while creating the order.');
                     }
@@ -107,7 +107,15 @@ export default class ProductDetail extends Component {
                     await this.notify('There was an error while creating the order.');
                 }
             } else {
-                await this.notify('This product is out of stock or not deliverable');
+                if (!delivery) {
+                    await this.notify('Enter delivery pincode to proceed');
+                } else if (delivery.status === 'NOT_DELIVERABLE') {
+                    await this.notify('Sorry, we don\'t deliver to this area');
+                } else if (parseInt(stockQuantity) <= 0) {
+                    await this.notify('Sorry, this product is out of stock');
+                } else {
+                    await this.notify('There was an error while creating the order.');
+                }
             }
         } else {
             await this.notify('Select a size and color of your choice.');

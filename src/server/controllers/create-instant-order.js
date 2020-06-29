@@ -29,7 +29,7 @@ const createInstantOrder = async (req, res) => {
                 method: 'PATCH',
                 href: `/api/order/${orderId}`,
             }, {
-                name: 'PAYMENT',
+                name: 'INSTANT_PURCHASE',
                 method: 'GET',
                 href: `/instant-purchase/${orderId}`
             }]

@@ -88,14 +88,14 @@ export default class InstantPurchase extends Component {
             instantOrderModal.updatePatchDataFromState(this.state);
             try {
                 const response = await patchOrder(instantOrderModal.buildPatchOrderRequest());
-                if (response && response.instant_payment_url) {
-                    window.location.href = response.instant_payment_url;
+                if (response && response.status === 'COMPLETED') {
+                    const next = response.links.filter(link => link.name === 'PAYMENT');
+                    window.location.href = next[0].href;
                 } else {
-                    console.log('ERROR PATCHING ORDER');
+                    console.log('Error patching order');
                 }
             } catch (error) {
-                console.log(error)
-                console.log('ERROR PATCHING ORDER');
+                console.log('Error patching order', error);
             }
         } else {
             await this.setState({
