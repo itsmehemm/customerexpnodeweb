@@ -16,7 +16,7 @@ const getOrderById = async (req, res) => {
             const shippingAddress = instantPurchaseModal.getShippingAddress();
             if (shippingAddress && shippingAddress.pincode) {
                 const address = await postalpincodeApi.load(shippingAddress.pincode);
-                if (address && address.getPincode()) {
+                if (address && !address.error && address.getPincode()) {
                     let deliveryData = await postalpincodeApi.getDeliveryStatus(address);
                     delivery = constructDeliveryObj({
                         state: address.getState(),

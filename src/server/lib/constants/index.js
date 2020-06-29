@@ -33,5 +33,7 @@ module.exports = {
     MAILSERVICE: {
         NOREPLY: 'noreply',
         ORDERCONFIRMATION: 'orderconfirmation'
-    }
+    },
+    DELIVERABLE: 'DELIVERABLE',
+    NOT_DELIVERABLE: 'NOT_DELIVERABLE'
 };

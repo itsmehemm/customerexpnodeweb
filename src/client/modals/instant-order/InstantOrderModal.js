@@ -34,6 +34,7 @@ export default class InstantOrderModal {
             landmark: d && d.shipping_address && d.shipping_address.landmark,
         };
         data.payment_information = d && d.payment_information;
+        data.delivery = d && d.delivery;
         this.data = {
             id: data.id,
             personal_information: data.personal_information,
@@ -42,7 +43,8 @@ export default class InstantOrderModal {
             amount: data.amount,
             billing_address: data.billing_address,
             shipping_address: data.shipping_address,
-            payment_information: data.payment_information
+            payment_information: data.payment_information,
+            delivery: data.delivery
         };
     }
 
@@ -78,7 +80,8 @@ export default class InstantOrderModal {
                 state: null,
                 landmark: null,
             },
-            payment_information: null
+            payment_information: null,
+            delivery: null
         };
     }
 

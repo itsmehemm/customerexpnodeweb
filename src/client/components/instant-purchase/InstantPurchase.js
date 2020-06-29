@@ -91,6 +91,13 @@ export default class InstantPurchase extends Component {
                 if (response && response.status === 'COMPLETED') {
                     const next = response.links.filter(link => link.name === 'PAYMENT');
                     window.location.href = next[0].href;
+                } else if (response && response.status === 'PENDING') {
+                    await this.setState({
+                        notification: {
+                            status: true,
+                            message: response.reason
+                        }
+                    });
                 } else {
                     console.log('Error patching order');
                 }
@@ -124,6 +131,7 @@ export default class InstantPurchase extends Component {
             amount,
             billing_address,
             shipping_address,
+            delivery,
             notification
         } = this.state;
         return (
@@ -272,6 +280,7 @@ export default class InstantPurchase extends Component {
                                             color={purchase_item.color}
                                             quantity={purchase_item.quantity}
                                             picture_links={purchase_item.picture_links}
+                                            delivery={delivery}
                                         />
                                     </Grid>
                                 </>

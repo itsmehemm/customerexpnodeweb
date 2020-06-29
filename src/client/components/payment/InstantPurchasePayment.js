@@ -30,6 +30,7 @@ export default class InstantPurchasePayment extends Component {
         super(props);
         this.state = {
             paymentPlan: null,
+            delivery: null,
             paypalSdkLoaded: false,
             paypalSdkError: false,
             razorpaySdkLoaded: false,
@@ -48,7 +49,8 @@ export default class InstantPurchasePayment extends Component {
                 if (response && response.payment_plan) {
                     await this.setState({
                         status: OPERATION_LOADING_COMPLETED,
-                        paymentPlan: response.payment_plan
+                        paymentPlan: response.payment_plan,
+                        delivery: response.delivery
                     });
                 } else {
                     this.setState({
@@ -143,6 +145,7 @@ export default class InstantPurchasePayment extends Component {
         const {
             status,
             paymentPlan,
+            delivery,
             notification
         } = this.state;
         return (
@@ -151,7 +154,7 @@ export default class InstantPurchasePayment extends Component {
                 <Container style={{ padding: '1em' }} maxWidth='lg'>
                     <Card variant="outlined">
                         {status === OPERATION_LOADING && <ComponentLoader />}
-                        {status === OPERATION_LOADING_ERROR && <div> ORDER NOT FOUND </div>}
+                        {status === OPERATION_LOADING_ERROR && <div> CANNOT RETRIVE PAYMENT PLAN FOR THIS ORDER </div>}
                         {status === OPERATION_LOADING_COMPLETED &&
                             <Grid container>
                                 <Grid item xs={12}>
@@ -317,6 +320,7 @@ export default class InstantPurchasePayment extends Component {
                                                         color={paymentPlan.tinnat.order_details.purchase_items[0].color}
                                                         quantity={paymentPlan.tinnat.order_details.purchase_items[0].quantity}
                                                         picture_links={paymentPlan.tinnat.order_details.purchase_items[0].picture_links}
+                                                        delivery={delivery}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>

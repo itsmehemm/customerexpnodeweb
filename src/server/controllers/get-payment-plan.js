@@ -1,14 +1,17 @@
 const args = require('yargs').argv;
 const PayPalApi = require('../paypal/api');
 const RazorPayApi = require('../razorpay/api');
+const postalpincodeApi = require('../postalpincode');
 const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
 const PaymentPlanModel = require('../modals/PaymentPlanModal');
 const {
     ENVIRONMENT_PRODUCTION,
-    COMPLETED
+    COMPLETED,
+    DELIVERABLE
 } = require('../lib/constants')
 const errorConstants = require('../lib/constants/error-constants');
 const { GET_PAYMENT_PLAN_CONTROLLER } = require('../lib/constants/logging-constants');
+const { constructDeliveryObj } = require('../lib/utils');
 const config = require('../lib/config.json');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
 
@@ -30,6 +33,31 @@ const getPaymentPlan = async (req, res) => {
     if (!instantPurchaseModal.validate()) {
         return res.status(400).send({
             error: errorConstants.INSUFFICIENT_DETAILS_TO_GET_PAYMENT_PLAN
+        });
+    }
+    const pincode = instantPurchaseModal.getShippingAddress() && instantPurchaseModal.getShippingAddress().pincode;
+    let delivery = null;
+    if (pincode) {
+        const address = await postalpincodeApi.load(pincode);
+        if (address && !address.error && address.getPincode()) {
+            const deliveryData = await postalpincodeApi.getDeliveryStatus(address);
+            if (deliveryData.status === DELIVERABLE) {
+                delivery = constructDeliveryObj({
+                    state: address.getState(),
+                    district: address.getDistrict(),
+                    region: address.getRegion(),
+                    place: address.getPlace(),
+                    pincode: address.getPincode(),
+                    status: deliveryData.status,
+                    deliveryTime: deliveryData.deliveryTime
+                });
+
+            }
+        }
+    }
+    if (!delivery) {
+        return res.status(404).send({
+            error: errorConstants.ORDER_NOT_FOUND
         });
     }
     const paymentPlanModel = new PaymentPlanModel();
@@ -70,7 +98,8 @@ const getPaymentPlan = async (req, res) => {
         });
     }
     return res.status(200).send({
-        payment_plan: paymentPlanModel.getData()
+        payment_plan: paymentPlanModel.getData(),
+        delivery: delivery
     });
 };
 

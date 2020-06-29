@@ -18,6 +18,7 @@ export default class OrderSummary extends Component {
             color,
             quantity,
             picture_links,
+            delivery
         } = this.props;
         return (
             <Grid container>
@@ -78,14 +79,30 @@ export default class OrderSummary extends Component {
                         </Grid>
                     </Box>
                     <Divider className="t-extend-hr-2" />
-                    <Box m={2}>
-                        <Typography
-                            icon="local_shipping"
-                            text={"Confirmed delivery in 4 - 7 days"}
-                            variant="body2"
-                            style={{ color: "rgb(5, 153, 54)" }}
-                        />
-                    </Box>
+                    {
+                        delivery &&
+                        delivery.status === 'DELIVERABLE' &&
+                        <Box m={2}>
+                            <Typography
+                                icon="local_shipping"
+                                text={delivery.formatted.delivery_string}
+                                variant="body2"
+                                style={{ color: "rgb(5, 153, 54)" }}
+                            />
+                        </Box>
+                    }
+                    {
+                        delivery &&
+                        delivery.status === 'NOT_DELIVERABLE' &&
+                        <Box m={2}>
+                            <Typography
+                                icon="local_shipping"
+                                text="Sorry, this item is not deliverable to the address."
+                                variant="body2"
+                                style={{ color: "rgb(247, 36, 52)" }}
+                            />
+                        </Box>
+                    }
                 </Grid>
                 <Grid item xs={12}>
                     <Box m={0}> <Divider className="t-extend-hr" /> </Box>

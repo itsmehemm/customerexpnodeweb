@@ -24,6 +24,11 @@ module.exports = {
         message: 'ORDER_PATCHED',
         description: 'The order has been patched successfully'
     },
+    ORDER_PATCH_PENDING: {
+        status: 'PENDING',
+        message: 'ORDER_PATCH_PENDING',
+        description: 'The order patch is pending'
+    },
     PAYMENT_COMPLETED: {
         status: 'COMPLETED',
         message: 'PAYMENT_COMPLETED',

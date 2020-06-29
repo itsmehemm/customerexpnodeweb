@@ -1,5 +1,9 @@
+const postalpincodeApi = require('../postalpincode');
 const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
-const { COMPLETED } = require('../lib/constants');
+const {
+    COMPLETED,
+    DELIVERABLE
+} = require('../lib/constants');
 const apiMessages = require('../lib/constants/api-messages');
 const errorConstants = require('../lib/constants/error-constants');
 const { PATCH_ORDER_BY_ID_CONTROLLER } = require('../lib/constants/logging-constants');
@@ -25,14 +29,28 @@ const patchOrderById = async (req, res) => {
         ...req.body
     });
     if (orderId) {
+        const pincode = instantPurchaseModal.getShippingAddress() && instantPurchaseModal.getShippingAddress().pincode;
+        if (pincode) {
+            const address = await postalpincodeApi.load(pincode);
+            if (address && !address.error && address.getPincode()) {
+                const deliveryData = await postalpincodeApi.getDeliveryStatus(address);
+                if (deliveryData.status === DELIVERABLE) {
+                    return res.status(200).send({
+                        ...apiMessages.ORDER_PATCHED,
+                        id: instantPurchaseModal.getOrderId(),
+                        links: [{
+                            name: 'PAYMENT',
+                            method: 'GET',
+                            href: `/instant-purchase/payment/${orderId}`
+                        }]
+                    });
+                }
+            }
+        }
         return res.status(200).send({
-            ...apiMessages.ORDER_PATCHED,
+            ...apiMessages.ORDER_PATCH_PENDING,
             id: instantPurchaseModal.getOrderId(),
-            links: [{
-                name: 'PAYMENT',
-                method: 'GET',
-                href: `/instant-purchase/payment/${orderId}`
-            }]
+            reason: 'Sorry, we don\'t deliver to this address'
         });
     } else {
         return res.status(500).send({
