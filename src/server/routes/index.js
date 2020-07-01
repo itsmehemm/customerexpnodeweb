@@ -44,7 +44,7 @@ app.get('/logout', logoutSession);
 
 app.use(validateUserSession);
 
-app.get('/me', whoami);
+app.get('/whoami', whoami);
 
 app.use('/api', apiAuthenticator);
 
