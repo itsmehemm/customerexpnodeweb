@@ -7,6 +7,7 @@ const path = require('path');
 const api = require('./api');
 const config = require('../lib/config.json');
 const {
+    whoami,
     validateUserSession,
     logoutSession,
     createSessionWithFacebook,
@@ -42,6 +43,8 @@ app.get('/auth/facebook', createSessionWithFacebook);
 app.get('/logout', logoutSession);
 
 app.use(validateUserSession);
+
+app.get('/me', whoami);
 
 app.use('/api', apiAuthenticator);
 

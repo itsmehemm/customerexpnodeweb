@@ -1,4 +1,5 @@
 module.exports = {
+    whoami: require('./whoami'),
     apiAuthenticator: require('./api-authenticator'),
     createSessionWithFacebook: require('./create-session-with-facebook'),
     logoutSession: require('./logout-session'),
@@ -21,4 +22,4 @@ module.exports = {
     getPaymentPlan: require('./get-payment-plan'),
     razorpayPaymentComplete: require('./razorpay-payment-complete'),
     updateDeliveryPincode: require('./update-delivery-pincode.js')
-}
+};

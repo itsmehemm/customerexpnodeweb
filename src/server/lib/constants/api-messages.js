@@ -43,5 +43,13 @@ module.exports = {
         status: 'COMPLETED',
         message: 'PINCODE_UPDATED',
         description: 'The pincode was successfully updated'
+    },
+    TINNAT_USER: {
+        status: 'COMPLETED',
+        message: 'TINNAT_USER'
+    },
+    GUEST_USER: {
+        status: 'COMPLETED',
+        message: 'GUEST_USER'
     }
 }
