@@ -400,3 +400,11 @@ body {
 .t-extend-hr-2 {
     width: 119% !important;
 }
+
+.fb-logged-in {
+    border-radius: 60px;
+    padding: 1em;
+    background: #1877F5;
+    color: #fff;
+    cursor: pointer;
+}
