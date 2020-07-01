@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '../common/elements/Typography';
-import LoginDialog from '../login/LoginDialog';
-import { getCart } from '../../actions/cart/get-cart';
+// import { getCart } from '../../actions/cart/get-cart';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
@@ -11,6 +10,7 @@ import {
 } from '../../lib/constants';
 import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
+import User from '../user/User';
 
 export default class Header extends Component {
     constructor(props) {
@@ -92,14 +92,8 @@ export default class Header extends Component {
                         <Grid className="t-menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
                             <Typography text="contact" variant="button" display="block" guttertop={"true"} />
                         </Grid>
-                        {/* <Grid className="t-menu-item" onClick={() => this.setState({ login: true })} item xs={1}>
-                            <Typography className="t-text-link-3" text="Login" variant="button" display="block" guttertop={"true"} />
-                        </Grid> */}
-                        <Grid className="t-menu-item" onClick={() => this.setState({ login: true })} item xs={1}>
-                            <div
-                                className="fb-login-button"
-                                {...this.fbAtttributes}
-                            />
+                        <Grid className="t-menu-item" item xs={2}>
+                            <User />
                         </Grid>
                         {/* <Grid className="t-menu-item" onClick={() => window.location = '/viewcart'} item xs={1}>
                             <Typography icon="add_shopping_cart" text={
