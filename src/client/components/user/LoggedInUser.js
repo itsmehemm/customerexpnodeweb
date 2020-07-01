@@ -8,8 +8,18 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import FaceIcon from '@material-ui/icons/Face';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '../common/elements/Typography';
+
+const useStyles = makeStyles({
+    root: {
+        width: 200,
+        color: 'rgb(247, 36, 52)'
+    },
+});
 
 export default function LoggedInUser(props) {
+    const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const handleToggle = () => {
@@ -50,7 +60,7 @@ export default function LoggedInUser(props) {
                 </IconButton>
                 {props.name}
             </Button>
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+            <Popper className={classes.root} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                 {({ TransitionProps, placement }) => (
                     <Grow
                         {...TransitionProps}
@@ -59,7 +69,9 @@ export default function LoggedInUser(props) {
                         <Paper>
                             <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem onClick={(e) => handleClose(e, 'logout')}>Logout</MenuItem>
+                                    <MenuItem className={classes.root} onClick={(e) => handleClose(e, 'logout')}>
+                                        <Typography text="Logout" variant="button" />
+                                    </MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>
