@@ -33,7 +33,9 @@ export const COMPONENT_MAPPER = {
 export const NO_DISCOUNT = 'NO_DISCOUNT';
 export const INSTANT_AMOUNT = 'INSTANT_AMOUNT';
 export const INSTANT_PERCENTAGE = 'INSTANT_PERCENTAGE';
-
-
+export const TINNAT_USER = 'TINNAT_USER';
+export const GUEST_USER = 'GUEST_USER';
+export const LOGGED_IN = 'LOGGED_IN';
+export const LOGGED_OUT = 'LOGGED_OUT';
 
 

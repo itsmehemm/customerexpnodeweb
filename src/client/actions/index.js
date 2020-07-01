@@ -11,4 +11,5 @@ export { default as createInstantOrder } from './create-instant-order';
 export { default as getPaymentPlan } from './get-payment-plan';
 export { default as razorpayPayment } from './razorpay-payment';
 export { default as updateDeliveryPincode } from './update-delivery-pincode';
+export { default as whoami } from './whoami';
 
