@@ -1,6 +1,11 @@
 {
     "environment": "development",
     "production": {
+        "web": {
+            "whoami": {
+                "uri": "http://tinnat.com/whoami"
+            }
+        },
         "api": {
             "v1_get_product_by_id": {
                 "uri": "http://tinnat.com/api/product/"
@@ -50,6 +55,11 @@
         }
     },
     "development": {
+        "web": {
+            "whoami": {
+                "uri": "https://localhost:2003/whoami"
+            }
+        },
         "api": {
             "v1_get_product_by_id": {
                 "uri": "https://localhost:2003/api/product/"
