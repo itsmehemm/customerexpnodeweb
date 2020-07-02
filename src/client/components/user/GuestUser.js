@@ -7,7 +7,7 @@ import Login from './Login';
 
 const ActionButton = withStyles(() => ({
     root: {
-        color: '#000',
+        color: 'rgb(247, 36, 52)',
         border: '2px solid rgb(247, 36, 52)',
         backgroundColor: '#fff',
         '&:hover': {
