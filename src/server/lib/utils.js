@@ -137,6 +137,9 @@ const getAPIName = (req) => {
     if (/^\/activity\/payment\/.*$/.test(url)) {
         return API_NAME.GET_PAYMENT_ACTIVITY;
     }
+    if (/^\/activity\/search\/transactions$/.test(url)) {
+        return API_NAME.SEARCH_TRANSACTIONS;
+    }
     return null;
 };
 

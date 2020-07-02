@@ -23,5 +23,6 @@ module.exports = {
     getPaymentPlan: require('./get-payment-plan'),
     razorpayPaymentComplete: require('./razorpay-payment-complete'),
     updateDeliveryPincode: require('./update-delivery-pincode'),
-    getPaymentActivity: require('./get-payment-activity')
+    getPaymentActivity: require('./get-payment-activity'),
+    searchTransactions: require('./search-transactions')
 };

@@ -38,6 +38,7 @@
     "memcached": "^2.2.2",
     "memjs": "^1.2.2",
     "memory-cache": "^0.2.0",
+    "moment-timezone": "^0.5.31",
     "mongodb": "^2.2.36",
     "path": "^0.12.7",
     "pug": "^3.0.0",

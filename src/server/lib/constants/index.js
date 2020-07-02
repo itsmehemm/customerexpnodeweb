@@ -38,7 +38,8 @@ module.exports = {
         GET_PAYMENT_PLAN: 'get_payment_plan',
         RAZORPAY_PAYMENT_COMPLETE: 'razorpay_payment_complete',
         UPDATE_DELIVERY_PINCODE: 'update_delivery_pincode',
-        GET_PAYMENT_ACTIVITY: 'get_payment_activity'
+        GET_PAYMENT_ACTIVITY: 'get_payment_activity',
+        SEARCH_TRANSACTIONS: 'search_transactions'
     },
     SOFT_DESCRIPTOR: 'Tinnos India',
     ORDER_INIT: 'INITIAL',

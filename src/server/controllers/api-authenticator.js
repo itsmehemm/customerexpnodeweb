@@ -32,7 +32,7 @@ const apiAuthenticator = async (req, res, next) => {
         req.user = {
             name: 'TEST TEST',
             email: 'hemanthprasathmurali@gmail.com',
-            accountType: 'PERSONAL',
+            accountType: 'ADMIN',
             authenticationParty: 'TEST',
             accountId: '123456789'
         };

@@ -60,5 +60,13 @@ module.exports = {
     PAYMENT_ACTIVITY_FOUND: {
         status: 'COMPLETED',
         message: 'PAYMENT_ACTIVITY_FOUND'
+    },
+    TRANSACTIONS_NOT_FOUND: {
+        status: 'TRANSACTIONS_NOT_FOUND',
+        message: 'There were no transactions that matches the filter'
+    },
+    OPERATION_COMPLETED: {
+        status: 'COMPLETED',
+        message: 'The requested operation has been completed'
     }
 }
