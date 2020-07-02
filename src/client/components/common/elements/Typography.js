@@ -5,7 +5,7 @@ import Icon from '../elements/Icon';
 import FacebookIcon from '@material-ui/icons/Facebook';
 
 const _Typography = (props) => {
-    const {
+    let {
         width = 12,
         icon,
         icon_type = "default",
@@ -13,16 +13,24 @@ const _Typography = (props) => {
         text, style, iconStyle,
         align,
         size = "h6",
-        component = "h2"
+        component = "h2",
+        variant
     } = props;
+    if (variant === 'body1_bold') {
+        variant = 'body1';
+        style = {
+            ...style,
+            fontWeight: 900
+        };
+    }
     return (
         <Grid item xs={width}>
             <Typography
                 style={style}
-                variant={size}
                 align={align}
                 component={component}
                 {...props}
+                variant={variant}
             >
                 {icon_type === 'default' && icon_pos === 'front' && icon && <> <Icon name={icon} /> {text} </>}
                 {icon_type === 'default' && icon_pos === 'back' && icon && <> {text} <Icon name={icon} /> </>}

@@ -3,6 +3,7 @@ export { default as getProductById } from './get-product-by-id';
 export { default as getFeaturedProducts } from './get-featured-products';
 export { default as getFilteredProducts } from './get-filtered-products';
 export { default as getRecentlyViewedProducts } from './get-recently-viewed-products';
+export { default as getPaymentActivity } from './get-payment-activity';
 export { default as addProductToRecentView } from './add-product-to-recent-view';
 export { default as updateProductById } from './update-product-by-id';
 export { default as getOrderDetails } from './get-order-details';

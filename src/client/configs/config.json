@@ -51,6 +51,9 @@
             },
             "v1_post_update_pincode": {
                 "uri": "http://tinnat.com/api/delivery/update/pincode"
+            },
+            "v1_get_payment_activity": {
+                "uri": "http://tinnat.com/api/activity/payment/"
             }
         }
     },
@@ -105,6 +108,9 @@
             },
             "v1_post_update_pincode": {
                 "uri": "https://localhost:2003/api/delivery/update/pincode"
+            },
+            "v1_get_payment_activity": {
+                "uri": "https://localhost:2003/api/activity/payment/"
             }
         }
     }

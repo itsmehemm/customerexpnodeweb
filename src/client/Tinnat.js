@@ -12,6 +12,7 @@ import InstantPurchasePayment from './components/payment/InstantPurchasePayment'
 import InstantPurchaseConfirmation from './components/payment/InstantPurchaseConfirmation';
 import Checkout from './components/checkout/Checkout';
 import ProductDetailWrapper from './components/product-detail/ProductDetailWrapper';
+import PaymentActivity from './components/activity/Payment';
 import Internal from './components/internal';
 import './styles/index.css';
 
@@ -31,6 +32,7 @@ export default class Tinnat extends Component {
                 <Route exact path="/instant-purchase/payment/:orderid" component={InstantPurchasePayment} />
                 <Route exact path="/instant-purchase/complete/:orderid" component={InstantPurchaseConfirmation} />
                 <Route exact path="/instant-purchase/:orderid" component={InstantPurchase} />
+                <Route exact path="/activity/payment/:transactionid" component={PaymentActivity} />
                 <Route path="/internal" component={Internal} />
                 <Footer />
             </Router >

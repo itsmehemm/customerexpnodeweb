@@ -37,5 +37,4 @@ export const TINNAT_USER = 'TINNAT_USER';
 export const GUEST_USER = 'GUEST_USER';
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
-
-
+export const PAYMENT_ACTIVITY_NOT_FOUND = 'PAYMENT_ACTIVITY_NOT_FOUND';
