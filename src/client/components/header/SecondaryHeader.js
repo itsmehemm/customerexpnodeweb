@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '../common/elements/Typography';
+import User from '../user/User';
 import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
 
@@ -27,17 +28,17 @@ export default class SecondaryHeader extends Component {
                         <Grid className="logo" onClick={() => window.location = '/'} item xs={1}>
                             <img src={logo} height="80px" width="120px" />
                         </Grid>
-                        <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/products'} item xs={1}>
+                        <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/products'} item xs={2}>
                             <Typography variant="button" display="block" guttertop="true" text="Products" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/internal/warehouse/product/add'} item xs={2}>
                             <Typography variant="button" display="block" guttertop="true" text="Add Product" />
                         </Grid>
-                        <Grid className="t-menu-item" onClick={() => window.location = '/help'} item xs={1}>
-                            <Typography variant="button" display="block" guttertop="true" text="Help" />
+                        <Grid className="t-menu-item" onClick={() => window.location = '/internal/activity/transactions'} item xs={2}>
+                            <Typography variant="button" display="block" guttertop="true" text="Transactions" />
                         </Grid>
-                        <Grid className="t-menu-item" onClick={() => window.location = '/contactus'} item xs={1}>
-                            <Typography variant="button" display="block" guttertop="true" text="Contact" />
+                        <Grid className="t-menu-item" item xs={2}>
+                            <User />
                         </Grid>
                     </Grid>
                 </Container>

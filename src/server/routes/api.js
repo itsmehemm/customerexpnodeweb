@@ -62,6 +62,6 @@ app.post('/delivery/update/pincode', updateDeliveryPincode);
 
 app.get('/activity/payment/:transactionId', getPaymentActivity);
 
-app.get('/activity/search/transactions', searchTransactions);
+app.post('/activity/search/transactions', searchTransactions);
 
 module.exports = app;
