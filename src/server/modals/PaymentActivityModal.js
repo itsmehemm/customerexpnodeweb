@@ -44,6 +44,7 @@ class PaymentActivityModal {
             return {
                 id: purchaseItem.id,
                 url: purchaseItem.url,
+                name: purchaseItem.name,
                 theme_id: purchaseItem.theme_id,
                 size: purchaseItem.size,
                 color: purchaseItem.color,
