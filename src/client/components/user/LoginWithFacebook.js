@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
+import ComponentLoader from '../common/loaders/ComponentLoader';
 import Typography from '../common/elements/Typography';
 import {
+    OPERATION_LOADING,
+    OPERATION_LOADING_COMPLETED,
     LOGGED_IN,
     LOGGED_OUT
 } from '../../lib/constants';
@@ -10,7 +13,8 @@ export default class LoginWithFacebook extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            status: null,
+            status: OPERATION_LOADING,
+            login_status: null,
             facebookResponse: null
         }
     }
@@ -21,7 +25,8 @@ export default class LoginWithFacebook extends Component {
                 if (response && response.status === 'connected' && response.authResponse) {
                     FB.api('/me', async (user) => {
                         await this.setState({
-                            status: LOGGED_IN,
+                            status: OPERATION_LOADING_COMPLETED,
+                            login_status: LOGGED_IN,
                             facebookResponse: {
                                 ...response,
                                 user: user
@@ -30,7 +35,8 @@ export default class LoginWithFacebook extends Component {
                     })
                 } else {
                     await this.setState({
-                        status: null,
+                        status: OPERATION_LOADING_COMPLETED,
+                        login_status: null,
                         facebookResponse: null
                     });
                 }
@@ -38,19 +44,26 @@ export default class LoginWithFacebook extends Component {
         }
     }
 
-    logout = () => {
+    logout = async () => {
+        await this.setState({
+            status: OPERATION_LOADING
+        });
         if (FB) {
-            FB.getLoginStatus(response => {
+            FB.getLoginStatus(async response => {
                 if (response && response.status === 'connected' && response.authResponse) {
-                    FB.logout(response => {
+                    FB.logout(r => {
                         this.setState({
-                            status: null,
+                            status: OPERATION_LOADING_COMPLETED,
+                            login_status: null,
                             facebookResponse: null
                         });
                         fetch('/logout');
                     });
                 } else {
-                    fetch('/logout');
+                    await fetch('/logout');
+                    await this.setState({
+                        status: OPERATION_LOADING_COMPLETED
+                    });
                 }
             });
         }
@@ -62,7 +75,7 @@ export default class LoginWithFacebook extends Component {
                 if (response && response.status === 'connected' && response.authResponse) {
                     FB.api('/me', async (user) => {
                         await this.setState({
-                            status: LOGGED_IN,
+                            login_status: LOGGED_IN,
                             facebookResponse: {
                                 ...response,
                                 user: user
@@ -75,7 +88,7 @@ export default class LoginWithFacebook extends Component {
                         if (response && response.status === 'connected' && response.authResponse) {
                             FB.api('/me', async (user) => {
                                 await this.setState({
-                                    status: LOGGED_IN,
+                                    login_status: LOGGED_IN,
                                     facebookResponse: {
                                         ...response,
                                         user: user
@@ -106,9 +119,14 @@ export default class LoginWithFacebook extends Component {
     render() {
         const {
             status,
+            login_status,
             facebookResponse
         } = this.state;
         switch (status) {
+            case OPERATION_LOADING:
+                return <ComponentLoader />;
+        };
+        switch (login_status) {
             case LOGGED_IN:
                 return (
                     <Grid container align="center" spacing={2}>
