@@ -207,6 +207,7 @@ class InstantPurchaseModal {
                 });
                 purchase_items.push({
                     id: product.id,
+                    name: product.name,
                     url: getProductUrl(product.id),
                     theme_id: theme.id,
                     size: theme.size,
@@ -351,7 +352,7 @@ class InstantPurchaseModal {
     async updatePaymentDetails(payment) {
         if (payment) {
             this.payment_information = {
-                order_status: payment.order_status,
+                status: payment.status,
                 transaction_id: payment.transaction_id,
                 processor: payment.processor,
                 processor_order_id: payment.processor_order_id,
