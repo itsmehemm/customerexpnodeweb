@@ -20,9 +20,11 @@ const {
 const { INSTANT_PURCHASE_MODAL } = require('../lib/constants/logging-constants');
 
 class InstantPurchaseModal {
-    constructor() {
+    constructor(accountId) {
+        this.account_id = accountId;
         this.id = null;
-        this.status = null;
+        this.transaction_id = null;
+        this.order_status = null;
         this.personal_information = null;
         this.purchase_items = [];
         this.amount = null;
@@ -46,12 +48,13 @@ class InstantPurchaseModal {
         this.shipping_address = this._getShippingAddress(d);
         this.time_stamp = new Date().getTime();
         if (this.billing_address && this.shipping_address) {
-            this.status = ORDER_PAYMENT_PENDING;
+            this.order_status = ORDER_PAYMENT_PENDING;
         } else {
-            this.status = ORDER_INIT;
+            this.order_status = ORDER_INIT;
         }
         this.data = {
-            status: this.status,
+            account_id: this.account_id,
+            order_status: this.order_status,
             personal_information: this.personal_information,
             purchase_items: this.purchase_items,
             amount: this.amount,
@@ -70,9 +73,11 @@ class InstantPurchaseModal {
         const data = JSON.parse(cache.get(d.id));
         console.log(INSTANT_PURCHASE_MODAL, 'order fetched from cache:', JSON.stringify(data));
         if (!data) return null;
+        if (data.account_id !== this.account_id) return null;
         this.id = d.id;
         this.data = data;
-        this.status = data.status;
+        this.account_id = data.account_id;
+        this.order_status = data.order_status;
         this.personal_information = data.personal_information;
         this.purchase_items = data.purchase_items;
         this.amount = data.amount;
@@ -125,13 +130,13 @@ class InstantPurchaseModal {
             }
         }
         if (this.billing_address && this.shipping_address) {
-            this.status = ORDER_PAYMENT_PENDING;
+            this.order_status = ORDER_PAYMENT_PENDING;
         } else {
-            this.status = ORDER_INIT;
+            this.order_status = ORDER_INIT;
         }
         this.data = {
             ...this.data,
-            status: this.status,
+            order_status: this.order_status,
             personal_information: this.personal_information,
             billing_address: this.billing_address,
             shipping_address: this.shipping_address,
@@ -147,9 +152,11 @@ class InstantPurchaseModal {
         console.log(INSTANT_PURCHASE_MODAL, 'load order details from cache for id: ', id);
         const data = JSON.parse(cache.get(id));
         if (!data) return null;
+        if (data.account_id !== this.account_id) return null;
         this.id = id;
         this.data = data;
-        this.status = data.status;
+        this.account_id = data.account_id;
+        this.order_status = data.order_status;
         this.personal_information = data.personal_information;
         this.purchase_items = data.purchase_items;
         this.amount = data.amount;
@@ -344,7 +351,7 @@ class InstantPurchaseModal {
     async updatePaymentDetails(payment) {
         if (payment) {
             this.payment_information = {
-                status: payment.status,
+                order_status: payment.order_status,
                 transaction_id: payment.transaction_id,
                 processor: payment.processor,
                 processor_order_id: payment.processor_order_id,
@@ -358,6 +365,29 @@ class InstantPurchaseModal {
         }
         await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
         console.log(INSTANT_PURCHASE_MODAL, 'order detail patched & persisted with payment details:', cache.get(this.id));
+    }
+
+    async updateTransactionId(transactionId) {
+        this.transaction_id = transactionId;
+        this.data = {
+            ...this.data,
+            transaction_id: this.transaction_id
+        };
+        await this._persist();
+    }
+
+    async updateOrderStatus(status) {
+        this.order_status = status;
+        this.data = {
+            ...this.data,
+            order_status: this.order_status
+        };
+        await this._persist();
+    }
+
+    async _persist() {
+        await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
+        console.log(INSTANT_PURCHASE_MODAL, 'order detail persisted:', cache.get(this.id));
     }
 
     validate() {
@@ -393,7 +423,7 @@ class InstantPurchaseModal {
 
     getShippingAddress() { return this.shipping_address; }
 
-    getStatus() { return this.status; }
+    getOrderStatus() { return this.order_status; }
 
     getPaymentInformation() { return this.payment_information; }
 };

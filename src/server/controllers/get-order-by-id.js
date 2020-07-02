@@ -8,11 +8,12 @@ const { response } = require('express');
 
 const getOrderById = async (req, res) => {
     console.log(GET_ORDER_BY_ID_CONTROLLER, `processing request to get order by id: ${req.params.id}.`);
-    const instantPurchaseModal = new InstantPurchaseModal();
+    const { accountId } = req && req.user;
+    const instantPurchaseModal = new InstantPurchaseModal(accountId);
     instantPurchaseModal.load(req.params.id);
     if (instantPurchaseModal.getOrderId()) {
         let delivery = null;
-        if (instantPurchaseModal.getStatus() !== ORDER_COMPLETED) {
+        if (instantPurchaseModal.getOrderStatus() !== ORDER_COMPLETED) {
             const shippingAddress = instantPurchaseModal.getShippingAddress();
             if (shippingAddress && shippingAddress.pincode) {
                 const address = await postalpincodeApi.load(shippingAddress.pincode);

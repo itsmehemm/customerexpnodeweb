@@ -17,7 +17,8 @@ const environment = args.env || ENVIRONMENT_PRODUCTION;
 
 const getPaymentPlan = async (req, res) => {
     console.log(GET_PAYMENT_PLAN_CONTROLLER, `processing request to get payment plan for order id: ${req.params.id}.`);
-    const instantPurchaseModal = new InstantPurchaseModal();
+    const { accountId } = req && req.user;
+    const instantPurchaseModal = new InstantPurchaseModal(accountId);
     instantPurchaseModal.load(req.params.id);
     if (!instantPurchaseModal.getOrderId()) {
         return res.status(404).send({

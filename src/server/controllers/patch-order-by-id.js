@@ -11,7 +11,8 @@ const { PATCH_ORDER_BY_ID_CONTROLLER } = require('../lib/constants/logging-const
 const patchOrderById = async (req, res) => {
     console.log(PATCH_ORDER_BY_ID_CONTROLLER, `processing request to patch order by id: ${req.params.id}`);
     console.log(PATCH_ORDER_BY_ID_CONTROLLER, `patch request received: ${JSON.stringify(req.body)}`);
-    const instantPurchaseModal = new InstantPurchaseModal();
+    const { accountId } = req && req.user;
+    const instantPurchaseModal = new InstantPurchaseModal(accountId);
     instantPurchaseModal.load(req.params.id);
     if (!instantPurchaseModal.getOrderId()) {
         return res.status(404).send({

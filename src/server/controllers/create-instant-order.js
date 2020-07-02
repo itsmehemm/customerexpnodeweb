@@ -14,7 +14,8 @@ const createInstantOrder = async (req, res) => {
                 error: errorConstants.INVALID_DATA
             });
         }
-        const instantPurchaseModal = new InstantPurchaseModal();
+        const { accountId } = req && req.user;
+        const instantPurchaseModal = new InstantPurchaseModal(accountId);
         const orderId = await instantPurchaseModal.create(req.body);
         if (!orderId) {
             return res.status(404).send({
