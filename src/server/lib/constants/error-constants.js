@@ -58,5 +58,17 @@ module.exports = {
     NOT_DELIVERABLE: {
         message: 'NOT_DELIVERABLE',
         description: 'Sorry, we don\'t deliver product to this pincode at this time'
+    },
+    PAYMENT_ACTIVITY_NOT_FOUND: {
+        message: 'PAYMENT_ACTIVITY_NOT_FOUND',
+        description: 'Sorry, the activity you\'re looking for doesn\'t exist'
+    },
+    UNAUTHORIZED_REQUEST: {
+        message: 'UNAUTHORIZED_REQUEST',
+        description: 'The user is not authorized to access this resource'
+    },
+    PERMISSION_DENIED: {
+        message: 'PERMISSION_DENIED',
+        description: 'The user doesn\'t have the required permissions to access this resource'
     }
 };

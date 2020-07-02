@@ -1,6 +1,9 @@
 const args = require('yargs').argv;
 const config = require('../lib/config.json');
-const { ENVIRONMENT_PRODUCTION } = require('../lib/constants')
+const {
+    ENVIRONMENT_PRODUCTION,
+    API_NAME
+} = require('../lib/constants')
 const environment = args.env || ENVIRONMENT_PRODUCTION;
 
 const getProductUrl = (id) => {
@@ -73,10 +76,77 @@ const constructDeliveryObj = (delivery) => {
     return null;
 }
 
+const isAPIRequest = (req) => {
+    if (req && req.url) {
+        const url = req.url;
+        return /^\/api\/.*$/.test(url);
+    }
+    return false;
+};
+
+const isGuestRequestAllowed = (req) => {
+    return true;
+};
+
+const getAPIName = (req) => {
+    const url = req.url;
+    const method = req.method;
+    if (!url) return null;
+    if (/^\/products$/.test(url)) {
+        return API_NAME.GET_PRODUCTS;
+    }
+    if (/^\/products\/featured$/.test(url)) {
+        return API_NAME.GET_FEATURED_PRODUCTS;
+    }
+    if (/^\/products\/filter$/.test(url)) {
+        return API_NAME.GET_FILTERED_PRODUCTS;
+    }
+    if (/^\/products\/category\/.*$/.test(url)) {
+        return API_NAME.GET_PRODUCTS_BY_CATEGORY;
+    }
+    if (/^\/product\/add$/.test(url)) {
+        return API_NAME.ADD_PRODUCT;
+    }
+    if (/^\/product\/.*\/update$/.test(url)) {
+        return API_NAME.EDIT_PRODUCT_BY_ID;
+    }
+    if (/^\/product\/.*\/remove$/.test(url)) {
+        return API_NAME.REMOVE_PRODUCT_BY_ID;
+    }
+    if (/^\/product\/.*$/.test(url)) {
+        return API_NAME.GET_PRODUCT_BY_ID;
+    }
+    if (/^\/create\/order$/.test(url)) {
+        return API_NAME.CREATE_INSTANT_ORDER;
+    }
+    if (/^\/order\/.*$/.test(url) && method === 'GET') {
+        return API_NAME.GET_ORDER_BY_ID;
+    }
+    if (/^\/order\/.*$/.test(url) && method === 'PATCH') {
+        return API_NAME.PATCH_ORDER_BY_ID;
+    }
+    if (/^\/instant-purchase\/.*\/payment\/plan$/.test(url)) {
+        return API_NAME.GET_PAYMENT_PLAN;
+    }
+    if (/^\/instant-purchase\/.*\/payment\/razorpay$/.test(url)) {
+        return API_NAME.RAZORPAY_PAYMENT_COMPLETE;
+    }
+    if (/^\/delivery\/update\/pincode$/.test(url)) {
+        return API_NAME.UPDATE_DELIVERY_PINCODE;
+    }
+    if (/^\/activity\/payment\/.*$/.test(url)) {
+        return API_NAME.GET_PAYMENT_ACTIVITY;
+    }
+    return null;
+};
+
 module.exports = {
     getProductUrl: getProductUrl,
     constructProductLink: constructProductLink,
     getDefaultThemeObj: getDefaultThemeObj,
     getFormattedProductInfo: getFormattedProductInfo,
-    constructDeliveryObj: constructDeliveryObj
+    constructDeliveryObj: constructDeliveryObj,
+    isAPIRequest: isAPIRequest,
+    isGuestRequestAllowed: isGuestRequestAllowed,
+    getAPIName: getAPIName
 };

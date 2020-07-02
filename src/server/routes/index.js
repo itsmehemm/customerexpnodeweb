@@ -11,7 +11,8 @@ const {
     validateUserSession,
     logoutSession,
     createSessionWithFacebook,
-    apiAuthenticator
+    apiAuthenticator,
+    checkUserAPIPermission
 } = require('../controllers');
 
 const app = express();
@@ -46,7 +47,7 @@ app.use(validateUserSession);
 
 app.get('/whoami', whoami);
 
-app.use('/api', apiAuthenticator);
+app.use('/api', apiAuthenticator, checkUserAPIPermission);
 
 app.use('/api', api);
 

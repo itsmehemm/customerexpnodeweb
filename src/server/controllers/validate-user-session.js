@@ -1,16 +1,27 @@
 const { VALIDATE_USER_SESSION_CONTROLLER } = require('../lib/constants/logging-constants');
+const {
+    isAPIRequest,
+    isGuestRequestAllowed
+} = require('../lib/utils');
 
 const validateUserSession = (req, res, next) => {
-    console.log(VALIDATE_USER_SESSION_CONTROLLER, `Validating user session for web request`);
-    if (req && req.session && req.session.sessionId) {
-        console.log(VALIDATE_USER_SESSION_CONTROLLER, `Session found: ${JSON.stringify(req.session)}`);
-        req.user = req.session.user;
-        console.log(VALIDATE_USER_SESSION_CONTROLLER, `Proceeding with the existing session.`);
+    console.log(VALIDATE_USER_SESSION_CONTROLLER, `validating user session for request: ${req.url}`);
+    if (isAPIRequest(req)) {
+        console.log(VALIDATE_USER_SESSION_CONTROLLER, `API request received`);
         return next();
     }
-    console.log(VALIDATE_USER_SESSION_CONTROLLER, `No session found.`);
-    // logic to allow anonymous session or redirect to home page
-    return next();
+    if (req && req.session && req.session.sessionId) {
+        console.log(VALIDATE_USER_SESSION_CONTROLLER, `session found: ${JSON.stringify(req.session)}`);
+        req.user = req.session.user;
+        return next();
+    }
+    console.log(VALIDATE_USER_SESSION_CONTROLLER, `no session found.`);
+    if (isGuestRequestAllowed(req)) {
+        console.log(VALIDATE_USER_SESSION_CONTROLLER, `guest request allowed.`);
+        return next();
+    }
+    console.log(VALIDATE_USER_SESSION_CONTROLLER, `guest request not allowed. redirecting to home page`);
+    return res.redirect('/');
 };
 
 module.exports = validateUserSession;

@@ -23,6 +23,23 @@ module.exports = {
     COUNTRY_CODE: {
         IN: 'IN'
     },
+    API_NAME: {
+        GET_PRODUCTS: 'get_products',
+        GET_FEATURED_PRODUCTS: 'get_featured_products',
+        GET_FILTERED_PRODUCTS: 'get_filtered_products',
+        GET_PRODUCTS_BY_CATEGORY: 'get_products_by_category',
+        ADD_PRODUCT: 'add_product',
+        GET_PRODUCT_BY_ID: 'get_product_by_id',
+        EDIT_PRODUCT_BY_ID: 'edit_product_by_id',
+        REMOVE_PRODUCT_BY_ID: 'remove_product_by_id',
+        CREATE_INSTANT_ORDER: 'create_instant_order',
+        GET_ORDER_BY_ID: 'get_order_by_id',
+        PATCH_ORDER_BY_ID: 'patch_order_by_id',
+        GET_PAYMENT_PLAN: 'get_payment_plan',
+        RAZORPAY_PAYMENT_COMPLETE: 'razorpay_payment_complete',
+        UPDATE_DELIVERY_PINCODE: 'update_delivery_pincode',
+        GET_PAYMENT_ACTIVITY: 'get_payment_activity'
+    },
     SOFT_DESCRIPTOR: 'Tinnos India',
     ORDER_INIT: 'INITIAL',
     RECEIPT_PREFIX: 'R-',
