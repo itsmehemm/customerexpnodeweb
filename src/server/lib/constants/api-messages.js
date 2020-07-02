@@ -39,6 +39,11 @@ module.exports = {
         message: 'PAYMENT_FAILED',
         description: 'There was an error processing your payment'
     },
+    PAYMENT_PENDING: {
+        status: 'COMPLETED',
+        message: 'PAYMENT_PENDING',
+        description: 'The payment is pending. You\'ll be notified once the payment is received'
+    },
     PINCODE_UPDATED: {
         status: 'COMPLETED',
         message: 'PINCODE_UPDATED',
@@ -51,5 +56,9 @@ module.exports = {
     GUEST_USER: {
         status: 'COMPLETED',
         message: 'GUEST_USER'
+    },
+    PAYMENT_ACTIVITY_FOUND: {
+        status: 'COMPLETED',
+        message: 'PAYMENT_ACTIVITY_FOUND'
     }
 }

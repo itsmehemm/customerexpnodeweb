@@ -17,7 +17,8 @@ const {
     patchOrderById,
     getPaymentPlan,
     razorpayPaymentComplete,
-    updateDeliveryPincode
+    updateDeliveryPincode,
+    getPaymentActivity
 } = require('../controllers');
 
 const app = express();
@@ -57,5 +58,7 @@ app.get('/instant-purchase/:id/payment/plan', getPaymentPlan);
 app.post('/instant-purchase/:id/payment/razorpay', razorpayPaymentComplete);
 
 app.post('/delivery/update/pincode', updateDeliveryPincode);
+
+app.get('/activity/payment/:transactionId', getPaymentActivity);
 
 module.exports = app;

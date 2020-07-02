@@ -6,9 +6,11 @@ const {
     ENVIRONMENT_PRODUCTION,
     COMPLETED,
     RAZORPAY,
-    MAILSERVICE
+    MAILSERVICE,
+    status
 } = require('../lib/constants')
 const InstantPurchaseModal = require('../modals/InstantPurchaseModal');
+const PaymentActivityModal = require('../modals/PaymentActivityModal');
 const errorConstants = require('../lib/constants/error-constants');
 const apiMessages = require('../lib/constants/api-messages');
 const config = require('../lib/config.json');
@@ -17,7 +19,8 @@ const environment = args.env || ENVIRONMENT_PRODUCTION;
 const razorpayPaymentComplete = async (req, res) => {
     console.log(RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION, `processing request to complete payment for order id: ${req.params.id}.`);
     console.log(RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION, `razorpay payment complete received: ${JSON.stringify(req.body)}.`);
-    const instantPurchaseModal = new InstantPurchaseModal();
+    const { accountId } = req && req.user;
+    const instantPurchaseModal = new InstantPurchaseModal(accountId);
     instantPurchaseModal.load(req.params.id);
     if (!instantPurchaseModal.getOrderId()) {
         return res.status(404).send({
@@ -61,6 +64,18 @@ const razorpayPaymentComplete = async (req, res) => {
                 if (to) {
                     service.send(to, 'Payment received', JSON.stringify(order));
                 }
+                const paymentActivity = new PaymentActivityModal(accountId);
+                await paymentActivity.buildWithOrderId(instantPurchaseModal.getOrderId());
+                const activityResponse = await paymentActivity.persist();
+                console.log(JSON.stringify(activityResponse))
+                if (!activityResponse || (activityResponse && activityResponse.status === status.FAILURE)) {
+                    return res.status(500).send({
+                        ...apiMessages.PAYMENT_PENDING,
+                        ...instantPurchaseModal.getOrder(),
+                    });
+                }
+                await instantPurchaseModal.updateOrderStatus(COMPLETED);
+                await instantPurchaseModal.updateTransactionId(paymentActivity.getTransactionId());
                 return res.status(200).send({
                     ...apiMessages.PAYMENT_COMPLETED,
                     ...instantPurchaseModal.getOrder(),

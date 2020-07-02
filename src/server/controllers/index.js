@@ -1,6 +1,7 @@
 module.exports = {
     whoami: require('./whoami'),
     apiAuthenticator: require('./api-authenticator'),
+    checkUserAPIPermission: require('./check-user-api-permission'),
     createSessionWithFacebook: require('./create-session-with-facebook'),
     logoutSession: require('./logout-session'),
     addProduct: require('./add-product'),
@@ -21,5 +22,6 @@ module.exports = {
     patchOrderById: require('./patch-order-by-id'),
     getPaymentPlan: require('./get-payment-plan'),
     razorpayPaymentComplete: require('./razorpay-payment-complete'),
-    updateDeliveryPincode: require('./update-delivery-pincode.js')
+    updateDeliveryPincode: require('./update-delivery-pincode'),
+    getPaymentActivity: require('./get-payment-activity')
 };
