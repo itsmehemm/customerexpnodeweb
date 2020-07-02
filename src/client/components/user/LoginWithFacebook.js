@@ -69,7 +69,10 @@ export default class LoginWithFacebook extends Component {
         }
     }
 
-    login = () => {
+    login = async () => {
+        await this.setState({
+            status: OPERATION_LOADING
+        });
         if (FB) {
             FB.getLoginStatus(response => {
                 if (response && response.status === 'connected' && response.authResponse) {
