@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '../common/elements/Typography';
@@ -51,7 +50,7 @@ export default class LoginWithFacebook extends Component {
                         fetch('/logout');
                     });
                 } else {
-                    this.tinnatLogout();
+                    fetch('/logout');
                 }
             });
         }
@@ -69,7 +68,8 @@ export default class LoginWithFacebook extends Component {
                                 user: user
                             }
                         });
-                    })
+                        this.tinnatLogin();
+                    });
                 } else {
                     FB.login(response => {
                         if (response && response.status === 'connected' && response.authResponse) {
