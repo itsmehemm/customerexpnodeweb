@@ -2,9 +2,12 @@ const args = require('yargs').argv;
 const config = require('../lib/config.json');
 const {
     ENVIRONMENT_PRODUCTION,
-    API_NAME
+    API_NAME,
+    WEB_NAME,
+    GUEST
 } = require('../lib/constants')
 const environment = args.env || ENVIRONMENT_PRODUCTION;
+const webPermissions = require('./permissions/web.json');
 
 const getProductUrl = (id) => {
     let url = config.tinnat[environment].url.v1_get_product_by_id;
@@ -85,7 +88,72 @@ const isAPIRequest = (req) => {
 };
 
 const isGuestRequestAllowed = (req) => {
-    return true;
+    const webName = getWebName(req);
+    console.log('checkUserWebPermission', `web: ${webName}`);
+    const web = webPermissions[webName];
+    if (web && Array.isArray(web.permissions)) {
+        console.log('checkUserWebPermission', `available permissions: ${web.permissions}`);
+        if (web.permissions.includes(GUEST)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+};
+
+const checkUserWebPermission = (req) => {
+    const webName = getWebName(req);
+    console.log('checkUserWebPermission', `web resource: ${webName}`);
+    const web = webPermissions[webName];
+    if (web && Array.isArray(web.permissions)) {
+        console.log('checkUserWebPermission', `available permissions: ${web.permissions}`);
+        const accountType = req && req.user && req.user.accountType;
+        console.log('checkUserWebPermission', `accountType: ${accountType}`);
+        if (web.permissions.includes(accountType)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+};
+
+const getWebName = (req) => {
+    const url = req.url;
+    if (!url) return null;
+    if (/^\/product\/.*$/.test(url)) {
+        return WEB_NAME.GET_PRODUCT;
+    }
+    if (/^\/whoami$/.test(url)) {
+        return WEB_NAME.WHOAMI;
+    }
+    if (/^\/home$/.test(url)) {
+        return WEB_NAME.HOME;
+    }
+    if (/^\/about$/.test(url)) {
+        return WEB_NAME.ABOUT;
+    }
+    if (/^\/product\/.*$/.test(url)) {
+        return WEB_NAME.GET_PRODUCTS;
+    }
+    if (/^\/help$/.test(url)) {
+        return WEB_NAME.HELP;
+    }
+    if (/^\/contactus$/.test(url)) {
+        return WEB_NAME.CONTACTUS;
+    }
+    if (/^\/instant-purchase\/payment\/.*$/.test(url)) {
+        return WEB_NAME.INSTANT_PURCHASE_PAYMENT;
+    }
+    if (/^\/instant-purchase\/complete\/.*$/.test(url)) {
+        return WEB_NAME.INSTANT_PURCHASE_CONFIRMATION;
+    }
+    if (/^\/instant-purchase\/.*$/.test(url)) {
+        return WEB_NAME.INSTANT_PURCHASE_ORDER;
+    }
+    if (/^\/activity\/payment\/.*$/.test(url)) {
+        return WEB_NAME.GET_PAYMENT_ACTIVITY;
+    }
+    return null;
 };
 
 const getAPIName = (req) => {
@@ -95,7 +163,7 @@ const getAPIName = (req) => {
     if (/^\/products$/.test(url)) {
         return API_NAME.GET_PRODUCTS;
     }
-    if (/^\/products\/featured$/.test(url)) {
+    if (/^\/products\/featured/.test(url)) {
         return API_NAME.GET_FEATURED_PRODUCTS;
     }
     if (/^\/products\/filter$/.test(url)) {
@@ -154,5 +222,6 @@ module.exports = {
     constructDeliveryObj: constructDeliveryObj,
     isAPIRequest: isAPIRequest,
     isGuestRequestAllowed: isGuestRequestAllowed,
-    getAPIName: getAPIName
+    getAPIName: getAPIName,
+    checkUserWebPermission: checkUserWebPermission
 };

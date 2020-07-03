@@ -1,0 +1,86 @@
+{
+    "get_product": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "whoami": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "home": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "about": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "get_products": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "help": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "contactus": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "instant_purchase_order": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "instant_purchase_payment": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "instant_purchase_confirmation": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "get_payment_activity": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    }
+}

@@ -12,7 +12,8 @@ const {
     ADMIN_USER,
     ADMIN_USER_KEY,
     X_TINNAT_SECURITY_CONTEXT,
-    ENVIRONMENT_PRODUCTION
+    ENVIRONMENT_PRODUCTION,
+    PERSONAL
 } = require('../lib/constants');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
 
@@ -33,7 +34,7 @@ const apiAuthenticator = async (req, res, next) => {
             name: 'TEST TEST',
             email: 'hemanthprasathmurali@gmail.com',
             accountType: 'ADMIN',
-            authenticationParty: 'TEST',
+            authenticationParty: 'FACEBOOK',
             accountId: '123456789'
         };
         req.session.user = req.user;
@@ -50,7 +51,7 @@ const apiAuthenticator = async (req, res, next) => {
                     name: user.name,
                     email: user.email,
                     party_id: user.accountNumber,
-                    account_type: PERSONAL_ACCOUNT
+                    account_type: PERSONAL
                 };
                 const response = await userserv.createFacebookUser(tinnatUser);
                 if (response && response.data) {

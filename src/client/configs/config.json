@@ -26,7 +26,7 @@
                 "uri": "http://tinnat.com/api/order/${orderid}"
             },
             "v1_create_instant_order": {
-                "uri": "http://tinnat.com/api/create/order/"
+                "uri": "http://tinnat.com/api/create/order"
             },
             "v1_patch_order_details": {
                 "uri": "http://tinnat.com/api/order/${orderid}"
@@ -89,7 +89,7 @@
                 "uri": "https://localhost:2003/api/order/${orderid}"
             },
             "v1_create_instant_order": {
-                "uri": "https://localhost:2003/api/create/order/"
+                "uri": "https://localhost:2003/api/create/order"
             },
             "v1_patch_order_details": {
                 "uri": "https://localhost:2003/api/order/${orderid}"
