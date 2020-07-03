@@ -9,7 +9,7 @@
     "start": "HTTPS=true react-scripts start eslint-disable-next-line",
     "build": "react-scripts build eslint-disable-next-line",
     "start:server:prod": "HTTPS=true node tinnat.js --env=production",
-    "start:server:dev": "HTTPS=true node tinnat.js --env=development"
+    "start:server:dev": "HTTPS=true node tinnat.js --env=development --WOWO_DEV_INJECT_TEST_USER=true"
   },
   "repository": {
     "type": "git",

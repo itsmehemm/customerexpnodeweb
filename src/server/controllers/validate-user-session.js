@@ -7,6 +7,7 @@ const {
     checkUserWebPermission
 } = require('../lib/utils');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
+const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER || false;
 
 const validateUserSession = (req, res, next) => {
     console.log(VALIDATE_USER_SESSION_CONTROLLER, `validating user session for request: ${req.url}`);
@@ -30,12 +31,13 @@ const validateUserSession = (req, res, next) => {
         }
         console.log(VALIDATE_USER_SESSION_CONTROLLER, `guest request not allowed`);
     }
-    if (environment !== ENVIRONMENT_PRODUCTION) {
+    console.log(VALIDATE_USER_SESSION_CONTROLLER, `WOWO_DEV_INJECT_TEST_USER:${WOWO_DEV_INJECT_TEST_USER}`);
+    if (environment !== ENVIRONMENT_PRODUCTION && WOWO_DEV_INJECT_TEST_USER === true) {
         console.log(`[development only] allowing user in development mode only. not setting session. session will be set by API request`);
         return next();
     }
     console.log(VALIDATE_USER_SESSION_CONTROLLER, `redirecting to login page`);
-    return res.redirect('/');
+    return res.redirect('/login');
 };
 
 module.exports = validateUserSession;
