@@ -6,6 +6,11 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import Button from '@material-ui/core/Button';
+import CheckIcon from '@material-ui/icons/Check';
+import ShareIcon from '@material-ui/icons/Share';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 import TextField from '../common/elements/TextField';
 import SmallButtonGroup from '../common/elements/SmallButtonGroup';
 import SmallImageButtonGroup from '../common/elements/SmallImageButtonGroup';
@@ -221,11 +226,17 @@ export default class ProductDetail extends Component {
                                         <CopyToClipboard
                                             text={data.url}
                                             onCopy={() => this.notify('Product link copied!')}>
-                                            <Typography
+                                            {/* <Typography
                                                 icon="share"
                                                 className="t-text-link-2"
                                                 text="Share"
-                                                variant="button" />
+                                                variant="button" /> */}
+                                            <Button
+                                                style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
+                                                variant="contained"
+                                                startIcon={<ShareIcon style={{ fontSize: '2em' }} />} >
+                                                Share
+                                            </Button>
                                         </CopyToClipboard>
                                     </Box>
                                 </Grid>
@@ -333,8 +344,15 @@ export default class ProductDetail extends Component {
                                                     required
                                                     type="number"
                                                     label="Pincode"
-                                                    variant="filled"
+                                                    variant="outlined"
                                                     value={pincode}
+                                                    InputProps={{
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <LocationOnIcon />
+                                                            </InputAdornment>
+                                                        ),
+                                                    }}
                                                     onChange={(pincode) => this.setState({ pincode: pincode })}
                                                     onKeyPress={(e) => {
                                                         if (e.key === 'Enter') {
@@ -342,12 +360,21 @@ export default class ProductDetail extends Component {
                                                         }
                                                     }}
                                                 />
-                                                {
-                                                    delivery_error &&
-                                                    <Typography text={delivery_error} variant="caption" style={{ color: "rgb(247, 36, 52)" }} />
-                                                }
-                                                <Typography text="Type your pincode and press enter" variant="caption" />
                                             </Grid>
+                                            <Grid item xs={2}>
+                                                <Button
+                                                    style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
+                                                    variant="contained"
+                                                    startIcon={<CheckIcon style={{ fontSize: '2em' }} />}
+                                                    onClick={() => this.updatePincode()}
+                                                />
+                                            </Grid>
+                                            {
+                                                delivery_error &&
+                                                <Grid item xs={12}>
+                                                    <Typography text={delivery_error} variant="caption" style={{ color: "rgb(247, 36, 52)" }} />
+                                                </Grid>
+                                            }
                                         </Grid>
                                     </Box>
                                     {
