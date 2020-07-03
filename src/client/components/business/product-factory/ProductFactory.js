@@ -12,7 +12,7 @@ import BasicDetails from './widgets/BasicDetails';
 import AdvancedDetails from './widgets/AdvancedDetails';
 import Preferences from './widgets/Preferences';
 import Themes from './widgets/Themes';
-import ProductFactoryModal from '../../../modals/internal/product-factory/ProductFactoryModal';
+import ProductFactoryModal from '../../../modals/business/product-factory/ProductFactoryModal';
 import {
     COMPONENT_STATUS_INVALID,
     COMPONENT_MAPPER

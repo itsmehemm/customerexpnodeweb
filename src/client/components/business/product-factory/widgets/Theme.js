@@ -7,7 +7,7 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '../../../common/elements/Typography';
 import TextField from '../../../common/elements/TextField';
 import Select from '../../../common/elements/Select';
-import ThemesModal from '../../../../modals/internal/product-factory/widgets/ThemesModal';
+import ThemesModal from '../../../../modals/business/product-factory/widgets/ThemesModal';
 import {
     COMPONENT_STATUS_INVALID,
     COMPONENT_STATUS_VALID

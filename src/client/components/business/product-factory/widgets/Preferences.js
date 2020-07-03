@@ -10,7 +10,7 @@ import {
     COMPONENT_STATUS_VALID
 } from '../../../../lib/constants';
 import paymentOptions from '../../../../lib/options/payment-options.json';
-import PreferencesModal from '../../../../modals/internal/product-factory/widgets/PreferencesModal';
+import PreferencesModal from '../../../../modals/business/product-factory/widgets/PreferencesModal';
 
 export default class Preferences extends Component {
 

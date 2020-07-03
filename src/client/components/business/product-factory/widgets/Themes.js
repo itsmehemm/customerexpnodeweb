@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Typography from '../../../common/elements/Typography';
 import Theme from './Theme';
-import ThemesModal from '../../../../modals/internal/product-factory/widgets/ThemesModal';
+import ThemesModal from '../../../../modals/business/product-factory/widgets/ThemesModal';
 import {
     COMPONENT_STATUS_VALID,
     COMPONENT_STATUS_INVALID

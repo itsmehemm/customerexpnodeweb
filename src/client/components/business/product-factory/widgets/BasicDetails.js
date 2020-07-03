@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import TextField from '../../../common/elements/TextField';
 import Typography from '../../../common/elements/Typography';
 import Select from '../../../common/elements/Select';
-import BasicDetailsModal from '../../../../modals/internal/product-factory/widgets/BasicDetailsModal';
+import BasicDetailsModal from '../../../../modals/business/product-factory/widgets/BasicDetailsModal';
 import {
     COMPONENT_STATUS_VALID,
     COMPONENT_STATUS_INVALID

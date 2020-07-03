@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import TextField from '../../../common/elements/TextField';
 import Typography from '../../../common/elements/Typography';
-import AdvancedDetailsModal from '../../../../modals/internal/product-factory/widgets/AdvancedDetailsModal';
+import AdvancedDetailsModal from '../../../../modals/business/product-factory/widgets/AdvancedDetailsModal';
 import {
     COMPONENT_STATUS_VALID
 } from '../../../../lib/constants';
