@@ -87,7 +87,7 @@ const Transactions = ({ transactions }) => {
                             </StyledTableCell>
                             <StyledTableCell align="center"><Typography variant="body2" text={row.status} /></StyledTableCell>
                             <StyledTableCell align="center"><Typography variant="body2" text={`${currencyCodeMapper[row.amount.currency]}${row.amount.subtotal}`} /></StyledTableCell>
-                            <StyledTableCell align="center"><Typography className="t-text-link" variant="body2" text="View" icon="open" /></StyledTableCell>
+                            <StyledTableCell align="center"><Button onClick={() => window.open(`/internal/activity/transaction/${row.transaction_id}`)}>View</Button></StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

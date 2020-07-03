@@ -102,5 +102,10 @@
         "permissions": [
             "ADMIN"
         ]
+    },
+    "get_payment_activity_internal": {
+        "permissions": [
+            "ADMIN"
+        ]
     }
 }

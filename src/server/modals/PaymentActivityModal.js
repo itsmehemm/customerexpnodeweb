@@ -165,6 +165,34 @@ class PaymentActivityModal {
         });
     }
 
+    async getActivityInternalByTransactionId(transactionId) {
+        if (!transactionId) {
+            return null;
+        }
+        console.log(PAYMENT_ACTIVITY_MODAL, `getting payment details for transactionId: ${transactionId}`);
+        return new Promise(resolve => {
+            mongoClient.connection((db) => {
+                db
+                    .collection(COLLECTION.PAY)
+                    .find({
+                        transaction_id: transactionId
+                    })
+                    .toArray()
+                    .then((result) => {
+                        if (Array.isArray(result) && result.length === 1) {
+                            return resolve(result[0]);
+                        }
+                        console.log(PAYMENT_ACTIVITY_MODAL, `no transactions found with id: ${transactionId}`);
+                        return resolve(null);
+                    })
+                    .catch((error) => {
+                        console.log(PAYMENT_ACTIVITY_MODAL, `error getting payment details: ${JSON.stringify(error)}`);
+                        resolve(null);
+                    });
+            });
+        });
+    }
+
     async getActivityByOrderId(orderId) {
         if (!orderId) {
             return null;

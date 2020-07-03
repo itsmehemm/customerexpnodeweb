@@ -19,6 +19,7 @@ const {
     razorpayPaymentComplete,
     updateDeliveryPincode,
     getPaymentActivity,
+    getPaymentActivityInternal,
     searchTransactions
 } = require('../controllers');
 
@@ -63,5 +64,7 @@ app.post('/delivery/update/pincode', updateDeliveryPincode);
 app.get('/activity/payment/:transactionId', getPaymentActivity);
 
 app.post('/activity/search/transactions', searchTransactions);
+
+app.get('/business/activity/payment/:transactionId', getPaymentActivityInternal);
 
 module.exports = app;

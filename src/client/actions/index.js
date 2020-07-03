@@ -14,4 +14,4 @@ export { default as razorpayPayment } from './razorpay-payment';
 export { default as updateDeliveryPincode } from './update-delivery-pincode';
 export { default as whoami } from './whoami';
 export { default as searchTransactions } from './search-transactions';
-
+export { default as getPaymentActivityInternal } from './get-payment-activity-internal';
