@@ -8,7 +8,7 @@ const {
     ENVIRONMENT_PRODUCTION
 } = require('../lib/constants');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
-const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER || false;
+const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER;
 
 const apiAuthenticator = async (req, res, next) => {
     console.log(API_AUTHENTICATOR, `authenticating API request: ${req.method}: ${req.url}`);

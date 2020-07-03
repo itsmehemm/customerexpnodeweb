@@ -7,7 +7,7 @@ const {
     checkUserWebPermission
 } = require('../lib/utils');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
-const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER || false;
+const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER;
 
 const validateUserSession = (req, res, next) => {
     console.log(VALIDATE_USER_SESSION_CONTROLLER, `validating user session for request: ${req.url}`);
