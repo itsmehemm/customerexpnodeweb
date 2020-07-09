@@ -7,94 +7,24 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
+import TransactionList from './TransactionList';
 import Typography from '../../common/elements/Typography';
 import TextField from '../../common/elements/TextField';
 import Select from '../../common/elements/Select';
 import Component404 from '../../common/errors/Component404';
 import ComponentLoader from '../../common/loaders/ComponentLoader';
+import { searchTransactions } from '../../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING_ERROR,
     TRANSACTIONS_NOT_FOUND
 } from '../../../lib/constants';
-import { searchTransactions } from '../../../actions';
-import { currencyCodeMapper } from '../../../lib/mappers';
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: '#f5f7fa',
-        color: theme.palette.common.black,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.common.white,
-        },
-    },
-}))(TableRow);
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
-
-const Transactions = ({ transactions }) => {
-    const classes = useStyles();
-    return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell align="center"><Typography variant="body1_bold" text="Date" /></StyledTableCell>
-                        <StyledTableCell align="center"><Typography variant="body1_bold" text="Transaction ID" /></StyledTableCell>
-                        <StyledTableCell align="center"><Typography variant="body1_bold" text="Order ID" /></StyledTableCell>
-                        <StyledTableCell align="center"><Typography variant="body1_bold" text="Customer" /></StyledTableCell>
-                        <StyledTableCell align="center"><Typography variant="body1_bold" text="Payment Status" /></StyledTableCell>
-                        <StyledTableCell align="center"><Typography variant="body1_bold" text="Gross" /></StyledTableCell>
-                        <StyledTableCell align="center"><Typography variant="body1_bold" text="Actions" /></StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {transactions.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell align="left"><Typography variant="body2" text={moment(row.time_stamp).format("MMM D, YYYY")} /></StyledTableCell>
-                            <StyledTableCell align="center"><Typography variant="body2" text={row.transaction_id} /></StyledTableCell>
-                            <StyledTableCell align="center"><Typography variant="body2" text={row.order_id} /></StyledTableCell>
-                            <StyledTableCell align="left">
-                                {row.billing_address && row.billing_address.name && <Typography variant="body2" text={row.billing_address.name} />}
-                                {row.personal_information && row.personal_information.email && <Typography variant="body2" text={row.personal_information.email} />}
-                                {row.personal_information && row.personal_information.phone_number && <Typography variant="body2" text={row.personal_information.phone_number} />}
-                            </StyledTableCell>
-                            <StyledTableCell align="center"><Typography variant="body2" text={row.status} /></StyledTableCell>
-                            <StyledTableCell align="center"><Typography variant="body2" text={`${currencyCodeMapper[row.amount.currency]}${row.amount.subtotal}`} /></StyledTableCell>
-                            <StyledTableCell align="center"><Button onClick={() => window.open(`/business/activity/transaction/${row.transaction_id}`)}>View</Button></StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
-};
 
 export default class SearchTransactions extends Component {
     constructor(props) {
@@ -292,7 +222,15 @@ export default class SearchTransactions extends Component {
                                     {
                                         search_status === OPERATION_LOADING_COMPLETED &&
                                         transactions && transactions.length > 0 &&
-                                        <Transactions transactions={transactions} />
+                                        <TransactionList transactions={transactions} columns={{
+                                            date: true,
+                                            transaction_id: true,
+                                            order_id: true,
+                                            customer: true,
+                                            payment_status: true,
+                                            gross: true,
+                                            actions: true,
+                                        }} />
                                     }
                                     {
                                         search_status === OPERATION_LOADING_COMPLETED &&
