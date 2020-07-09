@@ -1,4 +1,5 @@
 const moment = require('moment-timezone');
+const _ = require('lodash');
 const mongoClient = require('../mongo/mongodb');
 const { SEARCH_TRANSACTIONS_CONTROLLER } = require('../lib/constants/logging-constants');
 const { COLLECTION } = require('../lib/constants/mongo-constants');
@@ -42,7 +43,7 @@ const searchTransactions = async (req, res) => {
                         if (phoneNumber) {
                             transactions = transactions.filter(transaction => transaction.personal_information && transaction.personal_information.phone_number === phoneNumber);
                         }
-                        return resolve(transactions);
+                        return resolve(_.reverse(transactions));
                     }
                     return resolve([]);
                 })

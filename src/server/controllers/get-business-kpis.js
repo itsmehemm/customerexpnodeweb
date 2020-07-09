@@ -14,7 +14,7 @@ const getBusinessKPIs = async (req, res) => {
                 .toArray()
                 .then(transactions => {
                     if (Array.isArray(transactions)) {
-                        return resolve(_.takeRight(transactions, 10));
+                        return resolve(_.reverse(_.takeRight(transactions, 10)));
                     }
                     return resolve([]);
                 })
