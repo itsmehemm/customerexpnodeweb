@@ -5,7 +5,10 @@ const {
     API_AUTHENTICATOR
 } = require('../lib/constants/logging-constants');
 const {
-    ENVIRONMENT_PRODUCTION
+    ENVIRONMENT_PRODUCTION,
+    X_TINNAT_SECURITY_CONTEXT,
+    TINNAT_WEB,
+    TINNAT_WEB_GUEST_KEY
 } = require('../lib/constants');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
 const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER;
@@ -32,6 +35,16 @@ const apiAuthenticator = async (req, res, next) => {
         req.session.user = req.user;
         req.session.sessionId = uniqid('SESSION-').toUpperCase();
         req.session.startTime = new Date().getTime();
+        return next();
+    }
+    const securityContext = JSON.parse(req && req.headers && req.headers[X_TINNAT_SECURITY_CONTEXT] || '{}');
+    if (environment !== ENVIRONMENT_PRODUCTION &&
+        securityContext && securityContext.clientId === TINNAT_WEB &&
+        securityContext.key === TINNAT_WEB_GUEST_KEY) {
+        console.log(API_AUTHENTICATOR, `guest request found. proceeding for evaluation of guest access`);
+        req.user = {
+            accountType: 'GUEST'
+        };
         return next();
     }
     console.log(API_AUTHENTICATOR, `user not authorized`);
