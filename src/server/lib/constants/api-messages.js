@@ -68,5 +68,9 @@ module.exports = {
     OPERATION_COMPLETED: {
         status: 'COMPLETED',
         message: 'The requested operation has been completed'
+    },
+    SUCCESS: {
+        status: 'SUCCESS',
+        message: 'The requested operation has been completed. Check the data received'
     }
 }

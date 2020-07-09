@@ -107,5 +107,11 @@
         "permissions": [
             "ADMIN"
         ]
+    },
+    "get_kpis": {
+        "permissions": [
+            "ADMIN",
+            "BUSINESS"
+        ]
     }
 }

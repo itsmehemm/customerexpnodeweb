@@ -25,5 +25,6 @@ module.exports = {
     updateDeliveryPincode: require('./update-delivery-pincode'),
     getPaymentActivity: require('./get-payment-activity'),
     getPaymentActivityInternal: require('./get-payment-activity-internal'),
-    searchTransactions: require('./search-transactions')
+    searchTransactions: require('./search-transactions'),
+    getBusinessKPIs: require('./get-business-kpis')
 };

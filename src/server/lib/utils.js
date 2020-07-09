@@ -211,6 +211,9 @@ const getAPIName = (req) => {
     if (/^\/business\/activity\/payment\/.*$/.test(url)) {
         return API_NAME.GET_PAYMENT_ACTIVITY_INTERNAL;
     }
+    if (/^\/business\/kpis.*$/.test(url)) {
+        return API_NAME.GET_KPIS;
+    }
     return null;
 };
 

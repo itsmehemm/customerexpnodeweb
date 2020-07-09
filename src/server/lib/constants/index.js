@@ -40,7 +40,8 @@ module.exports = {
         UPDATE_DELIVERY_PINCODE: 'update_delivery_pincode',
         GET_PAYMENT_ACTIVITY: 'get_payment_activity',
         GET_PAYMENT_ACTIVITY_INTERNAL: 'get_payment_activity_internal',
-        SEARCH_TRANSACTIONS: 'search_transactions'
+        SEARCH_TRANSACTIONS: 'search_transactions',
+        GET_KPIS: 'get_kpis'
     },
     WEB_NAME: {
         GET_PRODUCT: 'get_product',

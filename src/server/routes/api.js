@@ -20,7 +20,8 @@ const {
     updateDeliveryPincode,
     getPaymentActivity,
     getPaymentActivityInternal,
-    searchTransactions
+    searchTransactions,
+    getBusinessKPIs
 } = require('../controllers');
 
 const app = express();
@@ -66,5 +67,7 @@ app.get('/activity/payment/:transactionId', getPaymentActivity);
 app.post('/activity/search/transactions', searchTransactions);
 
 app.get('/business/activity/payment/:transactionId', getPaymentActivityInternal);
+
+app.get('/business/kpis', getBusinessKPIs);
 
 module.exports = app;
