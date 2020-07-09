@@ -28,6 +28,9 @@ export default class SecondaryHeader extends Component {
                         <Grid className="logo" onClick={() => window.location = '/'} item xs={1}>
                             <img src={logo} height="80px" width="120px" />
                         </Grid>
+                        <Grid className="t-menu-item" onClick={() => window.location = '/business'} item xs={2}>
+                            <Typography variant="button" display="block" guttertop="true" text="Dashboard" />
+                        </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/business/warehouse/products'} item xs={2}>
                             <Typography variant="button" display="block" guttertop="true" text="Products" />
                         </Grid>
@@ -35,7 +38,7 @@ export default class SecondaryHeader extends Component {
                             <Typography variant="button" display="block" guttertop="true" text="Add Product" />
                         </Grid>
                         <Grid className="t-menu-item" onClick={() => window.location = '/business/activity/transactions'} item xs={2}>
-                            <Typography variant="button" display="block" guttertop="true" text="Transactions" />
+                            <Typography variant="button" display="block" guttertop="true" text="Activity" />
                         </Grid>
                         <Grid className="t-menu-item" item xs={2}>
                             <User />
