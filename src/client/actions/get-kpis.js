@@ -1,3 +1,7 @@
+import {
+    commonResponseHandler,
+    commonErrorHandler
+} from '../lib/handlers/common';
 import config from '../configs/config.json';
 
 const environment = config.environment;
@@ -13,8 +17,8 @@ export const getKPIs = () => {
         redirect: 'follow'
     })
         .then(response => response.json())
-        .then(response => response)
-        .catch(error => error);
+        .then(response => commonResponseHandler(response))
+        .catch(error => commonErrorHandler(error));
 };
 
 export default getKPIs;
