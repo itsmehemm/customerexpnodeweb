@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import SecondaryHeader from '../header/SecondaryHeader';
+import BusinessDashboard from './dashboard/Dashboard';
 import ProductDetailWrapper from '../product-detail/ProductDetailWrapper';
 import ProductFactoryWrapper from './product-factory/ProductFactoryWrapper';
 import SearchTransactions from './activity/SearchTransactions';
@@ -11,6 +12,7 @@ export default class Business extends Component {
         return (
             <Router>
                 <SecondaryHeader />
+                <Route exact path="/business" component={BusinessDashboard} />
                 <Route exact path="/business/warehouse/product/add" component={ProductFactoryWrapper} />
                 <Route exact path="/business/warehouse/product/edit/:productid" component={ProductFactoryWrapper} />
                 <Route exact path="/business/warehouse/product/view/:productid/" component={ProductDetailWrapper} />
