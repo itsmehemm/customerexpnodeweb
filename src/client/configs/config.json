@@ -60,6 +60,9 @@
             },
             "v1_post_search_transactions": {
                 "uri": "http://tinnat.com/api/activity/search/transactions"
+            },
+            "v1_get_kpis": {
+                "uri": "http://tinnat.com/api/business/kpis"
             }
         }
     },
@@ -123,6 +126,9 @@
             },
             "v1_post_search_transactions": {
                 "uri": "https://localhost:2003/api/activity/search/transactions"
+            },
+            "v1_get_kpis": {
+                "uri": "https://localhost:2003/api/business/kpis"
             }
         }
     }

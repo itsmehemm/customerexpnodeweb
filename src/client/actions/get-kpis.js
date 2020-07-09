@@ -1,0 +1,20 @@
+import config from '../configs/config.json';
+
+const environment = config.environment;
+
+export const getKPIs = () => {
+    console.log('[INFO]', 'action::getKPIs');
+    var myHeaders = new Headers();
+    myHeaders.append("X-TINNAT-SECURITY-CONTEXT", "{\"userId\": \"admin\", \"key\": \"tinnat\"}");
+    let uri = config[environment].api.v1_get_kpis.uri;
+    return fetch(uri, {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    })
+        .then(response => response.json())
+        .then(response => response)
+        .catch(error => error);
+};
+
+export default getKPIs;
