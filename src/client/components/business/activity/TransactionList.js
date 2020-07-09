@@ -54,7 +54,7 @@ const TransactionList = ({ transactions, columns = {} }) => {
                 </TableHead>
                 <TableBody>
                     {transactions.map((row) => (
-                        <StyledTableRow key={row.name}>
+                        <StyledTableRow key={row.transaction_id}>
                             {columns.date && <StyledTableCell align="left"><Typography variant="body2" text={moment(row.time_stamp).format("MMM D, YYYY")} /></StyledTableCell>}
                             {columns.transaction_id && <StyledTableCell align="center"><Typography variant="body2" text={row.transaction_id} /></StyledTableCell>}
                             {columns.order_id && <StyledTableCell align="center"><Typography variant="body2" text={row.order_id} /></StyledTableCell>}
