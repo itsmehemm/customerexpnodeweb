@@ -1,6 +1,7 @@
 {
     "get_products": {
         "permissions": [
+            "GUEST",
             "ADMIN",
             "PERSONAL",
             "BUSINESS"
@@ -8,6 +9,7 @@
     },
     "get_featured_products": {
         "permissions": [
+            "GUEST",
             "ADMIN",
             "PERSONAL",
             "BUSINESS"
@@ -15,6 +17,7 @@
     },
     "get_filtered_products": {
         "permissions": [
+            "GUEST",
             "ADMIN",
             "PERSONAL",
             "BUSINESS"
@@ -22,6 +25,7 @@
     },
     "get_products_by_category": {
         "permissions": [
+            "GUEST",
             "ADMIN",
             "PERSONAL",
             "BUSINESS"
@@ -34,6 +38,7 @@
     },
     "get_product_by_id": {
         "permissions": [
+            "GUEST",
             "ADMIN",
             "PERSONAL",
             "BUSINESS"
@@ -86,6 +91,7 @@
     },
     "update_delivery_pincode": {
         "permissions": [
+            "GUEST",
             "ADMIN",
             "PERSONAL",
             "BUSINESS"
@@ -100,12 +106,14 @@
     },
     "search_transactions": {
         "permissions": [
-            "ADMIN"
+            "ADMIN",
+            "BUSINESS"
         ]
     },
     "get_payment_activity_internal": {
         "permissions": [
-            "ADMIN"
+            "ADMIN",
+            "BUSINESS"
         ]
     },
     "get_kpis": {
