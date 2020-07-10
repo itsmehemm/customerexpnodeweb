@@ -38,8 +38,7 @@ const apiAuthenticator = async (req, res, next) => {
         return next();
     }
     const securityContext = JSON.parse(req && req.headers && req.headers[X_TINNAT_SECURITY_CONTEXT] || '{}');
-    if (environment !== ENVIRONMENT_PRODUCTION &&
-        securityContext && securityContext.clientId === TINNAT_WEB &&
+    if (securityContext && securityContext.clientId === TINNAT_WEB &&
         securityContext.key === TINNAT_WEB_GUEST_KEY) {
         console.log(API_AUTHENTICATOR, `guest request found. proceeding for evaluation of guest access`);
         req.user = {
