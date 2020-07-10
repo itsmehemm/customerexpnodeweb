@@ -156,6 +156,9 @@ const getWebName = (req) => {
     if (/^\/activity\/payment\/.*$/.test(url)) {
         return WEB_NAME.GET_PAYMENT_ACTIVITY;
     }
+    if (/^\/business\/logger\/idsearch.*$/.test(url)) {
+        return WEB_NAME.IDSEARCH;
+    }
     if (/^\/business$/.test(url)) {
         return WEB_NAME.BUSINESS_DASHBOARD;
     }
@@ -217,10 +220,24 @@ const getAPIName = (req) => {
     if (/^\/business\/activity\/payment\/.*$/.test(url)) {
         return API_NAME.GET_PAYMENT_ACTIVITY_INTERNAL;
     }
-    if (/^\/business\/kpis.*$/.test(url)) {
+    if (/^\/business\/kpis$/.test(url)) {
         return API_NAME.GET_KPIS;
     }
+    if (/^\/log\/.*$/.test(url)) {
+        return API_NAME.GET_LOGS;
+    }
     return null;
+};
+
+const computeRedirectErrorUrl = () => {
+    let redirectErrorUrl = config.tinnat[environment].url.redirect_error;
+    return encodeURIComponent(redirectErrorUrl);
+};
+
+const computeRedirectSuccessUrl = (path) => {
+    let redirectBaseUrl = config.tinnat[environment].url.redirect_base;
+    redirectBaseUrl += path;
+    return encodeURIComponent(redirectBaseUrl);
 };
 
 module.exports = {
@@ -232,5 +249,7 @@ module.exports = {
     isAPIRequest: isAPIRequest,
     isGuestRequestAllowed: isGuestRequestAllowed,
     getAPIName: getAPIName,
-    checkUserWebPermission: checkUserWebPermission
+    checkUserWebPermission: checkUserWebPermission,
+    computeRedirectSuccessUrl: computeRedirectSuccessUrl,
+    computeRedirectErrorUrl: computeRedirectErrorUrl
 };

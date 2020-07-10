@@ -21,9 +21,9 @@ const injectLogger = (req, res, next) => {
     }
     console.log = function () {
         let args = Array.from(arguments);
-        const log = args.join(' ');
-        let logs = cache.get(debugId);
-        logs = logs + "\n" + log;
+        const log = new Date().getTime() + '$$' + args.join('$$');
+        let logs = cache.get(debugId) || '';
+        logs = logs + log + '\n$';
         cache.put(debugId, logs);
         _consoleLog.apply(console, args);
     };

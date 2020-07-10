@@ -56,7 +56,8 @@ module.exports = {
         INSTANT_PURCHASE_PAYMENT: 'instant_purchase_payment',
         INSTANT_PURCHASE_CONFIRMATION: 'instant_purchase_confirmation',
         GET_PAYMENT_ACTIVITY: 'get_payment_activity',
-        BUSINESS_DASHBOARD: 'business_dashboard'
+        BUSINESS_DASHBOARD: 'business_dashboard',
+        IDSEARCH: 'idsearch'
     },
     SOFT_DESCRIPTOR: 'Tinnos India',
     ORDER_INIT: 'INITIAL',

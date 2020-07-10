@@ -88,5 +88,10 @@
             "ADMIN",
             "BUSINESS"
         ]
+    },
+    "idsearch": {
+        "permissions": [
+            "ADMIN"
+        ]
     }
 }

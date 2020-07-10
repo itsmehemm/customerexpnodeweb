@@ -57,6 +57,27 @@ class LoggerModal {
     }
 
     getLogs() { return this.logs };
+
+    getFormattedLogs() {
+        let logs = this.logs;
+        logs = logs.split('\n$');
+        let formattedLogs = [];
+        logs.forEach(log => {
+            log = log.replace('\n$', '');
+            log = log.split('$$');
+            let formattedLog = {};
+            if (log && log.length > 0) {
+                log[0] && (formattedLog.time_stamp = parseInt(log[0]));
+                log.length > 1 && (formattedLog.component = log[1]);
+                log.length > 2 && (formattedLog.operation = log[2]);
+                log.length > 3 && (formattedLog.additional_data = log[3]);
+                if (Object.keys(formattedLog).length > 0) {
+                    formattedLogs.push(formattedLog);
+                }
+            }
+        });
+        return formattedLogs;
+    }
 };
 
 module.exports = LoggerModal;

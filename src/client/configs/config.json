@@ -63,6 +63,9 @@
             },
             "v1_get_kpis": {
                 "uri": "http://tinnat.com/api/business/kpis"
+            },
+            "v1_get_logs_by_id": {
+                "uri": "http://tinnat.com/api/log/"
             }
         }
     },
@@ -129,6 +132,9 @@
             },
             "v1_get_kpis": {
                 "uri": "https://localhost:2003/api/business/kpis"
+            },
+            "v1_get_logs_by_id": {
+                "uri": "https://localhost:2003/api/log/"
             }
         }
     }

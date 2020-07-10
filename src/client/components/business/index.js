@@ -6,6 +6,7 @@ import ProductDetailWrapper from '../product-detail/ProductDetailWrapper';
 import ProductFactoryWrapper from './product-factory/ProductFactoryWrapper';
 import SearchTransactions from './activity/SearchTransactions';
 import PaymentActivity from './activity/PaymentActivity';
+import Idsearch from '../cal/Idsearch';
 
 export default class Business extends Component {
     render() {
@@ -18,6 +19,8 @@ export default class Business extends Component {
                 <Route exact path="/business/warehouse/product/view/:productid/" component={ProductDetailWrapper} />
                 <Route exact path="/business/activity/transactions" component={SearchTransactions} />
                 <Route exact path="/business/activity/transaction/:transactionid" component={PaymentActivity} />
+                <Route exact path="/business/logger/idsearch" component={Idsearch} />
+                <Route exact path="/business/logger/idsearch/:debugid" component={Idsearch} />
             </Router >
         );
     }

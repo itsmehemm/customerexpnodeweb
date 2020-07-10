@@ -10,7 +10,8 @@ const getLogsById = async (req, res) => {
     if (loggerModal.getLogs()) {
         return res.status(200).send({
             ...apiMessages.SUCCESS,
-            logs: loggerModal.getLogs()
+            logs: loggerModal.getLogs(),
+            formatted: loggerModal.getFormattedLogs()
         });
     }
     return res.status(404).send({
