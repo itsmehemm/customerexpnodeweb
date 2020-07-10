@@ -3,9 +3,9 @@ import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Typography from '../elements/Typography';
+import Typography from '../../elements/Typography';
 
-const Component404 = ({ reason }) => {
+const WebInternalServerError = () => {
     return (
         <Container maxWidth={'lg'}>
             <Box m={2}>
@@ -13,12 +13,12 @@ const Component404 = ({ reason }) => {
                     <Grid container>
                         <Grid item align='center' xs={12}>
                             <Box m={2}>
-                                <Typography variant='h1' text='404' />
+                                <Typography variant='h1' text='500' />
                             </Box>
                         </Grid>
                         <Grid item align='center' xs={12}>
                             <Box m={2}>
-                                <Typography variant='h6' text={reason ? reason : `The page you're looking for does not exist.`} />
+                                <Typography variant='h6' text={`It's on us. We faced an internal server error processing your request. Please check your internet connection and try again or come back later.`} />
                             </Box>
                         </Grid>
                         <Grid item align='center' xs={12}>
@@ -33,4 +33,4 @@ const Component404 = ({ reason }) => {
     );
 };
 
-export default Component404;
+export default WebInternalServerError;

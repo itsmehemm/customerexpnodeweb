@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../header/Header';
-import Component404 from './Component404';
+import Component404 from './widgets/Component404';
 
 const NotFound = () => {
     return (

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../header/Header';
 import ComponentLoader from '../common/loaders/ComponentLoader';
-import WebInternalServerError from '../common/errors/WebInternalServerError';
-import Component404 from '../common/errors/Component404';
+import WebInternalServerError from '../common/errors/widgets/WebInternalServerError';
+import Component404 from '../common/errors/widgets/Component404';
 import ProductDetail from './ProductDetail';
 import TrendingProducts from '../trending/TrendingProducts';
 import RecentProducts from '../recent-products/RecentProducts';

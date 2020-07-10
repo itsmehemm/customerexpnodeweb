@@ -32,7 +32,9 @@ export default class RecentProducts extends Component {
         const products = [];
         for (let i = 0; i < productids.length; i++) {
             const product = await getProductById(productids[i]);
-            products.push(product);
+            if (product && product.id) {
+                products.push(product);
+            }
         }
         await this.setState({ products, status: OPERATION_LOADING_COMPLETED });
     }
@@ -48,7 +50,7 @@ export default class RecentProducts extends Component {
             <Container maxWidth="xl">
                 {status === OPERATION_LOADING && <ComponentLoader />}
                 {status === OPERATION_LOADING_COMPLETED &&
-                    products.length > 0 &&
+                    products && products.length > 0 &&
                     <Box m={2}>
                         <Card variant="outlined">
                             <Grid container>

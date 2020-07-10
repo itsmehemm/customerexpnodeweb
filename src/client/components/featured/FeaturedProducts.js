@@ -25,20 +25,13 @@ export default class FeaturedProducts extends Component {
     }
 
     async componentDidMount() {
-        try {
-            const products = await getFeaturedProducts();
-            if (Array.isArray(products)) {
-                await this.setState({
-                    products: products,
-                    status: OPERATION_LOADING_COMPLETED
-                });
-            } else {
-                await this.setState({
-                    products: [],
-                    status: OPERATION_LOADING_ERROR
-                });
-            }
-        } catch (error) {
+        const products = await getFeaturedProducts();
+        if (Array.isArray(products)) {
+            await this.setState({
+                products: products,
+                status: OPERATION_LOADING_COMPLETED
+            });
+        } else {
             await this.setState({
                 products: [],
                 status: OPERATION_LOADING_ERROR

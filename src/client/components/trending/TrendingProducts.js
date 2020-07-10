@@ -25,20 +25,13 @@ export default class TrendingProducts extends Component {
     }
 
     async componentDidMount() {
-        try {
-            const products = await getFeaturedProducts();
-            if (Array.isArray(products)) {
-                await this.setState({
-                    products: products,
-                    status: OPERATION_LOADING_COMPLETED
-                });
-            } else {
-                await this.setState({
-                    products: [],
-                    status: OPERATION_LOADING_ERROR
-                });
-            }
-        } catch (error) {
+        const products = await getFeaturedProducts();
+        if (Array.isArray(products)) {
+            await this.setState({
+                products: products,
+                status: OPERATION_LOADING_COMPLETED
+            });
+        } else {
             await this.setState({
                 products: [],
                 status: OPERATION_LOADING_ERROR
@@ -80,7 +73,8 @@ export default class TrendingProducts extends Component {
                                                             amount={_.get(product, 'default_theme.amount')}
                                                             onClick={() => window.open(product.url)}
                                                         />
-                                                    </Grid>)
+                                                    </Grid>
+                                                )
                                             }
                                         </Grid>
                                     </Box>

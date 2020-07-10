@@ -14,7 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '../../common/elements/Typography';
 import ViewAddress from '../../instant-purchase/widgets/ViewAddress';
-import Component404 from '../../common/errors/Component404';
+import Component404 from '../../common/errors/widgets/Component404';
 import ComponentLoader from '../../common/loaders/ComponentLoader';
 import { getPaymentActivityInternal } from '../../../actions';
 import { currencyCodeMapper } from '../../../lib/mappers';

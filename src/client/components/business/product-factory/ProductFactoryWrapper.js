@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ComponentLoader from '../../common/loaders/ComponentLoader';
-import Component404 from '../../common/errors/Component404';
+import Component404 from '../../common/errors/widgets/Component404';
 import ProductFactory from './ProductFactory';
 import { getProductById } from '../../../actions/index.js';
 import ProductFactoryModal from '../../../modals/business/product-factory/ProductFactoryModal';

@@ -16,7 +16,7 @@ import TransactionList from './TransactionList';
 import Typography from '../../common/elements/Typography';
 import TextField from '../../common/elements/TextField';
 import Select from '../../common/elements/Select';
-import Component404 from '../../common/errors/Component404';
+import Component404 from '../../common/errors/widgets/Component404';
 import ComponentLoader from '../../common/loaders/ComponentLoader';
 import { searchTransactions } from '../../../actions';
 import {
