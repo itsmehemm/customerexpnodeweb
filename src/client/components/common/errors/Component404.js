@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '../elements/Typography';
 
-const Component404 = () => {
+const Component404 = ({ reason }) => {
     return (
         <Container maxWidth={'lg'}>
             <Box m={2}>
@@ -18,7 +18,7 @@ const Component404 = () => {
                         </Grid>
                         <Grid item align='center' xs={12}>
                             <Box m={2}>
-                                <Typography variant='h6' text={`The page you're looking for does not exist.`} />
+                                <Typography variant='h6' text={reason ? reason : `The page you're looking for does not exist.`} />
                             </Box>
                         </Grid>
                         <Grid item align='center' xs={12}>

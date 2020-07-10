@@ -56,7 +56,7 @@ export default class ProductDetailWrapper extends Component {
             <>
                 <Header />
                 {status === OPERATION_LOADING && <ComponentLoader />}
-                {status === OPERATION_LOADING_ERROR && <Component404 error={error} />}
+                {status === OPERATION_LOADING_ERROR && <Component404 reason={`The product you're looking for doesn't exists.`} />}
                 {status === OPERATION_LOADING_COMPLETED &&
                     <>
                         <ProductDetail data={data} />
