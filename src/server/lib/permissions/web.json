@@ -93,5 +93,13 @@
         "permissions": [
             "ADMIN"
         ]
+    },
+    "not_found": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
     }
 }

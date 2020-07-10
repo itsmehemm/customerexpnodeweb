@@ -162,6 +162,9 @@ const getWebName = (req) => {
     if (/^\/business$/.test(url)) {
         return WEB_NAME.BUSINESS_DASHBOARD;
     }
+    if (/^\/notfound$/.test(url)) {
+        return WEB_NAME.NOT_FOUND;
+    }
     return null;
 };
 

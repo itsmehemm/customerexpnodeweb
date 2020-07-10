@@ -7,7 +7,8 @@ const getLogsById = async (req, res) => {
     console.log(GET_LOGS_BY_ID_CONTROLLER, `request to fetch logs for id: ${req.params.debugid}`);
     const loggerModal = new LoggerModal(req.params.debugid);
     await loggerModal.load();
-    if (loggerModal.getLogs()) {
+    const logs = loggerModal.getLogs();
+    if (logs.length > 0) {
         return res.status(200).send({
             ...apiMessages.SUCCESS,
             logs: loggerModal.getLogs(),

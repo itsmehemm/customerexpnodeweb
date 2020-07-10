@@ -8,7 +8,7 @@ const getCart = (req, res) => {
 
     console.log(GET_CART_CONTROLLER, `Cart in session: ${JSON.stringify(cart)}`);
 
-    res.send({
+    res.status(200).send({
         status: 'COMPLETED',
         cart: cart
     });

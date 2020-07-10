@@ -1,5 +1,6 @@
 module.exports = {
     X_TINNAT_SECURITY_CONTEXT: 'x-tinnat-security-context',
+    X_TINNAT_DEBUG_ID: 'x-tinnat-debug-id',
     ADMIN_USER: 'admin',
     ADMIN_USER_KEY: 'tinnat',
     TINNAT_WEB: 'tinnat_web',
@@ -57,7 +58,8 @@ module.exports = {
         INSTANT_PURCHASE_CONFIRMATION: 'instant_purchase_confirmation',
         GET_PAYMENT_ACTIVITY: 'get_payment_activity',
         BUSINESS_DASHBOARD: 'business_dashboard',
-        IDSEARCH: 'idsearch'
+        IDSEARCH: 'idsearch',
+        NOT_FOUND: 'not_found'
     },
     SOFT_DESCRIPTOR: 'Tinnos India',
     ORDER_INIT: 'INITIAL',
@@ -79,5 +81,7 @@ module.exports = {
     BUSINESS: 'BUSINESS',
     ADMIN: 'ADMIN',
     FACEBOOK: 'FACEBOOK',
-    RAZORPAY: 'RAZORPAY'
+    RAZORPAY: 'RAZORPAY',
+    WEB: 'WEB',
+    API: 'API'
 };

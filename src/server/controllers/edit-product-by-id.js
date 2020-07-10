@@ -27,13 +27,13 @@ const editProductById = async (req, res) => {
             }, {
                 ...editProductModel.getData()
             })
-            .then(() => res.send({
+            .then(() => res.status(200).send({
                 id: editProductModel.getData().id,
                 ...apiMessages.PRODUCT_UPDATE_COMPLETED
             }))
             .catch((error) => {
                 console.log(EDIT_PRODUCT_BY_ID_CONTROLLER, `there was an error performing operation in the database. ${JSON.stringify(error)}`);
-                res.send({
+                res.status(500).send({
                     error: errorConstants.DATABASE_ERROR
                 });
             });

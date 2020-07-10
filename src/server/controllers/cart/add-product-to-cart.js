@@ -9,7 +9,7 @@ const addProductToCart = (req, res) => {
 
     if (!item.id) {
         console.log(ADD_TO_CART_CONTROLLER, `Item not present. ID is NULL`);
-        return res.send({
+        return res.status(400).send({
             status: 'FAILED',
             message: 'ITEM_NOT_ADDED',
             description: 'The item was not found. Please try again.'
@@ -49,7 +49,7 @@ const addProductToCart = (req, res) => {
 
     console.log(ADD_TO_CART_CONTROLLER, `updated cart: ${JSON.stringify(req.session.cart)}`);
 
-    res.send({
+    res.status(200).send({
         status: 'COMPLETED',
         message: 'ITEM_ADDED_TO_CART',
         description: 'The item was added to the cart successfully.'

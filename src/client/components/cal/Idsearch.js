@@ -42,7 +42,12 @@ export default class Idsearch extends Component {
     }
 
     async search() {
-        await this.setState({ status: OPERATION_LOADING });
+        await this.setState({
+            status: OPERATION_LOADING,
+            logs: null,
+            formatted: [],
+            error: null
+        });
         const { debugId } = this.state;
         const response = await getLogsById(debugId);
         if (response && response.logs) {

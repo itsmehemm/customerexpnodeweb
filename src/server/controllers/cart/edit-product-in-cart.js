@@ -31,7 +31,7 @@ const editProductInCart = (req, res) => {
 
     console.log(EDIT_IN_CART_CONTROLLER, `updated cart: ${JSON.stringify(req.session.cart)}`);
 
-    res.send({
+    res.status(200).send({
         status: 'COMPLETED',
         message: 'CART_EDITED_SUCCESSFULLY',
         description: 'The cart was updated successfully.'

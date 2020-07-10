@@ -28,6 +28,7 @@ app.use(cors());
 
 app.use(cookieParser());
 
+app.use('/cdn', express.static(path.resolve(__dirname, '../../../', 'build')));
 app.use('/static', express.static(path.resolve(__dirname, '../../../', 'build/static')));
 
 app.use(session({
