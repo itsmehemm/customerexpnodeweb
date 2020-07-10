@@ -12,8 +12,9 @@ const whoami = (req, res) => {
             data: {
                 name: user.name,
                 email: user.email,
+                accountType: user.accountType,
                 accountId: user.accountId,
-                authentication_party: user.authenticationParty,
+                authentication_party: user.authenticationParty
             }
         });
     }

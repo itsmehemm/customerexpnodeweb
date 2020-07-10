@@ -146,7 +146,7 @@ export default class LoginWithFacebook extends Component {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography
-                                className="t-text-link-2"
+                                className="t-text-link"
                                 text="Continue as another facebook user"
                                 variant="subtitle1"
                                 onClick={this.logout}

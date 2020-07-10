@@ -120,6 +120,9 @@ const checkUserWebPermission = (req) => {
 const getWebName = (req) => {
     const url = req.url;
     if (!url) return null;
+    if (/^\/$/.test(url)) {
+        return WEB_NAME.HOME;
+    }
     if (/^\/product\/.*$/.test(url)) {
         return WEB_NAME.GET_PRODUCT;
     }
@@ -152,6 +155,9 @@ const getWebName = (req) => {
     }
     if (/^\/activity\/payment\/.*$/.test(url)) {
         return WEB_NAME.GET_PAYMENT_ACTIVITY;
+    }
+    if (/^\/business$/.test(url)) {
+        return WEB_NAME.BUSINESS_DASHBOARD;
     }
     return null;
 };

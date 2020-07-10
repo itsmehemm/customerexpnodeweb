@@ -23,6 +23,7 @@ const validateUserSession = (req, res, next) => {
             return next();
         } else {
             console.log(VALIDATE_USER_SESSION_CONTROLLER, `user does not has permission to resource: ${req.url}`);
+            return res.redirect('/notfound');
         }
     } else {
         if (isGuestRequestAllowed(req)) {
@@ -30,11 +31,11 @@ const validateUserSession = (req, res, next) => {
             return next();
         }
         console.log(VALIDATE_USER_SESSION_CONTROLLER, `guest request not allowed`);
-    }
-    console.log(VALIDATE_USER_SESSION_CONTROLLER, `WOWO_DEV_INJECT_TEST_USER:${WOWO_DEV_INJECT_TEST_USER}`);
-    if (environment !== ENVIRONMENT_PRODUCTION && WOWO_DEV_INJECT_TEST_USER === true) {
-        console.log(`[development only] allowing user in development mode only. not setting session. session will be set by API request`);
-        return next();
+        console.log(VALIDATE_USER_SESSION_CONTROLLER, `WOWO_DEV_INJECT_TEST_USER:${WOWO_DEV_INJECT_TEST_USER}`);
+        if (environment !== ENVIRONMENT_PRODUCTION && WOWO_DEV_INJECT_TEST_USER === true) {
+            console.log(`[development only] allowing user in development mode only. not setting session. session will be set by API request`);
+            return next();
+        }
     }
     console.log(VALIDATE_USER_SESSION_CONTROLLER, `redirecting to login page`);
     return res.redirect('/login');

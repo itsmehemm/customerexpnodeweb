@@ -21,7 +21,7 @@ export default class User extends Component {
 
     async componentDidMount() {
         const userObj = await whoami();
-        if (userObj && userObj.data && userObj.message === TINNAT_USER) {
+        if (userObj && userObj.message === TINNAT_USER) {
             await this.setState({
                 status: OPERATION_LOADING_COMPLETED,
                 type: TINNAT_USER,

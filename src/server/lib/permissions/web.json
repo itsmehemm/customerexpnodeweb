@@ -82,5 +82,11 @@
             "PERSONAL",
             "BUSINESS"
         ]
+    },
+    "business_dashboard": {
+        "permissions": [
+            "ADMIN",
+            "BUSINESS"
+        ]
     }
 }
