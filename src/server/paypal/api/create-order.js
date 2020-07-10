@@ -7,12 +7,12 @@ const environment = args.env || ENVIRONMENT_PRODUCTION;
 const config = require('../../lib/config.json');
 
 const createOrder = async (order) => {
-    console.log('PAYPAL_API_CREATE_ORDER', `request: ${JSON.stringify(order)}`);
+    console.info('PAYPAL_API_CREATE_ORDER', `request: ${JSON.stringify(order)}`);
     const { create_order } = config.paypal[environment];
     try {
         const response = await createAccessToken();
         if (!response || !response.access_token) {
-            console.log('PAYPAL_API_ERROR', 'Access token retrieval failed.');
+            console.error('PAYPAL_API_ERROR', 'Access token retrieval failed.');
             return null;
         }
         const orderResponse = await new Promise((resolve) => {
@@ -26,19 +26,19 @@ const createOrder = async (order) => {
                 json: true
             }, (error, response, body) => {
                 if (error) {
-                    console.log('PAYPAL_API_ERROR', JSON.stringify(error));
+                    console.error('PAYPAL_API_ERROR', JSON.stringify(error));
                 }
-                console.log('PAYPAL_API_RESPONSE', JSON.stringify(body));
+                console.info('PAYPAL_API_RESPONSE', JSON.stringify(body));
                 resolve(body);
             });
         });
         if (orderResponse && orderResponse.id) {
             return orderResponse.id;
         }
-        console.log('PAYPAL_API_ERROR', 'Order creation failed.');
+        console.error('PAYPAL_API_ERROR', 'Order creation failed.');
         return null;
     } catch (error) {
-        console.log('PAYPAL_API_ERROR', JSON.stringify(error));
+        console.error('PAYPAL_API_ERROR', JSON.stringify(error));
         return null;
     }
 };

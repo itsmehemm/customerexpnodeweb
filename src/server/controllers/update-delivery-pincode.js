@@ -24,7 +24,7 @@ const updateDeliveryPincode = async (req, res, next) => {
             status: delivery.status,
             deliveryTime: delivery.deliveryTime
         };
-        console.log(UPDATE_DELIVERY_PINCODE_CONTROLLER, `pincode details updated in session: ${JSON.stringify(req.session.delivery)}`);
+        console.info(UPDATE_DELIVERY_PINCODE_CONTROLLER, `pincode details updated in session: ${JSON.stringify(req.session.delivery)}`);
         return res.status(200).send({
             ...apiMessages.PINCODE_UPDATED,
             delivery: constructDeliveryObj(req.session.delivery)

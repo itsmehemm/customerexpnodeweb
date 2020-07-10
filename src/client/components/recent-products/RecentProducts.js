@@ -44,8 +44,6 @@ export default class RecentProducts extends Component {
             status,
             products
         } = this.state;
-        console.log(status)
-        console.log(products)
         return (
             <Container maxWidth="xl">
                 {status === OPERATION_LOADING && <ComponentLoader />}

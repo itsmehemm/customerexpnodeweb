@@ -16,9 +16,9 @@ const checkUserAPIPermission = (req, res, next) => {
             console.log(CHECK_USER_API_PERMISSION_CONTROLLER, `user has permission to ${req.url}`);
             return next();
         }
-        console.log(CHECK_USER_API_PERMISSION_CONTROLLER, `either user account type or permissions not found`);
+        console.error(CHECK_USER_API_PERMISSION_CONTROLLER, `either user account type or permissions not found`);
     }
-    console.log(CHECK_USER_API_PERMISSION_CONTROLLER, `user does not have permission to ${req.url}`);
+    console.warn(CHECK_USER_API_PERMISSION_CONTROLLER, `user does not have permission to ${req.url}`);
     return res.status(401).send({
         error: {
             ...errorConstants.PERMISSION_DENIED

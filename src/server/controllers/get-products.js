@@ -25,7 +25,7 @@ const getProducts = (req, res) => {
                 });
             })
             .catch((error) => {
-                console.log(GET_PRODUCT_CONTROLLER, `error performing operation in database: ${JSON.stringify(error)}`);
+                console.error(GET_PRODUCT_CONTROLLER, `error performing operation in database: ${JSON.stringify(error)}`);
                 return res.status(500).send({
                     error: errorConstants.DATABASE_ERROR
                 });

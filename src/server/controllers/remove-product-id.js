@@ -24,7 +24,7 @@ const removeProductById = (req, res) => {
                 }
             })
             .catch((error) => {
-                console.log(REMOVE_PRODUCT_BY_ID_CONTROLLER, `error performing operation in database: ${JSON.stringify(error)}`);
+                console.error(REMOVE_PRODUCT_BY_ID_CONTROLLER, `error performing operation in database: ${JSON.stringify(error)}`);
                 res.status(500).send({
                     error: errorConstants.DATABASE_ERROR
                 });

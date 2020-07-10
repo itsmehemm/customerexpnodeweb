@@ -7,7 +7,7 @@ const connection = (closure) => {
         console.log('MONGO', 'connection', 'DB Connector available.');
         return closure(dbConnector);
     } else {
-        console.log('MONGO', 'connection', 'DB Connector unavailable. Requesting new connection');
+        console.error('MONGO', 'connection', 'DB Connector unavailable. Requesting new connection');
         return MongoClient.connect('mongodb://tinnat:tinnat@tinnat-db-cluster-0-shard-00-00-4synn.mongodb.net:27017,tinnat-db-cluster-0-shard-00-01-4synn.mongodb.net:27017,tinnat-db-cluster-0-shard-00-02-4synn.mongodb.net:27017/test?ssl=true&replicaSet=tinnat-db-cluster-0-shard-0&authSource=admin&retryWrites=true&w=majority', (err, db) => {
             console.log('MONGO', 'connection', 'Connected to database: tinnat')
             if (err) return console.log(err);

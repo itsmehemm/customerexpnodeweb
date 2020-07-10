@@ -18,7 +18,7 @@ const whoami = (req, res) => {
             }
         });
     }
-    console.log(WHOAMI_CONTROLLER, `no login found. guest session`);
+    console.warn(WHOAMI_CONTROLLER, `no login found. guest session`);
     return res.status(200).send({
         ...apiMessages.GUEST_USER
     });

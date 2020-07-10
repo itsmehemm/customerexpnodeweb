@@ -87,7 +87,7 @@ const razorpayPaymentComplete = async (req, res) => {
             }
         })
         .catch(error => {
-            console.log(RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION, `error receiving payment information from razorpay: ${JSON.stringify(error)}`);
+            console.error(RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION, `error receiving payment information from razorpay: ${JSON.stringify(error)}`);
             return res.status(400).send({
                 ...apiMessages.PAYMENT_FAILED
             });

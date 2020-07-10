@@ -70,7 +70,6 @@ export default class ProductFactoryModal {
         data.themes = themes.getData();
         data.advanced_details = advancedDetails.getData();
         data.preferences = preferences.getData();
-        console.log(JSON.stringify(data, undefined, 2));
         this.data = data;
     }
 

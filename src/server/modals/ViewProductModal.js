@@ -32,14 +32,14 @@ class ViewProductModal {
             data.formatted = getFormattedProductInfo(product);
             this.setData(data);
         } else {
-            console.log('[ERROR]', 'ViewProductModal::buildWithProduct', `product not found`);
+            console.error('ViewProductModal::buildWithProduct', `product not found`);
             this.setData(null);
         }
     }
 
     async build(id) {
         if (!id) {
-            console.log('[ERROR]', 'ViewProductModal::build', `no id received`);
+            console.error('ViewProductModal::build', `no id received`);
             return;
         };
         const product = await new Promise((resolve) => {
@@ -62,7 +62,7 @@ class ViewProductModal {
         if (product) {
             this.buildWithProduct(product);
         } else {
-            console.log('[ERROR]', 'ViewProductModal::build', `product not found with id=${id}`);
+            console.error('ViewProductModal::build', `product not found with id=${id}`);
             this.setData(null);
         }
         return;

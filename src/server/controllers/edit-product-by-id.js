@@ -11,7 +11,7 @@ const editProductById = async (req, res) => {
     const editProductModel = new EditProductModal();
     await editProductModel.getProduct(req.params.id);
     if (!editProductModel.getData()) {
-        console.log(EDIT_PRODUCT_BY_ID_CONTROLLER, `there are no products with the given id.`);
+        console.error(EDIT_PRODUCT_BY_ID_CONTROLLER, `there are no products with the given id.`);
         return res.status(404).send({
             error: errorConstants.PRODUCT_NOT_FOUND
         });
@@ -32,7 +32,7 @@ const editProductById = async (req, res) => {
                 ...apiMessages.PRODUCT_UPDATE_COMPLETED
             }))
             .catch((error) => {
-                console.log(EDIT_PRODUCT_BY_ID_CONTROLLER, `there was an error performing operation in the database. ${JSON.stringify(error)}`);
+                console.error(EDIT_PRODUCT_BY_ID_CONTROLLER, `there was an error performing operation in the database. ${JSON.stringify(error)}`);
                 res.status(500).send({
                     error: errorConstants.DATABASE_ERROR
                 });

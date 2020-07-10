@@ -39,7 +39,7 @@ const getFeaturedProducts = (req, res) => {
                     });
                 }
             }).catch((error) => {
-                console.log(GET_FEATURED_PRODUCTS_CONTROLLER, `there was an error performing the operation in the database. ${JSON.stringify(error)}`);
+                console.error(GET_FEATURED_PRODUCTS_CONTROLLER, `there was an error performing the operation in the database. ${JSON.stringify(error)}`);
                 return res.status(500).send({
                     error: errorConstants.DATABASE_ERROR
                 });

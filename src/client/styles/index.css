@@ -408,3 +408,15 @@ body {
     color: #fff;
     cursor: pointer;
 }
+
+.t-cal-row-info {
+    color: #0133e8;
+}
+
+.t-cal-row-warn {
+    color: #928e00;
+}
+
+.t-cal-row-error {
+    color: rgb(247, 36, 52);
+}

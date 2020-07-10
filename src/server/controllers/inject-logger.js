@@ -28,7 +28,7 @@ const injectLogger = (req, res, next) => {
             log.component = args[0];
         }
         if (args.length === 2) {
-            log.operation = 'INFO';
+            log.operation = 'LOG';
             log.additional_data = args[1];
         }
         if (args.length === 3) {
@@ -39,6 +39,81 @@ const injectLogger = (req, res, next) => {
         _logs.push(log);
         cache.put(debugId, _logs);
         _consoleLog.apply(console, args);
+    };
+    let _consoleInfo;
+    if (!_consoleInfo) {
+        _consoleInfo = console.info;
+    }
+    console.info = function () {
+        let args = Array.from(arguments);
+        let log = {};
+        log.status = 1;
+        log.time_stamp = new Date().getTime();
+        if (args.length > 0) {
+            log.component = args[0];
+        }
+        if (args.length === 2) {
+            log.operation = 'INFO';
+            log.additional_data = args[1];
+        }
+        if (args.length === 3) {
+            log.operation = args[1];;
+            log.additional_data = args[2];
+        }
+        let _logs = cache.get(debugId) || [];
+        _logs.push(log);
+        cache.put(debugId, _logs);
+        _consoleInfo.apply(console, args);
+    };
+    let _consoleWarn;
+    if (!_consoleWarn) {
+        _consoleWarn = console.warn;
+    }
+    console.warn = function () {
+        let args = Array.from(arguments);
+        let log = {};
+        log.status = 2;
+        log.time_stamp = new Date().getTime();
+        if (args.length > 0) {
+            log.component = args[0];
+        }
+        if (args.length === 2) {
+            log.operation = 'WARNING';
+            log.additional_data = args[1];
+        }
+        if (args.length === 3) {
+            log.operation = args[1];;
+            log.additional_data = args[2];
+        }
+        let _logs = cache.get(debugId) || [];
+        _logs.push(log);
+        cache.put(debugId, _logs);
+        _consoleWarn.apply(console, args);
+    };
+    let _consoleError;
+    if (!_consoleError) {
+        _consoleError = console.error;
+    }
+    console.error = function () {
+        let args = Array.from(arguments);
+        let log = {};
+        log.status = 3;
+        log.time_stamp = new Date().getTime();
+        if (args.length > 0) {
+            log.component = args[0];
+        }
+        if (args.length === 2) {
+            log.operation = 'ERROR';
+            log.additional_data = args[1];
+        }
+        if (args.length === 3) {
+            log.operation = args[1];;
+            log.additional_data = args[2];
+        }
+        let _logs = cache.get(debugId) || [];
+        _logs.push(log);
+        cache.put(debugId, _logs);
+        _consoleError.apply(console, args);
     };
     res.set(X_TINNAT_DEBUG_ID, debugId);
     const _resStatus = res.status;

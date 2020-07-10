@@ -5,11 +5,11 @@ const errorConstants = require('../lib/constants/error-constants');
 
 const load = async (pincode) => {
     if (!pincode) {
-        console.log('POSTALPINCODE API', 'no pincode received');
+        console.error('POSTALPINCODE API', 'no pincode received');
         return null;
     }
     let response = await request(`${config.postalpincode.api.url}/${pincode}`);
-    console.log('POSTALPINCODE API', `raw response`, JSON.stringify(response));
+    console.info('POSTALPINCODE API', `raw response`, JSON.stringify(response));
     response = JSON.parse(response && response.body || '{}');
     response = Array.isArray(response) ? response[0] : null;
     if (response && response['Status'] === 'Success') {
@@ -26,7 +26,7 @@ const load = async (pincode) => {
                 getPincode: () => pincode
             };
         } else {
-            console.log('POSTALPINCODE API', 'no post offices found for pincode');
+            console.error('POSTALPINCODE API', 'no post offices found for pincode');
             return {
                 error: {
                     ...errorConstants.NOT_DELIVERABLE
@@ -34,7 +34,7 @@ const load = async (pincode) => {
             };
         }
     }
-    console.log('POSTALPINCODE API', 'either an invalid pincode received or an error occurred while fetching the postalpincode api');
+    console.error('POSTALPINCODE API', 'either an invalid pincode received or an error occurred while fetching the postalpincode api');
     return {
         error: {
             ...errorConstants.INVALID_PINCODE
@@ -56,18 +56,18 @@ const getDeliveryStatus = async (address) => {
         const data = deliveryData[item];
         if (data) {
             if (data.status === true) {
-                console.log('POSTALPINCODE API', 'getDeliveryStatus', `deliverable to ${item} in ${data.delivery_time} seconds`);
+                console.info('POSTALPINCODE API', 'getDeliveryStatus', `deliverable to ${item} in ${data.delivery_time} seconds`);
                 rule1 += 1;
                 deliveryTime = Math.max(deliveryTime, data.delivery_time);
             } else if (data.status === false) {
-                console.log('POSTALPINCODE API', 'getDeliveryStatus', `not deliverable to ${item}`);
+                console.error('POSTALPINCODE API', 'getDeliveryStatus', `not deliverable to ${item}`);
                 rule2 += 1;
             } else {
-                console.log('POSTALPINCODE API', 'getDeliveryStatus', `data not found for ${item}`);
+                console.warn('POSTALPINCODE API', 'getDeliveryStatus', `data not found for ${item}`);
                 rule3 += 1;
             }
         } else {
-            console.log('POSTALPINCODE API', 'getDeliveryStatus', `data not found for ${item}`);
+            console.warn('POSTALPINCODE API', 'getDeliveryStatus', `data not found for ${item}`);
             rule3 += 1;
         }
     });

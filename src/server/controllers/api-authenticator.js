@@ -46,7 +46,7 @@ const apiAuthenticator = async (req, res, next) => {
         };
         return next();
     }
-    console.log(API_AUTHENTICATOR, `user not authorized`);
+    console.warn(API_AUTHENTICATOR, `user not authorized`);
     return res.status(401).send({
         error: {
             ...errorConstants.UNAUTHORIZED_REQUEST

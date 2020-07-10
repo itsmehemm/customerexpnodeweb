@@ -11,7 +11,7 @@ const addProduct = (req, res) => {
     const addProductModal = new AddProductModal(req.body);
     console.log(ADD_PRODUCT_CONTROLLER, `product object parsed: ${JSON.stringify(addProductModal.getData())}`);
     if (!addProductModal.validate()) {
-        console.log(ADD_PRODUCT_CONTROLLER, `invalid request received.`);
+        console.error(ADD_PRODUCT_CONTROLLER, `invalid request received.`);
         return res.status(400).send({
             error: errorConstants.MISSING_REQUIRED_PARAMETERS
         });
@@ -29,7 +29,7 @@ const addProduct = (req, res) => {
                 })
             })
             .catch((error) => {
-                console.log(ADD_PRODUCT_CONTROLLER, `error adding product to database: ${JSON.stringify(error)}`);
+                console.error(ADD_PRODUCT_CONTROLLER, `error adding product to database: ${JSON.stringify(error)}`);
                 res.status(500).send({
                     error: errorConstants.DATABASE_ERROR
                 });

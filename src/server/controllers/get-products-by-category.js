@@ -27,7 +27,7 @@ const getProductsByCategory = (req, res) => {
                 });
             })
             .catch(err => {
-                console.log(GET_PRODUCTS_BY_CATEGORY_CONTROLLER, `Error performing operation in database: ${JSON.stringify(err)}`);
+                console.error(GET_PRODUCTS_BY_CATEGORY_CONTROLLER, `Error performing operation in database: ${JSON.stringify(err)}`);
                 res.status(500).send({
                     error: errorConstants.DATABASE_ERROR
                 });

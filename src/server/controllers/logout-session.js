@@ -9,7 +9,7 @@ const logoutSession = (req, res, next) => {
         console.log(LOGOUT_SESSION_CONTROLLER, 'logout successful');
         req.session.destroy();
     }
-    console.log(LOGOUT_SESSION_CONTROLLER, 'no session found to logout');
+    console.warn(LOGOUT_SESSION_CONTROLLER, 'no session found to logout');
     return res.redirect(config.tinnat[environment].url.logout_success);
 };
 

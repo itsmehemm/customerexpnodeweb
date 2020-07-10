@@ -13,7 +13,7 @@ class ThemeAsProductModal {
             !this.product.themes ||
             !Array.isArray(this.product.themes) ||
             this.product.themes.length === 0) {
-            console.log('THEME_AS_PRODUCT_MODAL', 'failed to build theme as product');
+            console.warn('THEME_AS_PRODUCT_MODAL', 'failed to build theme as product');
             return;
         }
         const { themes } = this.product;

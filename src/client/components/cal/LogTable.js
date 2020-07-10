@@ -36,6 +36,20 @@ const useStyles = makeStyles({
     },
 });
 
+const getRowClassName = (status) => {
+    status = parseInt(status);
+    if (status === 1) {
+        return 't-cal-row-info';
+    }
+    if (status === 2) {
+        return 't-cal-row-warn';
+    }
+    if (status === 3) {
+        return 't-cal-row-error';
+    }
+    return '';
+}
+
 const LogTable = ({ logs, columns = {} }) => {
     const classes = useStyles();
     return (
@@ -52,10 +66,10 @@ const LogTable = ({ logs, columns = {} }) => {
                 <TableBody>
                     {logs.map((row) => (
                         <StyledTableRow key={row.date + row.component}>
-                            {columns.date && <StyledTableCell align="center"><Typography variant="body2" text={moment(row.time_stamp).format("DD.MM.YYYY HH:MM:SS")} /></StyledTableCell>}
-                            {columns.component && <StyledTableCell align="left"><Typography variant="body2" text={row.component} /></StyledTableCell>}
-                            {columns.operation && <StyledTableCell align="left"><Typography variant="body2" text={row.operation} /></StyledTableCell>}
-                            {columns.additional_data && <StyledTableCell align="left"><Typography variant="body2" text={row.additional_data} /></StyledTableCell>}
+                            {columns.date && <StyledTableCell align="center"><Typography variant="body2" text={moment(row.time_stamp).format("DD.MM.YYYY HH:MM:SS")} className={getRowClassName(row.status)} /></StyledTableCell>}
+                            {columns.component && <StyledTableCell align="left"><Typography variant="body2" text={row.component} className={getRowClassName(row.status)} /></StyledTableCell>}
+                            {columns.operation && <StyledTableCell align="left"><Typography variant="body2" text={row.operation} className={getRowClassName(row.status)} /></StyledTableCell>}
+                            {columns.additional_data && <StyledTableCell align="left"><Typography variant="body2" text={row.additional_data} className={getRowClassName(row.status)} /></StyledTableCell>}
                         </StyledTableRow>
                     ))}
                 </TableBody>

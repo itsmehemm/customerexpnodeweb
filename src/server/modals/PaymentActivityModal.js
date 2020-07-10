@@ -123,7 +123,7 @@ class PaymentActivityModal {
                             });
                         })
                         .catch((error) => {
-                            console.log(PAYMENT_ACTIVITY_MODAL, `error adding payment details to database: ${JSON.stringify(error)}`);
+                            console.error(PAYMENT_ACTIVITY_MODAL, `error adding payment details to database: ${JSON.stringify(error)}`);
                             resolve({
                                 status: status.FAILURE
                             });
@@ -154,11 +154,11 @@ class PaymentActivityModal {
                         if (Array.isArray(result) && result.length === 1) {
                             return resolve(result[0]);
                         }
-                        console.log(PAYMENT_ACTIVITY_MODAL, `no transactions found with id: ${transactionId}`);
+                        console.warn(PAYMENT_ACTIVITY_MODAL, `no transactions found with id: ${transactionId}`);
                         return resolve(null);
                     })
                     .catch((error) => {
-                        console.log(PAYMENT_ACTIVITY_MODAL, `error getting payment details: ${JSON.stringify(error)}`);
+                        console.error(PAYMENT_ACTIVITY_MODAL, `error getting payment details: ${JSON.stringify(error)}`);
                         resolve(null);
                     });
             });
@@ -182,11 +182,11 @@ class PaymentActivityModal {
                         if (Array.isArray(result) && result.length === 1) {
                             return resolve(result[0]);
                         }
-                        console.log(PAYMENT_ACTIVITY_MODAL, `no transactions found with id: ${transactionId}`);
+                        console.warn(PAYMENT_ACTIVITY_MODAL, `no transactions found with id: ${transactionId}`);
                         return resolve(null);
                     })
                     .catch((error) => {
-                        console.log(PAYMENT_ACTIVITY_MODAL, `error getting payment details: ${JSON.stringify(error)}`);
+                        console.error(PAYMENT_ACTIVITY_MODAL, `error getting payment details: ${JSON.stringify(error)}`);
                         resolve(null);
                     });
             });
@@ -210,11 +210,11 @@ class PaymentActivityModal {
                         if (Array.isArray(result) && result.length === 1) {
                             return resolve(result[0]);
                         }
-                        console.log(PAYMENT_ACTIVITY_MODAL, `no transactions found with id: ${orderId}`);
+                        console.warn(PAYMENT_ACTIVITY_MODAL, `no transactions found with id: ${orderId}`);
                         return resolve(null);
                     })
                     .catch((error) => {
-                        console.log(PAYMENT_ACTIVITY_MODAL, `error getting payment details: ${JSON.stringify(error)}`);
+                        console.error(PAYMENT_ACTIVITY_MODAL, `error getting payment details: ${JSON.stringify(error)}`);
                         resolve(null);
                     });
             });

@@ -15,7 +15,7 @@ class LoggerModal {
     async load() {
         console.log(LOGGER_MODAL, `loading logs from database for debugid: ${this.debug_id}`);
         if (!this.debug_id) {
-            console.log(LOGGER_MODAL, `invalid debugid`);
+            console.error(LOGGER_MODAL, `invalid debugid`);
             this.logs = [];
             return;
         }
@@ -36,7 +36,7 @@ class LoggerModal {
         if (this.logs.length > 0) {
             console.log(LOGGER_MODAL, `logs found for debugid: ${this.debug_id}`);
         } else {
-            console.log(LOGGER_MODAL, `logs not found for debugid: ${this.debug_id}`);
+            console.error(LOGGER_MODAL, `logs not found for debugid: ${this.debug_id}`);
         }
         return;
     }
@@ -64,7 +64,7 @@ class LoggerModal {
         if (status) {
             console.log(LOGGER_MODAL, `logs persisted in database successfully for debugid: ${this.debug_id}`);
         } else {
-            console.log(LOGGER_MODAL, `there was an error persisting logs to database for debugid: ${this.debug_id}`);
+            console.error(LOGGER_MODAL, `there was an error persisting logs to database for debugid: ${this.debug_id}`);
         }
     }
 

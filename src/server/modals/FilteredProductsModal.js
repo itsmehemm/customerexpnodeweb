@@ -28,7 +28,7 @@ class FilteredProductsModal {
             })
         });
         if (products.length === 0) {
-            console.log('FILTERED_PRODUCTS_MODAL', `failed to load products from database.`);
+            console.error('FILTERED_PRODUCTS_MODAL', `failed to load products from database.`);
             return;
         }
         console.log('FILTERED_PRODUCTS_MODAL', `loaded products from database. total: ${products.length}`);

@@ -40,7 +40,7 @@ class InstantPurchaseModal {
         this.personal_information = this._getPersonalInformation(d);
         this.purchase_items = await this._getPurchaseItems(d);
         if (this.purchase_items.length == 0) {
-            console.log(INSTANT_PURCHASE_MODAL, `invalid purchase items. order creation failed`);
+            console.error(INSTANT_PURCHASE_MODAL, `invalid purchase items. order creation failed`);
             return null;
         }
         this.amount = this._getAmount(this.purchase_items);
