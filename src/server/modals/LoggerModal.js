@@ -52,6 +52,7 @@ class LoggerModal {
                 .updateOne({
                     [KEY.DEBUG_ID]: this.debug_id
                 }, {
+                    [KEY.CREATED_AT]: new Date(),
                     [KEY.DEBUG_ID]: this.debug_id,
                     [KEY.LOGS]: JSON.stringify(this.logs)
                 }, {

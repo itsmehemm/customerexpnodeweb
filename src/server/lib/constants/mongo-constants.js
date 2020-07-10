@@ -8,6 +8,7 @@ module.exports = {
         PRODUCT_ID: 'id',
         FEATURED_PRODUCT: 'featured',
         DEBUG_ID: 'debug_id',
-        LOGS: 'logs'
+        LOGS: 'logs',
+        CREATED_AT: 'createdAt'
     }
 }
