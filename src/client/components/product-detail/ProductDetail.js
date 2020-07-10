@@ -13,6 +13,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import TextField from '../common/elements/TextField';
 import SmallButtonGroup from '../common/elements/SmallButtonGroup';
+import PrimaryIconButton from '../common/elements/PrimaryIconButton';
+import ButtonLoader from '../common/elements/ButtonLoader';
 import SmallImageButtonGroup from '../common/elements/SmallImageButtonGroup';
 import Amount from '../common/elements/Amount';
 import LargeBtn from '../common/elements/LargeBtn';
@@ -25,6 +27,11 @@ import {
     createInstantOrder,
     updateDeliveryPincode
 } from '../../actions';
+import {
+    OPERATION_LOADING,
+    OPERATION_LOADING_COMPLETED,
+    COMPLETED
+} from '../../lib/constants';
 
 export default class ProductDetail extends Component {
     constructor(props) {
@@ -70,29 +77,6 @@ export default class ProductDetail extends Component {
             }
         });
     }
-
-    // addToCart() {
-    //     const item = {
-    //         id: this.props.id,
-    //         color: this.state.selected.color || this.props.data.default_color,
-    //         size: this.state.selected.size || this.props.data.default_size
-    //     }
-    //     console.log(`ITEM TO BE ADDED: ${JSON.stringify(item)}`);
-    //     console.log(`${JSON.stringify(this.props)}`);
-    //     addItemToCart({
-    //         id: this.props.data.id,
-    //         color: this.state.selected.color || this.props.data.default_color,
-    //         size: this.state.selected.size || this.props.data.default_size
-    //     }).then(response => {
-    //         if (response && response.status === 'SUCCESS') {
-    //             this.setState({ notification: { status: true, message: response.description } });
-    //         } else {
-    //             this.setState({ notification: { status: true, message: response.description } });
-    //         }
-    //     }).catch(error => {
-    //         this.setState({ notification: { status: true, message: 'Internal error' } });
-    //     })
-    // }
 
     async instantPurchase() {
         const { selection, stockQuantity, delivery } = this.state;
@@ -146,15 +130,17 @@ export default class ProductDetail extends Component {
     }
 
     async updatePincode() {
+        await this.setState({ delivery_status: OPERATION_LOADING });
         const { pincode } = this.state;
         const response = await updateDeliveryPincode(pincode);
-        if (response && response.status === "COMPLETED") {
-            this.setState({ delivery: response.delivery, delivery_error: null });
+        if (response && response.status === COMPLETED) {
+            await this.setState({ delivery: response.delivery, delivery_error: null });
         } else if (response && response.error) {
-            this.setState({ delivery: null, delivery_error: response.error.description })
+            await this.setState({ delivery: null, delivery_error: response.error.description })
         } else {
-            this.setState({ delivery: null, delivery_error: null })
+            await this.setState({ delivery: null, delivery_error: 'Please try again.' })
         }
+        await this.setState({ delivery_status: OPERATION_LOADING_COMPLETED });
     }
 
     render() {
@@ -171,6 +157,7 @@ export default class ProductDetail extends Component {
             selection,
             pincode,
             delivery,
+            delivery_status,
             delivery_error
         } = this.state;
         return (
@@ -362,12 +349,17 @@ export default class ProductDetail extends Component {
                                                 />
                                             </Grid>
                                             <Grid item xs={2}>
-                                                <Button
-                                                    style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
-                                                    variant="contained"
-                                                    startIcon={<CheckIcon style={{ fontSize: '2em' }} />}
-                                                    onClick={() => this.updatePincode()}
-                                                />
+                                                {
+                                                    delivery_status === OPERATION_LOADING_COMPLETED &&
+                                                    <PrimaryIconButton
+                                                        Icon={<CheckIcon style={{ fontSize: '2em' }} />}
+                                                        onClick={() => this.updatePincode()}
+                                                    />
+                                                }
+                                                {
+                                                    delivery_status === OPERATION_LOADING &&
+                                                    <ButtonLoader />
+                                                }
                                             </Grid>
                                             {
                                                 delivery_error &&

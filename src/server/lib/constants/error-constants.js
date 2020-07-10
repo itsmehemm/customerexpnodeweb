@@ -1,11 +1,11 @@
 module.exports = {
     INVALID_DATA: {
         message: 'INVALID_DATA',
-        description: 'Invalid data received in the request. Please check the API specification and try again.'
+        description: 'Invalid data received in the request. Please try again.'
     },
     MISSING_REQUIRED_PARAMETERS: {
         message: 'MISSING_REQUIRED_PARAMETERS',
-        description: 'One or more required parameters missing. Please check the API specification and try again.'
+        description: 'One or more required parameters missing. Please try again.'
     },
     INTERNAL_SERVER_ERROR: {
         message: 'INTERNAL_SERVER_ERROR',
@@ -21,7 +21,7 @@ module.exports = {
     },
     INVALID_OR_MORE_ITEMS_RECEIVED: {
         message: 'INVALID_OR_MORE_ITEMS_RECEIVED',
-        description: 'Invalid or more items received. Please check the API specification and try again'
+        description: 'Invalid or more items received. Please try again'
     },
     ORDER_NOT_FOUND: {
         message: 'ORDER_NOT_FOUND',

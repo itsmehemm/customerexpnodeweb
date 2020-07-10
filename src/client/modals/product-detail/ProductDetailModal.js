@@ -1,3 +1,5 @@
+import { OPERATION_LOADING_COMPLETED } from '../../lib/constants';
+
 export default class ProductDetailModal {
 
     constructor(data) {
@@ -26,6 +28,7 @@ export default class ProductDetailModal {
                 status: false,
                 message: null
             },
+            delivery_status: OPERATION_LOADING_COMPLETED,
             pincode: ''
         };
     }
@@ -117,6 +120,7 @@ export default class ProductDetailModal {
                 message: null
             },
             delivery: data.delivery,
+            delivery_status: OPERATION_LOADING_COMPLETED,
             pincode: data.delivery && data.delivery.address && data.delivery.address.pincode
         };
     }
