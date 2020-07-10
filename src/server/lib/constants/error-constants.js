@@ -70,5 +70,9 @@ module.exports = {
     PERMISSION_DENIED: {
         message: 'PERMISSION_DENIED',
         description: 'The user doesn\'t have the required permissions to access this resource'
+    },
+    LOGS_NOT_FOUND: {
+        message: 'LOGS_NOT_FOUND',
+        description: 'There are no logs with the specified id.'
     }
 };

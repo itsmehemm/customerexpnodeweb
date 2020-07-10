@@ -121,5 +121,10 @@
             "ADMIN",
             "BUSINESS"
         ]
+    },
+    "get_logs": {
+        "permissions": [
+            "ADMIN"
+        ]
     }
 }

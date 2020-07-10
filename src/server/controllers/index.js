@@ -26,5 +26,7 @@ module.exports = {
     getPaymentActivity: require('./get-payment-activity'),
     getPaymentActivityInternal: require('./get-payment-activity-internal'),
     searchTransactions: require('./search-transactions'),
-    getBusinessKPIs: require('./get-business-kpis')
+    getBusinessKPIs: require('./get-business-kpis'),
+    injectLogger: require('./inject-logger'),
+    getLogsById: require('./get-logs-by-id')
 };

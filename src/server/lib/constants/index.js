@@ -41,7 +41,8 @@ module.exports = {
         GET_PAYMENT_ACTIVITY: 'get_payment_activity',
         GET_PAYMENT_ACTIVITY_INTERNAL: 'get_payment_activity_internal',
         SEARCH_TRANSACTIONS: 'search_transactions',
-        GET_KPIS: 'get_kpis'
+        GET_KPIS: 'get_kpis',
+        GET_LOGS: 'get_logs'
     },
     WEB_NAME: {
         GET_PRODUCT: 'get_product',

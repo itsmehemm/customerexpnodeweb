@@ -1,10 +1,13 @@
 module.exports = {
     COLLECTION: {
         PRODUCT: 'PRODUCT',
-        PAY: 'PAY'
+        PAY: 'PAY',
+        DEBUG_LOG: 'DEBUG_LOG'
     },
     KEY: {
         PRODUCT_ID: 'id',
-        FEATURED_PRODUCT: 'featured'
+        FEATURED_PRODUCT: 'featured',
+        DEBUG_ID: 'debug_id',
+        LOGS: 'logs'
     }
 }

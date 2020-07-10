@@ -21,7 +21,8 @@ const {
     getPaymentActivity,
     getPaymentActivityInternal,
     searchTransactions,
-    getBusinessKPIs
+    getBusinessKPIs,
+    getLogsById
 } = require('../controllers');
 
 const app = express();
@@ -69,5 +70,7 @@ app.post('/activity/search/transactions', searchTransactions);
 app.get('/business/activity/payment/:transactionId', getPaymentActivityInternal);
 
 app.get('/business/kpis', getBusinessKPIs);
+
+app.get('/log/:debugid', getLogsById);
 
 module.exports = app;
