@@ -16,7 +16,7 @@ export default class Business extends Component {
                 <Route exact path="/business" component={BusinessDashboard} />
                 <Route exact path="/business/warehouse/product/add" component={ProductFactoryWrapper} />
                 <Route exact path="/business/warehouse/product/edit/:productid" component={ProductFactoryWrapper} />
-                <Route exact path="/business/warehouse/product/view/:productid/" component={ProductDetailWrapper} />
+                <Route exact path="/business/warehouse/product/view/:productid" component={ProductDetailWrapper} />
                 <Route exact path="/business/activity/transactions" component={SearchTransactions} />
                 <Route exact path="/business/activity/transaction/:transactionid" component={PaymentActivity} />
                 <Route exact path="/business/logger/idsearch" component={Idsearch} />
