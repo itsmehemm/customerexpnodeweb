@@ -10,7 +10,9 @@
                 "v1_get_product_by_id": "https://localhost:2003/product/${productid}",
                 "login_success": "https://localhost:2003/",
                 "logout_success": "https://localhost:2003/",
-                "login_failure": "https://localhost:2003/error"
+                "login_failure": "https://localhost:2003/login?error='login_failure'",
+                "redirect_base": "https://localhost:2003",
+                "redirect_error": "https://localhost:2003/error"
             },
             "api": {
                 "base_url": "https://localhost:2003/api"
@@ -90,7 +92,7 @@
         }
     },
     "postalpincode": {
-        "api":{
+        "api": {
             "url": "https://api.postalpincode.in/pincode"
         }
     }

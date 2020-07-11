@@ -59,7 +59,12 @@ module.exports = {
         GET_PAYMENT_ACTIVITY: 'get_payment_activity',
         BUSINESS_DASHBOARD: 'business_dashboard',
         IDSEARCH: 'idsearch',
-        NOT_FOUND: 'not_found'
+        NOT_FOUND: 'not_found',
+        LOGIN: 'login',
+        BUSINESS_ACTIVITY: 'business_activity',
+        BUSINESS_ADD_PRODUCT: 'business_add_product',
+        BUSINESS_UPDATE_PRODUCT: 'business_update_product',
+        BUSINESS_VIEW_PRODUCT: 'business_view_product'
     },
     SOFT_DESCRIPTOR: 'Tinnos India',
     ORDER_INIT: 'INITIAL',

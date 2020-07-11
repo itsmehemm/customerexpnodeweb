@@ -16,6 +16,7 @@ import PaymentActivity from './components/activity/Payment';
 import Business from './components/business';
 import NotFound from './components/common/errors/NotFound';
 import Error from './components/common/errors/Error';
+import Login from './components/login/Login';
 import './styles/index.css';
 
 export default class Tinnat extends Component {
@@ -31,6 +32,7 @@ export default class Tinnat extends Component {
                 <Route exact path="/product/:productid" component={ProductDetailWrapper} />
                 <Route exact path="/viewcart" component={Cart} />
                 <Route exact path="/checkout" component={Checkout} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/instant-purchase/payment/:orderid" component={InstantPurchasePayment} />
                 <Route exact path="/instant-purchase/complete/:orderid" component={InstantPurchaseConfirmation} />
                 <Route exact path="/instant-purchase/:orderid" component={InstantPurchase} />
@@ -38,7 +40,6 @@ export default class Tinnat extends Component {
                 <Route path="/business" component={Business} />
                 <Route exact path="/notfound" component={NotFound} />
                 <Route exact path="/error" component={Error} />
-                <Footer />
             </Router >
         );
     }

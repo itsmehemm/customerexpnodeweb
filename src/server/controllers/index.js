@@ -28,5 +28,6 @@ module.exports = {
     searchTransactions: require('./search-transactions'),
     getBusinessKPIs: require('./get-business-kpis'),
     injectLogger: require('./inject-logger'),
-    getLogsById: require('./get-logs-by-id')
+    getLogsById: require('./get-logs-by-id'),
+    loginController: require('./login-controller')
 };

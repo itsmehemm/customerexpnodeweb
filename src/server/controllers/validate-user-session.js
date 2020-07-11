@@ -4,7 +4,9 @@ const { VALIDATE_USER_SESSION_CONTROLLER } = require('../lib/constants/logging-c
 const {
     isAPIRequest,
     isGuestRequestAllowed,
-    checkUserWebPermission
+    checkUserWebPermission,
+    computeRedirectSuccessUrl,
+    computeRedirectErrorUrl
 } = require('../lib/utils');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
 const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER;

@@ -13,7 +13,8 @@ const {
     createSessionWithFacebook,
     apiAuthenticator,
     checkUserAPIPermission,
-    injectLogger
+    injectLogger,
+    loginController
 } = require('../controllers');
 
 const app = express();
@@ -44,6 +45,8 @@ app.use(session({
 app.use(injectLogger);
 
 app.get('/auth/facebook', createSessionWithFacebook);
+
+app.get('/login', loginController);
 
 app.get('/logout', logoutSession);
 

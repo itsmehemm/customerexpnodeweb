@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import ComponentLoader from '../common/loaders/ComponentLoader';
 import Typography from '../common/elements/Typography';
+import initializeFacebookSDK from './initialize-facebook-sdk';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
@@ -20,28 +21,31 @@ export default class LoginWithFacebook extends Component {
     }
 
     async componentDidMount() {
-        if (FB) {
-            FB.getLoginStatus(async response => {
-                if (response && response.status === 'connected' && response.authResponse) {
-                    FB.api('/me', async (user) => {
+        await initializeFacebookSDK(document, 'script', 'facebook-jssdk');
+        setTimeout(() => {
+            if (FB) {
+                FB.getLoginStatus(async response => {
+                    if (response && response.status === 'connected' && response.authResponse) {
+                        FB.api('/me', async (user) => {
+                            await this.setState({
+                                status: OPERATION_LOADING_COMPLETED,
+                                login_status: LOGGED_IN,
+                                facebookResponse: {
+                                    ...response,
+                                    user: user
+                                }
+                            });
+                        })
+                    } else {
                         await this.setState({
                             status: OPERATION_LOADING_COMPLETED,
-                            login_status: LOGGED_IN,
-                            facebookResponse: {
-                                ...response,
-                                user: user
-                            }
+                            login_status: null,
+                            facebookResponse: null
                         });
-                    })
-                } else {
-                    await this.setState({
-                        status: OPERATION_LOADING_COMPLETED,
-                        login_status: null,
-                        facebookResponse: null
-                    });
-                }
-            });
-        }
+                    }
+                });
+            }
+        }, 3000);
     }
 
     logout = async () => {
@@ -108,7 +112,8 @@ export default class LoginWithFacebook extends Component {
         }
     }
 
-    tinnatLogin = () => {
+    tinnatLogin = async () => {
+        await this.setState({ status: OPERATION_LOADING });
         const { facebookResponse } = this.state;
         fetch(`/auth/facebook?access_token=${facebookResponse.authResponse.accessToken}`)
             .then(() => window.location.reload())

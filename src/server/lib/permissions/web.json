@@ -94,7 +94,37 @@
             "ADMIN"
         ]
     },
+    "business_activity": {
+        "permissions": [
+            "ADMIN",
+            "BUSINESS"
+        ]
+    },
+    "business_add_product": {
+        "permissions": [
+            "ADMIN"
+        ]
+    },
+    "business_update_product": {
+        "permissions": [
+            "ADMIN"
+        ]
+    },
+    "business_view_product": {
+        "permissions": [
+            "ADMIN",
+            "BUSINESS"
+        ]
+    },
     "not_found": {
+        "permissions": [
+            "GUEST",
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "login": {
         "permissions": [
             "GUEST",
             "ADMIN",
