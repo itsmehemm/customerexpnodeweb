@@ -116,6 +116,12 @@
             "BUSINESS"
         ]
     },
+    "business_view_products": {
+        "permissions": [
+            "ADMIN",
+            "BUSINESS"
+        ]
+    },
     "not_found": {
         "permissions": [
             "GUEST",

@@ -174,6 +174,9 @@ const getWebName = (req) => {
     if (/^\/business\/activity\/transaction\/.*$/.test(url)) {
         return WEB_NAME.BUSINESS_ACTIVITY;
     }
+    if (/^\/business\/warehouse\/products$/.test(url)) {
+        return WEB_NAME.BUSINESS_VIEW_PRODUCTS;
+    }
     if (/^\/business\/warehouse\/product\/add$/.test(url)) {
         return WEB_NAME.BUSINESS_ADD_PRODUCT;
     }
@@ -240,6 +243,9 @@ const getAPIName = (req) => {
     }
     if (/^\/business\/activity\/payment\/.*$/.test(url)) {
         return API_NAME.GET_PAYMENT_ACTIVITY_INTERNAL;
+    }
+    if (/^\/business\/products\/filter$/.test(url)) {
+        return API_NAME.BUSINESS_PRODUCT_FILTER;
     }
     if (/^\/business\/kpis$/.test(url)) {
         return API_NAME.GET_KPIS;

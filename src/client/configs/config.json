@@ -16,6 +16,9 @@
             "v1_post_filtered_products": {
                 "uri": "http://tinnat.com/api/products/filters"
             },
+            "v1_post_business_filtered_products": {
+                "uri": "http://tinnat.com/api/business/products/filters"
+            },
             "v1_post_add_product": {
                 "uri": "http://tinnat.com/api/product/add"
             },
@@ -84,6 +87,9 @@
             },
             "v1_post_filtered_products": {
                 "uri": "https://localhost:2003/api/products/filter"
+            },
+            "v1_post_business_filtered_products":{
+                "uri": "https://localhost:2003/api/business/products/filter"
             },
             "v1_post_add_product": {
                 "uri": "https://localhost:2003/api/product/add"

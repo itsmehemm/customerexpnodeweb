@@ -126,5 +126,11 @@
         "permissions": [
             "ADMIN"
         ]
+    },
+    "business_filter_products": {
+        "permissions": [
+            "ADMIN",
+            "BUSINESS"
+        ]
     }
 }

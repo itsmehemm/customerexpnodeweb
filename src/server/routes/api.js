@@ -69,6 +69,8 @@ app.post('/activity/search/transactions', searchTransactions);
 
 app.get('/business/activity/payment/:transactionId', getPaymentActivityInternal);
 
+app.post('/business/products/filter', getFilteredProducts);
+
 app.get('/business/kpis', getBusinessKPIs);
 
 app.get('/log/:debugid', getLogsById);

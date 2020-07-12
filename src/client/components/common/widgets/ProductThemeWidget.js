@@ -11,6 +11,8 @@ const ColorPallette = ({ color }) => <Grid item xs={1}> <div className="t-color-
 
 const ProductThemeWidget = (props) => {
     const {
+        id,
+        edit,
         name,
         description,
         onClick,
@@ -21,6 +23,15 @@ const ProductThemeWidget = (props) => {
     } = props;
     return (
         <Card variant="outlined">
+            {
+                edit && <Grid container>
+                    <Grid item align="right" xs={12}>
+                        <Box m={1}>
+                            <Typography className="t-text-link" variant="button" onClick={() => window.open('/business/warehouse/product/edit/' + id)} text="Edit" />
+                        </Box>
+                    </Grid>
+                </Grid>
+            }
             <Box m={1}>
                 <ProductImages
                     images={picture_links}
