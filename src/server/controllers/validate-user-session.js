@@ -24,7 +24,7 @@ const validateUserSession = (req, res, next) => {
             console.log(VALIDATE_USER_SESSION_CONTROLLER, `user has permission to resource: ${req.url}`);
             return next();
         } else {
-            console.log(VALIDATE_USER_SESSION_CONTROLLER, `user does not has permission to resource: ${req.url}`);
+            console.error(VALIDATE_USER_SESSION_CONTROLLER, `user does not has permission to resource: ${req.url}`);
             return res.redirect('/notfound');
         }
     } else {
@@ -35,12 +35,14 @@ const validateUserSession = (req, res, next) => {
         console.log(VALIDATE_USER_SESSION_CONTROLLER, `guest request not allowed`);
         console.log(VALIDATE_USER_SESSION_CONTROLLER, `WOWO_DEV_INJECT_TEST_USER:${WOWO_DEV_INJECT_TEST_USER}`);
         if (environment !== ENVIRONMENT_PRODUCTION && WOWO_DEV_INJECT_TEST_USER === true) {
-            console.log(`[development only] allowing user in development mode only. not setting session. session will be set by API request`);
+            console.log(VALIDATE_USER_SESSION_CONTROLLER, `[development only] allowing user in development mode only. not setting session. session will be set by API request`);
             return next();
         }
     }
-    console.log(VALIDATE_USER_SESSION_CONTROLLER, `redirecting to login page`);
-    return res.redirect('/login');
+    console.info(VALIDATE_USER_SESSION_CONTROLLER, `redirecting to login page`);
+    const redirectUrl = computeRedirectSuccessUrl(req.url);
+    const errorUrl = computeRedirectErrorUrl();
+    return res.redirect(`/login?redirect_url=${redirectUrl}&error_url=${errorUrl}`);
 };
 
 module.exports = validateUserSession;
