@@ -6,7 +6,7 @@ import {
 export const commonResponseHandler = (response) => {
     if (response && response.error && response.error.message === UNAUTHORIZED_REQUEST) {
         console.log('commonResponseHandler', `user not authorized to access this page.`);
-        window.location.href = '/login';
+        window.location.href = response.error.login_redirect_url;
     }
     if (response && response.error && response.error.message === PERMISSION_DENIED) {
         console.log('commonResponseHandler', `user not permitted to access this page.`);
