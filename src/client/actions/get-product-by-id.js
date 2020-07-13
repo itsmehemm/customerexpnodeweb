@@ -2,7 +2,7 @@ import {
     commonResponseHandler,
     commonErrorHandler
 } from '../lib/handlers/common';
-import getAPIHeaders from '../lib/request/get-api-headers';
+import { getAPIHeaders } from '../lib/request/get-headers';
 import config from '../configs/config.json';
 import addProductToRecentView from './add-product-to-recent-view';
 
