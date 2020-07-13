@@ -1,5 +1,9 @@
 const uniqid = require('uniqid');
 const args = require('yargs').argv;
+const {
+    computeRedirectSuccessUrlForAPI,
+    computeRedirectErrorUrl
+} = require('../lib/utils');
 const errorConstants = require('../lib/constants/error-constants');
 const {
     API_AUTHENTICATOR
@@ -47,9 +51,12 @@ const apiAuthenticator = async (req, res, next) => {
         return next();
     }
     console.warn(API_AUTHENTICATOR, `user not authorized`);
+    const redirectUrl = computeRedirectSuccessUrlForAPI(req);
+    const errorUrl = computeRedirectErrorUrl();
     return res.status(401).send({
         error: {
-            ...errorConstants.UNAUTHORIZED_REQUEST
+            ...errorConstants.UNAUTHORIZED_REQUEST,
+            login_redirect_url: `/login?redirect_url=${redirectUrl}&error_url=${errorUrl}`
         }
     });
 };

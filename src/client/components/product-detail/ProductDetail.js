@@ -82,6 +82,7 @@ export default class ProductDetail extends Component {
         const { selection, stockQuantity, delivery } = this.state;
         if (selection.color && selection.size) {
             if ((stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) && delivery && delivery.status === 'DELIVERABLE') {
+                await this.setState({ create_order_status: OPERATION_LOADING });
                 const instantOrderModal = new InstantOrderModal();
                 instantOrderModal.updateCreateDataFromState(this.state);
                 try {
@@ -89,11 +90,10 @@ export default class ProductDetail extends Component {
                     if (response && response.status === 'COMPLETED') {
                         const next = response.links.filter(link => link.name === 'INSTANT_PURCHASE')
                         window.location.href = next[0].href;
-                    } else {
-                        await this.notify('There was an error while creating the order.');
                     }
+                    await this.setState({ create_order_status: OPERATION_LOADING_COMPLETED });
                 } catch (error) {
-                    await this.notify('There was an error while creating the order.');
+                    await this.setState({ create_order_status: OPERATION_LOADING_COMPLETED });
                 }
             } else {
                 if (!delivery) {
@@ -158,7 +158,8 @@ export default class ProductDetail extends Component {
             pincode,
             delivery,
             delivery_status,
-            delivery_error
+            delivery_error,
+            create_order_status,
         } = this.state;
         return (
             <Container style={{ padding: '1em' }} maxWidth="lg">
@@ -188,6 +189,7 @@ export default class ProductDetail extends Component {
                                             delivery &&
                                             delivery.status === "DELIVERABLE")
                                     }
+                                    loading={create_order_status === OPERATION_LOADING}
                                     onClick={this.instantPurchase}
                                     name="BUY NOW"
                                     color="rgb(247, 36, 52)"

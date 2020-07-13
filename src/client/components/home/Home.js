@@ -1,18 +1,17 @@
 import React from 'react';
-import Header from '../header/Header';
+import ConsumerApp from '../common/ConsumerApp';
 import HomeBanner from '../common/HomeBanner';
 import FeaturedProducts from '../featured/FeaturedProducts';
 import RecentProducts from '../recent-products/RecentProducts';
 
 const Home = () => {
     return (
-        <div>
-            <Header />
+        <ConsumerApp>
             <HomeBanner />
             <FeaturedProducts />
             <RecentProducts />
-        </div>
-    )
-}
+        </ConsumerApp>
+    );
+};
 
 export default Home;

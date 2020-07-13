@@ -1,4 +1,5 @@
 const uniqid = require('uniqid');
+const args = require('yargs').argv;
 const cache = require('../cache');
 const LoggerModal = require('../modals/LoggerModal');
 const {
@@ -7,6 +8,7 @@ const {
     API,
     WEB
 } = require('../lib/constants');
+const WOWO_DEV_OUTPUT_LOGS = args.WOWO_DEV_OUTPUT_LOGS;
 
 const injectLogger = (req, res, next) => {
     const securityContext = JSON.parse(req && req.headers && req.headers[X_TINNAT_SECURITY_CONTEXT] || '{}');
@@ -38,7 +40,9 @@ const injectLogger = (req, res, next) => {
         let _logs = cache.get(debugId) || [];
         _logs.push(log);
         cache.put(debugId, _logs);
-        _consoleLog.apply(console, args);
+        if (WOWO_DEV_OUTPUT_LOGS === true) {
+            _consoleLog.apply(console, args);
+        }
     };
     let _consoleInfo;
     if (!_consoleInfo) {
@@ -63,7 +67,9 @@ const injectLogger = (req, res, next) => {
         let _logs = cache.get(debugId) || [];
         _logs.push(log);
         cache.put(debugId, _logs);
-        _consoleInfo.apply(console, args);
+        if (WOWO_DEV_OUTPUT_LOGS === true) {
+            _consoleInfo.apply(console, args);
+        }
     };
     let _consoleWarn;
     if (!_consoleWarn) {
@@ -88,7 +94,9 @@ const injectLogger = (req, res, next) => {
         let _logs = cache.get(debugId) || [];
         _logs.push(log);
         cache.put(debugId, _logs);
-        _consoleWarn.apply(console, args);
+        if (WOWO_DEV_OUTPUT_LOGS === true) {
+            _consoleWarn.apply(console, args);
+        }
     };
     let _consoleError;
     if (!_consoleError) {
@@ -113,7 +121,9 @@ const injectLogger = (req, res, next) => {
         let _logs = cache.get(debugId) || [];
         _logs.push(log);
         cache.put(debugId, _logs);
-        _consoleError.apply(console, args);
+        if (WOWO_DEV_OUTPUT_LOGS === true) {
+            _consoleError.apply(console, args);
+        }
     };
     res.set(X_TINNAT_DEBUG_ID, debugId);
     const _resStatus = res.status;

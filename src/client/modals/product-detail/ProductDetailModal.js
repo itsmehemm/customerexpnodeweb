@@ -29,6 +29,7 @@ export default class ProductDetailModal {
                 message: null
             },
             delivery_status: OPERATION_LOADING_COMPLETED,
+            create_order_status: OPERATION_LOADING_COMPLETED,
             pincode: ''
         };
     }
@@ -121,6 +122,7 @@ export default class ProductDetailModal {
             },
             delivery: data.delivery,
             delivery_status: OPERATION_LOADING_COMPLETED,
+            create_order_status: OPERATION_LOADING_COMPLETED,
             pincode: data.delivery && data.delivery.address && data.delivery.address.pincode
         };
     }

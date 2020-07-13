@@ -267,6 +267,14 @@ const computeRedirectSuccessUrl = (path) => {
     return encodeURIComponent(redirectBaseUrl);
 };
 
+const computeRedirectSuccessUrlForAPI = (req) => {
+    const name = getAPIName(req);
+    if (name === API_NAME.CREATE_INSTANT_ORDER) {
+        return `${config.tinnat[environment].url.redirect_base}/product/${req.body.purchase_items[0].id}`;
+    }
+    return config.tinnat[environment].url.redirect_base;
+};
+
 const getDefaultRedirectUrl = () => {
     return config.tinnat[environment].url.redirect_base;
 };
@@ -282,6 +290,7 @@ module.exports = {
     getAPIName: getAPIName,
     checkUserWebPermission: checkUserWebPermission,
     computeRedirectSuccessUrl: computeRedirectSuccessUrl,
+    computeRedirectSuccessUrlForAPI: computeRedirectSuccessUrlForAPI,
     computeRedirectErrorUrl: computeRedirectErrorUrl,
     getDefaultRedirectUrl: getDefaultRedirectUrl
 };
