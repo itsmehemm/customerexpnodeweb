@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
 import Box from '@material-ui/core/Box';
-import Header from '../header/Header';
+import ConsumerApp from '../common/ConsumerApp';
 import ComponentLoader from '../common/loaders/ComponentLoader';
 import Typography from '../common/elements/Typography';
 import LargeBtn from '../common/elements/LargeBtn';
@@ -22,7 +22,10 @@ import {
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING_ERROR,
     COMPONENT_STATUS_INVALID,
-    COMPONENT_MAPPER
+    COMPONENT_MAPPER,
+    COMPLETED,
+    PENDING,
+    PAYMENT
 } from '../../lib/constants';
 
 export default class InstantPurchase extends Component {
@@ -45,21 +48,14 @@ export default class InstantPurchase extends Component {
     async componentDidMount() {
         const orderid = this.props.match.params.orderid;
         const instantOrderModal = new InstantOrderModal();
-        try {
-            const order = await getOrderDetails(orderid);
-            if (order && order.id) {
-                instantOrderModal.updateData(order);
-                await this.setState({
-                    status: OPERATION_LOADING_COMPLETED,
-                    ...instantOrderModal.getData()
-                });
-            } else {
-                await this.setState({
-                    status: OPERATION_LOADING_ERROR,
-                    ...instantOrderModal.getDefaultData()
-                });
-            }
-        } catch (error) {
+        const order = await getOrderDetails(orderid);
+        if (order && order.id) {
+            instantOrderModal.updateData(order);
+            await this.setState({
+                status: OPERATION_LOADING_COMPLETED,
+                ...instantOrderModal.getData()
+            });
+        } else {
             await this.setState({
                 status: OPERATION_LOADING_ERROR,
                 ...instantOrderModal.getDefaultData()
@@ -84,26 +80,29 @@ export default class InstantPurchase extends Component {
     async patch() {
         const { errors } = this.state;
         if (errors.size === 0) {
+            await this.setState({ patch_order_status: OPERATION_LOADING });
             const instantOrderModal = new InstantOrderModal();
             instantOrderModal.updatePatchDataFromState(this.state);
-            try {
-                const response = await patchOrder(instantOrderModal.buildPatchOrderRequest());
-                if (response && response.status === 'COMPLETED') {
-                    const next = response.links.filter(link => link.name === 'PAYMENT');
-                    window.location.href = next[0].href;
-                } else if (response && response.status === 'PENDING') {
-                    await this.setState({
-                        notification: {
-                            status: true,
-                            message: response.reason
-                        }
-                    });
-                } else {
-                    console.log('Error patching order');
-                }
-            } catch (error) {
-                console.log('Error patching order', error);
+            const response = await patchOrder(instantOrderModal.buildPatchOrderRequest());
+            if (response && response.status === COMPLETED) {
+                const next = response.links.filter(link => link.name === PAYMENT);
+                window.location.href = next[0].href;
+            } else if (response && response.status === PENDING) {
+                await this.setState({
+                    notification: {
+                        status: true,
+                        message: response.reason
+                    }
+                });
+            } else {
+                await this.setState({
+                    notification: {
+                        status: true,
+                        message: `There was an error updating order information. Please try again`
+                    }
+                });
             }
+            await this.setState({ patch_order_status: OPERATION_LOADING_COMPLETED });
         } else {
             await this.setState({
                 notification: {
@@ -132,11 +131,11 @@ export default class InstantPurchase extends Component {
             billing_address,
             shipping_address,
             delivery,
-            notification
+            notification,
+            patch_order_status
         } = this.state;
         return (
-            <>
-                <Header />
+            <ConsumerApp>
                 <Snackbar
                     autoHideDuration={3000}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -248,10 +247,12 @@ export default class InstantPurchase extends Component {
                                         />
                                         <Box m={2}>
                                             <LargeBtn
+                                                loading={patch_order_status === OPERATION_LOADING}
+                                                onClick={this.patch}
                                                 name="PROCEED TO PAY YOUR ORDER"
-                                                icon="arrow_forward"
                                                 color="rgb(247, 36, 52)"
-                                                onClick={this.patch} />
+                                                icon="arrow_forward"
+                                            />
                                         </Box>
                                     </Grid>
                                     <Grid item>
@@ -260,9 +261,11 @@ export default class InstantPurchase extends Component {
                                     <Grid item>
                                         <Box m={2}>
                                             <LargeBtn
-                                                name="PROCEED TO PAY YOUR ORDER"
-                                                icon="arrow_forward"
+                                                loading={patch_order_status === OPERATION_LOADING}
                                                 onClick={this.patch}
+                                                name="PROCEED TO PAY YOUR ORDER"
+                                                color="rgb(247, 36, 52)"
+                                                icon="arrow_forward"
                                             />
                                         </Box>
                                         <Box m={2}>
@@ -288,7 +291,7 @@ export default class InstantPurchase extends Component {
                         </Grid>
                     </Card>
                 </Container>
-            </>
+            </ConsumerApp>
         );
     }
 }

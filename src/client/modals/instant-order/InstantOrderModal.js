@@ -1,3 +1,5 @@
+import { OPERATION_LOADING_COMPLETED } from "../../lib/constants";
+
 export default class InstantOrderModal {
 
     constructor() {
@@ -44,7 +46,8 @@ export default class InstantOrderModal {
             billing_address: data.billing_address,
             shipping_address: data.shipping_address,
             payment_information: data.payment_information,
-            delivery: data.delivery
+            delivery: data.delivery,
+            patch_order_status: OPERATION_LOADING_COMPLETED,
         };
     }
 
@@ -81,7 +84,8 @@ export default class InstantOrderModal {
                 landmark: null,
             },
             payment_information: null,
-            delivery: null
+            delivery: null,
+            patch_order_status: OPERATION_LOADING_COMPLETED,
         };
     }
 
