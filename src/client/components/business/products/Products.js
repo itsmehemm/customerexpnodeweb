@@ -67,7 +67,7 @@ export default class Products extends Component {
             status
         } = this.state;
         return (
-            <Container maxWidth="xl">
+            <Container maxWidth='xl'>
                 <Grid container>
                     <Grid item xs={3}>
                         <Box m={2}><Filters onUpdate={this.updateFilters} /></Box>

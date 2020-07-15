@@ -7,7 +7,7 @@ import Amount from '../elements/Amount';
 import Typography from '../elements/Typography';
 import ProductImages from './ProductImages';
 
-const ColorPallette = ({ color }) => <Grid item xs={1}> <div className="t-color-pallette" style={{ backgroundColor: color }} /></Grid>
+const ColorPallette = ({ color }) => <Grid item xs={1}> <div className='t-color-pallette' style={{ backgroundColor: color }} /></Grid>
 
 const ProductThemeWidget = (props) => {
     const {
@@ -22,12 +22,12 @@ const ProductThemeWidget = (props) => {
         color
     } = props;
     return (
-        <Card variant="outlined">
+        <Card variant='outlined'>
             {
                 edit && <Grid container>
-                    <Grid item align="right" xs={12}>
+                    <Grid item align='right' xs={12}>
                         <Box m={1}>
-                            <Typography className="t-text-link" variant="button" onClick={() => window.open('/business/warehouse/product/edit/' + id)} text="Edit" />
+                            <Typography className='t-text-link-2' variant='button' onClick={() => window.open('/business/warehouse/product/edit/' + id)} text='Edit' />
                         </Box>
                     </Grid>
                 </Grid>
@@ -52,8 +52,8 @@ const ProductThemeWidget = (props) => {
             <Box m={1}>
                 <Box m={0}>
                     <Typography
-                        className="t-text-link-3"
-                        variant="button"
+                        className='t-text-link-3'
+                        variant='button'
                         align='center'
                         text={name}
                         onClick={onClick}
@@ -62,10 +62,10 @@ const ProductThemeWidget = (props) => {
                 <Box m={0}>
                     <Typography
                         align='center'
-                        size="body2"
+                        size='body2'
                         text={description} />
                 </Box>
-                <Box m={0} align="center">
+                <Box m={0} align='center'>
                     <Amount amount={amount} />
                 </Box>
             </Box>
@@ -75,22 +75,22 @@ const ProductThemeWidget = (props) => {
                     <Box m={1}>
                         <Grid container spacing={1}>
                             <Grid item>
-                                <Typography variant="button" text="Size" />
+                                <Typography variant='button' text='Size' />
                             </Grid>
                             <Grid item>
-                                <Typography variant="button" text={size} />
+                                <Typography variant='button' text={size} />
                             </Grid>
                         </Grid>
                     </Box>
                 </Grid>
                 <Grid item>
-                    <Divider orientation="vertical" />
+                    <Divider orientation='vertical' />
                 </Grid>
                 <Grid item>
                     <Box m={1}>
                         <Grid container spacing={1}>
                             <Grid item>
-                                <Typography variant="button" text="Color" />
+                                <Typography variant='button' text='Color' />
                             </Grid>
                             <Grid item>
                                 <ColorPallette color={color} />
