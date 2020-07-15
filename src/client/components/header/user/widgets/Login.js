@@ -4,23 +4,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
-import { withStyles, ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import LoginWithFacebook from './LoginWithFacebook';
 import Typography from '../../../common/elements/Typography';
-
-const ActionButton = withStyles(() => ({
-    root: {
-        color: '#fff',
-        backgroundColor: 'rgb(247, 36, 52)',
-        border: '2px solid rgb(247, 36, 52)',
-        '&:hover': {
-            color: 'rgb(247, 36, 52)',
-            border: '2px solid rgb(247, 36, 52)',
-            backgroundColor: '#fff'
-        },
-    },
-}))(Button);
 
 export default class Login extends Component {
     constructor(props) {
