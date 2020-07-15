@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/static/css/main.dfb827d3.chunk.css",
-    "main.js": "/static/js/main.ac97c0c7.chunk.js",
-    "main.js.map": "/static/js/main.ac97c0c7.chunk.js.map",
+    "main.js": "/static/js/main.824de2c0.chunk.js",
+    "main.js.map": "/static/js/main.824de2c0.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.d1df44a7.js",
     "runtime-main.js.map": "/static/js/runtime-main.d1df44a7.js.map",
-    "static/js/2.6fac8c8a.chunk.js": "/static/js/2.6fac8c8a.chunk.js",
-    "static/js/2.6fac8c8a.chunk.js.map": "/static/js/2.6fac8c8a.chunk.js.map",
+    "static/js/2.50a3d43e.chunk.js": "/static/js/2.50a3d43e.chunk.js",
+    "static/js/2.50a3d43e.chunk.js.map": "/static/js/2.50a3d43e.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.ce81fec3096d7e4b76649634fd6f4c95.js": "/precache-manifest.ce81fec3096d7e4b76649634fd6f4c95.js",
+    "precache-manifest.d6a3eb350ad110a45ddded955fc02b04.js": "/precache-manifest.d6a3eb350ad110a45ddded955fc02b04.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.dfb827d3.chunk.css.map": "/static/css/main.dfb827d3.chunk.css.map",
-    "static/js/2.6fac8c8a.chunk.js.LICENSE.txt": "/static/js/2.6fac8c8a.chunk.js.LICENSE.txt",
+    "static/js/2.50a3d43e.chunk.js.LICENSE.txt": "/static/js/2.50a3d43e.chunk.js.LICENSE.txt",
     "static/media/tinnat-banner-2.jpg": "/static/media/tinnat-banner-2.efa123d1.jpg",
     "static/media/tinnat-logo-white.png": "/static/media/tinnat-logo-white.f62f22ea.png"
   },
   "entrypoints": [
     "static/js/runtime-main.d1df44a7.js",
-    "static/js/2.6fac8c8a.chunk.js",
+    "static/js/2.50a3d43e.chunk.js",
     "static/css/main.dfb827d3.chunk.css",
-    "static/js/main.ac97c0c7.chunk.js"
+    "static/js/main.824de2c0.chunk.js"
   ]
 }
