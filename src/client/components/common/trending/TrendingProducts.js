@@ -45,7 +45,7 @@ export default class TrendingProducts extends Component {
             products
         } = this.state;
         return (
-            <Container maxWidth={"xl"}>
+            <Container maxWidth={'xl'}>
                 {
                     status === OPERATION_LOADING &&
                     <ComponentLoader />
@@ -55,11 +55,11 @@ export default class TrendingProducts extends Component {
                     Array.isArray(products) &&
                     products.length > 0 &&
                     <Box m={2}>
-                        <Card variant="outlined">
+                        <Card variant='outlined'>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Typography variant="h6" text="Trending" />
+                                        <Typography variant='h6' text='Trending' />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -67,7 +67,7 @@ export default class TrendingProducts extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Grid container align="center" spacing={2}>
+                                        <Grid container align='center' spacing={2}>
                                             {
                                                 products.map((product, key) =>
                                                     <Grid item xs={3} key={key}>
