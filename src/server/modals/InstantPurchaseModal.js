@@ -4,7 +4,7 @@ const mongoClient = require('../mongo/mongodb');
 const { getProductUrl } = require('../lib/utils');
 const {
     ORDER_LIFE_TIME,
-    ORDER_INIT,
+    ORDER_CREATED,
     ORDER_PAYMENT_PENDING,
     RECEIPT_PREFIX,
     ORDER_PREFIX,
@@ -51,7 +51,7 @@ class InstantPurchaseModal {
         if (this.billing_address && this.shipping_address) {
             this.order_status = ORDER_PAYMENT_PENDING;
         } else {
-            this.order_status = ORDER_INIT;
+            this.order_status = ORDER_CREATED;
         }
         this.data = {
             account_id: this.account_id,
@@ -86,7 +86,6 @@ class InstantPurchaseModal {
         this.shipping_address = data.shipping_address;
         this.payment_information = data.payment_information;
         this.time_stamp = data.time_stamp;
-        // only these details can be patched.
         const {
             personal_information,
             billing_address,
@@ -133,7 +132,7 @@ class InstantPurchaseModal {
         if (this.billing_address && this.shipping_address) {
             this.order_status = ORDER_PAYMENT_PENDING;
         } else {
-            this.order_status = ORDER_INIT;
+            this.order_status = ORDER_CREATED;
         }
         this.data = {
             ...this.data,

@@ -73,11 +73,11 @@ module.exports = {
         BUSINESS_VIEW_PRODUCTS: 'business_view_products'
     },
     SOFT_DESCRIPTOR: 'Tinnos India',
-    ORDER_INIT: 'INITIAL',
-    RECEIPT_PREFIX: 'R-',
-    ORDER_PREFIX: 'ORDER-',
+    ORDER_CREATED: 'ORDER_CREATED',
     ORDER_PAYMENT_PENDING: 'PAYMENT_PENDING',
     ORDER_COMPLETED: 'COMPLETED',
+    RECEIPT_PREFIX: 'R-',
+    ORDER_PREFIX: 'ORDER-',
     COMPLETED: 'COMPLETED',
     MAILSERVICE: {
         NOREPLY: 'noreply',
