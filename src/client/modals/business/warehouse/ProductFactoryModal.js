@@ -75,34 +75,34 @@ export default class ProductFactoryModal {
 
     buildRequest() {
         return {
-            "id": this.data.id,
-            "name": this.data.basic_details.name,
-            "description": this.data.basic_details.description,
-            "product_code": this.data.basic_details.product_code,
-            "category_code": this.data.basic_details.category_code,
-            "sub_category_code": this.data.basic_details.sub_category_code,
-            "default_size": this.data.basic_details.default_size,
-            "default_color": this.data.basic_details.default_color,
-            "themes": this.data.themes,
-            "featured": this.data.preferences.featured,
-            "thirty_day_exchange": this.data.preferences.thirty_day_exchange,
-            "fifteen_day_exchange": this.data.preferences.fifteen_day_exchange,
-            "payment_options": this.data.preferences.payment_options,
-            "advanced_details": {
-                "type": this.data.advanced_details.type,
-                "sleeve": this.data.advanced_details.sleeve,
-                "fit": this.data.advanced_details.fit,
-                "fabric": this.data.advanced_details.fabric,
-                "pack_size": this.data.advanced_details.pack_size,
-                "neck_type": this.data.advanced_details.neck_type,
-                "ideal_gender": this.data.advanced_details.ideal_gender,
-                "occasion": this.data.advanced_details.occasion,
-                "brand_color": this.data.advanced_details.brand_color,
-                "fabric_care": this.data.advanced_details.fabric_care,
-                "brand_fit": this.data.advanced_details.brand_fit,
+            id: this.data.id,
+            name: this.data.basic_details.name,
+            description: this.data.basic_details.description,
+            product_code: this.data.basic_details.product_code,
+            category_code: this.data.basic_details.category_code,
+            sub_category_code: this.data.basic_details.sub_category_code,
+            default_size: this.data.basic_details.default_size,
+            default_color: this.data.basic_details.default_color,
+            themes: this.data.themes,
+            featured: this.data.preferences.featured,
+            thirty_day_exchange: this.data.preferences.thirty_day_exchange,
+            fifteen_day_exchange: this.data.preferences.fifteen_day_exchange,
+            payment_options: this.data.preferences.payment_options,
+            advanced_details: {
+                type: this.data.advanced_details.type,
+                sleeve: this.data.advanced_details.sleeve,
+                fit: this.data.advanced_details.fit,
+                fabric: this.data.advanced_details.fabric,
+                pack_size: this.data.advanced_details.pack_size,
+                neck_type: this.data.advanced_details.neck_type,
+                ideal_gender: this.data.advanced_details.ideal_gender,
+                occasion: this.data.advanced_details.occasion,
+                brand_color: this.data.advanced_details.brand_color,
+                fabric_care: this.data.advanced_details.fabric_care,
+                brand_fit: this.data.advanced_details.brand_fit,
             }
         };
     }
 
     getData = () => this.data;
-}
+};

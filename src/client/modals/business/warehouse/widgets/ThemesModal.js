@@ -1,7 +1,9 @@
 import uniqid from 'uniqid';
 import {
     COMPONENT_STATUS_INVALID,
-    COMPONENT_STATUS_VALID
+    COMPONENT_STATUS_VALID,
+    NO_DISCOUNT,
+    UNLIMITED
 } from '../../../../lib/constants';
 
 export default class Themes {
@@ -21,14 +23,14 @@ export default class Themes {
             amount: {
                 maximum_retail_price: '',
                 discount: {
-                    type: "NO_DISCOUNT",
+                    type: NO_DISCOUNT,
                     value: ''
                 },
                 subtotal: 0,
                 correction: 0,
                 currency: 'INR'
             },
-            stock_quantity: "UNLIMITED",
+            stock_quantity: UNLIMITED,
             status: COMPONENT_STATUS_INVALID,
             saved: false
         };

@@ -128,4 +128,4 @@ export default class ProductDetailModal {
     }
 
     getData() { return this.data }
-}
+};

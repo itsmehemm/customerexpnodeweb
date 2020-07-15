@@ -1,4 +1,4 @@
-import { OPERATION_LOADING_COMPLETED } from "../../lib/constants";
+import { OPERATION_LOADING_COMPLETED } from '../../lib/constants';
 
 export default class InstantOrderModal {
 
@@ -127,4 +127,4 @@ export default class InstantOrderModal {
     }
 
     getData() { return this.data; }
-}
+};
