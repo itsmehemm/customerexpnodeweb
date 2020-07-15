@@ -45,13 +45,13 @@ export default class FeaturedProducts extends Component {
             products
         } = this.state;
         return (
-            <Container maxWidth={'xl'}>
-                {status === OPERATION_LOADING && <ComponentLoader />}
-                {
-                    status === OPERATION_LOADING_COMPLETED &&
-                    Array.isArray(products) &&
-                    products.length > 0 &&
-                    <Box m={2}>
+            <Box m={2}>
+                <Container maxWidth={'lg'}>
+                    {status === OPERATION_LOADING && <ComponentLoader />}
+                    {
+                        status === OPERATION_LOADING_COMPLETED &&
+                        Array.isArray(products) &&
+                        products.length > 0 &&
                         <Card variant='outlined'>
                             <Grid container>
                                 <Grid item xs={12}>
@@ -67,7 +67,7 @@ export default class FeaturedProducts extends Component {
                                         <Grid container align='center' spacing={2}>
                                             {
                                                 products.map((product, key) =>
-                                                    <Grid item xs={3} key={key}>
+                                                    <Grid item xs={4} key={key}>
                                                         <ProductWidget
                                                             {...product}
                                                             picture_links={_.get(product, 'default_theme.picture_links', [])}
@@ -81,9 +81,9 @@ export default class FeaturedProducts extends Component {
                                 </Grid>
                             </Grid>
                         </Card>
-                    </Box>
-                }
-            </Container>
+                    }
+                </Container>
+            </Box>
         );
     }
 };

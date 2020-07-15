@@ -167,7 +167,7 @@ export default class ProductDetail extends Component {
             create_order_status,
         } = this.state;
         return (
-            <Container style={{ padding: '1em' }} maxWidth='lg'>
+            <Container maxWidth='lg'>
                 <Snackbar
                     autoHideDuration={3000}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
