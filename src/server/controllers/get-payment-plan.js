@@ -52,7 +52,6 @@ const getPaymentPlan = async (req, res) => {
                     status: deliveryData.status,
                     deliveryTime: deliveryData.deliveryTime
                 });
-
             }
         }
     }
@@ -61,6 +60,7 @@ const getPaymentPlan = async (req, res) => {
             error: errorConstants.ORDER_NOT_FOUND
         });
     }
+    await instantPurchaseModal.updateDelivery(delivery);
     const paymentPlanModel = new PaymentPlanModel();
     paymentPlanModel.setOrderId(req.params.id);
     paymentPlanModel.setOrderDetails(instantPurchaseModal.getOrder());

@@ -18,3 +18,5 @@ export { default as searchTransactions } from './search-transactions';
 export { default as getPaymentActivityInternal } from './get-payment-activity-internal';
 export { default as getKPIs } from './get-kpis';
 export { default as getLogsById } from './get-logs-by-id';
+export { default as getPurchaseById } from './get-purchase-by-id';
+export { default as getAllPurchases } from './get-all-purchases';

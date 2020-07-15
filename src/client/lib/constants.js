@@ -44,3 +44,6 @@ export const PENDING = 'PENDING';
 export const PAYMENT = 'PAYMENT';
 export const PRODUCT_NOT_FOUND = 'PRODUCT_NOT_FOUND';
 export const LOGS_NOT_FOUND = 'LOGS_NOT_FOUND';
+export const DELIVERABLE = 'DELIVERABLE';
+export const OUT_FOR_DELIVERY = 'OUT_FOR_DELIVERY';
+export const DELIVERED = 'DELIVERED';

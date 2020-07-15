@@ -1,3 +1,4 @@
+const Analytics = require('analytics-node');
 const args = require('yargs').argv;
 const { ENVIRONMENT_PRODUCTION } = require('../lib/constants');
 const { VALIDATE_USER_SESSION_CONTROLLER } = require('../lib/constants/logging-constants');
@@ -8,8 +9,10 @@ const {
     computeRedirectSuccessUrl,
     computeRedirectErrorUrl
 } = require('../lib/utils');
+const config = require('../lib/config.json');
 const environment = args.env || ENVIRONMENT_PRODUCTION;
 const WOWO_DEV_INJECT_TEST_USER = args.WOWO_DEV_INJECT_TEST_USER;
+const analytics = new Analytics(config.segment[environment].key);
 
 const validateUserSession = (req, res, next) => {
     console.log(VALIDATE_USER_SESSION_CONTROLLER, `validating user session for request: ${req.url}`);
@@ -20,6 +23,13 @@ const validateUserSession = (req, res, next) => {
     if (req && req.session && req.session.sessionId) {
         console.log(VALIDATE_USER_SESSION_CONTROLLER, `session found: ${JSON.stringify(req.session)}`);
         req.user = req.session.user;
+        analytics.track({
+            userId: req.user.accountId,
+            event: 'WEB_REQUEST',
+            properties: {
+                path: req.url
+            }
+        });
         if (checkUserWebPermission(req)) {
             console.log(VALIDATE_USER_SESSION_CONTROLLER, `user has permission to resource: ${req.url}`);
             return next();

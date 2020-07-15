@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './components/home/Home';
-import Footer from './components/common/Footer';
 import About from './components/about/About';
 import Products from './components/products/Products';
 import Help from './components/common/Help';
@@ -10,6 +9,8 @@ import Cart from './components/cart/Cart';
 import InstantPurchase from './components/instant-purchase/InstantPurchase';
 import InstantPurchasePayment from './components/payment/InstantPurchasePayment';
 import InstantPurchaseConfirmation from './components/payment/InstantPurchaseConfirmation';
+import Orders from './components/orders/Orders';
+import Order from './components/orders/Order';
 import Checkout from './components/checkout/Checkout';
 import ProductDetailWrapper from './components/product-detail/ProductDetailWrapper';
 import PaymentActivity from './components/activity/Payment';
@@ -36,7 +37,9 @@ export default class Tinnat extends Component {
                 <Route exact path="/instant-purchase/payment/:orderid" component={InstantPurchasePayment} />
                 <Route exact path="/instant-purchase/complete/:orderid" component={InstantPurchaseConfirmation} />
                 <Route exact path="/instant-purchase/:orderid" component={InstantPurchase} />
-                <Route exact path="/activity/payment/:transactionid" component={PaymentActivity} />
+                <Route exact path="/account/activity/orders" component={Orders} />
+                <Route exact path="/account/activity/order/:orderid" component={Order} />
+                <Route exact path="/account/activity/payment/:transactionid" component={PaymentActivity} />
                 <Route path="/business" component={Business} />
                 <Route exact path="/notfound" component={NotFound} />
                 <Route exact path="/error" component={Error} />

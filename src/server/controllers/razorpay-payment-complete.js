@@ -58,6 +58,7 @@ const razorpayPaymentComplete = async (req, res) => {
                         signature: signature
                     }
                 });
+                await instantPurchaseModal.completePurchase();
                 const service = await mailservices.build(MAILSERVICE.NOREPLY);
                 const order = instantPurchaseModal.getOrder();
                 const to = instantPurchaseModal.getPersonalInformation() && instantPurchaseModal.getPersonalInformation().email;
@@ -76,6 +77,7 @@ const razorpayPaymentComplete = async (req, res) => {
                 }
                 await instantPurchaseModal.updateOrderStatus(COMPLETED);
                 await instantPurchaseModal.updateTransactionId(paymentActivity.getTransactionId());
+                await instantPurchaseModal.completePurchase();
                 return res.status(200).send({
                     ...apiMessages.PAYMENT_COMPLETED,
                     ...instantPurchaseModal.getOrder(),

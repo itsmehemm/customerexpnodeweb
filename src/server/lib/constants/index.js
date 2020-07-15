@@ -44,10 +44,14 @@ module.exports = {
         SEARCH_TRANSACTIONS: 'search_transactions',
         GET_KPIS: 'get_kpis',
         GET_LOGS: 'get_logs',
-        BUSINESS_PRODUCT_FILTER: 'business_filter_products'
+        BUSINESS_PRODUCT_FILTER: 'business_filter_products',
+        GET_ALL_PURCHASES: 'get_all_purchases',
+        GET_PURCHASE_BY_ID: 'get_purchase_by_id'
     },
     WEB_NAME: {
         GET_PRODUCT: 'get_product',
+        GET_ORDERS: 'account_activity_orders',
+        GET_ORDER_BY_ID: 'account_activity_order',
         WHOAMI: 'whoami',
         HOME: 'home',
         ABOUT: 'about',

@@ -21,7 +21,8 @@ const checkUserAPIPermission = (req, res, next) => {
     console.warn(CHECK_USER_API_PERMISSION_CONTROLLER, `user does not have permission to ${req.url}`);
     return res.status(401).send({
         error: {
-            ...errorConstants.PERMISSION_DENIED
+            ...errorConstants.PERMISSION_DENIED,
+            error_redirect_url: `/notfound?debug_id=${req.debugId}`
         }
     });
 };

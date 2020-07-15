@@ -29,5 +29,7 @@ module.exports = {
     getBusinessKPIs: require('./get-business-kpis'),
     injectLogger: require('./inject-logger'),
     getLogsById: require('./get-logs-by-id'),
-    loginController: require('./login-controller')
+    loginController: require('./login-controller'),
+    getAllPurchases: require('./get-all-purchases'),
+    getPurchaseById: require('./get-purchase-by-id')
 };

@@ -28,6 +28,12 @@
             "v1_get_order_details": {
                 "uri": "http://tinnat.com/api/order/${orderid}"
             },
+            "v1_get_purchase_by_id": {
+                "uri": "http://tinnat.com/api/activity/order/${orderid}"
+            },
+            "v1_get_all_purchases": {
+                "uri": "http://tinnat.com/api/activity/order"
+            },
             "v1_create_instant_order": {
                 "uri": "http://tinnat.com/api/create/order"
             },
@@ -88,7 +94,7 @@
             "v1_post_filtered_products": {
                 "uri": "https://localhost:2003/api/products/filter"
             },
-            "v1_post_business_filtered_products":{
+            "v1_post_business_filtered_products": {
                 "uri": "https://localhost:2003/api/business/products/filter"
             },
             "v1_post_add_product": {
@@ -99,6 +105,12 @@
             },
             "v1_get_order_details": {
                 "uri": "https://localhost:2003/api/order/${orderid}"
+            },
+            "v1_get_purchase_by_id": {
+                "uri": "https://localhost:2003/api/activity/order/${orderid}"
+            },
+            "v1_get_all_purchases": {
+                "uri": "https://localhost:2003/api/activity/orders"
             },
             "v1_create_instant_order": {
                 "uri": "https://localhost:2003/api/create/order"

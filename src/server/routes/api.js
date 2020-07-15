@@ -22,7 +22,9 @@ const {
     getPaymentActivityInternal,
     searchTransactions,
     getBusinessKPIs,
-    getLogsById
+    getLogsById,
+    getAllPurchases,
+    getPurchaseById
 } = require('../controllers');
 
 const app = express();
@@ -64,6 +66,10 @@ app.post('/instant-purchase/:id/payment/razorpay', razorpayPaymentComplete);
 app.post('/delivery/update/pincode', updateDeliveryPincode);
 
 app.get('/activity/payment/:transactionId', getPaymentActivity);
+
+app.get('/activity/orders', getAllPurchases);
+
+app.get('/activity/order/:orderId', getPurchaseById);
 
 app.post('/activity/search/transactions', searchTransactions);
 

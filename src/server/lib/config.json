@@ -4,6 +4,11 @@
         "name": "tinnat-web",
         "secret": "tinnat-web"
     },
+    "segment": {
+        "development": {
+            "key": "Gwes5GWshkBeqFU0UvhClmwaFfvHgYxv"
+        }
+    },
     "tinnat": {
         "development": {
             "url": {

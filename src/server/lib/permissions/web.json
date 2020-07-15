@@ -137,5 +137,19 @@
             "PERSONAL",
             "BUSINESS"
         ]
+    },
+    "account_activity_orders": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "account_activity_order": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
     }
 }

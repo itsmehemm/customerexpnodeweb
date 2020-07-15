@@ -153,8 +153,14 @@ const getWebName = (req) => {
     if (/^\/instant-purchase\/.*$/.test(url)) {
         return WEB_NAME.INSTANT_PURCHASE_ORDER;
     }
-    if (/^\/activity\/payment\/.*$/.test(url)) {
+    if (/^\/account\/activity\/payment\/.*$/.test(url)) {
         return WEB_NAME.GET_PAYMENT_ACTIVITY;
+    }
+    if (/^\/account\/activity\/orders$/.test(url)) {
+        return WEB_NAME.GET_ORDERS;
+    }
+    if (/^\/account\/activity\/order\/.*$/.test(url)) {
+        return WEB_NAME.GET_ORDER_BY_ID;
     }
     if (/^\/business\/logger\/idsearch.*$/.test(url)) {
         return WEB_NAME.IDSEARCH;
@@ -237,6 +243,12 @@ const getAPIName = (req) => {
     }
     if (/^\/activity\/payment\/.*$/.test(url)) {
         return API_NAME.GET_PAYMENT_ACTIVITY;
+    }
+    if (/^\/activity\/order\/.*$/.test(url)) {
+        return API_NAME.GET_PURCHASE_BY_ID;
+    }
+    if (/^\/activity\/orders*$/.test(url)) {
+        return API_NAME.GET_ALL_PURCHASES;
     }
     if (/^\/activity\/search\/transactions$/.test(url)) {
         return API_NAME.SEARCH_TRANSACTIONS;

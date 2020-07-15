@@ -31,6 +31,7 @@ class InstantPurchaseModal {
         this.billing_address = null;
         this.shipping_address = null;
         this.payment_information = null;
+        this.delivery = null;
         this.time_stamp = null;
         this.data = null;
     }
@@ -163,6 +164,7 @@ class InstantPurchaseModal {
         this.billing_address = data.billing_address;
         this.shipping_address = data.shipping_address;
         this.payment_information = data.payment_information;
+        this.delivery = data.delivery;
         this.time_stamp = data.time_stamp;
         console.log(INSTANT_PURCHASE_MODAL, 'order details loaded from cache: ', JSON.stringify(this.data));
     }
@@ -349,6 +351,16 @@ class InstantPurchaseModal {
         };
     }
 
+    async updateDelivery(delivery) {
+        this.delivery = delivery;
+        this.data = {
+            ...this.data,
+            delivery: delivery
+        };
+        await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
+        console.log(INSTANT_PURCHASE_MODAL, 'order detail updated & persisted:', cache.get(this.id));
+    }
+
     async updatePaymentDetails(payment) {
         if (payment) {
             this.payment_information = {
@@ -412,6 +424,36 @@ class InstantPurchaseModal {
             return false;
         }
         return true;
+    }
+
+    async completePurchase() {
+        let order = {};
+        order.id = this.id;
+        order.account_id = this.account_id;
+        order.order_status = this.order_status;
+        order.transaction_id = this.transaction_id;
+        order.personal_information = this.personal_information;
+        order.billing_address = this.billing_address;
+        order.purchase_items = this.purchase_items;
+        order.amount = this.amount;
+        order.shipping_address = this.shipping_address;
+        order.delivery = this.delivery;
+        order.time_stamp = this.time_stamp;
+        const status = await new Promise(resolve => {
+            mongoClient.connection(db => {
+                db.
+                    collection(COLLECTION.ORDER)
+                    .insertOne(order)
+                    .then(() => resolve(true))
+                    .catch(() => resolve(false));
+            });
+        });
+        if (status) {
+            console.log(INSTANT_PURCHASE_MODAL, `completePurchase`, `order detail persisted in db`);
+        } else {
+            console.error(INSTANT_PURCHASE_MODAL, `completePurchase`, `order detail not persisted in db`);
+        }
+        return;
     }
 
     getOrderId() { return this.id }

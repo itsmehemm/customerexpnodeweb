@@ -68,6 +68,20 @@
             "BUSINESS"
         ]
     },
+    "get_purchase_by_id": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
+    "get_all_purchases": {
+        "permissions": [
+            "ADMIN",
+            "PERSONAL",
+            "BUSINESS"
+        ]
+    },
     "patch_order_by_id": {
         "permissions": [
             "ADMIN",
