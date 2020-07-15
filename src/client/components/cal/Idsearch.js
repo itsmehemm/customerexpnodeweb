@@ -99,7 +99,11 @@ export default class Idsearch extends Component {
                                                 placeholder="Enter debug id"
                                                 value={debugId}
                                                 onChange={(data) => this.update('debugId', data)}
-                                            />
+                                                onKeyPress={(e) => {
+                                                    if (e.key === 'Enter') {
+                                                        this.search();
+                                                    }
+                                                }} />
                                         </Grid>
                                         <Grid item xs={1}>
                                             {
