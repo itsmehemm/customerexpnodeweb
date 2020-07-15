@@ -2,48 +2,13 @@ import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '../common/elements/Typography';
-import {
-    OPERATION_LOADING,
-    OPERATION_LOADING_COMPLETED,
-    OPERATION_LOADING_ERROR
-} from '../../lib/constants';
+import User from './user/User';
 import logo from '../../images/tinnat-logo-white.png';
 import '../../styles/header.css';
-import User from '../user/User';
 
 export default class Header extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            status: OPERATION_LOADING,
-            login: false,
-            cart: []
-        }
-        this.fbAtttributes = {
-            'data-size': 'medium',
-            'data-button-type': 'continue_with',
-            'data-layout': 'rounded',
-            'data-auto-logout-link': 'true',
-            'data-use-continue-as': 'true',
-            'data-width': '',
-            'data-scope': 'public_profile,email',
-            'data-onlogin': 'checkLoginStatus()'
-        }
-    }
-
-    async updateComponent() {
-        const response = await getCart();
-        if (response && response.cart) {
-            this.setState({
-                status: OPERATION_LOADING_COMPLETED,
-                cart: response.cart
-            });
-        } else {
-            this.setState({
-                status: OPERATION_LOADING_ERROR,
-                cart: []
-            });
-        }
     }
 
     render() {
@@ -84,6 +49,6 @@ export default class Header extends Component {
                     </Grid>
                 </Container>
             </Container>
-        )
+        );
     }
-}
+};

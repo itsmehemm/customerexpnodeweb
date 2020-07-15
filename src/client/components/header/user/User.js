@@ -1,36 +1,37 @@
 import React, { Component } from 'react';
 import LoggedInUser from './LoggedInUser';
 import GuestUser from './GuestUser';
-import { whoami } from '../../actions';
+import { whoami } from '../../../actions';
 import {
     GUEST_USER,
     TINNAT_USER,
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
 export default class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
             status: OPERATION_LOADING,
-            type: null,
+            userType: null,
             user: null
-        }
+        };
     }
 
     async componentDidMount() {
         const userObj = await whoami();
+        console.log(userObj);
         if (userObj && userObj.message === TINNAT_USER) {
             await this.setState({
                 status: OPERATION_LOADING_COMPLETED,
-                type: TINNAT_USER,
+                userType: TINNAT_USER,
                 user: userObj.data
             });
         } else {
             await this.setState({
                 status: OPERATION_LOADING_COMPLETED,
-                type: GUEST_USER
+                userType: GUEST_USER
             });
         }
     }
@@ -38,15 +39,15 @@ export default class User extends Component {
     render() {
         const {
             status,
-            type,
+            userType,
             user
         } = this.state;
         switch (status) {
             case OPERATION_LOADING:
                 return <div></div>;
         };
-        switch (type) {
-            case GUEST_USER:
+        switch (userType) {
+            case TINNAT_USER:
                 return <LoggedInUser
                     {...user}
                     logout={{ onClick: () => window.location.href = "/logout" }}

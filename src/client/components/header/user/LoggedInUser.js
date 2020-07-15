@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import FaceIcon from '@material-ui/icons/Face';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '../common/elements/Typography';
+import Typography from '../../common/elements/Typography';
 
 const useStyles = makeStyles({
     root: {
@@ -66,13 +66,12 @@ export default function LoggedInUser(props) {
                     <Grow
                         {...TransitionProps}
                         className={classes.root}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                    >
+                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
                         <Paper>
                             <ClickAwayListener onClickAway={handleClose}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                     <MenuItem className={classes.root} onClick={(e) => handleClose(e, 'account')}>
-                                        <Typography text="Account" variant="button" icon="account_circle"/>
+                                        <Typography text="Account" variant="button" icon="account_circle" />
                                     </MenuItem>
                                     <MenuItem className={classes.root} onClick={(e) => handleClose(e, 'orders')}>
                                         <Typography text="Orders" variant="button" icon="local_mall" />

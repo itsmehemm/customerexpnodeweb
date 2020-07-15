@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import { withStyles, ThemeProvider } from '@material-ui/core/styles';
 import LoginWithFacebook from './LoginWithFacebook';
-import Typography from '../common/elements/Typography';
+import Typography from '../../../common/elements/Typography';
 
 const ActionButton = withStyles(() => ({
     root: {
@@ -48,7 +48,7 @@ export default class Login extends Component {
         return (
             <Dialog fullWidth onClose={this.handleClose} aria-labelledby="login-dialog" open={open}>
                 <DialogTitle id="login-dialog">
-                    <Typography align="center" icon="lock" variant="h6" text="Securely login to www.tinnat.com" />
+                    <Typography align="center" icon="lock" variant="button" text="Securely login to www.tinnat.com" />
                 </DialogTitle>
                 <DialogContent>
                     <Grid container>
@@ -59,9 +59,7 @@ export default class Login extends Component {
                 </DialogContent>
                 <DialogActions>
                     <ThemeProvider>
-                        <ActionButton onClick={this.handleClose} color="primary" autoFocus>
-                            Continue as Guest
-                        </ActionButton>
+                        <Typography align="right" className="t-text-link-2" onClick={this.handleClose} text="No thanks, continue as Guest" />
                     </ThemeProvider>
                 </DialogActions>
             </Dialog>

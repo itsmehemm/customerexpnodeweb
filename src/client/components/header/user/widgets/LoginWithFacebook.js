@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import ComponentLoader from '../common/loaders/ComponentLoader';
-import Typography from '../common/elements/Typography';
-import initializeFacebookSDK from './initialize-facebook-sdk';
+import ComponentLoader from '../../../common/loaders/ComponentLoader';
+import Typography from '../../../common/elements/Typography';
+import initializeFacebookSDK from '../../../../lib/utils/initialize-facebook-sdk';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
     LOGGED_IN,
     LOGGED_OUT
-} from '../../lib/constants';
+} from '../../../../lib/constants';
 
 export default class LoginWithFacebook extends Component {
     constructor(props) {
@@ -45,7 +45,7 @@ export default class LoginWithFacebook extends Component {
                     }
                 });
             }
-        }, 3000);
+        }, 2000);
     }
 
     logout = async () => {
@@ -146,7 +146,7 @@ export default class LoginWithFacebook extends Component {
                                 variant="h6"
                                 onClick={this.tinnatLogin}
                                 text={`Continue as ${facebookResponse.user.name}`}
-                                iconStyle={{ fontSize: '1.5em', verticalAlign: 'middle' }}
+                                iconStyle={{ fontSize: '1.7em', verticalAlign: 'middle' }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -171,7 +171,7 @@ export default class LoginWithFacebook extends Component {
                                 variant="h6"
                                 onClick={this.login}
                                 text="Login with facebook"
-                                iconStyle={{ fontSize: '1.5em', verticalAlign: 'middle' }}
+                                iconStyle={{ fontSize: '1.7em', verticalAlign: 'middle' }}
                             />
                         </Grid>
                     </Grid>
