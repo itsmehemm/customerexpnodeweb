@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import ShareIcon from '@material-ui/icons/Share';
@@ -30,7 +30,11 @@ import {
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
-    COMPLETED
+    COMPLETED,
+    UNLIMITED,
+    DELIVERABLE,
+    NOT_DELIVERABLE,
+    INSTANT_PURCHASE
 } from '../../lib/constants';
 
 export default class ProductDetail extends Component {
@@ -81,14 +85,14 @@ export default class ProductDetail extends Component {
     async instantPurchase() {
         const { selection, stockQuantity, delivery } = this.state;
         if (selection.color && selection.size) {
-            if ((stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) && delivery && delivery.status === 'DELIVERABLE') {
+            if ((stockQuantity === UNLIMITED || parseInt(stockQuantity) > 0) && delivery && delivery.status === DELIVERABLE) {
                 await this.setState({ create_order_status: OPERATION_LOADING });
                 const instantOrderModal = new InstantOrderModal();
                 instantOrderModal.updateCreateDataFromState(this.state);
                 try {
                     const response = await createInstantOrder(instantOrderModal.buildCreateOrderRequest());
-                    if (response && response.status === 'COMPLETED') {
-                        const next = response.links.filter(link => link.name === 'INSTANT_PURCHASE')
+                    if (response && response.status === COMPLETED) {
+                        const next = response.links.filter(link => link.name === INSTANT_PURCHASE)
                         window.location.href = next[0].href;
                     }
                     await this.setState({ create_order_status: OPERATION_LOADING_COMPLETED });
@@ -98,7 +102,7 @@ export default class ProductDetail extends Component {
             } else {
                 if (!delivery) {
                     await this.notify('Enter delivery pincode to proceed');
-                } else if (delivery.status === 'NOT_DELIVERABLE') {
+                } else if (delivery.status === NOT_DELIVERABLE) {
                     await this.notify('Sorry, we don\'t deliver to this area');
                 } else if (parseInt(stockQuantity) <= 0) {
                     await this.notify('Sorry, this product is out of stock');
@@ -162,7 +166,7 @@ export default class ProductDetail extends Component {
             create_order_status,
         } = this.state;
         return (
-            <Container style={{ padding: '1em' }} maxWidth="lg">
+            <Container style={{ padding: '1em' }} maxWidth='lg'>
                 <Snackbar
                     autoHideDuration={3000}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -171,43 +175,43 @@ export default class ProductDetail extends Component {
                     onClose={this.closeNotification}
                     message={notification.message}
                 />
-                <Card variant="outlined">
+                <Card variant='outlined'>
                     <Grid container>
                         <Grid item xs={5}>
                             <Box m={2}>
                                 <ProductImages
                                     images={pictureLinks}
                                     style={{
-                                        height: "500px",
-                                        width: "100%"
+                                        height: '500px',
+                                        width: '100%'
                                     }}
                                 />
                                 <LargeBtn
                                     disabled={
-                                        !((stockQuantity === 'UNLIMITED' ||
+                                        !((stockQuantity === UNLIMITED ||
                                             parseInt(stockQuantity) > 0) &&
                                             delivery &&
-                                            delivery.status === "DELIVERABLE")
+                                            delivery.status === DELIVERABLE)
                                     }
                                     loading={create_order_status === OPERATION_LOADING}
                                     onClick={this.instantPurchase}
-                                    name="BUY NOW"
-                                    color="rgb(247, 36, 52)"
-                                    icon="trending_up"
+                                    name='BUY NOW'
+                                    color='rgb(247, 36, 52)'
+                                    icon='trending_up'
                                 />
                             </Box>
                         </Grid>
-                        <Divider orientation="vertical" flexItem />
+                        <Divider orientation='vertical' flexItem />
                         <Grid item xs={6}>
                             <Grid container>
                                 <Grid item xs={9}>
                                     <Box m={2}>
                                         <Typography
                                             text={data.name}
-                                            variant="h5" />
+                                            variant='h5' />
                                         <Typography
                                             text={data.description}
-                                            size="body2" />
+                                            size='body2' />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={3}>
@@ -215,14 +219,9 @@ export default class ProductDetail extends Component {
                                         <CopyToClipboard
                                             text={data.url}
                                             onCopy={() => this.notify('Product link copied!')}>
-                                            {/* <Typography
-                                                icon="share"
-                                                className="t-text-link-2"
-                                                text="Share"
-                                                variant="button" /> */}
                                             <Button
                                                 style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
-                                                variant="contained"
+                                                variant='contained'
                                                 startIcon={<ShareIcon style={{ fontSize: '2em' }} />} >
                                                 Share
                                             </Button>
@@ -230,7 +229,7 @@ export default class ProductDetail extends Component {
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Divider className="t-extend-hr-2" />
+                                    <Divider className='t-extend-hr-2' />
                                 </Grid>
                             </Grid>
                             <Grid container>
@@ -243,15 +242,15 @@ export default class ProductDetail extends Component {
                                             </Box>
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <Divider className="t-extend-hr-2" />
+                                            <Divider className='t-extend-hr-2' />
                                         </Grid>
                                     </>
                                 }
                             </Grid>
                             <Box m={2}>
                                 <Typography
-                                    text={"Size"}
-                                    variant="button"
+                                    text={'Size'}
+                                    variant='button'
                                 />
                             </Box>
                             {
@@ -267,11 +266,11 @@ export default class ProductDetail extends Component {
                                     </Grid>
                                 </Box>
                             }
-                            <Divider className="t-extend-hr-2" />
+                            <Divider className='t-extend-hr-2' />
                             <Box m={2}>
                                 <Typography
-                                    text={"Color"}
-                                    variant="button"
+                                    text={'Color'}
+                                    variant='button'
                                 />
                             </Box>
                             {
@@ -281,7 +280,7 @@ export default class ProductDetail extends Component {
                                     <Box m={2}>
                                         <Grid item xs={12}>
                                             <SmallImageButtonGroup
-                                                name="color"
+                                                name='color'
                                                 size={selection.size}
                                                 buttons={availableColors}
                                                 onSelect={(data) => this.update('color', data)}
@@ -289,14 +288,14 @@ export default class ProductDetail extends Component {
                                             {
                                                 !selection.color &&
                                                 <Typography
-                                                    text="select a color of your choice"
-                                                    variant="caption"
+                                                    text='select a color of your choice'
+                                                    variant='caption'
                                                     style={{ color: 'rgb(189, 6, 61)' }}
                                                 />
                                             }
                                         </Grid>
                                     </Box>
-                                    <Divider className="t-extend-hr-2" />
+                                    <Divider className='t-extend-hr-2' />
                                 </>
                             }
                             {
@@ -306,38 +305,38 @@ export default class ProductDetail extends Component {
                                         {
                                             (stockQuantity === 'UNLIMITED' || parseInt(stockQuantity) > 0) &&
                                             <Typography
-                                                text="IN STOCK"
-                                                icon="done"
-                                                variant="button"
+                                                text='IN STOCK'
+                                                icon='done'
+                                                variant='button'
                                                 style={{ color: 'rgb(5, 153, 54)' }}
                                             />
                                             ||
                                             <Typography
-                                                text="OUT OF STOCK"
-                                                icon="cancel"
-                                                variant="button"
+                                                text='OUT OF STOCK'
+                                                icon='cancel'
+                                                variant='button'
                                                 style={{ color: 'rgb(189, 6, 61)' }}
                                             />
                                         }
                                     </Box>
-                                    <Divider className="t-extend-hr-2" />
+                                    <Divider className='t-extend-hr-2' />
                                 </>
                             }
                             {
                                 <>
-                                    <Box m={2}> <Typography variant="button" text={"Delivery"} /> </Box>
+                                    <Box m={2}> <Typography variant='button' text={'Delivery'} /> </Box>
                                     <Box m={2}>
                                         <Grid container>
                                             <Grid item xs={6}>
                                                 <TextField
                                                     required
-                                                    type="number"
-                                                    label="Pincode"
-                                                    variant="outlined"
+                                                    type='number'
+                                                    label='Pincode'
+                                                    variant='outlined'
                                                     value={pincode}
                                                     InputProps={{
                                                         startAdornment: (
-                                                            <InputAdornment position="start">
+                                                            <InputAdornment position='start'>
                                                                 <LocationOnIcon />
                                                             </InputAdornment>
                                                         ),
@@ -366,41 +365,41 @@ export default class ProductDetail extends Component {
                                             {
                                                 delivery_error &&
                                                 <Grid item xs={12}>
-                                                    <Typography text={delivery_error} variant="caption" style={{ color: "rgb(247, 36, 52)" }} />
+                                                    <Typography text={delivery_error} variant='caption' style={{ color: 'rgb(247, 36, 52)' }} />
                                                 </Grid>
                                             }
                                         </Grid>
                                     </Box>
                                     {
-                                        delivery && delivery.status === "DELIVERABLE" &&
+                                        delivery && delivery.status === 'DELIVERABLE' &&
                                         <Box m={2}>
                                             <Typography
-                                                icon="local_shipping"
+                                                icon='local_shipping'
                                                 text={delivery.formatted.delivery_string}
-                                                variant="body2"
-                                                style={{ color: "rgb(5, 153, 54)" }}
+                                                variant='body2'
+                                                style={{ color: 'rgb(5, 153, 54)' }}
                                             />
                                         </Box>
                                     }
                                     {
-                                        delivery && delivery.status === "NOT_DELIVERABLE" &&
+                                        delivery && delivery.status === 'NOT_DELIVERABLE' &&
                                         <Box m={2}>
                                             <Typography
-                                                icon="local_shipping"
-                                                text="Sorry, this item is not deliverable to the address."
-                                                variant="body2"
-                                                style={{ color: "rgb(247, 36, 52)" }}
+                                                icon='local_shipping'
+                                                text='Sorry, this item is not deliverable to the address.'
+                                                variant='body2'
+                                                style={{ color: 'rgb(247, 36, 52)' }}
                                             />
                                         </Box>
                                     }
-                                    <Divider className="t-extend-hr-2" />
+                                    <Divider className='t-extend-hr-2' />
                                 </>
                             }
 
                             {
                                 data.advanced_details &&
                                 <>
-                                    <Box m={2}> <Typography variant="button" text={"Product Details"} /> </Box>
+                                    <Box m={2}> <Typography variant='button' text={'Product Details'} /> </Box>
                                     <Box m={2}>
                                         {
                                             Object.keys(data.advanced_details || []).map((i, key) =>
@@ -409,12 +408,12 @@ export default class ProductDetail extends Component {
                                                     <Grid item xs={6}>
                                                         <Typography
                                                             text={productAdvancedDetailsMapper[i]}
-                                                            size="overline" />
+                                                            size='overline' />
                                                     </Grid>
                                                     <Grid item xs={6}>
                                                         <Typography
                                                             text={data.advanced_details[i]}
-                                                            size="subtitle2" />
+                                                            size='subtitle2' />
                                                     </Grid>
                                                 </Grid>
                                             )
@@ -428,4 +427,4 @@ export default class ProductDetail extends Component {
             </Container>
         );
     }
-}
+};

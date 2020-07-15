@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Header from '../header/Header';
+import ConsumerApp from '../common/ConsumerApp';
+import TrendingProducts from '../common/trending/TrendingProducts';
+import RecentProducts from '../common/recent/RecentProducts';
 import ComponentLoader from '../common/loaders/ComponentLoader';
 import WebInternalServerError from '../common/errors/widgets/WebInternalServerError';
 import Component404 from '../common/errors/widgets/Component404';
 import ProductDetail from './ProductDetail';
-import TrendingProducts from '../common/trending/TrendingProducts';
-import RecentProducts from '../common/recent/RecentProducts';
-import getProductById from '../../actions/get-product-by-id';
+import { getProductById } from '../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
@@ -16,13 +16,11 @@ import {
 } from '../../lib/constants';
 
 export default class ProductDetailWrapper extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             status: OPERATION_LOADING,
-            data: null,
-            error: null
+            data: null
         };
     }
 
@@ -38,25 +36,22 @@ export default class ProductDetailWrapper extends Component {
         else if (response && response.error &&
             response.error.message === PRODUCT_NOT_FOUND) {
             await this.setState({
-                status: OPERATION_LOADING_ERROR,
-                error: response.error
+                status: OPERATION_LOADING_ERROR
             });
         } else {
             await this.setState({
                 status: PAGE_LOADING_FAILED,
-                data: null,
-                error: 'Data not found'
+                data: null
             });
         }
     }
 
     render() {
-        const { status, data, error } = this.state;
+        const { status, data } = this.state;
         return (
-            <>
-                <Header />
+            <ConsumerApp>
                 {status === OPERATION_LOADING && <ComponentLoader />}
-                {status === OPERATION_LOADING_ERROR && <Component404 reason={`The product you're looking for doesn't exists.`} />}
+                {status === OPERATION_LOADING_ERROR && <Component404 reason={`The product you're looking for doesn't exists`} />}
                 {status === OPERATION_LOADING_COMPLETED &&
                     <>
                         <ProductDetail data={data} />
@@ -64,7 +59,7 @@ export default class ProductDetailWrapper extends Component {
                         <TrendingProducts />
                     </>}
                 {status === PAGE_LOADING_FAILED && <WebInternalServerError />}
-            </>
+            </ConsumerApp>
         );
     }
-}
+};

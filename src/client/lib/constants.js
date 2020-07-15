@@ -30,6 +30,7 @@ export const COMPONENT_MAPPER = {
     'billing_address': COMPONENT_BILLING_ADDRESS,
     'shipping_address': COMPONENT_SHIPPING_ADDRESS
 }
+export const INSTANT_PURCHASE = 'INSTANT_PURCHASE';
 export const NO_DISCOUNT = 'NO_DISCOUNT';
 export const INSTANT_AMOUNT = 'INSTANT_AMOUNT';
 export const INSTANT_PERCENTAGE = 'INSTANT_PERCENTAGE';
@@ -46,5 +47,7 @@ export const PAYMENT = 'PAYMENT';
 export const PRODUCT_NOT_FOUND = 'PRODUCT_NOT_FOUND';
 export const LOGS_NOT_FOUND = 'LOGS_NOT_FOUND';
 export const DELIVERABLE = 'DELIVERABLE';
+export const NOT_DELIVERABLE = 'NOT_DELIVERABLE';
 export const OUT_FOR_DELIVERY = 'OUT_FOR_DELIVERY';
 export const DELIVERED = 'DELIVERED';
+export const UNLIMITED = 'UNLIMITED';
