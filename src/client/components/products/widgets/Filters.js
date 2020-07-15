@@ -97,19 +97,19 @@ export default class Filters extends Component {
             priceRange
         } = this.state;
         return (
-            <Card variant="outlined">
+            <Card variant='outlined'>
                 <Box m={2}>
                     <Grid container>
                         <Grid item xs={6}>
-                            <Typography text="Filters" variant="h6" />
+                            <Typography text='Filters' variant='h6' />
                         </Grid>
                         <Grid item xs={6}>
                             <Box m={1}>
                                 <Typography
-                                    align="right"
-                                    text="CLEAR ALL"
-                                    variant="subtitle2"
-                                    className="t-text-link-2"
+                                    align='right'
+                                    text='CLEAR ALL'
+                                    variant='subtitle2'
+                                    className='t-text-link-2'
                                     onClick={this.clearAll}
                                 />
                             </Box>
@@ -121,7 +121,7 @@ export default class Filters extends Component {
                 <Box m={2}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Typography text="Categories" variant="button" />
+                            <Typography text='Categories' variant='button' />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
@@ -130,7 +130,7 @@ export default class Filters extends Component {
                                         style={{ color: 'rgb(247, 36, 52)' }}
                                         checked={subCategories['ALL'] === true}
                                         onChange={(e) => this.selectAllSubCategories(e.target.checked)}
-                                        name="ALL"
+                                        name='ALL'
                                     />
                                 }
                                 label={'All'}
@@ -159,7 +159,7 @@ export default class Filters extends Component {
                 <Box m={2}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Typography text="Price" variant="button" id="range-slider" />
+                            <Typography text='Price' variant='button' id='range-slider' />
                         </Grid>
                         <Grid item xs={12} style={{ marginTop: '3em' }}>
                             <Box m={2}>
@@ -167,12 +167,12 @@ export default class Filters extends Component {
                                     style={{ color: 'rgb(247, 36, 52)' }}
                                     value={priceRange}
                                     onChange={this.onPriceChange}
-                                    valueLabelDisplay="auto"
-                                    aria-labelledby="range-slider"
-                                    valueLabelDisplay="on"
+                                    valueLabelDisplay='auto'
+                                    aria-labelledby='range-slider'
+                                    valueLabelDisplay='on'
                                     min={99}
-                                    max={999}
-                                    valueLabelFormat={(value) => "₹" + value}
+                                    max={1999}
+                                    valueLabelFormat={(value) => '₹' + value}
                                     marks={[
                                         {
                                             value: 99,
@@ -192,7 +192,7 @@ export default class Filters extends Component {
                 <Box m={2}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Typography text="Size" variant="button" />
+                            <Typography text='Size' variant='button' />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
@@ -201,7 +201,7 @@ export default class Filters extends Component {
                                         style={{ color: 'rgb(247, 36, 52)' }}
                                         checked={sizes['ALL'] === true}
                                         onChange={(e) => this.selectAllSizes(e.target.checked)}
-                                        name="ALL"
+                                        name='ALL'
                                     />
                                 }
                                 label={'All'}

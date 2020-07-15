@@ -23,16 +23,16 @@ export default class ProductsViewer extends Component {
             products
         } = this.props;
         return (
-            <Card variant="outlined">
+            <Card variant='outlined'>
                 <Grid container>
                     <Grid item xs={12}>
                         <Box m={2}>
-                            <Typography variant="h6" text="Men's T Shirts" />
+                            <Typography variant='h6' text={`Men's T Shirts`} />
                             {status === OPERATION_LOADING && <ComponentLoader />}
-                            {status === OPERATION_LOADING_ERROR && <div>Loading failed</div>}
+                            {status === OPERATION_LOADING_ERROR && <Box m={2}><Typography align='center' text='Sorry, there was an error loading products.' /></Box>}
                             {
                                 status === OPERATION_LOADING_COMPLETED &&
-                                <Typography variant="caption" text={`${products.length} products found that match your filter`} />
+                                <Typography variant='caption' text={`${products.length} products found that match your filter`} />
                             }
                         </Box>
                     </Grid>
@@ -58,7 +58,7 @@ export default class ProductsViewer extends Component {
                             }
                             {
                                 status === OPERATION_LOADING_COMPLETED &&
-                                products.length === 0 && 
+                                products.length === 0 &&
                                 <div>
                                     There are no products that match your filter critera.
                                 </div>
@@ -69,4 +69,4 @@ export default class ProductsViewer extends Component {
             </Card>
         );
     }
-}
+};
