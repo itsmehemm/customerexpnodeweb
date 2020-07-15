@@ -5,19 +5,19 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
-import Typography from '../common/elements/Typography';
-import TextField from '../common/elements/TextField';
-import PrimaryIconButton from '../common/elements/PrimaryIconButton';
-import ButtonLoader from '../common/elements/ButtonLoader';
-import ComponentLoader from '../common/loaders/ComponentLoader';
+import Typography from '../../common/elements/Typography';
+import TextField from '../../common/elements/TextField';
+import PrimaryIconButton from '../../common/elements/PrimaryIconButton';
+import ButtonLoader from '../../common/elements/ButtonLoader';
+import ComponentLoader from '../../common/loaders/ComponentLoader';
 import LogTable from './LogTable';
-import { getLogsById } from '../../actions';
+import { getLogsById } from '../../../actions';
 import {
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING,
     LOGS_NOT_FOUND,
     OPERATION_LOADING_ERROR
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
 export default class Idsearch extends Component {
     constructor(props) {
@@ -79,13 +79,13 @@ export default class Idsearch extends Component {
             error
         } = this.state;
         return (
-            <Container maxWidth={"lg"}>
+            <Container maxWidth={'lg'}>
                 <Box m={2}>
-                    <Card variant="outlined">
+                    <Card variant='outlined'>
                         <Grid container>
                             <Grid item xs={12}>
                                 <Box m={2}>
-                                    <Typography variant="button" text="Logger management idsearch" />
+                                    <Typography variant='h6' text='Logger Management ID Search' />
                                 </Box>
                             </Grid>
                             <Grid item xs={12}>
@@ -96,7 +96,7 @@ export default class Idsearch extends Component {
                                     <Grid container>
                                         <Grid item xs={11}>
                                             <TextField
-                                                placeholder="Enter debug id"
+                                                placeholder='Enter debug id'
                                                 value={debugId}
                                                 onChange={(data) => this.update('debugId', data)}
                                                 onKeyPress={(e) => {
@@ -123,9 +123,9 @@ export default class Idsearch extends Component {
                             </Grid>
                             {
                                 error &&
-                                <Grid item align="center" xs={12}>
+                                <Grid item align='center' xs={12}>
                                     <Box m={2}>
-                                        <Typography variant="subtitle1" style={{ color: 'rgb(247, 36, 52)' }} text={error} />
+                                        <Typography variant='subtitle1' text={error} />
                                     </Box>
                                 </Grid>
                             }

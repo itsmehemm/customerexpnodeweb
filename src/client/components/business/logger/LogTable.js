@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,8 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Typography from '../common/elements/Typography';
-import { currencyCodeMapper } from '../../lib/mappers';
+import Typography from '../../common/elements/Typography';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -54,22 +52,22 @@ const LogTable = ({ logs, columns = {} }) => {
     const classes = useStyles();
     return (
         <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+            <Table className={classes.table} aria-label='customized table'>
                 <TableHead>
                     <TableRow>
-                        {columns.date && <StyledTableCell align="center"><Typography variant="body1_bold" text="Date" /></StyledTableCell>}
-                        {columns.component && <StyledTableCell align="center"><Typography variant="body1_bold" text="Component" /></StyledTableCell>}
-                        {columns.operation && <StyledTableCell align="center"><Typography variant="body1_bold" text="Operation" /></StyledTableCell>}
-                        {columns.additional_data && <StyledTableCell align="center"><Typography variant="body1_bold" text="Additional Data" /></StyledTableCell>}
+                        {columns.date && <StyledTableCell align='center'><Typography variant='button' text='Date' /></StyledTableCell>}
+                        {columns.component && <StyledTableCell align='center'><Typography variant='button' text='Component' /></StyledTableCell>}
+                        {columns.operation && <StyledTableCell align='center'><Typography variant='button' text='Operation' /></StyledTableCell>}
+                        {columns.additional_data && <StyledTableCell align='center'><Typography variant='button' text='Additional Data' /></StyledTableCell>}
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {logs.map((row) => (
                         <StyledTableRow key={row.date + row.component}>
-                            {columns.date && <StyledTableCell align="center"><Typography variant="body2" text={moment(row.time_stamp).format("DD.MM.YYYY HH:MM:SS")} className={getRowClassName(row.status)} /></StyledTableCell>}
-                            {columns.component && <StyledTableCell align="left"><Typography variant="body2" text={row.component} className={getRowClassName(row.status)} /></StyledTableCell>}
-                            {columns.operation && <StyledTableCell align="left"><Typography variant="body2" text={row.operation} className={getRowClassName(row.status)} /></StyledTableCell>}
-                            {columns.additional_data && <StyledTableCell align="left"><Typography variant="body2" text={row.additional_data} className={getRowClassName(row.status)} /></StyledTableCell>}
+                            {columns.date && <StyledTableCell align='center'><Typography variant='body2' text={moment(row.time_stamp).format('DD.MM.YYYY HH:MM:SS')} className={getRowClassName(row.status)} /></StyledTableCell>}
+                            {columns.component && <StyledTableCell align='left'><Typography variant='body2' text={row.component} className={getRowClassName(row.status)} /></StyledTableCell>}
+                            {columns.operation && <StyledTableCell align='left'><Typography variant='body2' text={row.operation} className={getRowClassName(row.status)} /></StyledTableCell>}
+                            {columns.additional_data && <StyledTableCell align='left'><Typography variant='body2' text={row.additional_data} className={getRowClassName(row.status)} /></StyledTableCell>}
                         </StyledTableRow>
                     ))}
                 </TableBody>

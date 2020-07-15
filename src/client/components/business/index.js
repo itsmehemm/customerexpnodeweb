@@ -7,7 +7,7 @@ import ProductFactoryWrapper from './warehouse/ProductFactoryWrapper';
 import ProductDetailWrapper from '../product-detail/ProductDetailWrapper';
 import SearchTransactions from './activity/SearchTransactions';
 import PaymentActivity from './activity/PaymentActivity';
-import Idsearch from '../logger/Idsearch';
+import Idsearch from './logger/Idsearch';
 import '../../styles/admin.css';
 
 export default class Business extends Component {
