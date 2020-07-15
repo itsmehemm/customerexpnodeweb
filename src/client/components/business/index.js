@@ -24,7 +24,7 @@ export default class Business extends Component {
                     <Route exact path='/business/logger/idsearch' component={Idsearch} />
                     <Route exact path='/business/logger/idsearch/:debugid' component={Idsearch} />
                 </BusinessApp>
-            </Router >
+            </Router>
         );
     }
 };
