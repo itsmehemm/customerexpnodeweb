@@ -144,8 +144,8 @@ export default class InstantPurchase extends Component {
                     onClose={this.closeNotification}
                     message={notification.message}
                 />
-                <Container style={{ padding: '1em' }} maxWidth="lg">
-                    <Card variant="outlined">
+                <Container style={{ padding: '1em' }} maxWidth='lg'>
+                    <Card variant='outlined'>
                         <Grid container>
                             {status === OPERATION_LOADING && <ComponentLoader />}
                             {status === OPERATION_LOADING_ERROR && <div>Invalid order</div>}
@@ -157,26 +157,26 @@ export default class InstantPurchase extends Component {
                                                 <Grid item>
                                                     <Box m={1}>
                                                         <Typography
-                                                            className="t-breadcrumb-inactive"
-                                                            variant="button"
+                                                            className='t-breadcrumb-inactive'
+                                                            variant='button'
                                                             gutterBottom
-                                                            text="Instant Purchase" />
+                                                            text='Instant Purchase' />
                                                     </Box>
                                                 </Grid>
                                                 <Grid item>
                                                     <Box m={1}>
                                                         <Typography
-                                                            variant="button"
+                                                            variant='button'
                                                             gutterBottom
-                                                            icon="arrow_forward_ios"
+                                                            icon='arrow_forward_ios'
                                                         />
                                                     </Box>
                                                 </Grid>
                                                 <Grid item>
                                                     <Box m={1}>
                                                         <Typography
-                                                            className="t-breadcrumb"
-                                                            variant="button"
+                                                            className='t-breadcrumb'
+                                                            variant='button'
                                                             gutterBottom
                                                             text={purchase_item.data.name}
                                                             onClick={() => window.location.href = '/product/' + purchase_item.id}
@@ -186,38 +186,38 @@ export default class InstantPurchase extends Component {
                                                 <Grid item>
                                                     <Box m={1}>
                                                         <Typography
-                                                            variant="button"
+                                                            variant='button'
                                                             gutterBottom
-                                                            icon="arrow_forward_ios"
+                                                            icon='arrow_forward_ios'
                                                         />
                                                     </Box>
                                                 </Grid>
                                                 <Grid item>
                                                     <Box m={1}>
                                                         <Typography
-                                                            className="t-breadcrumb-active"
-                                                            variant="button"
+                                                            className='t-breadcrumb-active'
+                                                            variant='button'
                                                             gutterBottom
-                                                            text="REVIEW ORDER"
+                                                            text='REVIEW ORDER'
                                                         />
                                                     </Box>
                                                 </Grid>
                                                 <Grid item>
                                                     <Box m={1}>
                                                         <Typography
-                                                            variant="button"
+                                                            variant='button'
                                                             gutterBottom
-                                                            icon="arrow_forward_ios"
+                                                            icon='arrow_forward_ios'
                                                         />
                                                     </Box>
                                                 </Grid>
                                                 <Grid item>
                                                     <Box m={1}>
                                                         <Typography
-                                                            className="t-breadcrumb-inactive"
-                                                            variant="button"
+                                                            className='t-breadcrumb-inactive'
+                                                            variant='button'
                                                             gutterBottom
-                                                            text="PROCEED TO PAY YOUR ORDER" />
+                                                            text='PROCEED TO PAY YOUR ORDER' />
                                                     </Box>
                                                 </Grid>
                                             </Grid>
@@ -234,13 +234,13 @@ export default class InstantPurchase extends Component {
                                         />
                                         <Divider />
                                         <Address
-                                            label="2. Billing Address"
+                                            label='2. Billing Address'
                                             {...billing_address}
                                             update={((data) => this.update('billing_address', data))}
                                         />
                                         <Divider />
                                         <Address
-                                            label="3. Shipping Address"
+                                            label='3. Shipping Address'
                                             {...shipping_address}
                                             isShipping={true}
                                             update={((data) => this.update('shipping_address', data))}
@@ -249,28 +249,28 @@ export default class InstantPurchase extends Component {
                                             <LargeBtn
                                                 loading={patch_order_status === OPERATION_LOADING}
                                                 onClick={this.patch}
-                                                name="PROCEED TO PAY YOUR ORDER"
-                                                color="rgb(247, 36, 52)"
-                                                icon="arrow_forward"
+                                                name='PROCEED TO PAY YOUR ORDER'
+                                                color='rgb(247, 36, 52)'
+                                                icon='arrow_forward'
                                             />
                                         </Box>
                                     </Grid>
                                     <Grid item>
-                                        <Divider orientation="vertical" />
+                                        <Divider orientation='vertical' />
                                     </Grid>
                                     <Grid item>
                                         <Box m={2}>
                                             <LargeBtn
                                                 loading={patch_order_status === OPERATION_LOADING}
                                                 onClick={this.patch}
-                                                name="PROCEED TO PAY YOUR ORDER"
-                                                color="rgb(247, 36, 52)"
-                                                icon="arrow_forward"
+                                                name='PROCEED TO PAY YOUR ORDER'
+                                                color='rgb(247, 36, 52)'
+                                                icon='arrow_forward'
                                             />
                                         </Box>
                                         <Box m={2}>
-                                            <Typography text="Review Order" />
-                                            <Typography variant="caption" gutterBottom text="Here is what you're about to purchase." />
+                                            <Typography text='Review Order' />
+                                            <Typography variant='caption' gutterBottom text={`Here is what you're about to purchase`} />
                                         </Box>
                                         <OrderSummary
                                             id={purchase_item.id}
@@ -294,4 +294,4 @@ export default class InstantPurchase extends Component {
             </ConsumerApp>
         );
     }
-}
+};

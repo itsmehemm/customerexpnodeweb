@@ -1,13 +1,12 @@
-
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import TextField from '../../common/elements/TextField';
-import Typography from '../../common/elements/Typography';
-import AddressModal from '../../../modals/instant-order/widgets/AddressModal';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '../../common/elements/TextField';
+import Typography from '../../common/elements/Typography';
 import ViewAddress from './ViewAddress';
+import AddressModal from '../../../modals/instant-order/widgets/AddressModal';
 import {
     COMPONENT_STATUS_INVALID,
     COMPONENT_STATUS_VALID
@@ -98,15 +97,15 @@ export default class Addresses extends Component {
                     <>
                         <Grid item xs={10}>
                             <Box m={2}>
-                                <Typography text={label} size="h6" />
+                                <Typography text={label} size='h6' />
                             </Box>
                         </Grid>
                         <Grid item xs={2}>
                             <Box m={2} onClick={() => this.setState({ viewer: false })}>
                                 <Typography
-                                    text="Edit"
-                                    variant="button"
-                                    className="t-text-link-2"
+                                    text='Edit'
+                                    variant='button'
+                                    className='t-text-link-2'
                                 />
                             </Box>
                         </Grid>
@@ -116,7 +115,7 @@ export default class Addresses extends Component {
                     !viewer &&
                     <Grid item xs={12}>
                         <Box m={2}>
-                            <Typography text={label} size="h6" />
+                            <Typography text={label} size='h6' />
                         </Box>
                     </Grid>
                 }
@@ -127,8 +126,8 @@ export default class Addresses extends Component {
                             <FormControlLabel
                                 control={<Checkbox checked={shipping_same_as_billing}
                                     onChange={(e) => this.update('shipping_same_as_billing', e.target.checked)}
-                                    name="shipping_check_box" />}
-                                label="Shipping address same as billing address"
+                                    name='shipping_check_box' />}
+                                label='Shipping address same as billing address'
                             />
                         </Box>
                     </Grid>
@@ -142,10 +141,10 @@ export default class Addresses extends Component {
                         <Grid item xs={12}>
                             <Box m={2}>
                                 <TextField
-                                    label="Name"
+                                    label='Name'
                                     value={name}
                                     error={name ? false : true}
-                                    helperText={name ? "" : "Your name is required."}
+                                    helperText={name ? '' : 'Your name is required.'}
                                     required={true}
                                     onChange={(data) => this.update('name', data)}
                                 />
@@ -154,10 +153,10 @@ export default class Addresses extends Component {
                         <Grid item xs={6}>
                             <Box m={2}>
                                 <TextField
-                                    label="Address Line 1"
+                                    label='Address Line 1'
                                     value={address_line_1}
                                     error={address_line_1 ? false : true}
-                                    helperText={address_line_1 ? "" : "Your address is required."}
+                                    helperText={address_line_1 ? '' : 'Your address is required.'}
                                     required={true}
                                     onChange={(data) => this.update('address_line_1', data)}
                                 />
@@ -166,7 +165,7 @@ export default class Addresses extends Component {
                         <Grid item xs={6}>
                             <Box m={2}>
                                 <TextField
-                                    label="Address Line 2"
+                                    label='Address Line 2'
                                     value={address_line_2}
                                     onChange={(data) => this.update('address_line_2', data)}
                                 />
@@ -175,10 +174,10 @@ export default class Addresses extends Component {
                         <Grid item xs={6}>
                             <Box m={2}>
                                 <TextField
-                                    label="City"
+                                    label='City'
                                     value={city}
                                     error={city ? false : true}
-                                    helperText={city ? "" : "Your city is required."}
+                                    helperText={city ? '' : 'Your city is required.'}
                                     required={true}
                                     onChange={(data) => this.update('city', data)}
                                 />
@@ -187,11 +186,11 @@ export default class Addresses extends Component {
                         <Grid item xs={6}>
                             <Box m={2}>
                                 <TextField
-                                    label="Pincode"
-                                    type="number"
+                                    label='Pincode'
+                                    type='number'
                                     value={pincode}
                                     error={pincode ? false : true}
-                                    helperText={pincode ? "" : "Your pincode is required."}
+                                    helperText={pincode ? '' : 'Your pincode is required.'}
                                     required={true}
                                     onChange={(data) => this.update('pincode', data)}
                                 />
@@ -200,10 +199,10 @@ export default class Addresses extends Component {
                         <Grid item xs={6}>
                             <Box m={2}>
                                 <TextField
-                                    label="State"
+                                    label='State'
                                     value={state}
                                     error={state ? false : true}
-                                    helperText={state ? "" : "Your state is required."}
+                                    helperText={state ? '' : 'Your state is required.'}
                                     required={true}
                                     onChange={(data) => this.update('state', data)}
                                 />
@@ -212,7 +211,7 @@ export default class Addresses extends Component {
                         <Grid item xs={6}>
                             <Box m={2}>
                                 <TextField
-                                    label="Landmark (optional)"
+                                    label='Landmark (optional)'
                                     value={landmark}
                                     onChange={(data) => this.update('landmark', data)}
                                 />
@@ -221,11 +220,11 @@ export default class Addresses extends Component {
                         <Grid item xs={12}>
                             <Box m={2}>
                                 <Typography
-                                    align="center"
-                                    variant="body1"
-                                    className="t-text-link"
-                                    icon="check"
-                                    text="Confirm Address"
+                                    align='center'
+                                    variant='body1'
+                                    className='t-text-link'
+                                    icon='check'
+                                    text='Confirm Address'
                                     onClick={this.confirm}
                                 />
                             </Box>
@@ -235,4 +234,4 @@ export default class Addresses extends Component {
             </Grid>
         );
     }
-}
+};

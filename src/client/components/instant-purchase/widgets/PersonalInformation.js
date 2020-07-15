@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
 import Typography from '../../common/elements/Typography';
 import TextField from '../../common/elements/TextField';
 import {
@@ -57,17 +56,17 @@ export default class PersonalInformation extends Component {
         return (
             <Box>
                 <Box m={2}>
-                    <Typography text="1. Personal Information" size="h6" gutterBottom/>
-                    <Typography text="We need your email and phone number to keep you updated." variant="caption" gutterBottom/>
+                    <Typography text='1. Personal Information' size='h6' gutterBottom/>
+                    <Typography text='We need your email and phone number to keep you updated.' variant='caption' gutterBottom/>
                 </Box>
                 <Grid container>
                     <Grid item xs={6}>
                         <Box m={2}>
                             <TextField
-                                label="Email"
+                                label='Email'
                                 value={email}
                                 error={email ? false : true}
-                                helperText={email ? "" : "Your email is required."}
+                                helperText={email ? '' : 'Your email is required.'}
                                 required={true}
                                 onChange={(data) => this.update('email', data)}
                             />
@@ -76,10 +75,10 @@ export default class PersonalInformation extends Component {
                     <Grid item xs={6}>
                         <Box m={2}>
                             <TextField
-                                label="Phone Number"
+                                label='Phone Number'
                                 value={phone_number}
                                 error={phone_number ? false : true}
-                                helperText={phone_number ? "" : "Your phone number is required."}
+                                helperText={phone_number ? '' : 'Your phone number is required.'}
                                 required={true}
                                 onChange={(data) => this.update('phone_number', data)}
                             />
@@ -89,4 +88,4 @@ export default class PersonalInformation extends Component {
             </Box>
         );
     }
-}
+};

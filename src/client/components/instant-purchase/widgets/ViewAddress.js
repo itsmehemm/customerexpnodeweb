@@ -22,14 +22,14 @@ const ViewAddress = (props) => {
                     (!shipping_same_as_billing || forceShow) &&
                     <>
                         <Box m={2}>
-                            <Typography variant="h6" text={name} />
+                            <Typography variant='h6' text={name} />
                         </Box>
                         <Box m={2}>
-                            <Box m={0}><Typography variant="subtitle1" text={address_line_1} /></Box>
-                            {address_line_2 && <Box m={0}><Typography variant="subtitle1" text={address_line_2} /></Box>}
-                            <Box m={0}><Typography variant="subtitle1" text={city + " " + pincode} /></Box>
-                            <Box m={0}><Typography variant="subtitle1" text={landmark} /></Box>
-                            <Box m={0}><Typography variant="subtitle1" text={state} /></Box>
+                            <Box m={0}><Typography variant='subtitle1' text={address_line_1} /></Box>
+                            {address_line_2 && <Box m={0}><Typography variant='subtitle1' text={address_line_2} /></Box>}
+                            <Box m={0}><Typography variant='subtitle1' text={city + ' ' + pincode} /></Box>
+                            <Box m={0}><Typography variant='subtitle1' text={landmark} /></Box>
+                            <Box m={0}><Typography variant='subtitle1' text={state} /></Box>
                         </Box>
                     </>
                 }
