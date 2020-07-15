@@ -13,6 +13,7 @@ import Typography from '../../common/elements/Typography';
 
 const useStyles = makeStyles({
     root: {
+        zIndex: 1,
         width: 175,
         backgroundColor: 'rgb(247, 36, 52)',
         color: '#fff'
