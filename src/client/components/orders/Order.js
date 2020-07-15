@@ -3,9 +3,10 @@ import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 import ConsumerApp from '../common/ConsumerApp';
 import ComponentLoader from '../common/loaders/ComponentLoader';
-import NotFound from '../common/errors/NotFound';
+import Component404 from '../common/errors/widgets/Component404';
 import ViewAddress from '../instant-purchase/widgets/ViewAddress';
 import Typography from '../common/elements/Typography';
 import OrderDetail from './widgets/OrderDetail';
@@ -47,7 +48,7 @@ export default class Order extends Component {
         return (
             <ConsumerApp>
                 {status === OPERATION_LOADING && <ComponentLoader />}
-                {status === OPERATION_LOADING_ERROR && <NotFound />}
+                {status === OPERATION_LOADING_ERROR && <Component404 />}
                 {
                     status === OPERATION_LOADING_COMPLETED &&
                     order &&
@@ -63,6 +64,9 @@ export default class Order extends Component {
                                             </Box>
                                         </Grid>
                                         <Grid item xs={12}>
+                                            <Divider />
+                                        </Grid>
+                                        <Grid item xs={6}>
                                             <Box m={2}>
                                                 <ViewAddress {...order.shipping_address} forceShow={true} />
                                             </Box>

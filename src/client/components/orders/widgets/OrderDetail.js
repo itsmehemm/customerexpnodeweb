@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 import Typography from '../../common/elements/Typography';
 import { currencyCodeMapper } from '../../../lib/mappers';
 import {
@@ -15,13 +16,16 @@ const OrderDetail = ({ id, purchase_items, delivery }) => {
     const purchaseItem = purchase_items[0];
     const images = purchaseItem.picture_links || [defaultImg];
     return (
-        <Box m={2} className="t-card" onClick={() => window.open(`/account/activity/order/${id}`)}>
+        <Box m={2} className="t-card">
             <Card variant="outlined">
                 <Grid container>
                     <Grid item xs={12}>
                         <Box m={2}>
                             <Typography variant="button" text="Order details" />
                         </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Divider />
                     </Grid>
                     <Grid item xs={2}>
                         <Box m={2}>

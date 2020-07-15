@@ -56,21 +56,24 @@ const Order = ({ id, purchase_items, delivery }) => {
                             <Typography variant="body1" text={`${currencyCodeMapper[purchaseItem.amount.currency]}${purchaseItem.amount.subtotal}`} />
                         </Box>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Box m={2}>
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    {
-                                        delivery.status === DELIVERABLE &&
-                                        <>
-                                            <Typography text={delivery.formatted.delivery_string} variant="body1_bold" />
-                                            <Typography text="Your item will be delivered" variant="caption" />
-                                        </>
-                                    }
+                    {
+                        delivery &&
+                        <Grid item xs={4}>
+                            <Box m={2}>
+                                <Grid container>
+                                    <Grid item xs={12}>
+                                        {
+                                            delivery.status === DELIVERABLE &&
+                                            <>
+                                                <Typography text={delivery.formatted.delivery_string} variant="body1_bold" />
+                                                <Typography text="Your item will be delivered" variant="caption" />
+                                            </>
+                                        }
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Box>
-                    </Grid>
+                            </Box>
+                        </Grid>
+                    }
                 </Grid>
             </Card>
         </Box>

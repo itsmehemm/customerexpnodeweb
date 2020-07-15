@@ -3,6 +3,17 @@
     color: #fff;
 }
 
+.t-menu-item-1 {
+    text-align: center;
+    color: #fff;
+}
+
 .t-menu-item:hover {
     cursor: pointer;
+}
+
+.t-menu-item-1:hover {
+    padding: 0.75em;
+    cursor: pointer;
+    background: rgb(218, 40, 41);
 }
