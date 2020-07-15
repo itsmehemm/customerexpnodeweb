@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import MomentUtils from '@date-io/moment';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -7,17 +12,12 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
-import TransactionList from './TransactionList';
 import Typography from '../../common/elements/Typography';
 import TextField from '../../common/elements/TextField';
 import Select from '../../common/elements/Select';
 import Component404 from '../../common/errors/widgets/Component404';
 import ComponentLoader from '../../common/loaders/ComponentLoader';
+import TransactionList from './TransactionList';
 import { searchTransactions } from '../../../actions';
 import {
     OPERATION_LOADING,
@@ -34,8 +34,8 @@ export default class SearchTransactions extends Component {
             search_status: OPERATION_LOADING,
             from: moment().subtract(3, 'months'),
             to: moment(),
-            search_type: "transaction_id",
-            search_text: '',
+            searchType: 'transaction_id',
+            searchText: '',
             transactions: []
         };
         this.search = this.search.bind(this);
@@ -49,8 +49,8 @@ export default class SearchTransactions extends Component {
         const {
             from,
             to,
-            search_type,
-            search_text
+            searchType,
+            searchText
         } = this.state;
         let request = {
             range: {
@@ -58,24 +58,24 @@ export default class SearchTransactions extends Component {
                 to: new Date(to).getTime()
             }
         };
-        if (search_type === 'transaction_id') {
+        if (searchType === 'transaction_id') {
             request.transaction = {
-                id: search_text
+                id: searchText
             };
         }
-        if (search_type === 'order_id') {
+        if (searchType === 'order_id') {
             request.order = {
-                id: search_text
+                id: searchText
             };
         }
-        if (search_type === 'email') {
+        if (searchType === 'email') {
             request.order = {
-                email: search_text
+                email: searchText
             };
         }
-        if (search_type === 'phone_number') {
+        if (searchType === 'phone_number') {
             request.order = {
-                phone_number: search_text
+                phone_number: searchText
             };
         }
         return request;
@@ -118,8 +118,8 @@ export default class SearchTransactions extends Component {
             status,
             from,
             to,
-            search_type,
-            search_text,
+            searchType,
+            searchText,
             search_status,
             transactions
         } = this.state;
@@ -130,12 +130,12 @@ export default class SearchTransactions extends Component {
                 {
                     status === OPERATION_LOADING_COMPLETED &&
                     <Box m={2}>
-                        <Container maxWidth="lg">
-                            <Card variant="outlined">
+                        <Container maxWidth='lg'>
+                            <Card variant='outlined'>
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Box m={2}>
-                                            <Typography variant="h6" text="Search Transactions" />
+                                            <Typography variant='h6' text='Search Transactions' />
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12}>
@@ -146,27 +146,27 @@ export default class SearchTransactions extends Component {
                                             <Grid container>
                                                 <Grid item xs={3}>
                                                     <Select
-                                                        value={search_type}
+                                                        value={searchType}
                                                         options={[
-                                                            { label: "Transaction ID", value: "transaction_id" },
-                                                            { label: 'Order ID', value: "order_id" },
-                                                            { label: 'Buyer email', value: "email" },
-                                                            { label: 'Buyer Phonenumber', value: "phone_number" }
+                                                            { label: 'Transaction ID', value: 'transaction_id' },
+                                                            { label: 'Order ID', value: 'order_id' },
+                                                            { label: 'Buyer email', value: 'email' },
+                                                            { label: 'Buyer Phonenumber', value: 'phone_number' }
                                                         ]}
-                                                        onChange={(data) => this.update('search_type', data)}
+                                                        onChange={(data) => this.update('searchType', data)}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={8}>
                                                     <TextField
-                                                        placeholder="Search for transactions"
-                                                        value={search_text}
-                                                        onChange={(data) => this.update('search_text', data)}
+                                                        placeholder='Search for transactions'
+                                                        value={searchText}
+                                                        onChange={(data) => this.update('searchText', data)}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={1}>
                                                     <Button
                                                         style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
-                                                        variant="contained"
+                                                        variant='contained'
                                                         startIcon={<SearchIcon style={{ fontSize: '2em' }} />}
                                                         onClick={this.search}
                                                     />
@@ -181,12 +181,12 @@ export default class SearchTransactions extends Component {
                                                     <MuiPickersUtilsProvider utils={MomentUtils}>
                                                         <KeyboardDatePicker
                                                             disableToolbar
-                                                            inputVariant="outlined"
-                                                            variant="inline"
-                                                            format="MMM D, YYYY"
-                                                            margin="normal"
-                                                            id="date-picker-inline"
-                                                            label="From"
+                                                            inputVariant='outlined'
+                                                            variant='inline'
+                                                            format='MMM D, YYYY'
+                                                            margin='normal'
+                                                            id='date-picker-inline'
+                                                            label='From'
                                                             value={from}
                                                             onChange={(data) => this.updateRange('from', data)}
                                                             KeyboardButtonProps={{
@@ -201,12 +201,12 @@ export default class SearchTransactions extends Component {
                                                     <MuiPickersUtilsProvider utils={MomentUtils}>
                                                         <KeyboardDatePicker
                                                             disableToolbar
-                                                            inputVariant="outlined"
-                                                            variant="inline"
-                                                            format="MMM D, YYYY"
-                                                            margin="normal"
-                                                            id="date-picker-inline"
-                                                            label="To"
+                                                            inputVariant='outlined'
+                                                            variant='inline'
+                                                            format='MMM D, YYYY'
+                                                            margin='normal'
+                                                            id='date-picker-inline'
+                                                            label='To'
                                                             value={to}
                                                             onChange={(data) => this.updateRange('to', data)}
                                                             KeyboardButtonProps={{
@@ -221,7 +221,8 @@ export default class SearchTransactions extends Component {
                                     {search_status === OPERATION_LOADING && <ComponentLoader />}
                                     {
                                         search_status === OPERATION_LOADING_COMPLETED &&
-                                        transactions && transactions.length > 0 &&
+                                        Array.isArray(transactions) &&
+                                        transactions.length > 0 &&
                                         <TransactionList transactions={transactions} columns={{
                                             date: true,
                                             transaction_id: true,
@@ -234,11 +235,12 @@ export default class SearchTransactions extends Component {
                                     }
                                     {
                                         search_status === OPERATION_LOADING_COMPLETED &&
-                                        transactions && transactions.length === 0 &&
+                                        Array.isArray(transactions) &&
+                                        transactions.length === 0 &&
                                         <Grid container>
-                                            <Grid align="center" item xs={12}>
+                                            <Grid align='center' item xs={12}>
                                                 <Box m={2}>
-                                                    <Typography variant="body2" text="Sorry, no transactions were found that matches your filter." />
+                                                    <Typography variant='body2' text='Sorry, no transactions were found that matches your filter.' />
                                                 </Box>
                                             </Grid>
                                         </Grid>

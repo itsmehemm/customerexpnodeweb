@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -62,35 +62,35 @@ const PurchaseItems = ({ purchaseItems, amount }) => {
     const classes = useStyles();
     return (
         <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+            <Table className={classes.table} aria-label='customized table'>
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell><Typography variant="body1_bold" text="Order Details" /></StyledTableCell>
-                        <StyledTableCell align="right"><Typography variant="body1_bold" text="Quantity" /></StyledTableCell>
-                        <StyledTableCell align="right"><Typography variant="body1_bold" text="Price" /></StyledTableCell>
-                        <StyledTableCell align="right"><Typography variant="body1_bold" text="Discount" /></StyledTableCell>
-                        <StyledTableCell align="right"><Typography variant="body1_bold" text="Subtotal" /></StyledTableCell>
+                        <StyledTableCell><Typography variant='body1_bold' text='Order Details' /></StyledTableCell>
+                        <StyledTableCell align='right'><Typography variant='body1_bold' text='Quantity' /></StyledTableCell>
+                        <StyledTableCell align='right'><Typography variant='body1_bold' text='Price' /></StyledTableCell>
+                        <StyledTableCell align='right'><Typography variant='body1_bold' text='Discount' /></StyledTableCell>
+                        <StyledTableCell align='right'><Typography variant='body1_bold' text='Subtotal' /></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {purchaseItems.map((row) => (
                         <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                <Typography variant="body1" text={row.name} />
+                            <StyledTableCell component='th' scope='row'>
+                                <Typography variant='body1' text={row.name} />
                             </StyledTableCell>
-                            <StyledTableCell align="right"><Typography variant="body1" text={row.quantity} /></StyledTableCell>
-                            <StyledTableCell align="right"><Typography variant="body1" text={`${currencyCodeMapper[row.amount.currency]}${row.amount.maximum_retail_price}`} /></StyledTableCell>
-                            <StyledTableCell align="right"><Typography variant="body1" text={getDiscountString({ ...row.amount.discount, currency: amount.currency })} /></StyledTableCell>
-                            <StyledTableCell align="right"><Typography variant="body1" text={`${currencyCodeMapper[row.amount.currency]}${row.amount.subtotal}`} /></StyledTableCell>
+                            <StyledTableCell align='right'><Typography variant='body1' text={row.quantity} /></StyledTableCell>
+                            <StyledTableCell align='right'><Typography variant='body1' text={`${currencyCodeMapper[row.amount.currency]}${row.amount.maximum_retail_price}`} /></StyledTableCell>
+                            <StyledTableCell align='right'><Typography variant='body1' text={getDiscountString({ ...row.amount.discount, currency: amount.currency })} /></StyledTableCell>
+                            <StyledTableCell align='right'><Typography variant='body1' text={`${currencyCodeMapper[row.amount.currency]}${row.amount.subtotal}`} /></StyledTableCell>
                         </StyledTableRow>
                     ))}
                     <StyledTableRow key={amount.currency}>
-                        <StyledTableCell component="th" scope="row">
+                        <StyledTableCell component='th' scope='row'>
                         </StyledTableCell>
-                        <StyledTableCell align="right"></StyledTableCell>
-                        <StyledTableCell align="right"></StyledTableCell>
-                        <StyledTableCell align="right"><Typography variant="body1_bold" text="Subtotal" /></StyledTableCell>
-                        <StyledTableCell align="right"><Typography variant="h6" text={`${currencyCodeMapper[amount.currency]}${amount.subtotal}`} /> </StyledTableCell>
+                        <StyledTableCell align='right'></StyledTableCell>
+                        <StyledTableCell align='right'></StyledTableCell>
+                        <StyledTableCell align='right'><Typography variant='body1_bold' text='Subtotal' /></StyledTableCell>
+                        <StyledTableCell align='right'><Typography variant='h6' text={`${currencyCodeMapper[amount.currency]}${amount.subtotal}`} /> </StyledTableCell>
                     </StyledTableRow>
                 </TableBody>
             </Table>
@@ -133,29 +133,29 @@ export default class PaymentActivity extends Component {
                 {status === OPERATION_LOADING_ERROR && <Component404 />}
                 {status === OPERATION_LOADING_COMPLETED &&
                     <Box m={2}>
-                        <Container maxWidth="lg">
-                            <Card variant="outlined">
+                        <Container maxWidth='lg'>
+                            <Card variant='outlined'>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Box m={2}> <Typography variant="h6" text="Transaction Details" /> </Box>
+                                        <Box m={2}> <Typography variant='h6' text='Transaction Details' /> </Box>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Divider />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Grid container>
-                                            <Grid item align="left" xs={8}>
+                                            <Grid item align='left' xs={8}>
                                                 <Box m={2}>
-                                                    <Typography variant="body1_bold" text={`Payment received for order: ${data.order_id}`} />
+                                                    <Typography variant='body1_bold' text={`Payment received for order: ${data.order_id}`} />
                                                 </Box>
                                                 <Box m={2}>
-                                                    <Typography variant="body1" text={new Date(data.time_stamp).toString()} />
+                                                    <Typography variant='body1' text={new Date(data.time_stamp).toString()} />
                                                 </Box>
                                             </Grid>
-                                            <Grid item align="right" xs={4}>
+                                            <Grid item align='right' xs={4}>
                                                 <Box m={2}>
-                                                    <Typography variant="body1" text="Gross amount" />
-                                                    <Typography variant="h4" text={`${currencyCodeMapper[data.amount.currency]}${data.amount.subtotal}`} />
+                                                    <Typography variant='body1' text='Gross amount' />
+                                                    <Typography variant='h4' text={`${currencyCodeMapper[data.amount.currency]}${data.amount.subtotal}`} />
                                                 </Box>
                                             </Grid>
                                         </Grid>
@@ -165,16 +165,16 @@ export default class PaymentActivity extends Component {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Grid container>
-                                            <Grid item align="left" xs={6}>
+                                            <Grid item align='left' xs={6}>
                                                 <Box m={2}>
-                                                    <Typography variant="body1_bold" text="Transaction ID" />
-                                                    <Typography variant="body1" text={data.transaction_id} />
+                                                    <Typography variant='body1_bold' text='Transaction ID' />
+                                                    <Typography variant='body1' text={data.transaction_id} />
                                                 </Box>
                                             </Grid>
-                                            <Grid item align="left" xs={6}>
+                                            <Grid item align='left' xs={6}>
                                                 <Box m={2}>
-                                                    <Typography variant="body1_bold" text="Payment Status" />
-                                                    <Typography variant="body1" text={data.status} />
+                                                    <Typography variant='body1_bold' text='Payment Status' />
+                                                    <Typography variant='body1' text={data.status} />
                                                 </Box>
                                             </Grid>
                                         </Grid>
@@ -184,18 +184,18 @@ export default class PaymentActivity extends Component {
                                         <Grid item xs={12}>
                                             <Box style={{ backgroundColor: '#f5f7fa', color: '#000', padding: '0.5em' }} m={0}>
                                                 <Box m={1}>
-                                                    <Typography variant="body1_bold" text="Personal Information" />
+                                                    <Typography variant='body1_bold' text='Personal Information' />
                                                 </Box>
                                             </Box>
                                             <Box m={2}>
                                                 <Grid container>
                                                     <Grid item xs={6}>
-                                                        <Typography variant="body1_bold" text="Email" />
-                                                        <Typography variant="body1" text={data.personal_information.email} />
+                                                        <Typography variant='body1_bold' text='Email' />
+                                                        <Typography variant='body1' text={data.personal_information.email} />
                                                     </Grid>
                                                     <Grid item xs={6}>
-                                                        <Typography variant="body1_bold" text="Phone Number" />
-                                                        <Typography variant="body1" text={data.personal_information.phone_number} />
+                                                        <Typography variant='body1_bold' text='Phone Number' />
+                                                        <Typography variant='body1' text={data.personal_information.phone_number} />
                                                     </Grid>
                                                 </Grid>
                                             </Box>
@@ -207,7 +207,7 @@ export default class PaymentActivity extends Component {
                                                 data && data.billing_address &&
                                                 <Grid item xs={6}>
                                                     <Box m={2}>
-                                                        <Typography variant="body1_bold" text="Billing address" />
+                                                        <Typography variant='body1_bold' text='Billing address' />
                                                     </Box>
                                                     <Box m={2}>
                                                         <ViewAddress {...data.billing_address} />
@@ -218,7 +218,7 @@ export default class PaymentActivity extends Component {
                                                 data && data.shipping_address &&
                                                 <Grid item xs={6}>
                                                     <Box m={2}>
-                                                        <Typography variant="body1_bold" text="OK to ship to" />
+                                                        <Typography variant='body1_bold' text='OK to ship to' />
                                                     </Box>
                                                     <Box m={2}>
                                                         <ViewAddress {...data.shipping_address} forceShow={true} />
@@ -242,22 +242,22 @@ export default class PaymentActivity extends Component {
                                         <Grid item xs={12}>
                                             <Box style={{ backgroundColor: '#f5f7fa', color: '#000', padding: '0.5em' }} m={0}>
                                                 <Box m={1}>
-                                                    <Typography variant="body1_bold" text="Payment details" />
+                                                    <Typography variant='body1_bold' text='Payment details' />
                                                 </Box>
                                             </Box>
                                             <Box m={2}>
                                                 <Grid container>
                                                     <Grid item xs={4}>
-                                                        <Typography variant="body1_bold" text="Mode" />
-                                                        <Typography variant="body1" text={data.payment_information.processor} />
+                                                        <Typography variant='body1_bold' text='Mode' />
+                                                        <Typography variant='body1' text={data.payment_information.processor} />
                                                     </Grid>
                                                     <Grid item xs={4}>
-                                                        <Typography variant="body1_bold" text="Processor Transaction ID" />
-                                                        <Typography variant="body1" text={data.payment_information.transaction_id} />
+                                                        <Typography variant='body1_bold' text='Processor Transaction ID' />
+                                                        <Typography variant='body1' text={data.payment_information.transaction_id} />
                                                     </Grid>
                                                     <Grid item xs={4}>
-                                                        <Typography variant="body1_bold" text="Processor Order ID" />
-                                                        <Typography variant="body1" text={data.payment_information.processor_order_id} />
+                                                        <Typography variant='body1_bold' text='Processor Order ID' />
+                                                        <Typography variant='body1' text={data.payment_information.processor_order_id} />
                                                     </Grid>
                                                 </Grid>
                                             </Box>
