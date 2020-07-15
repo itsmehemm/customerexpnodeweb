@@ -66,32 +66,14 @@ class PaymentActivityModal {
             this.amount = orderdata.amount;
             this.billing_address = orderdata.billing_address;
             this.shipping_address = orderdata.shipping_address;
+            this.delivery = orderdata.delivery;
             this.payment_information = orderdata.payment_information;
         }
-
-        if (this.shipping_address && this.shipping_address.pincode) {
-            const address = await postalpincodeApi.load(this.shipping_address.pincode);
-            if (address && !address.error && address.getPincode()) {
-                const delivery = await postalpincodeApi.getDeliveryStatus(address);
-                this.delivery = constructDeliveryObj({
-                    state: address.getState(),
-                    district: address.getDistrict(),
-                    region: address.getRegion(),
-                    place: address.getPlace(),
-                    pincode: address.getPincode(),
-                    status: delivery.status,
-                    deliveryTime: delivery.deliveryTime
-                });
-            }
-        }
-
         this.transaction_id = uniqid().toUpperCase();
         this.time_stamp = new Date().getTime();
-
         if (this.payment_information && this.payment_information.status) {
             this.status = this.payment_information.status;
         }
-
         this.data = {
             account_id: this.account_id,
             transaction_id: this.transaction_id,

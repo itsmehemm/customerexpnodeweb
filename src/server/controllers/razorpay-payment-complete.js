@@ -65,7 +65,6 @@ const razorpayPaymentComplete = async (req, res) => {
                     }
                 });
                 await instantPurchaseModal.initiateDelivery();
-                await instantPurchaseModal.completePurchase();
                 const service = await mailservices.build(MAILSERVICE.NOREPLY);
                 const order = instantPurchaseModal.getOrder();
                 const to = instantPurchaseModal.getPersonalInformation() && instantPurchaseModal.getPersonalInformation().email;

@@ -37,8 +37,8 @@ const getOrderById = async (req, res) => {
         }
         return res.status(200).send({
             id: instantPurchaseModal.getOrderId(),
-            ...instantPurchaseModal.getOrder(),
-            delivery: delivery
+            delivery: delivery,
+            ...instantPurchaseModal.getOrder()
         });
     } else {
         return res.status(404).send({
