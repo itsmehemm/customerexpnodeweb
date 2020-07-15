@@ -12,7 +12,7 @@ import BasicDetails from './widgets/BasicDetails';
 import AdvancedDetails from './widgets/AdvancedDetails';
 import Preferences from './widgets/Preferences';
 import Themes from './widgets/Themes';
-import ProductFactoryModal from '../../../modals/business/product-factory/ProductFactoryModal';
+import ProductFactoryModal from '../../../modals/business/warehouse/ProductFactoryModal';
 import {
     COMPONENT_STATUS_INVALID,
     COMPONENT_MAPPER
@@ -21,10 +21,8 @@ import {
     addProduct,
     updateProductById
 } from '../../../actions/index.js';
-import '../../../styles/admin.css';
 
 export default class ProductFactory extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -101,15 +99,15 @@ export default class ProductFactory extends Component {
         const { notification } = this.state;
         return (
             <Box m={2}>
-                <Container maxWidth={"md"}>
-                    <Card variant="outlined">
+                <Container maxWidth={'md'}>
+                    <Card variant='outlined'>
                         <Snackbar
                             autoHideDuration={5000}
-                            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                             open={notification ? true : false}
                             message={notification}
                             onClose={() => this.setState({ notification: null })}
-                            key={"topcenter"}
+                            key={'topcenter'}
                         />
                         <Grid container>
                             <Grid item xs={12}>
@@ -117,7 +115,7 @@ export default class ProductFactory extends Component {
                                     {
                                         !this.state.id &&
                                         <Typography
-                                            variant="button"
+                                            variant='button'
                                             text='Add a new product to sale'
                                             icon='add'
                                         />
@@ -125,7 +123,7 @@ export default class ProductFactory extends Component {
                                     {
                                         this.state.id &&
                                         <Typography
-                                            variant="button"
+                                            variant='button'
                                             text='Edit product'
                                             icon='edit'
                                         />
@@ -173,9 +171,9 @@ export default class ProductFactory extends Component {
                                     <Button
                                         fullWidth
                                         style={{ height: '57px' }}
-                                        size="large"
-                                        variant="outlined"
-                                        color="primary"
+                                        size='large'
+                                        variant='outlined'
+                                        color='primary'
                                         onClick={() => this.state.id ? this.updateProduct() : this.addProduct()}
                                         startIcon={<Icon>done</Icon>}>
                                         {this.state.id ? 'Edit' : 'Add'}
@@ -187,9 +185,9 @@ export default class ProductFactory extends Component {
                                     <Button
                                         fullWidth
                                         style={{ height: '57px' }}
-                                        size="large"
-                                        variant="outlined"
-                                        color="secondary"
+                                        size='large'
+                                        variant='outlined'
+                                        color='secondary'
                                         onClick={() => window.location.reload()}
                                         startIcon={<Icon>refresh</Icon>}>
                                         Reset
@@ -202,4 +200,4 @@ export default class ProductFactory extends Component {
             </Box >
         );
     }
-}
+};

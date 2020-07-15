@@ -3,11 +3,12 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 import BusinessApp from './BusinessApp';
 import BusinessDashboard from './dashboard/Dashboard';
 import Products from './products/Products';
-import ProductFactoryWrapper from './product-factory/ProductFactoryWrapper';
+import ProductFactoryWrapper from './warehouse/ProductFactoryWrapper';
 import ProductDetailWrapper from '../product-detail/ProductDetailWrapper';
 import SearchTransactions from './activity/SearchTransactions';
 import PaymentActivity from './activity/PaymentActivity';
 import Idsearch from '../logger/Idsearch';
+import '../../styles/admin.css';
 
 export default class Business extends Component {
     render() {

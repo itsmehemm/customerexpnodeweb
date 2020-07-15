@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import TextField from '../../../common/elements/TextField';
 import Typography from '../../../common/elements/Typography';
 import Select from '../../../common/elements/Select';
-import BasicDetailsModal from '../../../../modals/business/product-factory/widgets/BasicDetailsModal';
+import BasicDetailsModal from '../../../../modals/business/warehouse/widgets/BasicDetailsModal';
 import {
     COMPONENT_STATUS_VALID,
     COMPONENT_STATUS_INVALID
@@ -15,7 +14,6 @@ import availableColors from '../../../../lib/options/colors.json';
 import availableSizes from '../../../../lib/options/sizes.json';
 
 export default class BasicDetails extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -90,11 +88,11 @@ export default class BasicDetails extends Component {
         const { helperTexts } = this.state;
         return (
             <Grid container spacing={3}>
-                <Typography variant="button" text="Basic Details" />
+                <Typography variant='button' text='Basic Details' />
                 <TextField
                     required={true}
                     width={6}
-                    label="Product Name"
+                    label='Product Name'
                     value={this.state.name}
                     error={helperTexts.name.type === 'ERROR'}
                     helperText={helperTexts.name.text}
@@ -102,14 +100,14 @@ export default class BasicDetails extends Component {
                 />
                 <TextField
                     width={6}
-                    label="Product Description"
+                    label='Product Description'
                     value={this.state.description}
                     onChange={data => this.onChange('description', data)}
                 />
                 <TextField
                     required={true}
                     width={4}
-                    label="Product Code"
+                    label='Product Code'
                     value={this.state.product_code}
                     error={helperTexts.product_code.type === 'ERROR'}
                     helperText={helperTexts.product_code.text}
@@ -117,30 +115,30 @@ export default class BasicDetails extends Component {
                 />
                 <Select
                     width={4}
-                    label="Category Code"
+                    label='Category Code'
                     value={this.state.category_code}
-                    onChange={data => this.onChange("category_code", data)}
+                    onChange={data => this.onChange('category_code', data)}
                     options={CategoryCodes}
                 />
                 <Select
                     width={4}
-                    label="Sub Category Code"
+                    label='Sub Category Code'
                     value={this.state.sub_category_code}
-                    onChange={data => this.onChange("sub_category_code", data)}
+                    onChange={data => this.onChange('sub_category_code', data)}
                     options={SubCategoryCodes}
                 />
                 <Select
                     width={6}
-                    label="Default Size"
+                    label='Default Size'
                     value={this.state.default_size}
-                    onChange={data => this.onChange("default_size", data)}
+                    onChange={data => this.onChange('default_size', data)}
                     options={availableSizes}
                 />
                 <Select
                     width={6}
-                    label="Default Color"
+                    label='Default Color'
                     value={this.state.default_color}
-                    onChange={data => this.onChange("default_color", data)}
+                    onChange={data => this.onChange('default_color', data)}
                     options={availableColors}
                 />
             </Grid>

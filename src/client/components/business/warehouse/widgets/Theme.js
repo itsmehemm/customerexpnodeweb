@@ -7,10 +7,12 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '../../../common/elements/Typography';
 import TextField from '../../../common/elements/TextField';
 import Select from '../../../common/elements/Select';
-import ThemesModal from '../../../../modals/business/product-factory/widgets/ThemesModal';
+import ThemesModal from '../../../../modals/business/warehouse/widgets/ThemesModal';
 import {
     COMPONENT_STATUS_INVALID,
-    COMPONENT_STATUS_VALID
+    COMPONENT_STATUS_VALID,
+    INSTANT_AMOUNT,
+    INSTANT_PERCENTAGE
 } from '../../../../lib/constants';
 import availableSizes from '../../../../lib/options/sizes.json';
 import availableColors from '../../../../lib/options/colors.json';
@@ -93,10 +95,10 @@ export default class Theme extends Component {
         const { amount } = this.state;
         const { maximum_retail_price, discount, correction } = amount;
         let subtotal = parseInt(maximum_retail_price);
-        if (discount.type === "INSTANT_AMOUNT") {
+        if (discount.type === INSTANT_AMOUNT) {
             subtotal -= parseInt(discount.value);
         }
-        if (discount.type === "INSTANT_PERCENTAGE") {
+        if (discount.type === INSTANT_PERCENTAGE) {
             subtotal -= (subtotal * parseInt(discount.value) / 100);
         }
         if (!isNaN(parseInt(correction))) {
@@ -144,7 +146,7 @@ export default class Theme extends Component {
             helperTexts.maximum_retail_price = 'MRP should be greater than 0.';
             error = true;
         }
-        if (discount.type !== "NO_DISCOUNT" && (isNaN(parseInt(discount.value)) || parseInt(discount.value) <= 0)) {
+        if (discount.type !== 'NO_DISCOUNT' && (isNaN(parseInt(discount.value)) || parseInt(discount.value) <= 0)) {
             helperTexts.discount_value = 'Discount value should be greater than 0.';
             error = true;
         }
@@ -211,95 +213,95 @@ export default class Theme extends Component {
                 <Grid container spacing={3}>
                     <Select
                         width={4}
-                        label="Size"
+                        label='Size'
                         value={size}
-                        onChange={data => this.onChange("size", data)}
+                        onChange={data => this.onChange('size', data)}
                         error={helperTexts.size ? true : false}
                         helperText={helperTexts.size}
                         options={availableSizes}
                     />
                     <Select
                         width={4}
-                        label="Color"
+                        label='Color'
                         value={color}
-                        onChange={data => this.onChange("color", data)}
+                        onChange={data => this.onChange('color', data)}
                         error={helperTexts.color ? true : false}
                         helperText={helperTexts.color}
                         options={availableColors}
                     />
                     <TextField
                         width={4}
-                        type="text"
-                        label="MRP"
+                        type='text'
+                        label='MRP'
                         value={maximum_retail_price}
                         error={helperTexts.maximum_retail_price ? true : false}
                         helperText={helperTexts.maximum_retail_price}
-                        onChange={data => this.onAmountChange("maximum_retail_price", data)}
+                        onChange={data => this.onAmountChange('maximum_retail_price', data)}
                     />
                     <Select
                         width={4}
-                        label="Discount Type"
+                        label='Discount Type'
                         value={discount.type}
-                        onChange={data => this.onDiscountChange("type", data)}
+                        onChange={data => this.onDiscountChange('type', data)}
                         options={discountTypes}
                     />
                     <TextField
                         width={4}
-                        type="number"
-                        label="Discount value"
+                        type='number'
+                        label='Discount value'
                         value={discount.value}
                         error={helperTexts.discount_value ? true : false}
                         helperText={helperTexts.discount_value}
-                        onChange={data => this.onDiscountChange("value", data)}
+                        onChange={data => this.onDiscountChange('value', data)}
                     />
                     <TextField
                         width={4}
-                        type="text"
-                        label="Amount Correction"
+                        type='text'
+                        label='Amount Correction'
                         value={correction}
                         onChange={data => this.onCorrectionChange(data)}
                     />
                     <Select
                         width={6}
-                        label="Currency"
+                        label='Currency'
                         value={currency}
-                        onChange={data => this.onAmountChange("currency", data)}
+                        onChange={data => this.onAmountChange('currency', data)}
                         options={currencyCodes}
                     />
                     <TextField
-                        label="Final Amount"
+                        label='Final Amount'
                         disabled={true}
                         width={6}
-                        type="text"
+                        type='text'
                         value={subtotal}
                     />
                     <TextField
                         width={12}
-                        type="text"
-                        label="Stock quantity"
+                        type='text'
+                        label='Stock quantity'
                         value={stock_quantity}
                         error={helperTexts.stock_quantity ? true : false}
                         helperText={helperTexts.stock_quantity}
-                        onChange={data => this.onChange("stock_quantity", data)}
+                        onChange={data => this.onChange('stock_quantity', data)}
                     />
                     <Grid item xs={11}>
                         <TextField
                             width={12}
-                            type="text"
-                            label="Picture links"
+                            type='text'
+                            label='Picture links'
                             value={link}
                             error={helperTexts.picture_links ? true : false}
                             helperText={helperTexts.picture_links}
-                            onChange={data => this.onChange("link", data)}
+                            onChange={data => this.onChange('link', data)}
                         />
                     </Grid>
                     <Grid item xs={1}>
                         <Button
-                            align="left"
+                            align='left'
                             style={{ height: '57px' }}
-                            size="large"
-                            variant="outlined"
-                            color="primary"
+                            size='large'
+                            variant='outlined'
+                            color='primary'
                             onClick={() => this.addPictureLink(this.state.link)}
                             startIcon={<Icon>done</Icon>}></Button>
                     </Grid>
@@ -308,14 +310,14 @@ export default class Theme extends Component {
                             <Grid key={key} item xs={12}>
                                 <Grid container>
                                     <Grid item xs={9}>
-                                        <Typography className="t-text-link" variant="subtitle1" text={link} />
+                                        <Typography className='t-text-link' variant='subtitle1' text={link} />
                                     </Grid>
                                     <Grid item xs={3}>
                                         <Typography
-                                            align="right"
-                                            className="t-text-link"
-                                            icon="close"
-                                            variant="subtitle1"
+                                            align='right'
+                                            className='t-text-link'
+                                            icon='close'
+                                            variant='subtitle1'
                                             onClick={() => this.removePictureLink(key)}
                                         />
                                     </Grid>
@@ -327,9 +329,9 @@ export default class Theme extends Component {
                         <Button
                             fullWidth
                             style={{ height: '57px' }}
-                            size="large"
-                            variant="outlined"
-                            color="primary"
+                            size='large'
+                            variant='outlined'
+                            color='primary'
                             onClick={() => this.addTheme()}
                             startIcon={<Icon>done</Icon>}>
                             Save
@@ -339,9 +341,9 @@ export default class Theme extends Component {
                         <Button
                             fullWidth
                             style={{ height: '57px' }}
-                            size="large"
-                            variant="outlined"
-                            color="secondary"
+                            size='large'
+                            variant='outlined'
+                            color='secondary'
                             onClick={() => this.removeTheme()}
                             startIcon={<Icon>cancel</Icon>}>
                             Remove

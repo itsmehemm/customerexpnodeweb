@@ -23,7 +23,7 @@ const WebInternalServerError = () => {
                         </Grid>
                         <Grid item align='center' xs={12}>
                             <Box m={2}>
-                                <Typography className='t-text-link-2' variant='subtitle1' text={`Take me to the home page`} />
+                                <Typography className='t-text-link-2' variant='subtitle1' text={`Take me to the home page`} onClick={() => window.href = '/home'} />
                             </Box>
                         </Grid>
                     </Grid>

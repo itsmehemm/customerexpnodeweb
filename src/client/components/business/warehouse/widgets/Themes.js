@@ -4,14 +4,13 @@ import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import Typography from '../../../common/elements/Typography';
 import Theme from './Theme';
-import ThemesModal from '../../../../modals/business/product-factory/widgets/ThemesModal';
+import ThemesModal from '../../../../modals/business/warehouse/widgets/ThemesModal';
 import {
     COMPONENT_STATUS_VALID,
     COMPONENT_STATUS_INVALID
 } from '../../../../lib/constants';
 
 export default class Themes extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -85,12 +84,15 @@ export default class Themes extends Component {
     }
 
     render() {
-        const { themes, valid } = this.state;
+        const {
+            themes,
+            valid
+        } = this.state;
         return (
             themes && <Grid container>
                 <Grid item xs={12}>
-                    <Typography text="Themes" variant="button" />
-                    <Typography text={`${valid} theme(s) added`} variant="caption" />
+                    <Typography text='Themes' variant='button' />
+                    <Typography text={`${valid} theme(s) added`} variant='caption' />
                 </Grid>
                 <Grid item xs={12}>
                     {
@@ -113,11 +115,11 @@ export default class Themes extends Component {
                 <Grid item xs={12}>
                     <Box m={4}>
                         <Typography
-                            align="center"
-                            variant="subtitle1"
-                            className="t-text-link"
-                            text="Add another theme"
-                            icon="add"
+                            align='center'
+                            variant='subtitle1'
+                            className='t-text-link'
+                            text='Add another theme'
+                            icon='add'
                             onClick={() => this.append()}
                         />
                     </Box>
