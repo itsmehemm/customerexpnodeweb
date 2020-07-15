@@ -10,6 +10,7 @@
     "build": "react-scripts build eslint-disable-next-line",
     "start:server:prod": "HTTPS=true node tinnat.js --env=production",
     "start:server:dev:inject": "HTTPS=true node tinnat.js --env=development --WOWO_DEV_INJECT_TEST_USER --WOWO_DEV_OUTPUT_LOGS",
+    "start:server:dev:injectuser:nologs": "HTTPS=true node tinnat.js --env=development --WOWO_DEV_INJECT_TEST_USER",
     "start:server:dev": "HTTPS=true node tinnat.js --env=development"
   },
   "repository": {
@@ -27,6 +28,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.55",
     "@material-ui/pickers": "^3.2.10",
+    "analytics-node": "^3.4.0-beta.2",
     "async-request": "^1.2.0",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
