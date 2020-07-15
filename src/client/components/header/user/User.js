@@ -50,9 +50,9 @@ export default class User extends Component {
             case TINNAT_USER:
                 return <LoggedInUser
                     {...user}
-                    logout={{ onClick: () => window.location.href = "/logout" }}
-                    account={{ onClick: () => window.location.href = "/account" }}
-                    orders={{ onClick: () => window.location.href = "/account/activity/orders" }}
+                    logout={{ onClick: () => window.location.href = '/logout' }}
+                    account={{ onClick: () => window.location.href = '/account' }}
+                    orders={{ onClick: () => window.location.href = '/account/activity/orders' }}
                 />
             case GUEST_USER:
             default:

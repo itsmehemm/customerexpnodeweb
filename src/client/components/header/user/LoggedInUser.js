@@ -53,10 +53,10 @@ export default function LoggedInUser(props) {
             <Button
                 ref={anchorRef}
                 aria-controls={open ? 'menu-list-grow' : undefined}
-                aria-haspopup="true"
+                aria-haspopup='true'
                 onClick={handleToggle}
                 style={{ color: '#fff' }} >
-                <IconButton aria-label="user" style={{ color: '#fff' }} >
+                <IconButton aria-label='user' style={{ color: '#fff' }} >
                     <FaceIcon />
                 </IconButton>
                 {props.name}
@@ -69,15 +69,15 @@ export default function LoggedInUser(props) {
                         style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}>
                         <Paper>
                             <ClickAwayListener onClickAway={handleClose}>
-                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                <MenuList autoFocusItem={open} id='menu-list-grow' onKeyDown={handleListKeyDown}>
                                     <MenuItem className={classes.root} onClick={(e) => handleClose(e, 'account')}>
-                                        <Typography text="Account" variant="button" icon="account_circle" />
+                                        <Typography text='Account' variant='button' icon='account_circle' />
                                     </MenuItem>
                                     <MenuItem className={classes.root} onClick={(e) => handleClose(e, 'orders')}>
-                                        <Typography text="Orders" variant="button" icon="local_mall" />
+                                        <Typography text='Orders' variant='button' icon='local_mall' />
                                     </MenuItem>
                                     <MenuItem className={classes.root} onClick={(e) => handleClose(e, 'logout')}>
-                                        <Typography text="Logout" variant="button" icon="exit_to_app" />
+                                        <Typography text='Logout' variant='button' icon='exit_to_app' />
                                     </MenuItem>
                                 </MenuList>
                             </ClickAwayListener>

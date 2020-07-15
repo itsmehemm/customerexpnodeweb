@@ -137,13 +137,13 @@ export default class LoginWithFacebook extends Component {
         switch (login_status) {
             case LOGGED_IN:
                 return (
-                    <Grid container align="center" spacing={2}>
+                    <Grid container align='center' spacing={2}>
                         <Grid item xs={12}>
                             <Typography
-                                icon_type="user"
-                                icon="facebook"
-                                className="fb-logged-in"
-                                variant="h6"
+                                icon_type='user'
+                                icon='facebook'
+                                className='fb-logged-in'
+                                variant='h6'
                                 onClick={this.tinnatLogin}
                                 text={`Continue as ${facebookResponse.user.name}`}
                                 iconStyle={{ fontSize: '1.7em', verticalAlign: 'middle' }}
@@ -151,9 +151,9 @@ export default class LoginWithFacebook extends Component {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography
-                                className="t-text-link"
-                                text="Continue as another facebook user"
-                                variant="subtitle1"
+                                className='t-text-link'
+                                text='Continue as another facebook user'
+                                variant='subtitle1'
                                 onClick={this.logout}
                             />
                         </Grid>
@@ -162,15 +162,15 @@ export default class LoginWithFacebook extends Component {
             case LOGGED_OUT:
             default:
                 return (
-                    <Grid container align="center" spacing={2}>
+                    <Grid container align='center' spacing={2}>
                         <Grid item xs={12}>
                             <Typography
-                                icon_type="user"
-                                icon="facebook"
-                                className="fb-logged-in"
-                                variant="h6"
+                                icon_type='user'
+                                icon='facebook'
+                                className='fb-logged-in'
+                                variant='h6'
                                 onClick={this.login}
-                                text="Login with facebook"
+                                text='Login with facebook'
                                 iconStyle={{ fontSize: '1.7em', verticalAlign: 'middle' }}
                             />
                         </Grid>

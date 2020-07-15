@@ -32,9 +32,9 @@ export default class Login extends Component {
     render() {
         const { open } = this.state;
         return (
-            <Dialog fullWidth onClose={this.handleClose} aria-labelledby="login-dialog" open={open}>
-                <DialogTitle id="login-dialog">
-                    <Typography align="center" icon="lock" variant="button" text="Securely login to www.tinnat.com" />
+            <Dialog fullWidth onClose={this.handleClose} aria-labelledby='login-dialog' open={open}>
+                <DialogTitle id='login-dialog'>
+                    <Typography align='center' icon='lock' variant='button' text='Securely login to www.tinnat.com' />
                 </DialogTitle>
                 <DialogContent>
                     <Grid container>
@@ -45,7 +45,7 @@ export default class Login extends Component {
                 </DialogContent>
                 <DialogActions>
                     <ThemeProvider>
-                        <Typography align="right" className="t-text-link-2" onClick={this.handleClose} text="No thanks, continue as Guest" />
+                        <Typography align='right' className='t-text-link-2' onClick={this.handleClose} text='No thanks, continue as Guest' />
                     </ThemeProvider>
                 </DialogActions>
             </Dialog>

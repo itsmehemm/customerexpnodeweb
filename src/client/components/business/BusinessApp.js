@@ -1,15 +1,15 @@
 import React from 'react';
-import Header from '../header/Header';
+import SecondaryHeader from '../header/SecondaryHeader';
 import Footer from '../footer/Footer';
 
-const ConsumerApp = (props) => {
+const BusinessApp = (props) => {
     return (
         <>
-            <Header />
+            <SecondaryHeader />
             {props.children}
             <Footer />
         </>
     );
 };
 
-export default ConsumerApp;
+export default BusinessApp;
