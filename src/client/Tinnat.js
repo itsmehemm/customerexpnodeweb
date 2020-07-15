@@ -12,9 +12,9 @@ import InstantPurchasePayment from './components/payment/InstantPurchasePayment'
 import InstantPurchaseConfirmation from './components/payment/InstantPurchaseConfirmation';
 import Cart from './components/cart/Cart';
 import Checkout from './components/checkout/Checkout';
-import Orders from './components/orders/Orders';
-import Order from './components/orders/Order';
-import PaymentActivity from './components/activity/Payment';
+import Orders from './components/activity/orders/Orders';
+import Order from './components/activity/orders/Order';
+import PaymentActivity from './components/activity/payment/Payment';
 import NotFound from './components/common/errors/NotFound';
 import Error from './components/common/errors/Error';
 import Business from './components/business';

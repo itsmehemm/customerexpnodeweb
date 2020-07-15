@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
-import ConsumerApp from '../common/ConsumerApp';
-import ComponentLoader from '../common/loaders/ComponentLoader';
+import Box from '@material-ui/core/Box';
+import ConsumerApp from '../../common/ConsumerApp';
+import Typography from '../../common/elements/Typography';
+import ComponentLoader from '../../common/loaders/ComponentLoader';
 import Order from './widgets/Order';
-import { getAllPurchases } from '../../actions';
+import { getAllPurchases } from '../../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING_ERROR
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
 export default class Orders extends Component {
     constructor(props) {
@@ -38,9 +40,16 @@ export default class Orders extends Component {
         } = this.state;
         return (
             <ConsumerApp>
-                <Container maxWidth="lg">
+                <Container maxWidth='lg'>
                     {status === OPERATION_LOADING && <ComponentLoader />}
-                    {status === OPERATION_LOADING_COMPLETED && orders.length === 0 && <div> No orders found</div>}
+                    {
+                        status === OPERATION_LOADING_COMPLETED &&
+                        Array.isArray(orders) &&
+                        orders.length === 0 &&
+                        <Box m={2}>
+                            <Typography variant='body1' align='center' text={`You've not purchased any item`} />
+                        </Box>
+                    }
                     {
                         status === OPERATION_LOADING_COMPLETED &&
                         orders.length > 0 &&

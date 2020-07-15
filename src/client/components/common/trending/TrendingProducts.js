@@ -5,17 +5,17 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-import Typography from '../common/elements/Typography';
-import ComponentLoader from '../common/loaders/ComponentLoader';
-import ProductWidget from '../common/widgets/ProductWidget';
-import { getFeaturedProducts } from '../../actions';
+import Typography from '../elements/Typography';
+import ComponentLoader from '../loaders/ComponentLoader';
+import ProductWidget from '../widgets/ProductWidget';
+import { getFeaturedProducts } from '../../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING_ERROR
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
-export default class FeaturedProducts extends Component {
+export default class TrendingProducts extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -55,7 +55,7 @@ export default class FeaturedProducts extends Component {
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Typography variant="h6" text="Featured Products" />
+                                        <Typography variant="h6" text="Trending" />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -73,7 +73,8 @@ export default class FeaturedProducts extends Component {
                                                             amount={_.get(product, 'default_theme.amount')}
                                                             onClick={() => window.open(product.url)}
                                                         />
-                                                    </Grid>)
+                                                    </Grid>
+                                                )
                                             }
                                         </Grid>
                                     </Box>

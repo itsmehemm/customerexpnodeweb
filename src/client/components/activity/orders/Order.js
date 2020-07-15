@@ -4,18 +4,18 @@ import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import ConsumerApp from '../common/ConsumerApp';
-import ComponentLoader from '../common/loaders/ComponentLoader';
-import Component404 from '../common/errors/widgets/Component404';
-import ViewAddress from '../instant-purchase/widgets/ViewAddress';
-import Typography from '../common/elements/Typography';
+import ConsumerApp from '../../common/ConsumerApp';
+import ComponentLoader from '../../common/loaders/ComponentLoader';
+import Component404 from '../../common/errors/widgets/Component404';
+import Typography from '../../common/elements/Typography';
+import ViewAddress from '../../instant-purchase/widgets/ViewAddress';
 import OrderDetail from './widgets/OrderDetail';
-import { getPurchaseById } from '../../actions';
+import { getPurchaseById } from '../../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED,
     OPERATION_LOADING_ERROR
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
 export default class Order extends Component {
     constructor(props) {
@@ -52,15 +52,15 @@ export default class Order extends Component {
                 {
                     status === OPERATION_LOADING_COMPLETED &&
                     order &&
-                    <Container maxWidth={"lg"}>
+                    <Container maxWidth={'lg'}>
                         {
                             order.shipping_address &&
                             <Box m={2}>
-                                <Card variant="outlined">
+                                <Card variant='outlined'>
                                     <Grid container>
                                         <Grid item xs={12}>
                                             <Box m={2}>
-                                                <Typography variant="button" text="Delivery Address" />
+                                                <Typography variant='button' text='Delivery Address' />
                                             </Box>
                                         </Grid>
                                         <Grid item xs={12}>
