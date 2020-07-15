@@ -25,8 +25,7 @@ const getPaymentPlan = async (req, res) => {
             error: errorConstants.ORDER_NOT_FOUND
         });
     }
-    if (instantPurchaseModal.getPaymentInformation() &&
-        instantPurchaseModal.getPersonalInformation().status === COMPLETED) {
+    if (instantPurchaseModal.getOrderStatus() === COMPLETED) {
         return res.status(400).send({
             error: errorConstants.ORDER_ALREADY_PURCHASED
         });

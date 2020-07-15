@@ -11,7 +11,8 @@ const {
     CURRENCY,
     INTENT,
     COUNTRY_CODE,
-    SOFT_DESCRIPTOR
+    SOFT_DESCRIPTOR,
+    DELIVERY_INITIATED
 } = require('../lib/constants');
 const {
     COLLECTION,
@@ -355,6 +356,17 @@ class InstantPurchaseModal {
         this.data = {
             ...this.data,
             delivery: delivery
+        };
+        await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
+        console.log(INSTANT_PURCHASE_MODAL, 'order detail updated & persisted:', cache.get(this.id));
+    }
+
+    async initiateDelivery() {
+        this.delivery = this.delivery || {};
+        this.delivery.status = DELIVERY_INITIATED;
+        this.data = {
+            ...this.data,
+            delivery: this.delivery
         };
         await cache.put(this.id, JSON.stringify(this.data), ORDER_LIFE_TIME);
         console.log(INSTANT_PURCHASE_MODAL, 'order detail updated & persisted:', cache.get(this.id));

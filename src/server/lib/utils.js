@@ -57,7 +57,7 @@ const constructDeliveryString = (time) => {
         return `Confirmed delivery in ${time} days`
     }
     return null;
-}
+};
 
 const constructDeliveryObj = (delivery) => {
     if (delivery && delivery.pincode) {
@@ -77,7 +77,7 @@ const constructDeliveryObj = (delivery) => {
         };
     }
     return null;
-}
+};
 
 const isAPIRequest = (req) => {
     if (req && req.url) {

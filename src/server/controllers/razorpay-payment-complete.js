@@ -4,6 +4,7 @@ const mailservices = require('tinnat-mailservices')
 const { RAZORPAY_PAYMENT_COMPLETE_NOTIFICATION } = require('../lib/constants/logging-constants');
 const {
     ENVIRONMENT_PRODUCTION,
+    ORDER_CREATED,
     COMPLETED,
     RAZORPAY,
     MAILSERVICE,
@@ -33,6 +34,11 @@ const razorpayPaymentComplete = async (req, res) => {
             error: errorConstants.PAYMENT_ALREADY_COMPLETED
         });
     }
+    if (instantPurchaseModal.getOrderStatus() === ORDER_CREATED) {
+        return res.status(400).send({
+            error: errorConstants.INVALID_PAYMENT
+        });
+    }
     const { payment_id, order_id, signature } = req.body;
     if (!payment_id || !order_id || !signature) {
         return res.status(402).send({
@@ -58,6 +64,7 @@ const razorpayPaymentComplete = async (req, res) => {
                         signature: signature
                     }
                 });
+                await instantPurchaseModal.initiateDelivery();
                 await instantPurchaseModal.completePurchase();
                 const service = await mailservices.build(MAILSERVICE.NOREPLY);
                 const order = instantPurchaseModal.getOrder();

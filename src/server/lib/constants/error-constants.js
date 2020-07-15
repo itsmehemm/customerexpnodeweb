@@ -74,5 +74,9 @@ module.exports = {
     LOGS_NOT_FOUND: {
         message: 'LOGS_NOT_FOUND',
         description: 'There are no logs with the specified id.'
+    },
+    INVALID_PAYMENT: {
+        message: 'INVALID_PAYMENT',
+        description: 'Invalid payment received. Please try again'
     }
 };
