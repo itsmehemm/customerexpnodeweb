@@ -40,7 +40,10 @@ export default class TrendingProducts extends Component {
     }
 
     render() {
-        const { status, products } = this.state;
+        const {
+            status,
+            products
+        } = this.state;
         return (
             <Container maxWidth={"xl"}>
                 {
@@ -49,7 +52,8 @@ export default class TrendingProducts extends Component {
                 }
                 {
                     status === OPERATION_LOADING_COMPLETED &&
-                    Array.isArray(products) && products.length > 0 &&
+                    Array.isArray(products) &&
+                    products.length > 0 &&
                     <Box m={2}>
                         <Card variant="outlined">
                             <Grid container>

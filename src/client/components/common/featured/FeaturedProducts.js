@@ -40,22 +40,23 @@ export default class FeaturedProducts extends Component {
     }
 
     render() {
-        const { status, products } = this.state;
+        const {
+            status,
+            products
+        } = this.state;
         return (
-            <Container maxWidth={"xl"}>
-                {
-                    status === OPERATION_LOADING &&
-                    <ComponentLoader />
-                }
+            <Container maxWidth={'xl'}>
+                {status === OPERATION_LOADING && <ComponentLoader />}
                 {
                     status === OPERATION_LOADING_COMPLETED &&
-                    Array.isArray(products) && products.length > 0 &&
+                    Array.isArray(products) &&
+                    products.length > 0 &&
                     <Box m={2}>
-                        <Card variant="outlined">
+                        <Card variant='outlined'>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Typography variant="h6" text="Featured Products" />
+                                        <Typography variant='h6' text='Featured Products' />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -63,7 +64,7 @@ export default class FeaturedProducts extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Grid container align="center" spacing={2}>
+                                        <Grid container align='center' spacing={2}>
                                             {
                                                 products.map((product, key) =>
                                                     <Grid item xs={3} key={key}>

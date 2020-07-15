@@ -5,17 +5,17 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-import ProductWidget from '../common/widgets/ProductWidget';
-import ComponentLoader from '../common/loaders/ComponentLoader';
-import Typography from '../common/elements/Typography';
+import ProductWidget from '../widgets/ProductWidget';
+import ComponentLoader from '../loaders/ComponentLoader';
+import Typography from '../elements/Typography';
 import {
     getRecentlyViewedProducts,
     getProductById
-} from '../../actions';
+} from '../../../actions';
 import {
     OPERATION_LOADING,
     OPERATION_LOADING_COMPLETED
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
 export default class RecentProducts extends Component {
     constructor(props) {
@@ -45,16 +45,17 @@ export default class RecentProducts extends Component {
             products
         } = this.state;
         return (
-            <Container maxWidth="xl">
+            <Container maxWidth='xl'>
                 {status === OPERATION_LOADING && <ComponentLoader />}
                 {status === OPERATION_LOADING_COMPLETED &&
-                    products && products.length > 0 &&
+                    Array.isArray(products) &&
+                    products.length > 0 &&
                     <Box m={2}>
-                        <Card variant="outlined">
+                        <Card variant='outlined'>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Typography variant="h6" text="Recently Viewed" />
+                                        <Typography variant='h6' text='Recently Viewed' />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -62,7 +63,7 @@ export default class RecentProducts extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Box m={2}>
-                                        <Grid container align="center" spacing={2}>
+                                        <Grid container align='center' spacing={2}>
                                             {
                                                 products.map((product, key) =>
                                                     <Grid item xs={3} key={key}>
@@ -84,4 +85,4 @@ export default class RecentProducts extends Component {
             </Container>
         );
     }
-}
+};

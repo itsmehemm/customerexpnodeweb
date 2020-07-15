@@ -4,8 +4,8 @@ import ComponentLoader from '../common/loaders/ComponentLoader';
 import WebInternalServerError from '../common/errors/widgets/WebInternalServerError';
 import Component404 from '../common/errors/widgets/Component404';
 import ProductDetail from './ProductDetail';
-import TrendingProducts from '../trending/TrendingProducts';
-import RecentProducts from '../recent-products/RecentProducts';
+import TrendingProducts from '../common/trending/TrendingProducts';
+import RecentProducts from '../common/recent/RecentProducts';
 import getProductById from '../../actions/get-product-by-id';
 import {
     OPERATION_LOADING,
