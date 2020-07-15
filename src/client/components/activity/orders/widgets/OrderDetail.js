@@ -83,7 +83,7 @@ const OrderDetail = ({ purchase_items, delivery }) => {
                     </Grid>
                     <Grid item xs={1}>
                         <Box m={2}>
-                            <Typography align='right' variant='body1' text={`${currencyCodeMapper[purchaseItem.amount.currency]}${purchaseItem.amount.subtotal}`} />
+                            <Typography align='right' variant='h6' text={`${currencyCodeMapper[purchaseItem.amount.currency]}${purchaseItem.amount.subtotal}`} />
                         </Box>
                     </Grid>
                 </Grid>
