@@ -17,6 +17,7 @@ export default class Login extends Component {
     }
 
     async componentDidMount() {
+        document.title = `Login to continue to Tinnat`;
         await initializeFacebookSDK(document, 'script', 'facebook-jssdk');
         await this.setState({ status: OPERATION_LOADING_COMPLETED });
     }

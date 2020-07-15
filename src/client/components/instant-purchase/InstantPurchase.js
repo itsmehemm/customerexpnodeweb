@@ -47,6 +47,7 @@ export default class InstantPurchase extends Component {
 
     async componentDidMount() {
         const orderid = this.props.match.params.orderid;
+        document.title = `Place your order - Tinnat`;
         const instantOrderModal = new InstantOrderModal();
         const order = await getOrderDetails(orderid);
         if (order && order.id) {

@@ -29,6 +29,7 @@ export default class Products extends Component {
     }
 
     async componentDidMount() {
+        document.title = `All Products - Tinnat Business`;
         await this.fetchProducts();
     }
 

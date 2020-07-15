@@ -22,6 +22,7 @@ export default class Orders extends Component {
     }
 
     async componentDidMount() {
+        document.title = `All Orders - Tinnat.com`;
         const response = await getAllPurchases();
         if (response && Array.isArray(response.orders)) {
             await this.setState({

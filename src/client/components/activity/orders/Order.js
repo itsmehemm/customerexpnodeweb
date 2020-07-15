@@ -27,6 +27,7 @@ export default class Order extends Component {
 
     async componentDidMount() {
         const orderId = this.props.match.params.orderid;
+        document.title = `Order: ${orderId} - Tinnat.com`;
         const order = await getPurchaseById(orderId);
         if (order && order.id) {
             await this.setState({

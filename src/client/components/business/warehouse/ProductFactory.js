@@ -37,6 +37,11 @@ export default class ProductFactory extends Component {
         const product = this.props && this.props.product;
         const productFactoryModal = new ProductFactoryModal(product);
         await this.setState({ ...productFactoryModal.getData() });
+        if (this.state.id) {
+            document.title = `Edit Product: ${this.state.id} - Tinnat Business`;
+        } else {
+            document.title = `Add Product - Tinnat Business`;
+        }
     }
 
     async update(name, value) {

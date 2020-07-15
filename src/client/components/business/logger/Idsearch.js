@@ -33,6 +33,7 @@ export default class Idsearch extends Component {
 
     async componentDidMount() {
         const debugId = this.props.match.params.debugid;
+        document.title = `ID Search: ${debugId} - Tinnat Business`;
         if (debugId) {
             await this.setState({ debugId: debugId });
             await this.search();

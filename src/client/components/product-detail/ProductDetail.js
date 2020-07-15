@@ -52,6 +52,7 @@ export default class ProductDetail extends Component {
         await this.setState({
             ...productDetailModal.getData(),
         });
+        document.title = `Product: ${this.props.data.name} - Tinnat.com`;
     }
 
     async update(name, value) {

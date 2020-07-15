@@ -29,6 +29,7 @@ export default class InstantPurchaseConfirmation extends Component {
 
     async componentDidMount() {
         const orderid = this.props.match.params.orderid;
+        document.title = `Payment confirmation for your order - Tinnat`;
         try {
             const order = await getOrderDetails(orderid);
             if (order && order.payment_information && order.payment_information.status === 'COMPLETED') {

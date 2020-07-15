@@ -109,6 +109,7 @@ export default class Payment extends Component {
 
     async componentDidMount() {
         const transactionId = this.props.match.params.transactionid;
+        document.title = `Payment: ${transactionId} - Tinnat.com`;
         const response = await getPaymentActivity(transactionId);
         if (response && response.data) {
             await this.setState({

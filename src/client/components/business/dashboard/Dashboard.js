@@ -28,6 +28,7 @@ export default class Dashboard extends Component {
     }
 
     async componentDidMount() {
+        document.title = `Dashboard - Tinnat Business`;
         const response = await getKPIs();
         if (response && response.status === SUCCESS) {
             await this.setState({

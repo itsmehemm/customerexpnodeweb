@@ -43,6 +43,7 @@ export default class InstantPurchasePayment extends Component {
 
     async componentDidMount() {
         const orderId = this.props.match.params.orderid;
+        document.title = `Payment for your order - Tinnat`;
         if (orderId) {
             try {
                 const response = await getPaymentPlan(orderId);

@@ -42,6 +42,7 @@ export default class SearchTransactions extends Component {
     }
 
     async componentDidMount() {
+        document.title = `All activity - Tinnat Business`;
         await this.search();
     }
 
