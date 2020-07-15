@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import { withStyles, ThemeProvider } from '@material-ui/core/styles';
-import Login from './widgets/Login';
+import LoginDialog from './widgets/LoginDialog';
 
 const ActionButton = withStyles(() => ({
     root: {
@@ -41,7 +41,7 @@ export default class GuestUser extends Component {
                         </ButtonGroup>
                     </ThemeProvider>
                 </Grid>
-                <Login open={openLogin} />
+                <LoginDialog open={openLogin} />
             </Grid>
         );
     }

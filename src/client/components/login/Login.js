@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
-import LoginDialog from './LoginDialog';
 import ComponentLoader from '../common/loaders/ComponentLoader';
-import initializeFacebookSDK from './initialize-facebook-sdk';
+import LoginDialog from '../header/user/widgets/LoginDialog';
+import initializeFacebookSDK from '../../lib/utils/initialize-facebook-sdk';
 import {
-    OPERATION_LOADING_COMPLETED,
-    OPERATION_LOADING
+    OPERATION_LOADING,
+    OPERATION_LOADING_COMPLETED
 } from '../../lib/constants';
 
 export default class Login extends Component {
