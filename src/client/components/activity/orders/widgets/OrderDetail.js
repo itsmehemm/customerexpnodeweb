@@ -3,11 +3,9 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import DeliveryTimeline from './DeliveryTimeline';
 import Typography from '../../../common/elements/Typography';
 import { currencyCodeMapper } from '../../../../lib/mappers';
-import {
-    DELIVERABLE
-} from '../../../../lib/constants';
 import defaultImg from '../../../../images/default-product-image.png';
 
 const ColorPallette = ({ color }) => <Grid item xs={1}> <div className='t-color-pallette' style={{ backgroundColor: color }} /></Grid>
@@ -21,7 +19,7 @@ const OrderDetail = ({ purchase_items, delivery }) => {
                 <Grid container>
                     <Grid item xs={12}>
                         <Box m={2}>
-                            <Typography variant='button' text='Order details' />
+                            <Typography variant='h6' text='Order details' />
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
@@ -32,52 +30,60 @@ const OrderDetail = ({ purchase_items, delivery }) => {
                             <img src={images[0]} height='150px' width='150px' />
                         </Box>
                     </Grid>
-                    <Grid item xs={5}>
-                        <Box m={2}>
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <Typography variant='body1' text={purchaseItem.name} />
-                                </Grid>
-                                <Grid item xs={12}>
+                    <Grid>
+                        <Divider orientation='vertical' />
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Box m={2}>
                                     <Grid container>
-                                        <Grid item xs={2}>
-                                            <Typography variant='body2' text='Size' />
+                                        <Grid item xs={12}>
+                                            <Typography variant='body1' className='t-text-link' onClick={() => window.open(purchaseItem.url)} text={purchaseItem.name} />
                                         </Grid>
-                                        <Grid item xs={2}>
-                                            <Typography variant='body2' text={purchaseItem.size} />
+                                        <Grid item xs={12}>
+                                            <Grid container>
+                                                <Grid item xs={1}>
+                                                    <Typography variant='body2' text='Size' />
+                                                </Grid>
+                                                <Grid item xs={1}>
+                                                    <Typography variant='body2' text={purchaseItem.size} />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Grid container>
+                                                <Grid item xs={1}>
+                                                    <Typography variant='body2' text='Color' />
+                                                </Grid>
+                                                <Grid item xs={1}>
+                                                    <ColorPallette color={purchaseItem.color} />                                        </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Grid container>
+                                                <Grid item xs={1}>
+                                                    <Typography variant='body2' text='Quantity' />
+                                                </Grid>
+                                                <Grid item xs={1}>
+                                                    <Typography variant='body2' text={purchaseItem.quantity} />
+                                                </Grid>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Grid container>
-                                        <Grid item xs={2}>
-                                            <Typography variant='body2' text='Color' />
-                                        </Grid>
-                                        <Grid item xs={2}>
-                                            <ColorPallette color={purchaseItem.color} />                                        </Grid>
-                                    </Grid>
-                                </Grid>
+                                </Box>
                             </Grid>
-                        </Box>
+                            <Grid item xs={12}>
+                                <DeliveryTimeline status={delivery.status} />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item>
+                        <Divider variant='vertical' />
                     </Grid>
                     <Grid item xs={1}>
                         <Box m={2}>
-                            <Typography variant='body1' text={`${currencyCodeMapper[purchaseItem.amount.currency]}${purchaseItem.amount.subtotal}`} />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Box m={2}>
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    {
-                                        delivery.status === DELIVERABLE &&
-                                        <>
-                                            <Typography text={delivery.formatted.delivery_string} variant='body1_bold' />
-                                            <Typography text='Your item will be delivered' variant='caption' />
-                                        </>
-                                    }
-                                </Grid>
-                            </Grid>
+                            <Typography align='right' variant='body1' text={`${currencyCodeMapper[purchaseItem.amount.currency]}${purchaseItem.amount.subtotal}`} />
                         </Box>
                     </Grid>
                 </Grid>

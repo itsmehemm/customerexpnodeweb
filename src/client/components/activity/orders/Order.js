@@ -61,13 +61,13 @@ export default class Order extends Component {
                                     <Grid container>
                                         <Grid item xs={12}>
                                             <Box m={2}>
-                                                <Typography variant='button' text='Delivery Address' />
+                                                <Typography variant='h6' text='Delivery Address' />
                                             </Box>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Divider />
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={4}>
                                             <Box m={2}>
                                                 <ViewAddress {...order.shipping_address} forceShow={true} />
                                             </Box>
