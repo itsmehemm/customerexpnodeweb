@@ -145,7 +145,7 @@ export default class PaymentActivity extends Component {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Grid container>
-                                            <Grid item align='left' xs={8}>
+                                            <Grid item align='left' xs={12} sm={9}>
                                                 <Box m={2}>
                                                     <Typography variant='body1_bold' text={`Payment received for order: ${data.order_id}`} />
                                                 </Box>
@@ -153,7 +153,7 @@ export default class PaymentActivity extends Component {
                                                     <Typography variant='body1' text={new Date(data.time_stamp).toString()} />
                                                 </Box>
                                             </Grid>
-                                            <Grid item align='right' xs={4}>
+                                            <Grid item xs={12} sm={3}>
                                                 <Box m={2}>
                                                     <Typography variant='body1' text='Gross amount' />
                                                     <Typography variant='h4' text={`${currencyCodeMapper[data.amount.currency]}${data.amount.subtotal}`} />
@@ -166,13 +166,13 @@ export default class PaymentActivity extends Component {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Grid container>
-                                            <Grid item align='left' xs={6}>
+                                            <Grid item align='left' sm={6} xs={12}>
                                                 <Box m={2}>
                                                     <Typography variant='body1_bold' text='Transaction ID' />
                                                     <Typography variant='body1' text={data.transaction_id} />
                                                 </Box>
                                             </Grid>
-                                            <Grid item align='left' xs={6}>
+                                            <Grid item align='left' sm={6} xs={12}>
                                                 <Box m={2}>
                                                     <Typography variant='body1_bold' text='Payment Status' />
                                                     <Typography variant='body1' text={data.status} />
@@ -190,11 +190,11 @@ export default class PaymentActivity extends Component {
                                             </Box>
                                             <Box m={2}>
                                                 <Grid container>
-                                                    <Grid item xs={6}>
+                                                    <Grid item sm={12} xs={6}>
                                                         <Typography variant='body1_bold' text='Email' />
                                                         <Typography variant='body1' text={data.personal_information.email} />
                                                     </Grid>
-                                                    <Grid item xs={6}>
+                                                    <Grid item sm={12} xs={6}>
                                                         <Typography variant='body1_bold' text='Phone Number' />
                                                         <Typography variant='body1' text={data.personal_information.phone_number} />
                                                     </Grid>
