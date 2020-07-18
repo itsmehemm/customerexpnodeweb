@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isMobile } from 'react-device-detect';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
@@ -52,7 +53,7 @@ export default class ProductDetail extends Component {
         await this.setState({
             ...productDetailModal.getData(),
         });
-        document.title = `Product: ${this.props.data.name} - Tinnat.com`;
+        document.title = `${this.props.data.name} - Tinnat.com`;
     }
 
     async update(name, value) {
@@ -178,15 +179,56 @@ export default class ProductDetail extends Component {
                 />
                 <Card variant='outlined'>
                     <Grid container>
-                        <Grid item xs={5}>
+                        {
+                            isMobile && <Grid container>
+                                <Grid item xs={12}>
+                                    <Box m={2}>
+                                        <Typography
+                                            text={data.name}
+                                            variant='h5' />
+                                        <Typography
+                                            text={data.description}
+                                            size='body2' />
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box m={2}>
+                                        <CopyToClipboard
+                                            text={data.url}
+                                            onCopy={() => this.notify('Product link copied!')}>
+                                            <Button
+                                                style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
+                                                variant='contained'
+                                                startIcon={<ShareIcon style={{ fontSize: '2em' }} />} >
+                                                Share
+                                            </Button>
+                                        </CopyToClipboard>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        }
+                        <Grid item sm={5} xs={12}>
                             <Box m={2}>
-                                <ProductImages
-                                    images={pictureLinks}
-                                    style={{
-                                        height: '500px',
-                                        width: '100%'
-                                    }}
-                                />
+                                {
+                                    isMobile &&
+                                    <ProductImages
+                                        images={pictureLinks}
+                                        style={{
+                                            height: '100%',
+                                            width: '100%'
+                                        }}
+                                    />
+                                }
+                                {
+                                    !isMobile &&
+                                    <ProductImages
+                                        images={pictureLinks}
+                                        style={{
+                                            height: '500px',
+                                            width: '100%'
+                                        }}
+                                    />
+                                }
                                 <LargeBtn
                                     disabled={
                                         !((stockQuantity === UNLIMITED ||
@@ -202,41 +244,51 @@ export default class ProductDetail extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Divider orientation='vertical' flexItem />
-                        <Grid item xs={6}>
-                            <Grid container>
-                                <Grid item xs={9}>
-                                    <Box m={2}>
-                                        <Typography
-                                            text={data.name}
-                                            variant='h5' />
-                                        <Typography
-                                            text={data.description}
-                                            size='body2' />
-                                    </Box>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Box m={2}>
-                                        <CopyToClipboard
-                                            text={data.url}
-                                            onCopy={() => this.notify('Product link copied!')}>
-                                            <Button
-                                                style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
-                                                variant='contained'
-                                                startIcon={<ShareIcon style={{ fontSize: '2em' }} />} >
-                                                Share
+                        {!isMobile && <Divider orientation='vertical' flexItem />}
+                        <Grid item sm={6} xs={12}>
+                            {
+                                !isMobile && <Grid container>
+                                    <Grid item xs={9}>
+                                        <Box m={2}>
+                                            <Typography
+                                                text={data.name}
+                                                variant='h5' />
+                                            <Typography
+                                                text={data.description}
+                                                size='body2' />
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Box m={2}>
+                                            <CopyToClipboard
+                                                text={data.url}
+                                                onCopy={() => this.notify('Product link copied!')}>
+                                                <Button
+                                                    style={{ height: '100%', width: '100%', backgroundColor: 'rgb(247, 36, 52)', color: '#fff' }}
+                                                    variant='contained'
+                                                    startIcon={<ShareIcon style={{ fontSize: '2em' }} />} >
+                                                    Share
                                             </Button>
-                                        </CopyToClipboard>
-                                    </Box>
+                                            </CopyToClipboard>
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Divider className='t-extend-hr-2' />
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Divider className='t-extend-hr-2' />
-                                </Grid>
-                            </Grid>
+                            }
                             <Grid container>
                                 {
                                     amount &&
                                     <>
+                                        <Grid item xs={12}>
+                                            <Box m={2}>
+                                                <Typography
+                                                    text={'Amount'}
+                                                    variant='button'
+                                                />
+                                            </Box>
+                                        </Grid>
                                         <Grid item xs={12}>
                                             <Box m={2}>
                                                 <Amount amount={amount} />
@@ -328,7 +380,7 @@ export default class ProductDetail extends Component {
                                     <Box m={2}> <Typography variant='button' text={'Delivery'} /> </Box>
                                     <Box m={2}>
                                         <Grid container>
-                                            <Grid item xs={6}>
+                                            <Grid item sm={6} xs={9}>
                                                 <TextField
                                                     required
                                                     type='number'

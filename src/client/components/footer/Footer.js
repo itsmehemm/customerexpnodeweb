@@ -1,4 +1,5 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -13,9 +14,9 @@ const Footer = () => {
             color: '#fff'
         }} maxWidth={false}>
             <Grid container>
-                <Grid item xs={2}>
+                <Grid item sm={2} xs={0}>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item sm={2} xs={6}>
                     <Box m={2}>
                         <Typography variant='button' text='Quick Links' />
                         <Typography variant='body2' className='t-text-link-3' text='Home' onClick={() => window.href = '/home'} />
@@ -25,7 +26,7 @@ const Footer = () => {
                         <Typography variant='body2' className='t-text-link-3' text='Help' onClick={() => window.href = '/help'} />
                     </Box>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item sm={2} xs={6}>
                     <Box m={2}>
                         <Typography variant='button' text='Social' />
                         <Typography variant='body2' className='t-text-link-3' text='Facebook' onClick={() => window.open('https://www.facebook.com/tinnatshirts')} />
@@ -33,10 +34,19 @@ const Footer = () => {
                         <Typography variant='body2' className='t-text-link-3' text='Youtube' onClick={() => window.open('https://www.facebook.com/tinnatshirts')} />
                     </Box>
                 </Grid>
-                <Box m={2}>
-                    <Divider orientation='vertical' style={{ backgroundColor: '#fff' }} />
-                </Box>
-                <Grid item xs={2}>
+                {
+                    !isMobile &&
+                    <Box m={2}>
+                        <Divider orientation='vertical' style={{ backgroundColor: '#fff' }} />
+                    </Box>
+                }
+                {
+                    isMobile &&
+                    <Grid item xs={12}>
+                        <Divider style={{ backgroundColor: '#fff' }}/>
+                    </Grid>
+                }
+                <Grid item sm={2} xs={12}>
                     <Box m={2}>
                         <Typography variant='body1' text='Mail Us:' />
                         <Typography variant='body2' text='Tinnos India Private Limited,' />
@@ -46,7 +56,7 @@ const Footer = () => {
                         <Typography variant='body2' text='Tamil Nadu, India' />
                     </Box>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item sm={2} xs={12}>
                     <Box m={2}>
                         <Typography variant='body1' text='Registered Address:' />
                         <Typography variant='body2' text='Tinnos India Private Limited,' />

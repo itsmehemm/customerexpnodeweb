@@ -66,7 +66,7 @@ export default class RecentProducts extends Component {
                                         <Grid container align='center' spacing={2}>
                                             {
                                                 products.map((product, key) =>
-                                                    <Grid item xs={4} key={key}>
+                                                    <Grid item xs={12} sm={4} key={key}>
                                                         <ProductWidget
                                                             {...product}
                                                             picture_links={_.get(product, 'default_theme.picture_links', [])}

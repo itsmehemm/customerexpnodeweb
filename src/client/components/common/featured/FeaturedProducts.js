@@ -67,7 +67,7 @@ export default class FeaturedProducts extends Component {
                                         <Grid container align='center' spacing={2}>
                                             {
                                                 products.map((product, key) =>
-                                                    <Grid item xs={4} key={key}>
+                                                    <Grid item sm={4} xs={12} key={key}>
                                                         <ProductWidget
                                                             {...product}
                                                             picture_links={_.get(product, 'default_theme.picture_links', [])}

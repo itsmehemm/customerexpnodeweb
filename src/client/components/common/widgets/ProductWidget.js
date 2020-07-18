@@ -6,7 +6,7 @@ import Amount from '../elements/Amount';
 import Typography from '../elements/Typography';
 import ProductImages from './ProductImages';
 
-const ColorPallette = ({ color }) => <Grid item xs={1}> <div className="t-color-pallette" style={{ backgroundColor: color }} /></Grid>
+const ColorPallette = ({ color }) => <Grid item xs={1}> <div className='t-color-pallette' style={{ backgroundColor: color }} /></Grid>
 
 const ProductWidget = (props) => {
     const {
@@ -18,7 +18,7 @@ const ProductWidget = (props) => {
         formatted
     } = props;
     return (
-        <Card variant="outlined">
+        <Card variant='outlined'>
             <Box m={1}>
                 <ProductImages
                     images={picture_links}
@@ -27,8 +27,8 @@ const ProductWidget = (props) => {
                         infinite: false
                     }}
                     style={{
-                        width: '300px',
-                        height: '300px',
+                        width: '100%',
+                        height: '100%',
                         marginLeft: 'auto',
                         marginRight: 'auto',
                         cursor: 'pointer'
@@ -39,7 +39,7 @@ const ProductWidget = (props) => {
             <Box>
                 <Box m={0}>
                     <Typography
-                        className="t-text-link"
+                        className='t-text-link'
                         align='center'
                         text={name}
                         onClick={onClick}
@@ -48,7 +48,7 @@ const ProductWidget = (props) => {
                 <Box m={0}>
                     <Typography
                         align='center'
-                        size="subtitle1"
+                        size='subtitle1'
                         text={description} />
                 </Box>
                 <Box m={0}>
@@ -61,16 +61,16 @@ const ProductWidget = (props) => {
                     <Grid container>
                         <Grid item xs={3}>
                             <Typography
-                                text="Size"
-                                variant="button"
-                                align="left"
+                                text='Size'
+                                variant='button'
+                                align='left'
                             />
                         </Grid>
                         <Grid item xs={9}>
                             <Typography
                                 text={formatted.available_sizes_string}
-                                variant="button"
-                                align="left"
+                                variant='button'
+                                align='left'
                             />
                         </Grid>
                     </Grid>
@@ -82,9 +82,9 @@ const ProductWidget = (props) => {
                     <Grid container>
                         <Grid item xs={3}>
                             <Typography
-                                text="Color"
-                                variant="button"
-                                align="left"
+                                text='Color'
+                                variant='button'
+                                align='left'
                             />
                         </Grid>
                         <Grid item xs={9}>

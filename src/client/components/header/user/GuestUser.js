@@ -37,7 +37,6 @@ export default class GuestUser extends Component {
                     <ThemeProvider>
                         <ButtonGroup disableElevation variant='contained' style={{ color: '#fff' }}>
                             <ActionButton onClick={() => this.setState({ openLogin: true })}>Login</ActionButton>
-                            <ActionButton onClick={() => this.setState({ openSignup: true })}>Signup</ActionButton>
                         </ButtonGroup>
                     </ThemeProvider>
                 </Grid>
