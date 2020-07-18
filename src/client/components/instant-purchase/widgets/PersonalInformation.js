@@ -60,7 +60,7 @@ export default class PersonalInformation extends Component {
                     <Typography text='We need your email and phone number to keep you updated.' variant='caption' gutterBottom/>
                 </Box>
                 <Grid container>
-                    <Grid item xs={6}>
+                    <Grid item sm={6} xs={12}>
                         <Box m={2}>
                             <TextField
                                 label='Email'
@@ -72,7 +72,7 @@ export default class PersonalInformation extends Component {
                             />
                         </Box>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item sm={6} xs={12}>
                         <Box m={2}>
                             <TextField
                                 label='Phone Number'

@@ -150,7 +150,7 @@ export default class Addresses extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item sm={6} xs={12}>
                             <Box m={2}>
                                 <TextField
                                     label='Address Line 1'
@@ -162,7 +162,7 @@ export default class Addresses extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item sm={6} xs={12}>
                             <Box m={2}>
                                 <TextField
                                     label='Address Line 2'
@@ -171,7 +171,7 @@ export default class Addresses extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item sm={6} xs={12}>
                             <Box m={2}>
                                 <TextField
                                     label='City'
@@ -183,7 +183,7 @@ export default class Addresses extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item sm={6} xs={12}>
                             <Box m={2}>
                                 <TextField
                                     label='Pincode'
@@ -196,7 +196,7 @@ export default class Addresses extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item sm={6} xs={12}>
                             <Box m={2}>
                                 <TextField
                                     label='State'
@@ -208,7 +208,7 @@ export default class Addresses extends Component {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item sm={6} xs={12}>
                             <Box m={2}>
                                 <TextField
                                     label='Landmark (optional)'

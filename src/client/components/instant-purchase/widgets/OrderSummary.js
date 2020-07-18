@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isMobile } from 'react-device-detect';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
@@ -25,17 +26,32 @@ export default class OrderSummary extends Component {
                 <Grid item xs={12}>
                     <Divider className='t-extend-hr' />
                 </Grid>
-                <Grid item>
-                    <Box m={2}>
-                        <img
-                            height='125px'
-                            width='120px'
-                            src={picture_links[0]}
-                        />
-                    </Box>
-                </Grid>
-                <Divider orientation='vertical' flexItem />
-                <Grid item xs={9}>
+                {
+                    !isMobile &&
+                    <Grid item>
+                        <Box m={2}>
+                            <img
+                                height='125px'
+                                width='120px'
+                                src={picture_links[0]}
+                            />
+                        </Box>
+                    </Grid>
+                }
+                {!isMobile && <Divider orientation='vertical' flexItem />}
+                {
+                    isMobile &&
+                    <Grid item xs={12}>
+                        <Box align='center' m={2}>
+                            <img
+                                height='100%'
+                                width='100%'
+                                src={picture_links[0]}
+                            />
+                        </Box>
+                    </Grid>
+                }
+                <Grid item sm={9} xs={12}>
                     <Grid container>
                         <Grid item xs={12}>
                             <Box m={2}>
@@ -54,31 +70,31 @@ export default class OrderSummary extends Component {
                     </Grid>
                     <Box m={2}>
                         <Grid container>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography text='Size' variant='body2' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography text={size} variant='body2' />
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography text='Color' variant='body2' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography text={color} variant='body2' />
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography text='Quantity' variant='body2' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography text={quantity} variant='body2' />
                             </Grid>
                         </Grid>
                     </Box>
-                    <Divider className='t-extend-hr-2' />
+                    {!isMobile && <Divider className='t-extend-hr-2' />}
                     {
                         delivery &&
                         delivery.status === 'DELIVERABLE' &&
@@ -110,34 +126,34 @@ export default class OrderSummary extends Component {
                 <Grid item xs={12}>
                     <Box m={2}>
                         <Grid container>
-                            <Grid item xs={3}>
+                            <Grid item sm={3} xs={6}>
                                 <Typography text='MRP (Inc. of all taxes)' variant='body2' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography align='right' text={`${currencyCodeMapper[amount.currency]}${amount.maximum_retail_price}`} variant='body2' />
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item xs={3}>
+                            <Grid item sm={3} xs={6}>
                                 <Typography text='Discount' variant='body2' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography align='right' text={`${discount.type === 'INSTANT_AMOUNT' ? currencyCodeMapper[amount.currency] : ''}${discount.value}${discount.type === 'INSTANT_AMOUNT' ? '' : '%'}`} variant='body2' />
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item xs={3}>
+                            <Grid item sm={3} xs={6}>
                                 <Typography text='Sub total' variant='body2' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography align='right' text={`${currencyCodeMapper[amount.currency]}${amount.subtotal}`} variant='body2' />
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item xs={3}>
+                            <Grid item sm={3} xs={6}>
                                 <Typography text='Shipping charges' variant='body2' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography align='right' text={`${currencyCodeMapper[amount.currency]}0`} variant='body2' />
                             </Grid>
                         </Grid>
@@ -145,10 +161,10 @@ export default class OrderSummary extends Component {
                     <Divider className='t-extend-hr' />
                     <Box m={2}>
                         <Grid container>
-                            <Grid item xs={3}>
+                            <Grid item sm={3} xs={6}>
                                 <Typography text='Total' variant='h6' />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item sm={2} xs={6}>
                                 <Typography align='right' text={`${currencyCodeMapper[payment.currency]}${payment.subtotal}`} variant='h6' />
                             </Grid>
                         </Grid>
