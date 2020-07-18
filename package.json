@@ -51,6 +51,7 @@
     "razorpay": "^2.0.6",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
+    "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-load-script": "0.0.6",
     "react-router-dom": "^5.2.0",
