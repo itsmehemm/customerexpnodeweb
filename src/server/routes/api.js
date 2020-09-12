@@ -27,8 +27,8 @@ const {
     getPurchaseById
 } = require('../controllers');
 
+// this is another comment 
 const app = express();
-
 app.get('/products', getProducts);
 
 app.get('/products/featured', getFeaturedProducts);
